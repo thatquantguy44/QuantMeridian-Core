@@ -1,0 +1,492 @@
+# ─────────────────────────────────────────────────────────────────────
+# Series Catalog — countries, indicators, and mappings across sources
+# Covers G20, major emerging markets, and select frontier economies
+# ─────────────────────────────────────────────────────────────────────
+
+regions:
+  AMER: "Americas"
+  EMEA: "Europe, Middle East & Africa"
+  APAC: "Asia-Pacific"
+
+countries:
+  # ═══════════════════════════════════════════════════════════════════
+  # AMERICAS
+  # ═══════════════════════════════════════════════════════════════════
+  - iso3: USA
+    name: "United States"
+    flag: "\U0001F1FA\U0001F1F8"
+    region: AMER
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+      fred_id: "CPIAUCSL"
+    policy_rate:
+      bis_ref_area: "US"
+      fred_id: "IRSTCB01USM156N"
+      central_bank: "Federal Reserve"
+    target_inflation: 2.0
+
+  - iso3: CAN
+    name: "Canada"
+    flag: "\U0001F1E8\U0001F1E6"
+    region: AMER
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "CA"
+      central_bank: "Bank of Canada"
+    target_inflation: 2.0
+
+  - iso3: MEX
+    name: "Mexico"
+    flag: "\U0001F1F2\U0001F1FD"
+    region: AMER
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "MX"
+      central_bank: "Banco de Mexico"
+    target_inflation: 3.0
+
+  - iso3: BRA
+    name: "Brazil"
+    flag: "\U0001F1E7\U0001F1F7"
+    region: AMER
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "BR"
+      central_bank: "Banco Central do Brasil"
+    target_inflation: 3.25
+
+  - iso3: ARG
+    name: "Argentina"
+    flag: "\U0001F1E6\U0001F1F7"
+    region: AMER
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "AR"
+      central_bank: "Banco Central de la Republica Argentina"
+    target_inflation: null
+
+  - iso3: CHL
+    name: "Chile"
+    flag: "\U0001F1E8\U0001F1F1"
+    region: AMER
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "CL"
+      central_bank: "Banco Central de Chile"
+    target_inflation: 3.0
+
+  - iso3: COL
+    name: "Colombia"
+    flag: "\U0001F1E8\U0001F1F4"
+    region: AMER
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "CO"
+      central_bank: "Banco de la Republica"
+    target_inflation: 3.0
+
+  - iso3: PER
+    name: "Peru"
+    flag: "\U0001F1F5\U0001F1EA"
+    region: AMER
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "PE"
+      central_bank: "Banco Central de Reserva del Peru"
+    target_inflation: 2.0
+
+  # ═══════════════════════════════════════════════════════════════════
+  # EUROPE, MIDDLE EAST & AFRICA
+  # ═══════════════════════════════════════════════════════════════════
+  - iso3: GBR
+    name: "United Kingdom"
+    flag: "\U0001F1EC\U0001F1E7"
+    region: EMEA
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "GB"
+      central_bank: "Bank of England"
+    target_inflation: 2.0
+
+  - iso3: DEU
+    name: "Germany"
+    flag: "\U0001F1E9\U0001F1EA"
+    region: EMEA
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "XM"
+      central_bank: "European Central Bank"
+    target_inflation: 2.0
+
+  - iso3: FRA
+    name: "France"
+    flag: "\U0001F1EB\U0001F1F7"
+    region: EMEA
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "XM"
+      central_bank: "European Central Bank"
+    target_inflation: 2.0
+
+  - iso3: ITA
+    name: "Italy"
+    flag: "\U0001F1EE\U0001F1F9"
+    region: EMEA
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "XM"
+      central_bank: "European Central Bank"
+    target_inflation: 2.0
+
+  - iso3: ESP
+    name: "Spain"
+    flag: "\U0001F1EA\U0001F1F8"
+    region: EMEA
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "XM"
+      central_bank: "European Central Bank"
+    target_inflation: 2.0
+
+  - iso3: CHE
+    name: "Switzerland"
+    flag: "\U0001F1E8\U0001F1ED"
+    region: EMEA
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "CH"
+      central_bank: "Swiss National Bank"
+    target_inflation: 2.0
+
+  - iso3: SWE
+    name: "Sweden"
+    flag: "\U0001F1F8\U0001F1EA"
+    region: EMEA
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "SE"
+      central_bank: "Sveriges Riksbank"
+    target_inflation: 2.0
+
+  - iso3: NOR
+    name: "Norway"
+    flag: "\U0001F1F3\U0001F1F4"
+    region: EMEA
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "NO"
+      central_bank: "Norges Bank"
+    target_inflation: 2.0
+
+  - iso3: POL
+    name: "Poland"
+    flag: "\U0001F1F5\U0001F1F1"
+    region: EMEA
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "PL"
+      central_bank: "National Bank of Poland"
+    target_inflation: 2.5
+
+  - iso3: TUR
+    name: "Turkey"
+    flag: "\U0001F1F9\U0001F1F7"
+    region: EMEA
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "TR"
+      central_bank: "Central Bank of the Republic of Turkiye"
+    target_inflation: 5.0
+
+  - iso3: RUS
+    name: "Russia"
+    flag: "\U0001F1F7\U0001F1FA"
+    region: EMEA
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "RU"
+      central_bank: "Central Bank of Russia"
+    target_inflation: 4.0
+
+  - iso3: ZAF
+    name: "South Africa"
+    flag: "\U0001F1FF\U0001F1E6"
+    region: EMEA
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "ZA"
+      central_bank: "South African Reserve Bank"
+    target_inflation: 4.5
+
+  - iso3: SAU
+    name: "Saudi Arabia"
+    flag: "\U0001F1F8\U0001F1E6"
+    region: EMEA
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "SA"
+      central_bank: "Saudi Central Bank"
+    target_inflation: null
+
+  - iso3: ISR
+    name: "Israel"
+    flag: "\U0001F1EE\U0001F1F1"
+    region: EMEA
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "IL"
+      central_bank: "Bank of Israel"
+    target_inflation: 2.0
+
+  - iso3: NGA
+    name: "Nigeria"
+    flag: "\U0001F1F3\U0001F1EC"
+    region: EMEA
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "NG"
+      central_bank: "Central Bank of Nigeria"
+    target_inflation: null
+
+  - iso3: EGY
+    name: "Egypt"
+    flag: "\U0001F1EA\U0001F1EC"
+    region: EMEA
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "EG"
+      central_bank: "Central Bank of Egypt"
+    target_inflation: 7.0
+
+  # ═══════════════════════════════════════════════════════════════════
+  # ASIA-PACIFIC
+  # ═══════════════════════════════════════════════════════════════════
+  - iso3: JPN
+    name: "Japan"
+    flag: "\U0001F1EF\U0001F1F5"
+    region: APAC
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "JP"
+      central_bank: "Bank of Japan"
+    target_inflation: 2.0
+
+  - iso3: CHN
+    name: "China"
+    flag: "\U0001F1E8\U0001F1F3"
+    region: APAC
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "CN"
+      central_bank: "People's Bank of China"
+    target_inflation: 3.0
+
+  - iso3: IND
+    name: "India"
+    flag: "\U0001F1EE\U0001F1F3"
+    region: APAC
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "IN"
+      central_bank: "Reserve Bank of India"
+    target_inflation: 4.0
+
+  - iso3: KOR
+    name: "South Korea"
+    flag: "\U0001F1F0\U0001F1F7"
+    region: APAC
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "KR"
+      central_bank: "Bank of Korea"
+    target_inflation: 2.0
+
+  - iso3: AUS
+    name: "Australia"
+    flag: "\U0001F1E6\U0001F1FA"
+    region: APAC
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "AU"
+      central_bank: "Reserve Bank of Australia"
+    target_inflation: 2.5
+
+  - iso3: NZL
+    name: "New Zealand"
+    flag: "\U0001F1F3\U0001F1FF"
+    region: APAC
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "NZ"
+      central_bank: "Reserve Bank of New Zealand"
+    target_inflation: 2.0
+
+  - iso3: IDN
+    name: "Indonesia"
+    flag: "\U0001F1EE\U0001F1E9"
+    region: APAC
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "ID"
+      central_bank: "Bank Indonesia"
+    target_inflation: 3.0
+
+  - iso3: THA
+    name: "Thailand"
+    flag: "\U0001F1F9\U0001F1ED"
+    region: APAC
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "TH"
+      central_bank: "Bank of Thailand"
+    target_inflation: 2.0
+
+  - iso3: MYS
+    name: "Malaysia"
+    flag: "\U0001F1F2\U0001F1FE"
+    region: APAC
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "MY"
+      central_bank: "Bank Negara Malaysia"
+    target_inflation: null
+
+  - iso3: PHL
+    name: "Philippines"
+    flag: "\U0001F1F5\U0001F1ED"
+    region: APAC
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "PH"
+      central_bank: "Bangko Sentral ng Pilipinas"
+    target_inflation: 3.0
+
+  - iso3: VNM
+    name: "Vietnam"
+    flag: "\U0001F1FB\U0001F1F3"
+    region: APAC
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "VN"
+      central_bank: "State Bank of Vietnam"
+    target_inflation: 4.0
+
+  - iso3: TWN
+    name: "Taiwan"
+    flag: "\U0001F1F9\U0001F1FC"
+    region: APAC
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "TW"
+      central_bank: "Central Bank of the Republic of China"
+    target_inflation: 2.0
+
+  - iso3: SGP
+    name: "Singapore"
+    flag: "\U0001F1F8\U0001F1EC"
+    region: APAC
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "SG"
+      central_bank: "Monetary Authority of Singapore"
+    target_inflation: null
+
+  - iso3: HKG
+    name: "Hong Kong"
+    flag: "\U0001F1ED\U0001F1F0"
+    region: APAC
+    inflation:
+      world_bank_indicator: "FP.CPI.TOTL.ZG"
+      imf_indicator: "PCPIPCH"
+    policy_rate:
+      bis_ref_area: "HK"
+      central_bank: "Hong Kong Monetary Authority"
+    target_inflation: null
+
+
+# ─────────────────────────────────────────────────────────────────────
+# CME FedWatch — Fed Funds Futures contract specifications
+# ─────────────────────────────────────────────────────────────────────
+fed_funds_futures:
+  product_id: 305
+  product_name: "30-Day Federal Funds Futures"
+  exchange: "CME"
+  tick_size: 0.005
+  tick_value: 20.835
+  contract_unit: "$5,000,000"
+  settlement: "Cash settled"
+  rate_derivation: "100 - settlement_price = implied_rate"
+  fomc_months_ahead: 8  # how many upcoming FOMC meetings to track

@@ -1,0 +1,190 @@
+views:
+  - view_id: ath_forward_returns
+    display_name: "All-Time Highs → Forward Returns"
+    category: "Event Studies"
+    description: "What happens after an asset reaches a new all-time high? Measures forward returns at configurable windows."
+    default_series: ["SPY"]
+    default_tiles: ["event_table", "forward_return_box", "cumulative_chart", "baseline_comparison"]
+    configurable_fields: ["series", "forward_windows", "cooldown_days"]
+    compatible_series_types: ["EQUITY", "BOND", "COMMODITY", "REIT"]
+    default_forward_windows: ["1W", "1M", "3M", "6M", "1Y"]
+
+  - view_id: drawdown_analysis
+    display_name: "Drawdown Analysis"
+    category: "Risk"
+    description: "Detect and rank all drawdowns exceeding a threshold. Analyze recovery times and severity."
+    default_series: ["SPY"]
+    default_tiles: ["drawdown_table", "drawdown_chart", "recovery_histogram", "severity_scatter"]
+    configurable_fields: ["series", "threshold", "start_date"]
+    compatible_series_types: ["EQUITY", "BOND", "COMMODITY", "REIT"]
+    default_forward_windows: ["1M", "3M", "6M", "1Y"]
+
+  - view_id: vix_spike_study
+    display_name: "VIX Spike Event Study"
+    category: "Event Studies"
+    description: "What happens to equities when the VIX spikes above a threshold? Measures S&P 500 forward returns after volatility events."
+    default_series: ["SPY"]
+    default_tiles: ["event_table", "forward_return_box", "vix_overlay", "regime_chart"]
+    configurable_fields: ["series", "vix_threshold", "forward_windows", "cooldown_days"]
+    compatible_series_types: ["EQUITY"]
+    default_forward_windows: ["1W", "1M", "3M", "6M", "1Y"]
+
+  - view_id: largest_vix_increases
+    display_name: "Largest VIX Increases"
+    category: "Event Studies"
+    description: "The N largest VIX percentage increases over a configurable window. Measures equity forward returns after the biggest fear spikes."
+    default_series: ["SPY"]
+    default_tiles: ["event_table", "forward_return_box", "vix_change_scatter"]
+    configurable_fields: ["series", "change_period", "top_n", "forward_windows", "cooldown_days"]
+    compatible_series_types: ["EQUITY"]
+    default_forward_windows: ["1W", "1M", "3M", "6M", "1Y"]
+
+  - view_id: largest_vix_decreases
+    display_name: "Largest VIX Decreases"
+    category: "Event Studies"
+    description: "The N largest VIX percentage decreases — what happens after the biggest fear collapses?"
+    default_series: ["SPY"]
+    default_tiles: ["event_table", "forward_return_box", "vix_change_scatter"]
+    configurable_fields: ["series", "change_period", "top_n", "forward_windows", "cooldown_days"]
+    compatible_series_types: ["EQUITY"]
+    default_forward_windows: ["1W", "1M", "3M", "6M", "1Y"]
+
+  - view_id: rolling_returns
+    display_name: "Rolling Return Distribution"
+    category: "Returns"
+    description: "Distribution of rolling returns across multiple time horizons. Includes percentile ranks and current context."
+    default_series: ["SPY"]
+    default_tiles: ["histogram", "percentile_gauge", "rolling_chart", "statistics_table"]
+    configurable_fields: ["series", "windows", "return_type"]
+    compatible_series_types: ["EQUITY", "BOND", "COMMODITY", "REIT"]
+    default_forward_windows: ["1M", "3M", "6M", "1Y", "3Y", "5Y"]
+
+  - view_id: monthly_seasonality
+    display_name: "Monthly Seasonality"
+    category: "Patterns"
+    description: "Average returns by calendar month. Tests the 'Sell in May' effect and other seasonal patterns."
+    default_series: ["SPY"]
+    default_tiles: ["seasonality_heatmap", "monthly_bar", "sell_in_may", "day_of_week"]
+    configurable_fields: ["series", "start_date"]
+    compatible_series_types: ["EQUITY", "BOND", "COMMODITY"]
+    default_forward_windows: ["1M"]
+
+  - view_id: cross_asset_correlation
+    display_name: "Cross-Asset Correlation"
+    category: "Multi-Asset"
+    description: "Rolling correlations between major asset classes. Identifies regime shifts in cross-asset relationships."
+    default_series: ["SPY", "AGG", "GLD", "^VIX"]
+    default_tiles: ["correlation_matrix", "rolling_corr_chart", "regime_overlay"]
+    configurable_fields: ["series", "window", "start_date"]
+    compatible_series_types: ["EQUITY", "BOND", "COMMODITY", "VOLATILITY", "CURRENCY"]
+    default_forward_windows: ["3M", "1Y"]
+
+  - view_id: relative_strength
+    display_name: "Relative Strength Analysis"
+    category: "Multi-Asset"
+    description: "Relative performance of one asset vs a benchmark over time."
+    default_series: ["QQQ", "SPY"]
+    default_tiles: ["relative_strength_chart", "excess_return_table", "rolling_excess"]
+    configurable_fields: ["series", "benchmark", "start_date"]
+    compatible_series_types: ["EQUITY", "BOND", "COMMODITY", "REIT"]
+    default_forward_windows: ["1M", "3M", "1Y"]
+
+  - view_id: yield_curve_analysis
+    display_name: "Yield Curve Deep Dive"
+    category: "Rates"
+    description: "Treasury curve shape, slope history, and inversion detection with forward equity returns."
+    default_series: ["DGS2", "DGS10", "T10Y2Y"]
+    default_tiles: ["curve_chart", "slope_history", "inversion_events", "forward_returns_post_inversion"]
+    configurable_fields: ["tenors", "forward_windows"]
+    compatible_series_types: ["RATE"]
+    default_forward_windows: ["3M", "6M", "1Y", "2Y"]
+
+  - view_id: credit_spread_stress
+    display_name: "Credit Spread Stress"
+    category: "Credit"
+    description: "HY and IG spread analysis — percentile ranking, z-scores, and widening event studies."
+    default_series: ["BAMLH0A0HYM2", "BAMLC0A0CM"]
+    default_tiles: ["spread_gauge", "spread_history", "zscore_chart", "widening_events"]
+    configurable_fields: ["spread_series", "threshold_bps", "forward_windows"]
+    compatible_series_types: ["CREDIT"]
+    default_forward_windows: ["1M", "3M", "6M", "1Y"]
+
+  - view_id: purchasing_power
+    display_name: "Purchasing Power Erosion"
+    category: "Inflation"
+    description: "How much has $100 lost in purchasing power? Real vs nominal return comparison."
+    default_series: ["SPY", "CPIAUCSL"]
+    default_tiles: ["purchasing_power_chart", "real_vs_nominal", "real_return_table"]
+    configurable_fields: ["asset_series", "cpi_series", "base_amount"]
+    compatible_series_types: ["EQUITY", "BOND", "MACRO"]
+    default_forward_windows: ["1Y", "5Y"]
+
+  - view_id: volatility_regime
+    display_name: "Volatility Regime Analysis"
+    category: "Risk"
+    description: "VIX regime classification and asset performance across volatility environments."
+    default_series: ["SPY", "^VIX"]
+    default_tiles: ["regime_chart", "regime_return_table", "rolling_vol", "panic_events"]
+    configurable_fields: ["series", "vix_thresholds"]
+    compatible_series_types: ["EQUITY", "VOLATILITY"]
+    default_forward_windows: ["1W", "1M", "3M"]
+
+  - view_id: rate_cycle_analysis
+    display_name: "Rate Cycle Impact"
+    category: "Rates"
+    description: "How do assets perform during Fed hiking and cutting cycles?"
+    default_series: ["SPY", "FEDFUNDS"]
+    default_tiles: ["cycle_timeline", "hiking_returns", "cutting_returns", "current_cycle"]
+    configurable_fields: ["asset_series", "rate_series", "threshold_bps"]
+    compatible_series_types: ["EQUITY", "BOND", "RATE"]
+    default_forward_windows: ["3M", "6M", "1Y"]
+
+  - view_id: asset_class_returns
+    display_name: "Asset Class Return Comparison"
+    category: "Multi-Asset"
+    description: "Side-by-side return comparison across major asset classes — Bilello-style."
+    default_series: ["SPY", "QQQ", "IWM", "EFA", "EEM", "AGG", "HYG", "GLD", "VNQ"]
+    default_tiles: ["return_table", "bar_chart", "ranking_quilt"]
+    configurable_fields: ["series", "windows"]
+    compatible_series_types: ["EQUITY", "BOND", "COMMODITY", "REIT"]
+    default_forward_windows: ["1M", "3M", "6M", "1Y", "3Y", "5Y"]
+
+  - view_id: ma_crossover_study
+    display_name: "Moving Average Crossover"
+    category: "Patterns"
+    description: "Event study when short MA crosses above/below long MA. Tests golden cross/death cross myths."
+    default_series: ["SPY"]
+    default_tiles: ["crossover_chart", "event_table", "forward_return_box"]
+    configurable_fields: ["series", "ma_short", "ma_long", "forward_windows"]
+    compatible_series_types: ["EQUITY", "COMMODITY"]
+    default_forward_windows: ["1W", "1M", "3M", "6M", "1Y"]
+
+  - view_id: drawdown_recovery
+    display_name: "Drawdown Recovery Patterns"
+    category: "Risk"
+    description: "How long does recovery take after major drawdowns? Historical recovery analysis."
+    default_series: ["SPY"]
+    default_tiles: ["recovery_table", "recovery_chart", "severity_vs_recovery"]
+    configurable_fields: ["series", "threshold"]
+    compatible_series_types: ["EQUITY", "BOND"]
+    default_forward_windows: ["3M", "6M", "1Y", "2Y"]
+
+  - view_id: inflation_surprise
+    display_name: "Inflation Surprise Impact"
+    category: "Inflation"
+    description: "How do markets react to inflation surprises? CPI beat/miss event study."
+    default_series: ["SPY", "CPIAUCSL"]
+    default_tiles: ["surprise_table", "forward_return_box", "real_return_chart"]
+    configurable_fields: ["asset_series", "inflation_series", "forward_windows"]
+    compatible_series_types: ["EQUITY", "BOND", "MACRO"]
+    default_forward_windows: ["1W", "1M", "3M"]
+
+  - view_id: zscore_extremes
+    display_name: "Z-Score Extreme Events"
+    category: "Event Studies"
+    description: "Event study when returns hit extreme z-scores. Tests mean reversion hypothesis."
+    default_series: ["SPY"]
+    default_tiles: ["zscore_chart", "extreme_events", "forward_return_box", "reversion_stats"]
+    configurable_fields: ["series", "z_threshold", "lookback", "forward_windows"]
+    compatible_series_types: ["EQUITY", "BOND", "COMMODITY"]
+    default_forward_windows: ["1W", "1M", "3M", "6M"]

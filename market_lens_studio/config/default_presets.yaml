@@ -1,0 +1,69 @@
+presets:
+  - preset_id: bilello_classic
+    name: "Bilello Classic"
+    description: "Charlie Bilello-inspired cross-asset return comparison with all major asset classes"
+    request:
+      view_id: asset_class_returns
+      series:
+        - { series_id: SPY, ticker: SPY, source: yahoo, display_name: "S&P 500", asset_class: EQUITY }
+        - { series_id: QQQ, ticker: QQQ, source: yahoo, display_name: "Nasdaq 100", asset_class: EQUITY }
+        - { series_id: IWM, ticker: IWM, source: yahoo, display_name: "Russell 2000", asset_class: EQUITY }
+        - { series_id: EFA, ticker: EFA, source: yahoo, display_name: "MSCI EAFE", asset_class: EQUITY }
+        - { series_id: EEM, ticker: EEM, source: yahoo, display_name: "MSCI EM", asset_class: EQUITY }
+        - { series_id: AGG, ticker: AGG, source: yahoo, display_name: "US Agg Bond", asset_class: BOND }
+        - { series_id: HYG, ticker: HYG, source: yahoo, display_name: "HY Corporate", asset_class: BOND }
+        - { series_id: GLD, ticker: GLD, source: yahoo, display_name: "Gold", asset_class: COMMODITY }
+        - { series_id: VNQ, ticker: VNQ, source: yahoo, display_name: "US REITs", asset_class: REIT }
+      forward_windows: ["1M", "3M", "6M", "1Y", "3Y", "5Y"]
+      selected_tiles: ["return_table", "bar_chart", "ranking_quilt"]
+    tags: ["bilello", "cross-asset", "returns"]
+
+  - preset_id: ath_spy
+    name: "S&P 500 All-Time Highs"
+    description: "What happens after the S&P 500 sets a new all-time high?"
+    request:
+      view_id: ath_forward_returns
+      series:
+        - { series_id: SPY, ticker: SPY, source: yahoo, display_name: "S&P 500 (SPY)", asset_class: EQUITY, is_proxy: true, proxy_for: SPX, proxy_note: "SPY tracks S&P 500" }
+      forward_windows: ["1W", "1M", "3M", "6M", "1Y"]
+      selected_tiles: ["event_table", "forward_return_box", "cumulative_chart", "baseline_comparison"]
+    tags: ["ath", "spy", "event-study"]
+
+  - preset_id: vix_panic
+    name: "VIX Panic Events"
+    description: "S&P 500 returns after VIX spikes above 30"
+    request:
+      view_id: vix_spike_study
+      series:
+        - { series_id: SPY, ticker: SPY, source: yahoo, display_name: "S&P 500 (SPY)", asset_class: EQUITY }
+      forward_windows: ["1W", "1M", "3M", "6M", "1Y"]
+      options:
+        vix_threshold: 30
+        cooldown_days: 10
+      selected_tiles: ["event_table", "forward_return_box", "vix_overlay"]
+    tags: ["vix", "volatility", "panic"]
+
+  - preset_id: credit_stress
+    name: "Credit Spread Monitor"
+    description: "HY and IG spread analysis with stress indicators"
+    request:
+      view_id: credit_spread_stress
+      series:
+        - { series_id: BAMLH0A0HYM2, ticker: BAMLH0A0HYM2, source: fred, display_name: "HY OAS", asset_class: CREDIT }
+        - { series_id: BAMLC0A0CM, ticker: BAMLC0A0CM, source: fred, display_name: "IG OAS", asset_class: CREDIT }
+      forward_windows: ["1M", "3M", "6M", "1Y"]
+      options:
+        threshold_bps: 100
+      selected_tiles: ["spread_gauge", "spread_history", "zscore_chart"]
+    tags: ["credit", "spreads", "stress"]
+
+  - preset_id: sell_in_may
+    name: "Sell in May?"
+    description: "Testing the 'Sell in May and go away' seasonal pattern"
+    request:
+      view_id: monthly_seasonality
+      series:
+        - { series_id: SPY, ticker: SPY, source: yahoo, display_name: "S&P 500 (SPY)", asset_class: EQUITY }
+      forward_windows: ["1M"]
+      selected_tiles: ["seasonality_heatmap", "monthly_bar", "sell_in_may", "day_of_week"]
+    tags: ["seasonality", "myth", "sell-in-may"]

@@ -1,0 +1,50 @@
+sources:
+  world_bank:
+    base_url: "https://api.worldbank.org/v2"
+    database: "Global Inflation"
+    format: json
+    per_page: 5000
+    rate_limit_delay: 0.5
+    retry_attempts: 3
+
+  bis:
+    base_url: "https://stats.bis.org/api/v2"
+    dataset: "WS_CBPOL"
+    format: csv
+    rate_limit_delay: 0.5
+    retry_attempts: 3
+
+  imf:
+    base_url: "https://www.imf.org/external/datamapper/api/v1"
+    fallback_for: ["world_bank", "bis"]
+    rate_limit_delay: 1.0
+    retry_attempts: 3
+
+  cme:
+    base_url: "https://www.cmegroup.com/CmeWS/mvc"
+    futures_url: "https://www.cmegroup.com/CmeWS/mvc/Quotes/Future"
+    product_id: 305  # 30-Day Federal Funds Futures
+    rate_limit_delay: 2.0
+    retry_attempts: 3
+
+storage:
+  format: parquet
+  compression: zstd
+  partition_by: [source, frequency]
+  base_path: "./data"
+
+  duckdb:
+    path: "./data/macro.duckdb"
+
+cache:
+  ttl_hours: 6
+
+quality:
+  null_threshold: 0.05
+  duplicate_check: true
+  date_validation: true
+  sanity_bounds:
+    inflation_yoy_min: -20.0
+    inflation_yoy_max: 500.0
+    policy_rate_min: -2.0
+    policy_rate_max: 100.0

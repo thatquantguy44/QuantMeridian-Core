@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "macro-data-etl"
+version = "0.1.0"
+description = "Production ETL for global macro data — World Bank inflation, BIS policy rates, IMF, CME FedWatch"
+requires-python = ">=3.11"
+dependencies = [
+    "polars>=1.0",
+    "httpx>=0.27",
+    "tenacity>=8.2",
+    "pydantic>=2.5",
+    "pydantic-settings>=2.1",
+    "typer>=0.12",
+    "duckdb>=1.0",
+    "pyarrow>=15.0",
+    "pyyaml>=6.0",
+    "rich>=13.0",
+]
+
+[project.optional-dependencies]
+postgres = ["psycopg[binary]>=3.1"]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.23", "ruff>=0.4"]
+
+[project.scripts]
+macro-etl = "macro_data_etl.cli:app"
+
+[tool.setuptools]
+package-dir = { "macro_data_etl" = "." }
+packages = [
+    "macro_data_etl",
+    "macro_data_etl.src",
+    "macro_data_etl.src.analytics",
+    "macro_data_etl.src.connectors",
+    "macro_data_etl.src.extract",
+    "macro_data_etl.src.load",
+    "macro_data_etl.src.orchestration",
+    "macro_data_etl.src.transform",
+    "macro_data_etl.src.utils",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "SIM", "TCH"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

@@ -1,0 +1,56 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# vite
+/dist/
+/dist-server/
+/dist-vercel/
+/dist-tools/
+/.vite/
+
+# local provider cache
+/data/master/
+/market_data_pipeline/data/export/
+/batchers/.venv*/
+/batchers/.snapshot-backup/
+
+# production
+/build
+/.next/
+
+# misc
+.DS_Store
+*.pem
+.idea
+.vscode
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env
+.env*.local
+.env
+.proxy
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# python backend
+backend/__pycache__/
+backend/.venv/
+services/**/.venv/
+**/__pycache__/
+*.pyc
+.hypothesis/
+services/inventory_optimizer_api/tests/benchmarks/
+
+# test artifacts
+/test-results/
+
+# local engine wheels for Docker builds (see services/inventory_optimizer_api/README.md)
+services/inventory_optimizer_api/wheels/

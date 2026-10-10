@@ -1,0 +1,23 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - FRED_API_KEY=${FRED_API_KEY:-}
+      - MDP_OFFLINE=${MDP_OFFLINE:-0}
+      - MDP_ALLOW_YAHOO=${MDP_ALLOW_YAHOO:-1}
+    volumes:
+      - ./data:/app/market_data_pipeline/data
+    command: ["python", "-m", "market_data_pipeline.cli", "serve", "--host", "0.0.0.0", "--port", "8000"]
+
+  scheduler:
+    build: .
+    depends_on: [api]
+    environment:
+      - FRED_API_KEY=${FRED_API_KEY:-}
+      - MDP_OFFLINE=${MDP_OFFLINE:-0}
+      - MDP_ALLOW_YAHOO=${MDP_ALLOW_YAHOO:-1}
+    volumes:
+      - ./data:/app/market_data_pipeline/data
+    command: ["python", "-m", "market_data_pipeline.cli", "schedule"]

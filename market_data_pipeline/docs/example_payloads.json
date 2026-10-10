@@ -1,0 +1,408 @@
+{
+  "GET /health": {
+    "status": "ok",
+    "normalized_rows": 78554,
+    "tables": {
+      "analytics_cross_asset_returns": 29,
+      "analytics_drawdowns": 29,
+      "analytics_inflation_dashboard": 4,
+      "analytics_market_snapshot": 29,
+      "analytics_rate_dashboard": 7,
+      "asset_master": 29,
+      "data_quality_results": 134,
+      "ingestion_manifest": 22,
+      "macro_series_master": 21,
+      "normalized_time_series": 78554,
+      "raw_macro_observations": 17973,
+      "raw_market_prices": 60581
+    }
+  },
+  "GET /snapshot/market": {
+    "cards": [
+      {
+        "series_id": "IEF",
+        "display_name": "7-10Y Treasuries (IEF)",
+        "asset_class": "BOND",
+        "source": "SYNTHETIC",
+        "price": 95.0,
+        "asof": "2026-06-18",
+        "ret_1d": 0.0012,
+        "ret_5d": -0.0206,
+        "mtd": -0.0407,
+        "ytd": -0.1846,
+        "ret_1y": 0.0354,
+        "cagr_3y": 0.0358,
+        "cagr_5y": -0.0225,
+        "max_drawdown": -0.4058,
+        "pct_from_52w_high": -0.2188
+      },
+      {
+        "series_id": "SHY",
+        "display_name": "1-3Y Treasuries (SHY)",
+        "asset_class": "BOND",
+        "source": "SYNTHETIC",
+        "price": 247.4,
+        "asof": "2026-06-18",
+        "ret_1d": -0.0448,
+        "ret_5d": -0.024,
+        "mtd": -0.0722,
+        "ytd": -0.1309,
+        "ret_1y": -0.259,
+        "cagr_3y": -0.1011,
+        "cagr_5y": 0.0579,
+        "max_drawdown": -0.5815,
+        "pct_from_52w_high": -0.3346
+      },
+      {
+        "series_id": "TLT",
+        "display_name": "20+Y Treasuries (TLT)",
+        "asset_class": "BOND",
+        "source": "SYNTHETIC",
+        "price": 92.0,
+        "asof": "2026-06-18",
+        "ret_1d": -0.035,
+        "ret_5d": -0.0948,
+        "mtd": -0.1247,
+        "ytd": -0.1522,
+        "ret_1y": -0.16,
+        "cagr_3y": -0.0721,
+        "cagr_5y": 0.1197,
+        "max_drawdown": -0.4997,
+        "pct_from_52w_high": -0.2682
+      }
+    ]
+  },
+  "GET /snapshot/rates": {
+    "asof": "2026-06-18",
+    "curve": [
+      {
+        "series_id": "DGS3MO",
+        "tenor": "3M",
+        "label": "3M",
+        "yield": 5.3
+      },
+      {
+        "series_id": "DGS2",
+        "tenor": "2Y",
+        "label": "2Y",
+        "yield": 4.6
+      },
+      {
+        "series_id": "DGS5",
+        "tenor": "5Y",
+        "label": "5Y",
+        "yield": 6.04
+      },
+      {
+        "series_id": "DGS10",
+        "tenor": "10Y",
+        "label": "10Y",
+        "yield": 4.3
+      },
+      {
+        "series_id": "DGS30",
+        "tenor": "30Y",
+        "label": "30Y",
+        "yield": 4.5
+      }
+    ],
+    "spreads": {
+      "two_s_ten_s_bps": -30.0,
+      "three_m_ten_y_bps": -100.0
+    },
+    "changes": [
+      {
+        "series_id": "DGS3MO",
+        "label": "3-Month",
+        "latest": 5.3,
+        "chg_1d_bps": 1.2,
+        "chg_1w_bps": -1.2,
+        "chg_1m_bps": -12.4,
+        "chg_3m_bps": -24.0,
+        "chg_ytd_bps": 2.9
+      },
+      {
+        "series_id": "DGS2",
+        "label": "2-Year",
+        "latest": 4.6,
+        "chg_1d_bps": 0.2,
+        "chg_1w_bps": 0.3,
+        "chg_1m_bps": 2.8,
+        "chg_3m_bps": -18.5,
+        "chg_ytd_bps": -12.0
+      },
+      {
+        "series_id": "DGS5",
+        "label": "5-Year",
+        "latest": 6.04,
+        "chg_1d_bps": -4.0,
+        "chg_1w_bps": -6.5,
+        "chg_1m_bps": 7.0,
+        "chg_3m_bps": 11.5,
+        "chg_ytd_bps": 2.0
+      },
+      {
+        "series_id": "DGS10",
+        "label": "10-Year",
+        "latest": 4.3,
+        "chg_1d_bps": 2.3,
+        "chg_1w_bps": 6.6,
+        "chg_1m_bps": 6.4,
+        "chg_3m_bps": 5.8,
+        "chg_ytd_bps": -2.6
+      },
+      {
+        "series_id": "DGS30",
+        "label": "30-Year",
+        "latest": 4.5,
+        "chg_1d_bps": 2.4,
+        "chg_1w_bps": 3.1,
+        "chg_1m_bps": 18.5,
+        "chg_3m_bps": 19.1,
+        "chg_ytd_bps": 31.6
+      },
+      {
+        "series_id": "DFF",
+        "label": "Fed Funds",
+        "latest": 4.33,
+        "chg_1d_bps": 0.6,
+        "chg_1w_bps": 7.0,
+        "chg_1m_bps": 14.8,
+        "chg_3m_bps": 35.5,
+        "chg_ytd_bps": 56.8
+      },
+      {
+        "series_id": "SOFR",
+        "label": "SOFR",
+        "latest": 4.31,
+        "chg_1d_bps": -1.9,
+        "chg_1w_bps": -4.4,
+        "chg_1m_bps": 2.2,
+        "chg_3m_bps": -2.7,
+        "chg_ytd_bps": 21.8
+      }
+    ]
+  },
+  "GET /snapshot/inflation": {
+    "cards": [
+      {
+        "series_id": "CPIAUCSL",
+        "label": "CPI",
+        "yoy": 2.5326,
+        "prior_yoy": 2.5453,
+        "mom": 0.2464,
+        "trend": "FLAT",
+        "asof": "2026-06-01"
+      },
+      {
+        "series_id": "CPILFESL",
+        "label": "Core CPI",
+        "yoy": 2.2622,
+        "prior_yoy": 2.197,
+        "mom": 0.2246,
+        "trend": "RISING",
+        "asof": "2026-06-01"
+      },
+      {
+        "series_id": "PCEPI",
+        "label": "PCE",
+        "yoy": 1.8031,
+        "prior_yoy": 1.8521,
+        "mom": 0.2165,
+        "trend": "FLAT",
+        "asof": "2026-06-01"
+      },
+      {
+        "series_id": "PCEPILFE",
+        "label": "Core PCE",
+        "yoy": 4.9042,
+        "prior_yoy": 4.757,
+        "mom": 0.4286,
+        "trend": "RISING",
+        "asof": "2026-06-01"
+      }
+    ]
+  },
+  "GET /snapshot/cross-asset": {
+    "equities": [
+      {
+        "series_id": "DIA",
+        "display_name": "Dow Jones (DIA)",
+        "price": 410.0,
+        "ytd": -0.0338,
+        "ret_1y": 0.0954,
+        "asof": "2026-06-18"
+      },
+      {
+        "series_id": "EEM",
+        "display_name": "Emerging Markets (EEM)",
+        "price": 274.6,
+        "ytd": -0.2968,
+        "ret_1y": -0.3576,
+        "asof": "2026-06-18"
+      }
+    ],
+    "bonds": [
+      {
+        "series_id": "IEF",
+        "display_name": "7-10Y Treasuries (IEF)",
+        "price": 95.0,
+        "ytd": -0.1846,
+        "ret_1y": 0.0354,
+        "asof": "2026-06-18"
+      },
+      {
+        "series_id": "SHY",
+        "display_name": "1-3Y Treasuries (SHY)",
+        "price": 247.4,
+        "ytd": -0.1309,
+        "ret_1y": -0.259,
+        "asof": "2026-06-18"
+      }
+    ],
+    "commodities": [
+      {
+        "series_id": "GLD",
+        "display_name": "Gold (GLD)",
+        "price": 250.0,
+        "ytd": -0.0427,
+        "ret_1y": 0.1142,
+        "asof": "2026-06-18"
+      },
+      {
+        "series_id": "SLV",
+        "display_name": "Silver (SLV)",
+        "price": 28.0,
+        "ytd": -0.0542,
+        "ret_1y": -0.1862,
+        "asof": "2026-06-18"
+      }
+    ],
+    "credit": [
+      {
+        "series_id": "HYG",
+        "display_name": "High Yield (HYG)",
+        "price": 281.2,
+        "ytd": -0.0337,
+        "ret_1y": 0.2827,
+        "asof": "2026-06-18"
+      },
+      {
+        "series_id": "LQD",
+        "display_name": "Inv. Grade (LQD)",
+        "price": 269.4,
+        "ytd": -0.2121,
+        "ret_1y": -0.4602,
+        "asof": "2026-06-18"
+      }
+    ],
+    "volatility": [
+      {
+        "series_id": "VIXY",
+        "display_name": "VIX Futures (VIXY)",
+        "price": 154.4,
+        "ytd": 0.2209,
+        "ret_1y": 0.389,
+        "asof": "2026-06-18"
+      }
+    ],
+    "currencies": [
+      {
+        "series_id": "UUP",
+        "display_name": "US Dollar Index (UUP)",
+        "price": 296.8,
+        "ytd": 0.0856,
+        "ret_1y": -0.3763,
+        "asof": "2026-06-18"
+      }
+    ],
+    "asof": "2026-06-18"
+  },
+  "GET /dashboard/regime": {
+    "asof": "2026-06-18",
+    "risk_on_off": {
+      "score": 18.8,
+      "label": "NEUTRAL"
+    },
+    "inflation_pressure": {
+      "score": 10.7,
+      "label": "MODERATE"
+    },
+    "growth_momentum": {
+      "score": 31.2,
+      "label": "EXPANSION"
+    },
+    "liquidity": {
+      "score": -37.0,
+      "label": "TIGHT"
+    },
+    "composite": {
+      "score": 0.6,
+      "label": "NEUTRAL"
+    },
+    "narrative": "Markets are neutral with expansion growth momentum. Inflation pressure is moderate and liquidity is tight. Composite regime reads NEUTRAL."
+  },
+  "GET /series/SPY": {
+    "series_id": "SPY",
+    "display_name": "S&P 500 (SPY)",
+    "asset_class": "EQUITY",
+    "source": "SYNTHETIC",
+    "frequency": "D",
+    "unit": "USD",
+    "currency": "USD",
+    "observations": [
+      {
+        "date": "2026-06-16",
+        "value": 561.5146
+      },
+      {
+        "date": "2026-06-17",
+        "value": 561.4329
+      },
+      {
+        "date": "2026-06-18",
+        "value": 560.0
+      }
+    ]
+  },
+  "GET /manifest/latest": {
+    "manifest": [
+      {
+        "manifest_id": "b5bd5276acbb4c26",
+        "ingestion_run_id": "run_20260618_114220",
+        "source": "SYNTHETIC",
+        "dataset": "synthetic_market",
+        "symbol_or_series_id": "SPY,QQQ,IWM,DIA,XLK,XLF,XLE,XLV,XLI,XLY,XLP,XLU,XLB,XLRE,XLC,GLD,SLV,USO,TLT,IEF,SHY,HYG,LQD,VIXY,UUP,EFA,EEM,VGK,EWJ",
+        "request_url_or_endpoint": "synthetic://market",
+        "parameters": "{\"symbols\": [\"SPY\", \"QQQ\", \"IWM\", \"DIA\", \"XLK\", \"XLF\", \"XLE\", \"XLV\", \"XLI\", \"XLY\", \"XLP\", \"XLU\", \"XLB\", \"XLRE\", \"XLC\", \"GLD\", \"SLV\", \"USO\", \"TLT\", \"IEF\", \"SHY\", \"HYG\", \"LQD\", \"VIXY\", \"UUP\", \"EFA\", \"EEM\", \"VGK\", \"EWJ\"], \"start\": null}",
+        "requested_at": "2026-06-18 11:42:21.585816",
+        "response_status": "ok:synthetic",
+        "row_count": 60581,
+        "min_date": "2018-06-18",
+        "max_date": "2026-06-18",
+        "checksum": "82393752873916a9de687d03ed2963f87e247db73f4f78ef05dbcab58591979a",
+        "version": 1,
+        "data_quality_status": "pending",
+        "error_message": ""
+      },
+      {
+        "manifest_id": "2164ce4e03894ce1",
+        "ingestion_run_id": "run_20260618_114220",
+        "source": "SYNTHETIC",
+        "dataset": "synthetic_macro",
+        "symbol_or_series_id": "BAMLC0A0CM",
+        "request_url_or_endpoint": "synthetic://macro",
+        "parameters": "{\"series_id\": \"BAMLC0A0CM\", \"start\": null}",
+        "requested_at": "2026-06-18 11:42:20.834920",
+        "response_status": "ok:synthetic",
+        "row_count": 97,
+        "min_date": "2018-06-01",
+        "max_date": "2026-06-01",
+        "checksum": "7be74b84f36263ff139703049f0ecd54b226dc8820550bbbb02a1f328566a4fb",
+        "version": 1,
+        "data_quality_status": "pending",
+        "error_message": ""
+      }
+    ]
+  }
+}
