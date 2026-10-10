@@ -2,6 +2,7 @@
   "name": "market-terminal",
   "version": "0.1.0",
   "private": true,
+  "license": "Apache-2.0",
   "type": "module",
   "description": "Quant Intelligence Platform — a Bloomberg-style operating system for market intelligence, macro analytics, securities finance, treasury analytics, and AI decision support.",
   "scripts": {
