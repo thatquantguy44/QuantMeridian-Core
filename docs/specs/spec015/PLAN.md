@@ -1,8 +1,8 @@
 # Plan: Pluggable Money Market and Collateral Optimization Center
 
 - **Spec:** spec015-pluggable-optimization-center (`SPEC.md`)
-- **Status:** Draft
-- **Last updated:** 2026-10-17
+- **Status:** Draft — implementation in progress; model binding approval pending
+- **Last updated:** 2026-10-18
 
 ## Architecture
 
@@ -32,6 +32,20 @@ Durable optimization registry + queue/scheduler/worker
 The model services are isolated deployments and retain their own `/health`, `/v1/capabilities`, `/v1/validate`, and `/v1/runs` boundaries. Extend `services/money_market_api` rather than creating a second MMKT service. Add `services/collateral_optimizer_api` on a configurable URL (8017 is the proposed local port; confirm no collision at implementation). The browser never contacts a Python service directly. The registry and worker own history, scheduling, comparisons, and audits; a model service never needs to read QuantMeridian's database or other services. Model source data is composed by QuantMeridian and passed as an explicit snapshot.
 
 The current `optimization_core` can verify continuous LPs, not MIPs. Use its verifier where it is mathematically sufficient; for other model forms, the adapter must provide an approved independent verifier or the result remains `UNVERIFIED`. Do not silently describe service self-checks as independent verification.
+
+## Current implementation checkpoint
+
+The first Spec015 code slice runs on the `spec015/optimization-center-foundation` branch. It adds a same-origin connection health route and an Optimization Center connection panel. Service health is shown separately from Spec015 binding status, which remains `UNCONFIGURED` until an approved model binding is registered. Legacy generated run, savings, dual, and trade panels remain available only with a prominent SIMULATION DATA notice. This does not approve the local MMKT prototype as a Spec015 model binding.
+
+## Money Market Fund Optimizer module
+
+A separate `/money-market-fund-optimizer` workspace is being added for fund allocation. It is distinct from the existing `CASH` treasury funding optimizer. The workspace probes a deployment-configured model service through a same-origin server route, with the model logic remaining in its own repository. The repository identity and approved immutable revision, request/result schemas, input mapping, and independent verifier remain open Spec015 decisions; service reachability alone never enables a run.
+
+## Money Market Fund Optimizer proof of concept
+
+The separate `/money-market-fund-optimizer` module runs a small deterministic LP locally through `POST /api/mm-fund-optimizer/optimize`. Synthetic Demo Mode is an explicit opt-in and defaults off; the API also requires `synthetic_mode: true`. When enabled, it uses the fixed `mmfo-demo-us-institutional-2026-10-16` fictional dataset with eight government and prime share classes and descriptive yield, expense, AUM, maturity, liquidity, and portfolio-mix fields. It maximizes illustrative net 7-day yield subject to cash reserve, minimum same-day liquidity, maximum prime exposure, and per-fund concentration constraints. A bounded vertex-enumeration solver returns the highest-yield feasible point for this small LP and checks the stated constraints before returning it. Results expose the dataset ID/as-of date and remain labeled `SIM`; when the toggle is off, the POC run is disabled and produces no synthetic result.
+
+This is a replaceable POC adapter, not the eventual model integration. The future service remains a separate deployment built from the approved model repository. Keep the POC explicitly separated from production bindings; do not use its synthetic universe as a live recommendation source. The model repository, immutable revision, approved input/result schemas, sponsor/vehicle eligibility, fee and tax treatment, liquidity mapping, and independent verifier remain unresolved.
 
 ## Repository connection contract
 
@@ -69,7 +83,7 @@ The service's capability response is the single source for which controls and re
 
 The `config_schema` is a reviewed, machine-readable JSON Schema subset with field ID, type, units, bounds, enumerations, required/conditional rules, display group/help, and safe default provenance. Product policy cannot be invented by a UI form generator. The service validates every value again. The UI stores named profile versions containing the explicit user values and original schema version; the service returns a canonical `effective_config` with all applied defaults and a SHA-256 hash. Unknown fields, incompatible schema majors, nonfinite numbers, unit mismatches, and unsupported features fail validation. Import/export uses the same canonical schema and includes no credential or local path.
 
-MMKT starts from spec011's forecast, instrument, normalized-rate snapshot, and policy contract. Preserve the existing `money_market_api` rate snapshot hash and explicit SIM selection. COLL needs a newly approved, typed snapshot with inventory asset IDs/quantities/availability, obligations, agreements, eligibility, haircuts, concentration/counterparty rules, currency/legal entity, costs, and as-of/source fields. Actual schema details are finalized against the identified collateral engine; no eligibility, haircut, or legal-authority default is inferred. Each adapter maps stable IDs in and out and reports rejected/unmapped fields. Both services must expose unavailable fields honestly when a model cannot support them.
+MMKT starts from spec011's forecast, instrument, normalized-rate snapshot, and policy contract. Preserve the existing `money_market_api` rate snapshot hash and explicit SIM selection. COLL's identified model and proposed native `Snapshot`/`OptimizationResult` binding are detailed in [spec016](../spec016/PLAN.md). Review that contract before activation; no eligibility, haircut, or legal-authority default is inferred. Each adapter maps stable IDs in and out and reports rejected/unmapped fields. Both services must expose unavailable fields honestly when a model cannot support them.
 
 ## Run lifecycle and API
 
@@ -117,4 +131,4 @@ Likely changes include `services/money_market_api/` (adapter and real solve), ne
 
 ## Dependencies and unresolved decisions
 
-Resolve the five decisions in `SPEC.md` before connecting a model. Spec011 and spec012 approval boundaries remain in force; this plan does not grant solving authority to Sources & Uses. Confirm collateral engine input/output semantics and obtain legal/policy ownership for eligibility and reuse. Choose a worker/storage deployment that survives serverless request lifetime and supports audit retention. Record any production activation separately from local proof of concept.
+Resolve the five decisions in `SPEC.md` before connecting a model. Spec016 identifies a collateral repository and candidate pin but does not approve its binding or production sources. Spec011 and spec012 approval boundaries remain in force; this plan does not grant solving authority to Sources & Uses. Confirm collateral engine input/output semantics and obtain legal/policy ownership for eligibility and reuse. Choose a worker/storage deployment that survives serverless request lifetime and supports audit retention. Record any production activation separately from local proof of concept.

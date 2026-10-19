@@ -18,6 +18,7 @@ const PAGES = [
   { path: "/market-lens", title: "Market Lens Studio", code: "LENS" },
   { path: "/market-chart", title: "Market Chart Studio", code: "MKC" },
   { path: "/market-volatility", title: "Market Volatility", code: "MVOL" },
+  { path: "/money-market", title: "Money Market Optimizer", code: "MMKT" },
   { path: "/economics", title: "Macro Dashboard", code: "ECON" },
   { path: "/economics/curve", title: "Treasury Curve Lab", code: "CURV" },
   { path: "/economics/inflation", title: "Inflation Explorer", code: "INFL" },

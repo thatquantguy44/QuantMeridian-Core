@@ -3,19 +3,34 @@
 - **ID:** spec015-pluggable-optimization-center
 - **Module code / route:** `OPT` / `/optimization`
 - **Status:** Draft — implementation subject to review of this spec and its integration contracts
-- **Last updated:** 2026-10-17
+- **Last updated:** 2026-10-18
 
 > This file defines outcomes and acceptance criteria. Integration design and sequencing are in `PLAN.md` and `TASKS.md`.
 
+## Implementation status — 2026-10-18
+
+- The operating-shell foundation merged in PR #161: service health is separate from approved model binding state, and seeded Optimization Center results are labeled SIMULATION DATA.
+- PR #163 delivered the separate Money Market Fund Optimizer workspace and local synthetic LP proof of concept. Follow-up Synthetic Demo Mode is an explicit opt-in and defaults off. When enabled, it uses a fixed eight-share-class fictional snapshot with gross/net 7-day yield, expense ratio, AUM, WAM/WAL, daily/weekly liquid assets, and portfolio mix. The LP distributes cash to maximize supplied net yield subject to reserve, same-day liquidity, prime exposure, and per-fund concentration limits. The API returns constraint checks; the UI reports estimates and model limitations.
+- The POC is an explicit, temporary exception to the non-goal below. It is demo-only, uses synthetic inputs, has no independent verifier, and does not satisfy the approved external model binding, source lineage, or production recommendation requirements. Actual model mathematics will remain in its separate repository when identified and approved.
+- Tracking and detailed implementation sequencing remain in PLAN.md and TASKS.md.
+
+## Implementation status — 2026-10-19
+
+- MMKT now runs end to end: `services/money_market_api` solves an independently verified continuous LP on named SIM rate sets (spec011), so its run endpoint no longer returns `501 MODEL_NOT_IMPLEMENTED`. Its Spec015 binding is still unregistered; the Optimization Center shows `BINDING UNCONFIGURED`.
+- The Optimization Center and COLL read service results only: generated runs, duals, trades and the client-side collateral what-if estimate are removed from the connected path (spec016 COLL-007). OPT also reports IBAL, gated by its pinned engine (`ENGINE_PINNED`).
+- No durable run registry, schedules, comparisons or audit trail exist yet; those remain the open Spec015 deliverables.
+
 ## Summary
 
-Make QuantMeridian's Optimization Center the operating surface for two independent model services: money market optimization and collateral optimization. Each service can be connected to an approved existing model repository, whether supplied as a local checkout or a pinned Git repository, through a versioned adapter contract. Users can configure supported model inputs and policies, run each optimizer manually or on a schedule, inspect verified results and audit history, and compare baseline and changed configurations side by side. The UI must be useful before a model is connected, while clearly identifying setup, unavailable, simulated, failed, and verified states.
+Make QuantMeridian's Optimization Center the operating surface for independent money market and collateral model services. Each service can be connected to an approved existing model repository, whether supplied as a local checkout or a pinned Git repository, through a versioned adapter contract. Users can configure supported model inputs and policies, run each optimizer manually or on a schedule, inspect verified results and audit history, and compare baseline and changed configurations side by side. Provide a distinct Money Market Fund Optimizer workspace for fund allocation, separate from the CASH treasury funding view. Its current implementation is a synthetic proof of concept; the eventual fund model will be connected through its own approved repository binding. The UI must be useful before a model is connected, while clearly identifying setup, unavailable, simulated, failed, and verified states.
 
 ## Problem and current state
 
 `services/money_market_api` already validates a versioned request and advertises `solver_enabled: false`; its run endpoint currently returns `501 MODEL_NOT_IMPLEMENTED`. Spec011 defines the money market model goals but has open decisions. `src/app/optimization/page.tsx` reads generated runs, duals, and trades from `src/data/optimization.ts`; `src/app/collateral/page.tsx` presents generated data and a client-side what-if estimate. Neither is an auditable source of real solve results. The existing `/cash-optimizer` page is a funding view, not a connected money market execution optimizer.
 
-This spec adds the connection and operating layer for actual, separately owned models. It does not choose or implement either mathematical model. The model repository, entry point, solver, license, and approved policies must be supplied and verified during integration. Spec011 remains the source for MMKT financial requirements; collateral-specific model requirements and acceptance fixtures must be approved before collateral recommendations are enabled.
+> **Update 2026-10-19:** the paragraph above records the state when this spec was written. MMKT and COLL now return verified service results and OPT and COLL no longer show generated data; see "Implementation status — 2026-10-19".
+
+This spec adds the connection and operating layer for actual, separately owned models. It does not implement either mathematical model. [Spec016](../spec016/SPEC.md) identifies the InventoryBallast collateral package and proposes its exact initial pin and native contract; that binding still needs review and conformance evidence before activation. The money market model repository remains unresolved. Spec011 remains the source for MMKT financial requirements.
 
 ## Goals
 
@@ -29,7 +44,7 @@ This spec adds the connection and operating layer for actual, separately owned m
 
 ## Non-goals
 
-- Creating the money market or collateral mathematical engines inside QuantMeridian, or replacing their own source repositories.
+- Creating the production money market or collateral mathematical engines inside QuantMeridian, or replacing their own source repositories. A temporary synthetic LP is permitted only as the explicitly SIM-labeled Money Market Fund Optimizer proof of concept; it cannot produce production recommendations and must be replaced by the approved external fund model binding.
 - Automatically importing arbitrary GitHub URLs, executable paths, or code supplied by a browser user. Connections are approved server-side deployments.
 - Order routing, settlement, collateral movement, trade execution, or automatic application of proposed allocations.
 - Combining money market yield and collateral savings into one total without an approved common objective and double-counting rule.
@@ -64,6 +79,8 @@ This spec adds the connection and operating layer for actual, separately owned m
 | OC-014 | Append-only audit events cover connection/profile changes, validation, submission, scheduling, lifecycle changes, verification, comparison creation, export, and administrative action. Authorized users can filter and export the audit trail with event time, actor, correlation ID, before/after references, and reason; secrets and raw sensitive payloads are excluded from event logs. | must |
 | OC-015 | Input source and as-of state (`DB`, `SIM`, user supplied, stale, missing, error) are visible in each module, `OPT`, comparison, and export. No silent DB-to-SIM fallback is allowed. | must |
 | OC-016 | Existing seeded OPT metrics, duals, and trades, and the collateral client-side savings formula, are removed from connected result paths. An unconnected model presents setup guidance and representative layout without invented run success. | must |
+| OC-017 | Provide a Money Market Fund Optimizer workspace distinct from CASH treasury funding. It may run the explicitly synthetic local POC while unbound; all output stays labeled SIM and is excluded from verified recommendation totals. The approved fund model, eligibility rules, input/result schemas, and independent verifier must be connected before live recommendations are enabled. | must |
+| OC-018 | Synthetic Demo Mode is explicit and defaults off. When on, the module uses a clearly identified, fixed fictional fund dataset and labels all outputs SIM; when off, the POC endpoint refuses to solve and no synthetic values are presented as live. Dataset metadata and assumptions are visible in results. | must |
 
 ## User interface slices
 
@@ -91,8 +108,8 @@ All slices use the existing terminal navigation, dense table patterns, provenanc
 
 ## Decisions required before implementation
 
-1. Identify the money market and collateral model repositories (or local checkout paths), their owners, supported invocation surfaces, licenses, and first approved immutable revisions. Do not infer these from similar repository names.
-2. Approve the collateral model's input, policy, output, objective, units, and independent verification contract, including whether its use is limited to one currency/legal entity per run.
+1. Identify the money market model repository and its first approved immutable revision. Spec016 identifies the collateral repository and a merged-main candidate commit; approve its binding only after build, ownership, license and conformance review.
+2. Review spec016's native collateral input, policy, output, objective, units and verifier contract. The candidate supports multiple currencies and legal entities through explicit agreements; approve the QuantMeridian adapter and source policy before recommendations are enabled.
 3. Resolve spec011's baseline, horizon/currency, and stale-rate decisions before enabling money market recommendations.
 4. Select durable run/audit storage and worker deployment for local and hosted environments, retention periods, user identity/RBAC source, and schedule failure notification destination.
 5. Define whether any combined economic metric across MMKT and COLL is valid; otherwise keep the two impact panels separate.
@@ -102,6 +119,7 @@ All slices use the existing terminal navigation, dense table patterns, provenanc
 - `docs/specs/spec011/` — money market model requirements and existing `money_market_api` scaffold.
 - `docs/specs/spec012/` — Sources & Uses, including its bounded setup-only approval.
 - `docs/specs/spec013/` and `docs/specs/spec007/` — InventoryBallast capability/version and UI integration precedents.
+- `docs/specs/spec016/` — specific InventoryBallast collateral package, candidate pin and update protocol.
 - `docs/specs/spec014/` — liquidity forecast source dependency and proposed service port 8016.
 - `services/optimization_core/` — current LP builder and independent verifier; MIP support is not yet implemented there.
 - `src/app/optimization/page.tsx`, `src/app/collateral/page.tsx`, `src/app/cash-optimizer/page.tsx` — current product surfaces.

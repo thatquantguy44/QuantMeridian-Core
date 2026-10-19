@@ -10,6 +10,8 @@
     "LENS":   { "enabled": true, "label": "Market Lens Studio" },
     "MKC":    { "enabled": true, "label": "Market Chart Studio" },
     "MVOL":   { "enabled": true, "label": "Market Volatility" },
+    "MMKT":   { "enabled": true, "label": "Money Market Optimizer" },
+    "MMFO":   { "enabled": true, "label": "Money Market Fund Optimizer" },
     "ECON":   { "enabled": true, "label": "Macro Dashboard" },
     "ECOIQ":  { "enabled": true, "label": "ECOIQ Economic Intelligence" },
     "CURV":   { "enabled": true, "label": "Treasury Curve Lab" },
