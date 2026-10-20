@@ -1,35 +1,43 @@
 # QuantMeridian Money Market API
 
-This package scaffolds the private model-service boundary for MMKT on port `8014`. The
-terminal remains responsible for Gold DB reads, SIM selection, rate snapshot construction, and
-the rate snapshot hash. This service has no database or market-data client.
+The private MMKT model service listens on port `8014`. The terminal owns Gold reads,
+explicit SIM selection, normalized rate snapshots, and snapshot hashes. The service has
+no database connection or market-data client.
 
-The versioned request contract validates the full rate snapshot, preserves each row's status and
-normalized `mm_yield_pct`, and requires an explicit `sim_set_id` when the caller selects `SIM`.
-It also requires dated cash forecast points, candidate instruments linked to snapshot rows, a
-declared horizon, and explicit policy fields (including explicit nulls for undecided limits and
-currency aggregation). No policy defaults are inferred. Non-OK rows remain visible as evidence;
-the current scaffold does not price or filter instruments because no optimizer model is implemented.
+`POST /v1/runs` solves a multi-period cash allocation with SciPy HiGHS and independent
+verification of bounds, rows, integrality, and objective reconstruction. The default
+binding is disabled. `local-mmkt-lp-v1` permits only the continuous LP preview;
+`local-mmkt-execution-v2` permits the verified ticketed MIP. The latter enforces
+minimum ticket, integer lot, maximum ticket count, and dated cutoff constraints.
+The returned blotter is an indicative, cutoff-ordered plan. No orders are routed.
+An infeasible or unverified solve returns no allocation or blotter.
 
-`GET /health` is unauthenticated and reports that the service is not ready for solves. The
-capability endpoint and run endpoint require a bearer token in `MONEY_MARKET_API_TOKEN`, a UUID
-`X-Correlation-ID`, and the run endpoint also requires `Idempotency-Key`. In production, protected
-routes fail closed unless `MMKT_ENV=production` and `MMKT_PRODUCTION_ENABLED=true` are both set.
+Every run retains the request and rate-snapshot hashes, source and as-of date, SIM set,
+forecast case, model family, and assumptions. Only `status=ok` rates with normalized
+`mm_yield_pct` are priced. Cash continuity uses the selected p10/p50/p90 residual case;
+forecast quantiles are supplied inputs, not calibrated probabilities. Returns use
+simple ACT/365 on normalized annual yield, explicit costs are charged once, cash earns
+zero, and currencies solve independently. WAM/WAL use days-to-maturity proxies.
 
-`POST /v1/runs` validates the typed request and emits a run-attempt metadata record, then returns
-`501 MODEL_NOT_IMPLEMENTED`. The metadata is not durable run history and an idempotency key is not
-yet enforced against storage. `solver_adapter.py` provides the model-neutral bridge to
-`optimization_core` and its independent verifier; the MMKT model is not wired to it yet. This
-boundary deliberately does not claim a solve or recommendation.
+LP shadow prices are local objective changes in USD per extra $1mm of a row RHS.
+MIP duals are undefined: ticketed runs report marginals from a separately verified LP
+with all integer decisions fixed, labeled `FIXED_INTEGER_LP`. Liquidity frontier points
+are separately solved and verified at the requested floor multipliers. An infeasible
+point has no objective. The service does not claim sensitivity ranges.
 
-## Local boundary
+`/health` is public. `/v1/capabilities` and `/v1/runs` require the configured bearer
+token and UUID correlation ID; runs also require `Idempotency-Key`. Production is off
+unless explicitly enabled. Idempotency keys are hashed in logs but do not provide a
+durable replay cache. Run history is not yet persisted.
 
-Install this package in a Python 3.12 environment and run:
+## Local run
 
 ```bash
-pip install ./services/optimization_core ./services/money_market_api
-cd services/money_market_api
-MONEY_MARKET_API_TOKEN=local-token uvicorn money_market_api.app:app --app-dir src --port 8014
+pip install ./services/optimization_core -e ./services/money_market_api
+MONEY_MARKET_API_TOKEN=local-token MONEY_MARKET_MODEL_BINDING=local-mmkt-execution-v2 \
+  uvicorn money_market_api.app:app --app-dir services/money_market_api/src --port 8014
 ```
 
-Health is available at `http://127.0.0.1:8014/health`.
+Set the same `MONEY_MARKET_API_TOKEN` in the terminal's `.env.local`, restart the
+terminal, and open `/money-market`. Run `pytest services/money_market_api/tests` after
+installing the service's test dependencies.

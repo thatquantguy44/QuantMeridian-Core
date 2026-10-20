@@ -12,6 +12,8 @@ import IndexReturns from "./app/index-returns/page";
 import MarketLens from "./app/market-lens/page";
 import MarketChart from "./app/market-chart/page";
 import MarketVolatility from "./app/market-volatility/page";
+import MoneyMarketFundOptimizer from "./app/money-market-fund-optimizer/page";
+import MoneyMarket from "./app/money-market/page";
 import MacroChart from "./app/macro-chart/page";
 import Mcs from "./app/simulations/mcs/page";
 import VolatilityForecaster from "./app/ml/volatility-forecaster/page";
@@ -44,6 +46,7 @@ import EconFundingCost from "./app/economics/funding-cost/page";
 import EconRateAnalysis from "./app/economics/rate-analysis/page";
 import EconIQ from "./app/economics/ecoiq/page";
 
+import GuidesPage from "./app/guides/page";
 import NotFound from "./app/not-found";
 
 function on(code: string) {
@@ -87,6 +90,8 @@ export function App() {
         {on("LENS") && <Route path="market-lens" element={<MarketLens />} />}
         {on("MKC") && <Route path="market-chart" element={<MarketChart />} />}
         {on("MVOL") && <Route path="market-volatility" element={<MarketVolatility />} />}
+        {on("MMKT") && <Route path="money-market" element={<MoneyMarket />} />}
+        {on("MMFO") && <Route path="money-market-fund-optimizer" element={<MoneyMarketFundOptimizer />} />}
         {on("MGC") && <Route path="macro-chart" element={<MacroChart />} />}
         {on("MCS") && <Route path="simulations/mcs" element={<Mcs />} />}
         {on("VOLF") && <Route path="ml/volatility-forecaster" element={<VolatilityForecaster />} />}
@@ -110,6 +115,9 @@ export function App() {
           </Route>
         )}
 
+        <Route path="guides" element={<GuidesPage />} />
+        <Route path="guides/:code" element={<GuidesPage />} />
+        <Route path="guides/:code/:doc" element={<GuidesPage />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

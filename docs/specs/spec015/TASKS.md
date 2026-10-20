@@ -1,23 +1,24 @@
 # Tasks: Pluggable Money Market and Collateral Optimization Center
 
 - **Spec:** spec015-pluggable-optimization-center (`SPEC.md`, `PLAN.md`)
-- **Status:** Draft — no model binding approved yet
-- **Last updated:** 2026-10-17
+- **Status:** Draft — implementation in progress; no model binding approved yet
+- **Last updated:** 2026-10-18
 
 | ID | Task | Covers | Status | Evidence / definition of done |
 |---|---|---|---|---|
-| OC-T001 | Identify both model repositories or local checkouts, owners, entry points, licenses, approved revisions, verifier approach, and collateral semantics; resolve spec011 and spec015 decisions. | OC-001–005, OC-007–009 | blocked | Reviewed binding and contract decisions recorded; no guessed repository or policy default. |
+| OC-T001 | Identify both model repositories or local checkouts, owners, entry points, licenses, approved revisions, verifier approach, and collateral semantics; resolve spec011 and spec015 decisions. | OC-001–005, OC-007–009 | blocked | Spec016 identifies the collateral package and candidate SHA, but its binding review and the MMKT repository remain open; no guessed policy default. |
 | OC-T002 | Define common capability, configuration, snapshot, run, result, error, comparison, and audit schemas; generate TS/Python contract types. | OC-003–007, OC-010–015 | todo | Versioned schemas, canonical hash rules, parity fixtures, compatibility policy. |
 | OC-T003 | Implement deployment-approved local and pinned Git binding workflow and adapter conformance suite for both services. | OC-001–003 | todo | Local/remote golden fixtures match; revision drift and invalid adapter fail closed; rollback tested. |
 | OC-T004 | Extend `money_market_api` scaffold to adapt the approved MMKT model and approved verifier, keeping spec011 provenance and source rules. | OC-001, OC-004, OC-007, OC-008, OC-015 | blocked | Service contract and financial fixtures pass; `solver_enabled` becomes true only for approved binding. |
 | OC-T005 | Add independent `collateral_optimizer_api`, collateral snapshot/config adapter, capabilities, and approved verifier. | OC-001–005, OC-007, OC-009 | blocked | Agreement, eligibility, haircut, limits, coverage, cost, infeasible, and tamper fixtures pass. |
 | OC-T006 | Build durable profile/snapshot/run/result registry and append-only audit store, with auth, lineage, idempotency, and paginated APIs. | OC-005–007, OC-012, OC-014–015 | todo | Replayed run matches hashes; unauthorized access denied; immutable history and concurrent idempotency proven. |
 | OC-T007 | Implement queue, worker, scheduler, occurrence policy, health, pause/resume, and attempt tracking. | OC-006, OC-012–014 | todo | Crash/concurrency, DST, missed-run, stale-input, paused, and model-drift cases pass. |
-| OC-T008 | Build MMKT connection/input/configuration/run/result UI slices and source-state handling. | OC-003–005, OC-008, OC-015–016 | todo | Capability gates, field errors, no-solve state, verified blotter/ladder/baseline views, narrow-screen path. |
+| OC-T008 | Build MMKT connection/input/configuration/run/result UI slices and source-state handling. | OC-003–005, OC-008, OC-015–016 | in-progress | Added the initial OPT connection panel and `/api/optimization/connections` health probe. It separates service health from approved binding status; model binding remains UNCONFIGURED. Configuration, run, and verified result screens remain. |
 | OC-T009 | Build COLL connection/input/configuration/run/result UI slices; remove connected-path client what-if estimate. | OC-003–005, OC-009, OC-015–016 | todo | Real result drilldown, infeasible/error states, provenance and verifier labels, narrow-screen path. |
-| OC-T010 | Replace `OPT` generated operational data with registry-backed Runs, Connections, Schedules, and Audit views. | OC-012–016 | todo | Manual/automated attempts and failures traceable; demo records explicitly segregated. |
+| OC-T010 | Replace `OPT` generated operational data with registry-backed Runs, Connections, Schedules, and Audit views. | OC-012–016 | in-progress | Added live service health and a prominent SIMULATION DATA notice for the existing generated run, savings, dual, and trade panels. Registry-backed records, schedules, audit, and demo exclusion remain. |
 | OC-T011 | Build same-model A/B comparison and two-model coordinated experiment UI/API. | OC-010–011 | todo | Same-snapshot delta, non-comparable warning, unmatched rows, partial experiment, and separate-family metrics tested. |
 | OC-T012 | Complete end-to-end validation, usability, security, documentation, and staged activation for each service. | OC-001–016 | todo | Contract, adapter, verifier, scheduler, audit, and UI evidence linked; no synthetic result claimed as live. |
+| OC-T013 | Add a separate Money Market Fund Optimizer workspace with a replaceable local POC model and later approved external binding. | OC-001, OC-003–008, OC-015–018 | in-progress | Added an explicit-off-by-default Synthetic Demo Mode, fixed eight-share-class illustrative dataset, LP constraints/results, server-side mode gate, and future-service health probe. Outputs remain SIM and lack independent verification; external repository binding remains gated. |
 
 ## Delivery slices
 

@@ -17,6 +17,7 @@ import {
   Sigma,
   BrainCircuit,
   Banknote,
+  Coins,
   Flame,
   Globe2,
   Gavel,
@@ -54,6 +55,9 @@ const ALL_NAV: NavItem[] = [
   { code: "LENS", label: "Market Lens Studio", href: "/market-lens", icon: Telescope, desc: "Configurable analytics workspace", group: "MARKETS" },
   { code: "MKC", label: "Market Chart Studio", href: "/market-chart", icon: CandlestickChart, desc: "Freeform technical market charting", group: "MARKETS" },
   { code: "MVOL", label: "Market Volatility", href: "/market-volatility", icon: Activity, desc: "VIX claim audits & volatility regimes", group: "MARKETS" },
+  // Optimization Center is the hub of this group: keep it first, then the models in demo order.
+  { code: "MMKT", label: "Money Market Optimizer", href: "/money-market", icon: Coins, desc: "Forecast cash deployment across MMFs, bills, repo and CP", group: "OPTIMIZATION" },
+  { code: "MMFO", label: "Money Market Fund Optimizer", href: "/money-market-fund-optimizer", icon: Banknote, desc: "Fund allocation optimizer backed by a separately deployed model", group: "OPTIMIZATION" },
   { code: "ECON", label: "Macro Dashboard", href: "/economics", icon: Globe, desc: "FRED-connected economic analytics", group: "ECONOMICS" },
   { code: "ECOIQ", label: "ECOIQ Economic Intelligence", href: "/economics/ecoiq", icon: BrainCircuit, desc: "Causal macro explanations and effect chains", group: "AGENTIC_INTELLIGENCE" },
   { code: "CURV", label: "Treasury Curve Lab", href: "/economics/curve", icon: Spline, desc: "Curve shape, history & inversions", group: "ECONOMICS" },
