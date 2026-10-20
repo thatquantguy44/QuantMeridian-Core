@@ -90,6 +90,7 @@ export function App() {
         {on("LENS") && <Route path="market-lens" element={<MarketLens />} />}
         {on("MKC") && <Route path="market-chart" element={<MarketChart />} />}
         {on("MVOL") && <Route path="market-volatility" element={<MarketVolatility />} />}
+        {on("INDEM") && <Route path="securities-lending/indemnification" element={<Indemnification />} />}
         {on("MMKT") && <Route path="money-market" element={<MoneyMarket />} />}
         {on("MMFO") && <Route path="money-market-fund-optimizer" element={<MoneyMarketFundOptimizer />} />}
         {on("MGC") && <Route path="macro-chart" element={<MacroChart />} />}
