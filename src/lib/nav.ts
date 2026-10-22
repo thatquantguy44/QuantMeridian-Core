@@ -19,6 +19,7 @@ import {
   Banknote,
   Coins,
   Flame,
+  ShieldAlert,
   Globe2,
   Gavel,
   SquareStack,
@@ -55,6 +56,7 @@ const ALL_NAV: NavItem[] = [
   { code: "LENS", label: "Market Lens Studio", href: "/market-lens", icon: Telescope, desc: "Configurable analytics workspace", group: "MARKETS" },
   { code: "MKC", label: "Market Chart Studio", href: "/market-chart", icon: CandlestickChart, desc: "Freeform technical market charting", group: "MARKETS" },
   { code: "MVOL", label: "Market Volatility", href: "/market-volatility", icon: Activity, desc: "VIX claim audits & volatility regimes", group: "MARKETS" },
+  { code: "INDEM", label: "Indemnification Risk", href: "/securities-lending/indemnification", icon: ShieldAlert, desc: "Borrower default & reinvestment indemnification (SIM)", group: "FINANCE" },
   // Optimization Center is the hub of this group: keep it first, then the models in demo order.
   { code: "MMKT", label: "Money Market Optimizer", href: "/money-market", icon: Coins, desc: "Forecast cash deployment across MMFs, bills, repo and CP", group: "OPTIMIZATION" },
   { code: "MMFO", label: "Money Market Fund Optimizer", href: "/money-market-fund-optimizer", icon: Banknote, desc: "Fund allocation optimizer backed by a separately deployed model", group: "OPTIMIZATION" },
