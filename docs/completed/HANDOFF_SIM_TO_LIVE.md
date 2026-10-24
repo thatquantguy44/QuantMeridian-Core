@@ -32,7 +32,7 @@
 |---|-------|---------|----------|--------|
 | 11 | [SecLending inventory price overlay](#build-11-seclending-inventory-price-overlay) | `/securities-lending` | market_data_pipeline | [x] Complete |
 | 12 | [Collateral & PF mark-to-market overlay](#build-12-collateral--pf-mark-to-market-overlay) | `/collateral`, `/prime-finance` | market_data_pipeline | [ ] Not started |
-| 13 | [Squeeze radar short interest (Yahoo)](#build-13-squeeze-radar-short-interest) | `/securities-lending/squeeze` | Yahoo Finance (new) | [ ] Not started |
+| 13 | [Squeeze radar short interest (Yahoo)](#build-13-squeeze-radar-short-interest) | `/securities-lending/squeeze` | Yahoo Finance (new) | In draft [PR #192](https://github.com/thatquantguy44/QuantMeridian/pull/192); live fetch unverified |
 
 ### Config-Only (no code changes)
 
@@ -250,14 +250,14 @@ These are documented but not actionable from public pipelines:
 
 **Goal:** Wire Yahoo Finance short interest data into the squeeze radar.
 
-**Approach:** This requires adding a Yahoo Finance short interest API call to the market pipeline or a dedicated API route.
+**Approach (2026-10-24):** Draft PR #192 uses a dedicated Tier B server route. The old market pipeline path has been retired. Yahoo `defaultKeyStatistics` supplies the reported short-percent-of-float and short ratio; the route rejects incomplete or old observations.
 
-**Files to modify:**
-- New: `src/app/api/market/short-interest/route.ts` — fetch short interest from Yahoo Finance
-- `src/data/squeeze.ts` — add `mergeShortInterest(board, liveData)` function
-- `src/app/securities-lending/squeeze/page.tsx` — add fetch call, merge into squeeze board
+**Files in PR #192:**
+- `src/app/api/securities-finance/squeeze/short-interest/route.ts` and `src/lib/server/yahooShortInterest.ts` — fetch and validate Yahoo observations.
+- `src/data/squeeze.ts` — merge dated SI/DTC and recompute affected scores.
+- `src/app/securities-lending/squeeze/page.tsx` — show row provenance and report dates.
 
-**Acceptance:** Short interest % and days-to-cover use real data when available.
+**Acceptance:** Short interest % and days-to-cover use reported Yahoo data when available; missing rows remain explicitly SIM. Confirm the route against Yahoo from an outbound-enabled local runtime before treating this build as complete.
 
 ---
 
@@ -272,3 +272,4 @@ These are documented but not actionable from public pipelines:
 | 2026-06-24 | 7 | Markets quote board: expand pipeline overlay to all asset-class tabs | — |
 | 2026-06-24 | 10 | Alert live triggers: threshold evaluation against FRED series (VIX, HY OAS, 10Y, T10Y2Y) | — |
 | 2026-06-24 | 11 | SecLending inventory: overlay live market prices on market value column | — |
+| 2026-10-24 | 13 | Yahoo SI overlay in draft PR; CI and live fetch verification pending | [#192](https://github.com/thatquantguy44/QuantMeridian/pull/192) |

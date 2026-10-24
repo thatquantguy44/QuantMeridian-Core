@@ -12,6 +12,7 @@ import IndexReturns from "./app/index-returns/page";
 import MarketLens from "./app/market-lens/page";
 import MarketChart from "./app/market-chart/page";
 import MarketVolatility from "./app/market-volatility/page";
+import VixImpliedForward from "./app/market-volatility/implied-vs-forward/page";
 import MoneyMarketFundOptimizer from "./app/money-market-fund-optimizer/page";
 import MoneyMarket from "./app/money-market/page";
 import MacroChart from "./app/macro-chart/page";
@@ -90,6 +91,7 @@ export function App() {
         {on("LENS") && <Route path="market-lens" element={<MarketLens />} />}
         {on("MKC") && <Route path="market-chart" element={<MarketChart />} />}
         {on("MVOL") && <Route path="market-volatility" element={<MarketVolatility />} />}
+        {on("VIXR") && <Route path="market-volatility/implied-vs-forward" element={<VixImpliedForward />} />}
         {on("INDEM") && <Route path="securities-lending/indemnification" element={<Indemnification />} />}
         {on("MMKT") && <Route path="money-market" element={<MoneyMarket />} />}
         {on("MMFO") && <Route path="money-market-fund-optimizer" element={<MoneyMarketFundOptimizer />} />}
