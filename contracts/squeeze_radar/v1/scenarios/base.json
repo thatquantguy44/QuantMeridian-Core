@@ -1,0 +1,71 @@
+{
+  "$schema": "../scenario-manifest-1.0.schema.json",
+  "manifest_version": "1.0.0",
+  "manifest_id": "sqz-base",
+  "generator_version": "sqz-csv-gen-1.2.0",
+  "scenario_id": "sqz_base_v1",
+  "seed": 21021,
+  "generated_at": "2026-10-23T16:00:00Z",
+  "data_mode": "SIM",
+  "base_currency": "USD",
+  "calendar": {
+    "start_date": "2026-09-21",
+    "business_day_count": 25
+  },
+  "fictional_identity_policy": {
+    "fictional_only": true,
+    "required_name_suffix": " Synthetic"
+  },
+  "fictional_universe": {
+    "securities": [
+      { "security_id": "SEC-QAVA", "issuer_id": "ISS-QAVA", "listing_id": "LST-QAVA", "ticker": "QAVA", "security_name": "Aster Vale Robotics Synthetic", "asset_type": "EQUITY", "sector": "Technology", "shares_outstanding": 82000000, "float_shares": 65000000, "initial_price": 42, "initial_volume_qty": 1250000, "initial_lendable_qty": 11500000, "initial_utilization_pct": 48, "initial_fee_bps": 85, "initial_inventory_qty": 620000 },
+      { "security_id": "SEC-QBRI", "issuer_id": "ISS-QBRI", "listing_id": "LST-QBRI", "ticker": "QBRI", "security_name": "Briarstone Retail Synthetic", "asset_type": "EQUITY", "sector": "Consumer Discretionary", "shares_outstanding": 54000000, "float_shares": 41000000, "initial_price": 18, "initial_volume_qty": 2100000, "initial_lendable_qty": 7200000, "initial_utilization_pct": 78, "initial_fee_bps": 640, "initial_inventory_qty": 410000 },
+      { "security_id": "SEC-QCPE", "issuer_id": "ISS-QCPE", "listing_id": "LST-QCPE", "ticker": "QCPE", "security_name": "Cinder Peak Energy Synthetic", "asset_type": "EQUITY", "sector": "Energy", "shares_outstanding": 120000000, "float_shares": 96000000, "initial_price": 31, "initial_volume_qty": 980000, "initial_lendable_qty": 18400000, "initial_utilization_pct": 63, "initial_fee_bps": 225, "initial_inventory_qty": 880000 },
+      { "security_id": "SEC-QDHH", "issuer_id": "ISS-QDHH", "listing_id": "LST-QDHH", "ticker": "QDHH", "security_name": "Dovetail Harbor Health Synthetic", "asset_type": "EQUITY", "sector": "Health Care", "shares_outstanding": 70000000, "float_shares": 59000000, "initial_price": 67, "initial_volume_qty": 760000, "initial_lendable_qty": 9300000, "initial_utilization_pct": 35, "initial_fee_bps": 55, "initial_inventory_qty": 540000 },
+      { "security_id": "SEC-QEVC", "issuer_id": "ISS-QEVC", "listing_id": "LST-QEVC", "ticker": "QEVC", "security_name": "Evermere Cloudworks Synthetic", "asset_type": "EQUITY", "sector": "Technology", "shares_outstanding": 98000000, "float_shares": 77000000, "initial_price": 88, "initial_volume_qty": 1650000, "initial_lendable_qty": 13600000, "initial_utilization_pct": 57, "initial_fee_bps": 145, "initial_inventory_qty": 730000 },
+      { "security_id": "SEC-QFRG", "issuer_id": "ISS-QFRG", "listing_id": "LST-QFRG", "ticker": "QFRG", "security_name": "Fable Ridge Growth ETF Synthetic", "asset_type": "ETF", "sector": "Multi-Sector", "shares_outstanding": 45000000, "float_shares": 45000000, "initial_price": 51, "initial_volume_qty": 2400000, "initial_lendable_qty": 16800000, "initial_utilization_pct": 28, "initial_fee_bps": 35, "initial_inventory_qty": 1200000 }
+    ]
+  },
+  "random_streams": {
+    "equity": "equity-v1",
+    "market_borrow": "market-borrow-v1",
+    "inventory": "inventory-v1",
+    "short_interest": "short-interest-v1",
+    "short_volume": "short-volume-v1",
+    "options": "options-v1",
+    "etf": "etf-v1"
+  },
+  "regimes": [
+    { "regime_id": "ordinary-drift", "security_ids": ["*"], "start_date": "2026-09-21", "end_date": "2026-10-23", "effects": { "price_change_daily_pct": 0.2, "utilization_change_daily_points": 0.05 } },
+    { "regime_id": "qbri-borrow-tightening", "security_ids": ["SEC-QBRI"], "start_date": "2026-09-21", "end_date": "2026-10-23", "effects": { "utilization_change_daily_points": 0.67, "lendable_change_daily_pct": -0.8 } },
+    { "regime_id": "qbri-squeeze-like", "security_ids": ["SEC-QBRI"], "start_date": "2026-10-15", "end_date": "2026-10-23", "effects": { "price_change_daily_pct": 7.5, "fee_change_daily_bps": 55, "volume_multiplier_daily": 0.35, "call_volume_multiplier": 2.3 } },
+    { "regime_id": "qcpe-near-miss", "security_ids": ["SEC-QCPE"], "start_date": "2026-09-21", "end_date": "2026-10-23", "effects": { "utilization_change_daily_points": 0.13 } },
+    { "regime_id": "qcpe-offering-pressure", "security_ids": ["SEC-QCPE"], "start_date": "2026-10-07", "end_date": "2026-10-23", "effects": { "price_change_daily_pct": -1.2 } }
+  ],
+  "events": [
+    { "event_id": "EV-QBRI-01", "security_id": "SEC-QBRI", "issuer_id": "ISS-QBRI", "event_type": "EARNINGS", "event_time": "2026-10-14T12:00:00Z", "event_importance": "HIGH", "description": "Synthetic earnings surprise and guidance update" },
+    { "event_id": "EV-QBRI-02", "security_id": "SEC-QBRI", "issuer_id": "ISS-QBRI", "event_type": "RECALL_WAVE", "event_time": "2026-10-16T14:00:00Z", "event_importance": "HIGH", "description": "Synthetic beneficial-owner recall wave" },
+    { "event_id": "EV-QCPE-01", "security_id": "SEC-QCPE", "issuer_id": "ISS-QCPE", "event_type": "SECONDARY_OFFERING", "event_time": "2026-10-07T11:00:00Z", "event_importance": "MEDIUM", "description": "Synthetic secondary offering announcement" },
+    { "event_id": "EV-QEVC-01", "security_id": "SEC-QEVC", "issuer_id": "ISS-QEVC", "event_type": "INDEX_ADD", "event_time": "2026-10-12T21:00:00Z", "event_importance": "MEDIUM", "description": "Synthetic index inclusion announcement" },
+    { "event_id": "EV-QFRG-01", "security_id": "SEC-QFRG", "issuer_id": "ISS-QFRG", "event_type": "ETF_REBALANCE", "event_time": "2026-10-19T20:00:00Z", "event_importance": "LOW", "description": "Synthetic ETF rebalance" }
+  ],
+  "publication_schedules": {
+    "equity_market_daily.csv": { "observed_time_utc": "20:00:00", "ingest_delay_seconds": 240, "knowable_delay_seconds": 300 },
+    "market_borrow_snapshots.csv": { "observed_time_utc": "20:00:00", "ingest_delay_seconds": 240, "knowable_delay_seconds": 300 },
+    "inventory_snapshots.csv": { "observed_time_utc": "20:00:00", "ingest_delay_seconds": 240, "knowable_delay_seconds": 300 },
+    "loan_snapshots.csv": { "observed_time_utc": "20:00:00", "ingest_delay_seconds": 240, "knowable_delay_seconds": 300 },
+    "borrow_events.csv": { "observed_time_utc": "15:00:05", "ingest_delay_seconds": 15, "knowable_delay_seconds": 25 },
+    "short_interest.csv": { "observed_time_utc": "20:00:00", "ingest_delay_seconds": 240, "knowable_delay_seconds": 300, "publication_delay_business_days": 2 },
+    "short_sale_volume.csv": { "observed_time_utc": "20:00:00", "ingest_delay_seconds": 240, "knowable_delay_seconds": 300 },
+    "options_snapshots.csv": { "observed_time_utc": "20:00:00", "ingest_delay_seconds": 240, "knowable_delay_seconds": 300 },
+    "etf_snapshots.csv": { "observed_time_utc": "20:00:00", "ingest_delay_seconds": 240, "knowable_delay_seconds": 300 }
+  },
+  "invariants": ["MARKET_AVAILABILITY", "MARKET_UTILIZATION", "INTERNAL_ELIGIBLE", "INTERNAL_AVAILABLE", "SHORT_INTEREST_FLOAT"],
+  "faults": [],
+  "truth_events": [
+    { "truth_event_id": "TRUTH-001", "security_id": "SEC-QBRI", "event_type": "SQUEEZE_LIKE_EVENT", "start_time": "2026-10-14T12:00:00Z", "end_time": "2026-10-23T20:00:00Z", "outcome_horizon_days": 10, "outcome_label": "POSITIVE", "causal_driver": "DEMAND_PLUS_RECALL", "notes": "Hidden evaluation label only" },
+    { "truth_event_id": "TRUTH-002", "security_id": "SEC-QCPE", "event_type": "BORROW_TIGHTENING_NO_SQUEEZE", "start_time": "2026-10-07T11:00:00Z", "end_time": "2026-10-16T20:00:00Z", "outcome_horizon_days": 5, "outcome_label": "NEAR_MISS", "causal_driver": "OFFERING_OFFSETS_SCARCITY", "notes": "High borrow stress without upside price event" },
+    { "truth_event_id": "TRUTH-003", "security_id": "SEC-QDHH", "event_type": "NEGATIVE_CONTROL", "start_time": "2026-09-21T20:00:00Z", "end_time": "2026-10-23T20:00:00Z", "outcome_horizon_days": 10, "outcome_label": "NEGATIVE", "causal_driver": "ORDINARY_REGIME", "notes": "Mundane liquid security" },
+    { "truth_event_id": "TRUTH-004", "security_id": "SEC-QFRG", "event_type": "ETF_FLOW_EVENT", "start_time": "2026-10-19T20:00:00Z", "end_time": "2026-10-23T20:00:00Z", "outcome_horizon_days": 5, "outcome_label": "CONTEXT_ONLY", "causal_driver": "ETF_REBALANCE", "notes": "ETF flow context is not a squeeze label" }
+  ]
+}

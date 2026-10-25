@@ -1,0 +1,19 @@
+{
+  "$schema": "../synthetic-coverage-policy-1.0.schema.json",
+  "policyVersion": "sqz-synthetic-coverage-1.0",
+  "dataMode": "SIM",
+  "systemicCollapseBelowRatio": 0.75,
+  "datasets": {
+    "securities.csv": { "coverageGrain": "SECURITY_LISTING" },
+    "inventory_snapshots.csv": { "coverageGrain": "BOOK_SECURITY" },
+    "loan_snapshots.csv": { "coverageGrain": "BOOK_SECURITY_WITH_SOURCE_HEARTBEAT" },
+    "borrow_events.csv": { "coverageGrain": "BOOK_SOURCE_HEARTBEAT" },
+    "market_borrow_snapshots.csv": { "coverageGrain": "PROVIDER_SECURITY" },
+    "short_interest.csv": { "coverageGrain": "SOURCE_SECURITY" },
+    "short_sale_volume.csv": { "coverageGrain": "VENUE_SCOPE_SECURITY" },
+    "equity_market_daily.csv": { "coverageGrain": "LISTING_SECURITY" },
+    "options_snapshots.csv": { "coverageGrain": "PROVIDER_UNDERLYING" },
+    "etf_snapshots.csv": { "coverageGrain": "ETF_SECURITY" },
+    "security_events.csv": { "coverageGrain": "SOURCE_HEARTBEAT" }
+  }
+}

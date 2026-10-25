@@ -28,11 +28,13 @@ Golden cases cover each compatibility field, explicit override, hard/soft use, e
 
 SXU implementation follows the upstream skills `incremental-implementation`,
 `test-driven-development`, `doubt-driven-development`, `code-review-and-quality`, and
-`frontend-ui-engineering`, with `using-agent-skills` as the workflow router. The byte-for-byte
-snapshot and immutable source commit are recorded in `contracts/agent/agent-skills.pin.json`.
-Run `npm run check:agent-skills-pin` to verify its SHA-256 and Git blob pins; CI runs the same
-check without network access. Skill changes require reviewing the upstream commit and intentionally
-updating the manifest.
+`frontend-ui-engineering`, with `using-agent-skills` as the workflow router. The complete upstream
+repository is mirrored byte for byte under `.agents/`; all 24 skills, supporting references,
+personas, commands, hooks, documentation, evaluations, scripts, metadata and its symlink are pinned
+to the immutable source commit in `contracts/agent/agent-skills.pin.json`. Run
+`npm run check:agent-skills-pin` to verify the complete path inventory, Git modes, symlink target,
+SHA-256 hashes and Git blob pins; CI runs the same check without network access. Snapshot changes
+require reviewing the upstream commit and intentionally regenerating the manifest.
 
 ## Sequence
 

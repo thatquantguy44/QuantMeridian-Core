@@ -1,0 +1,2027 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quant-sandbox.local/contracts/squeeze-radar/csv-records-1.1.schema.json",
+  "title": "Squeeze Radar CSV record contracts",
+  "description": "Typed record schemas for the normalized synthetic CSV boundary. TruthEventRecord is evaluation-only and is not exposed by the model-input loader.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "manifest.csv": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ManifestRecord"
+      }
+    },
+    "securities.csv": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SecurityRecord"
+      }
+    },
+    "inventory_snapshots.csv": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/InventorySnapshotRecord"
+      }
+    },
+    "loan_snapshots.csv": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/LoanSnapshotRecord"
+      }
+    },
+    "borrow_events.csv": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/BorrowEventRecord"
+      }
+    },
+    "market_borrow_snapshots.csv": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/MarketBorrowSnapshotRecord"
+      }
+    },
+    "short_interest.csv": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ShortInterestRecord"
+      }
+    },
+    "short_sale_volume.csv": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ShortSaleVolumeRecord"
+      }
+    },
+    "equity_market_daily.csv": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/EquityMarketDailyRecord"
+      }
+    },
+    "options_snapshots.csv": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/OptionsSnapshotRecord"
+      }
+    },
+    "etf_snapshots.csv": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/EtfSnapshotRecord"
+      }
+    },
+    "security_events.csv": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SecurityEventRecord"
+      }
+    },
+    "_truth/truth_events.csv": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/TruthEventRecord"
+      }
+    },
+    "data_dictionary.csv": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DataDictionaryRecord"
+      }
+    }
+  },
+  "required": [
+    "manifest.csv",
+    "securities.csv",
+    "inventory_snapshots.csv",
+    "loan_snapshots.csv",
+    "borrow_events.csv",
+    "market_borrow_snapshots.csv",
+    "short_interest.csv",
+    "short_sale_volume.csv",
+    "equity_market_daily.csv",
+    "options_snapshots.csv",
+    "etf_snapshots.csv",
+    "security_events.csv",
+    "_truth/truth_events.csv",
+    "data_dictionary.csv"
+  ],
+  "$defs": {
+    "ManifestRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "dataset_version": {
+          "description": "Contract version for the CSV bundle",
+          "type": "string",
+          "minLength": 1,
+          "enum": [
+            "1.1"
+          ]
+        },
+        "scenario_id": {
+          "description": "Stable scenario identifier shared by every file",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "scenario_manifest_id": {
+          "description": "Stable identifier of the resolved generator scenario manifest",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "scenario_manifest_version": {
+          "description": "Version of the resolved generator scenario manifest contract",
+          "type": "string",
+          "minLength": 1,
+          "enum": [
+            "1.0.0"
+          ]
+        },
+        "scenario_manifest_sha256": {
+          "description": "Digest of the archived resolved scenario manifest bytes",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-f0-9]{64}$",
+          "x-unit": "hex SHA-256"
+        },
+        "seed": {
+          "description": "Deterministic generator seed",
+          "type": "integer"
+        },
+        "generator_version": {
+          "description": "Version of the synthetic generator",
+          "type": "string",
+          "minLength": 1
+        },
+        "data_mode": {
+          "description": "Provenance mode; Phase 1 accepts SIM only",
+          "type": "string",
+          "enum": [
+            "SIM"
+          ],
+          "const": "SIM"
+        },
+        "base_currency": {
+          "description": "Scenario reporting currency",
+          "type": "string",
+          "minLength": 1,
+          "enum": [
+            "USD"
+          ],
+          "x-unit": "ISO 4217"
+        },
+        "calendar_start": {
+          "description": "First business date in the bundle",
+          "type": "string",
+          "format": "date",
+          "minLength": 1,
+          "x-unit": "YYYY-MM-DD"
+        },
+        "calendar_end": {
+          "description": "Last business date in the bundle",
+          "type": "string",
+          "format": "date",
+          "minLength": 1,
+          "x-unit": "YYYY-MM-DD"
+        },
+        "generated_at": {
+          "description": "Bundle generation timestamp",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "model_input_path": {
+          "description": "Relative directory containing model-input CSVs",
+          "type": "string",
+          "minLength": 1
+        },
+        "truth_path": {
+          "description": "Relative test-only truth-ledger path",
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "dataset_version",
+        "scenario_id",
+        "scenario_manifest_id",
+        "scenario_manifest_version",
+        "scenario_manifest_sha256",
+        "seed",
+        "generator_version",
+        "data_mode",
+        "base_currency",
+        "calendar_start",
+        "calendar_end",
+        "generated_at",
+        "model_input_path",
+        "truth_path"
+      ]
+    },
+    "SecurityRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scenario_id": {
+          "description": "Stable scenario identifier shared by every file",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "security_id": {
+          "description": "Stable security identifier used for joins",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "issuer_id": {
+          "description": "Stable issuer identifier",
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "listing_id": {
+          "description": "Stable listing identifier",
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "ticker": {
+          "description": "Effective display ticker",
+          "type": "string",
+          "minLength": 1
+        },
+        "security_name": {
+          "description": "Fictional security name",
+          "type": "string",
+          "minLength": 1
+        },
+        "asset_type": {
+          "description": "Security type",
+          "type": "string",
+          "enum": [
+            "EQUITY",
+            "ETF"
+          ]
+        },
+        "sector": {
+          "description": "Sector classification",
+          "type": "string",
+          "minLength": 1
+        },
+        "currency": {
+          "description": "Security trading currency",
+          "type": "string",
+          "minLength": 1,
+          "x-unit": "ISO 4217"
+        },
+        "primary_exchange": {
+          "description": "Synthetic primary listing venue",
+          "type": "string",
+          "minLength": 1,
+          "x-unit": "MIC-like code"
+        },
+        "shares_outstanding": {
+          "description": "Shares outstanding at the effective date",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "float_shares": {
+          "description": "Tradable float used by positioning ratios",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "effective_from": {
+          "description": "Identity-record effective start",
+          "type": "string",
+          "format": "date",
+          "minLength": 1,
+          "x-unit": "YYYY-MM-DD"
+        },
+        "effective_to": {
+          "description": "Identity-record exclusive end; blank means open",
+          "type": "string",
+          "format": "date",
+          "x-unit": "YYYY-MM-DD"
+        },
+        "is_active": {
+          "description": "Whether the identity record is active",
+          "type": "boolean",
+          "enum": [
+            true,
+            false
+          ]
+        },
+        "published_at": {
+          "description": "Source publication timestamp",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "observed_at": {
+          "description": "Time the mock source observed the value",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "ingested_at": {
+          "description": "Time the platform persisted this exact source revision",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "first_knowable_at": {
+          "description": "Earliest time this exact revision may enter features",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "source_id": {
+          "description": "Named mock source; later maps to a real adapter",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "quality_state": {
+          "description": "Publication quality state",
+          "type": "string",
+          "enum": [
+            "VALID",
+            "DEGRADED",
+            "QUARANTINED"
+          ]
+        },
+        "revision": {
+          "description": "Source-record revision number starting at 1",
+          "type": "integer",
+          "minimum": 1
+        },
+        "data_mode": {
+          "description": "Provenance mode; Phase 1 accepts SIM only",
+          "type": "string",
+          "enum": [
+            "SIM"
+          ],
+          "const": "SIM"
+        }
+      },
+      "required": [
+        "scenario_id",
+        "security_id",
+        "ticker",
+        "security_name",
+        "asset_type",
+        "sector",
+        "currency",
+        "primary_exchange",
+        "shares_outstanding",
+        "float_shares",
+        "effective_from",
+        "is_active",
+        "published_at",
+        "observed_at",
+        "ingested_at",
+        "first_knowable_at",
+        "source_id",
+        "quality_state",
+        "revision",
+        "data_mode"
+      ]
+    },
+    "InventorySnapshotRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scenario_id": {
+          "description": "Stable scenario identifier shared by every file",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "observation_id": {
+          "description": "Immutable observation identifier",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "security_id": {
+          "description": "Stable security identifier used for joins",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "book_id": {
+          "description": "Internal lending-book identifier",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "owner_id": {
+          "description": "Synthetic beneficial-owner identifier",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "business_date": {
+          "description": "Business date represented by the record",
+          "type": "string",
+          "format": "date",
+          "minLength": 1,
+          "x-unit": "YYYY-MM-DD"
+        },
+        "observed_at": {
+          "description": "Time the mock source observed the value",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "ingested_at": {
+          "description": "Time the platform persisted this exact source revision",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "first_knowable_at": {
+          "description": "Earliest time this exact revision may enter features",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "gross_inventory_qty": {
+          "description": "Gross custody inventory before restrictions",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "restricted_qty": {
+          "description": "Inventory unavailable because of restrictions",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "eligible_lendable_qty": {
+          "description": "Gross inventory less restricted quantity",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "reserved_qty": {
+          "description": "Eligible inventory held out from lending",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "on_loan_qty": {
+          "description": "Quantity currently on loan under the dataset methodology",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "available_qty": {
+          "description": "Quantity available after on-loan and reserved amounts",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "source_id": {
+          "description": "Named mock source; later maps to a real adapter",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "quality_state": {
+          "description": "Publication quality state",
+          "type": "string",
+          "enum": [
+            "VALID",
+            "DEGRADED",
+            "QUARANTINED"
+          ]
+        },
+        "revision": {
+          "description": "Source-record revision number starting at 1",
+          "type": "integer",
+          "minimum": 1
+        },
+        "data_mode": {
+          "description": "Provenance mode; Phase 1 accepts SIM only",
+          "type": "string",
+          "enum": [
+            "SIM"
+          ],
+          "const": "SIM"
+        }
+      },
+      "required": [
+        "scenario_id",
+        "observation_id",
+        "security_id",
+        "book_id",
+        "owner_id",
+        "business_date",
+        "observed_at",
+        "ingested_at",
+        "first_knowable_at",
+        "gross_inventory_qty",
+        "restricted_qty",
+        "eligible_lendable_qty",
+        "reserved_qty",
+        "on_loan_qty",
+        "available_qty",
+        "source_id",
+        "quality_state",
+        "revision",
+        "data_mode"
+      ]
+    },
+    "LoanSnapshotRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scenario_id": {
+          "description": "Stable scenario identifier shared by every file",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "observation_id": {
+          "description": "Immutable observation identifier",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "loan_id": {
+          "description": "Stable loan identifier",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "security_id": {
+          "description": "Stable security identifier used for joins",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "book_id": {
+          "description": "Internal lending-book identifier",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "owner_id": {
+          "description": "Synthetic beneficial-owner identifier",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "counterparty_id": {
+          "description": "Synthetic borrower/counterparty identifier",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "business_date": {
+          "description": "Business date represented by the record",
+          "type": "string",
+          "format": "date",
+          "minLength": 1,
+          "x-unit": "YYYY-MM-DD"
+        },
+        "observed_at": {
+          "description": "Time the mock source observed the value",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "ingested_at": {
+          "description": "Time the platform persisted this exact source revision",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "first_knowable_at": {
+          "description": "Earliest time this exact revision may enter features",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "quantity": {
+          "description": "Settled loan quantity",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "fee_bps": {
+          "description": "Loan or event fee under the named convention",
+          "type": "number",
+          "x-unit": "annualized basis points"
+        },
+        "rate_currency": {
+          "description": "Currency of loan economics",
+          "type": "string",
+          "minLength": 1,
+          "x-unit": "ISO 4217"
+        },
+        "rate_convention": {
+          "description": "How loan economics are quoted",
+          "type": "string",
+          "enum": [
+            "FEE",
+            "REBATE"
+          ]
+        },
+        "collateral_type": {
+          "description": "Collateral type",
+          "type": "string",
+          "enum": [
+            "CASH",
+            "NON_CASH"
+          ]
+        },
+        "collateral_currency": {
+          "description": "Collateral currency",
+          "type": "string",
+          "minLength": 1,
+          "x-unit": "ISO 4217"
+        },
+        "term_type": {
+          "description": "Open or term loan",
+          "type": "string",
+          "enum": [
+            "OPEN",
+            "TERM"
+          ]
+        },
+        "maturity_date": {
+          "description": "Contractual maturity for term loans",
+          "type": "string",
+          "format": "date",
+          "x-unit": "YYYY-MM-DD"
+        },
+        "trade_date": {
+          "description": "Loan trade date or equity trading date",
+          "type": "string",
+          "format": "date",
+          "minLength": 1,
+          "x-unit": "YYYY-MM-DD"
+        },
+        "settlement_date": {
+          "description": "Loan settlement date",
+          "type": "string",
+          "format": "date",
+          "minLength": 1,
+          "x-unit": "YYYY-MM-DD"
+        },
+        "status": {
+          "description": "Loan lifecycle status",
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "SETTLED",
+            "RETURNED",
+            "RECALLED"
+          ]
+        },
+        "source_id": {
+          "description": "Named mock source; later maps to a real adapter",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "quality_state": {
+          "description": "Publication quality state",
+          "type": "string",
+          "enum": [
+            "VALID",
+            "DEGRADED",
+            "QUARANTINED"
+          ]
+        },
+        "revision": {
+          "description": "Source-record revision number starting at 1",
+          "type": "integer",
+          "minimum": 1
+        },
+        "data_mode": {
+          "description": "Provenance mode; Phase 1 accepts SIM only",
+          "type": "string",
+          "enum": [
+            "SIM"
+          ],
+          "const": "SIM"
+        }
+      },
+      "required": [
+        "scenario_id",
+        "observation_id",
+        "loan_id",
+        "security_id",
+        "book_id",
+        "owner_id",
+        "counterparty_id",
+        "business_date",
+        "observed_at",
+        "ingested_at",
+        "first_knowable_at",
+        "quantity",
+        "fee_bps",
+        "rate_currency",
+        "rate_convention",
+        "collateral_type",
+        "collateral_currency",
+        "term_type",
+        "trade_date",
+        "settlement_date",
+        "status",
+        "source_id",
+        "quality_state",
+        "revision",
+        "data_mode"
+      ]
+    },
+    "BorrowEventRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scenario_id": {
+          "description": "Stable scenario identifier shared by every file",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "event_id": {
+          "description": "Stable event identifier",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "security_id": {
+          "description": "Stable security identifier used for joins",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "book_id": {
+          "description": "Internal lending-book identifier",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "event_type": {
+          "description": "Domain-specific event classification",
+          "type": "string"
+        },
+        "event_time": {
+          "description": "Effective event time",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "observed_at": {
+          "description": "Time the mock source observed the value",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "ingested_at": {
+          "description": "Time the platform persisted this exact source revision",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "first_knowable_at": {
+          "description": "Earliest time this exact revision may enter features",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "requested_qty": {
+          "description": "Requested locate or borrow quantity",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "filled_qty": {
+          "description": "Quantity filled against the request",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "fee_bps": {
+          "description": "Loan or event fee under the named convention",
+          "type": "number",
+          "x-unit": "annualized basis points"
+        },
+        "reason_code": {
+          "description": "Machine-readable event explanation",
+          "type": "string",
+          "minLength": 1
+        },
+        "source_id": {
+          "description": "Named mock source; later maps to a real adapter",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "quality_state": {
+          "description": "Publication quality state",
+          "type": "string",
+          "enum": [
+            "VALID",
+            "DEGRADED",
+            "QUARANTINED"
+          ]
+        },
+        "revision": {
+          "description": "Source-record revision number starting at 1",
+          "type": "integer",
+          "minimum": 1
+        },
+        "data_mode": {
+          "description": "Provenance mode; Phase 1 accepts SIM only",
+          "type": "string",
+          "enum": [
+            "SIM"
+          ],
+          "const": "SIM"
+        }
+      },
+      "required": [
+        "scenario_id",
+        "event_id",
+        "security_id",
+        "book_id",
+        "event_type",
+        "event_time",
+        "observed_at",
+        "ingested_at",
+        "first_knowable_at",
+        "requested_qty",
+        "filled_qty",
+        "fee_bps",
+        "reason_code",
+        "source_id",
+        "quality_state",
+        "revision",
+        "data_mode"
+      ]
+    },
+    "MarketBorrowSnapshotRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scenario_id": {
+          "description": "Stable scenario identifier shared by every file",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "observation_id": {
+          "description": "Immutable observation identifier",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "security_id": {
+          "description": "Stable security identifier used for joins",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "business_date": {
+          "description": "Business date represented by the record",
+          "type": "string",
+          "format": "date",
+          "minLength": 1,
+          "x-unit": "YYYY-MM-DD"
+        },
+        "observed_at": {
+          "description": "Time the mock source observed the value",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "ingested_at": {
+          "description": "Time the platform persisted this exact source revision",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "first_knowable_at": {
+          "description": "Earliest time this exact revision may enter features",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "lendable_qty": {
+          "description": "Provider-reported lendable supply",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "on_loan_qty": {
+          "description": "Quantity currently on loan under the dataset methodology",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "available_qty": {
+          "description": "Quantity available after on-loan and reserved amounts",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "utilization_pct": {
+          "description": "One hundred times on-loan divided by lendable",
+          "type": "number",
+          "x-unit": "percent 0-100"
+        },
+        "current_fee_bps": {
+          "description": "Current provider borrow fee",
+          "type": "number",
+          "x-unit": "annualized basis points"
+        },
+        "new_loan_fee_bps": {
+          "description": "Provider fee for newly opened loans",
+          "type": "number",
+          "x-unit": "annualized basis points"
+        },
+        "demand_qty": {
+          "description": "Provider-observed borrow demand quantity",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "supply_change_1d_qty": {
+          "description": "One-business-day lendable change",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "loan_change_1d_qty": {
+          "description": "One-business-day on-loan change",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "contributor_count": {
+          "description": "Number of observations contributing to the benchmark",
+          "type": "integer",
+          "x-unit": "contributors"
+        },
+        "methodology_version": {
+          "description": "Version of the source calculation methodology",
+          "type": "string",
+          "minLength": 1
+        },
+        "source_id": {
+          "description": "Named mock source; later maps to a real adapter",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "quality_state": {
+          "description": "Publication quality state",
+          "type": "string",
+          "enum": [
+            "VALID",
+            "DEGRADED",
+            "QUARANTINED"
+          ]
+        },
+        "revision": {
+          "description": "Source-record revision number starting at 1",
+          "type": "integer",
+          "minimum": 1
+        },
+        "data_mode": {
+          "description": "Provenance mode; Phase 1 accepts SIM only",
+          "type": "string",
+          "enum": [
+            "SIM"
+          ],
+          "const": "SIM"
+        }
+      },
+      "required": [
+        "scenario_id",
+        "observation_id",
+        "security_id",
+        "business_date",
+        "observed_at",
+        "ingested_at",
+        "first_knowable_at",
+        "lendable_qty",
+        "on_loan_qty",
+        "available_qty",
+        "utilization_pct",
+        "current_fee_bps",
+        "new_loan_fee_bps",
+        "demand_qty",
+        "supply_change_1d_qty",
+        "loan_change_1d_qty",
+        "contributor_count",
+        "methodology_version",
+        "source_id",
+        "quality_state",
+        "revision",
+        "data_mode"
+      ]
+    },
+    "ShortInterestRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scenario_id": {
+          "description": "Stable scenario identifier shared by every file",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "report_id": {
+          "description": "Immutable short-position report identifier",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "security_id": {
+          "description": "Stable security identifier used for joins",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "short_interest_kind": {
+          "description": "Official-style report or provider estimate",
+          "type": "string",
+          "enum": [
+            "OFFICIAL",
+            "ESTIMATED"
+          ]
+        },
+        "position_qty": {
+          "description": "Reported or estimated short position",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "float_shares": {
+          "description": "Tradable float used by positioning ratios",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "short_interest_pct": {
+          "description": "One hundred times position divided by the stated basis",
+          "type": "number",
+          "x-unit": "percent 0-100"
+        },
+        "settlement_date": {
+          "description": "Loan settlement date",
+          "type": "string",
+          "format": "date",
+          "minLength": 1,
+          "x-unit": "YYYY-MM-DD"
+        },
+        "published_at": {
+          "description": "Source publication timestamp",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "observed_at": {
+          "description": "Time the mock source observed the value",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "ingested_at": {
+          "description": "Time the platform persisted this exact source revision",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "first_knowable_at": {
+          "description": "Earliest time this exact revision may enter features",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "basis": {
+          "description": "Denominator used by the positioning percentage",
+          "type": "string",
+          "enum": [
+            "FLOAT",
+            "SHARES_OUTSTANDING"
+          ]
+        },
+        "methodology_version": {
+          "description": "Version of the source calculation methodology",
+          "type": "string",
+          "minLength": 1
+        },
+        "source_id": {
+          "description": "Named mock source; later maps to a real adapter",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "revision": {
+          "description": "Source-record revision number starting at 1",
+          "type": "integer",
+          "minimum": 1
+        },
+        "data_mode": {
+          "description": "Provenance mode; Phase 1 accepts SIM only",
+          "type": "string",
+          "enum": [
+            "SIM"
+          ],
+          "const": "SIM"
+        }
+      },
+      "required": [
+        "scenario_id",
+        "report_id",
+        "security_id",
+        "short_interest_kind",
+        "position_qty",
+        "float_shares",
+        "short_interest_pct",
+        "settlement_date",
+        "published_at",
+        "observed_at",
+        "ingested_at",
+        "first_knowable_at",
+        "basis",
+        "methodology_version",
+        "source_id",
+        "revision",
+        "data_mode"
+      ]
+    },
+    "ShortSaleVolumeRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scenario_id": {
+          "description": "Stable scenario identifier shared by every file",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "observation_id": {
+          "description": "Immutable observation identifier",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "security_id": {
+          "description": "Stable security identifier used for joins",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "trade_date": {
+          "description": "Loan trade date or equity trading date",
+          "type": "string",
+          "format": "date",
+          "minLength": 1,
+          "x-unit": "YYYY-MM-DD"
+        },
+        "published_at": {
+          "description": "Source publication timestamp",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "observed_at": {
+          "description": "Time the mock source observed the value",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "ingested_at": {
+          "description": "Time the platform persisted this exact source revision",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "first_knowable_at": {
+          "description": "Earliest time this exact revision may enter features",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "short_volume_qty": {
+          "description": "Reported short-sale transaction volume",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "short_exempt_volume_qty": {
+          "description": "Reported short-exempt transaction volume",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "total_reported_volume_qty": {
+          "description": "Total volume in the same venue scope",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "venue_scope": {
+          "description": "Venues represented by the short-volume record",
+          "type": "string",
+          "minLength": 1
+        },
+        "source_id": {
+          "description": "Named mock source; later maps to a real adapter",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "revision": {
+          "description": "Source-record revision number starting at 1",
+          "type": "integer",
+          "minimum": 1
+        },
+        "data_mode": {
+          "description": "Provenance mode; Phase 1 accepts SIM only",
+          "type": "string",
+          "enum": [
+            "SIM"
+          ],
+          "const": "SIM"
+        }
+      },
+      "required": [
+        "scenario_id",
+        "observation_id",
+        "security_id",
+        "trade_date",
+        "published_at",
+        "observed_at",
+        "ingested_at",
+        "first_knowable_at",
+        "short_volume_qty",
+        "short_exempt_volume_qty",
+        "total_reported_volume_qty",
+        "venue_scope",
+        "source_id",
+        "revision",
+        "data_mode"
+      ]
+    },
+    "EquityMarketDailyRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scenario_id": {
+          "description": "Stable scenario identifier shared by every file",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "observation_id": {
+          "description": "Immutable observation identifier",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "security_id": {
+          "description": "Stable security identifier used for joins",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "trade_date": {
+          "description": "Loan trade date or equity trading date",
+          "type": "string",
+          "format": "date",
+          "minLength": 1,
+          "x-unit": "YYYY-MM-DD"
+        },
+        "published_at": {
+          "description": "Source publication timestamp",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "observed_at": {
+          "description": "Time the mock source observed the value",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "ingested_at": {
+          "description": "Time the platform persisted this exact source revision",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "first_knowable_at": {
+          "description": "Earliest time this exact revision may enter features",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "open_price": {
+          "description": "Unadjusted opening price",
+          "type": "number",
+          "x-unit": "currency per share"
+        },
+        "high_price": {
+          "description": "Unadjusted daily high",
+          "type": "number",
+          "x-unit": "currency per share"
+        },
+        "low_price": {
+          "description": "Unadjusted daily low",
+          "type": "number",
+          "x-unit": "currency per share"
+        },
+        "close_price": {
+          "description": "Unadjusted closing price",
+          "type": "number",
+          "x-unit": "currency per share"
+        },
+        "adjusted_close_price": {
+          "description": "Corporate-action-adjusted close",
+          "type": "number",
+          "x-unit": "currency per share"
+        },
+        "volume_qty": {
+          "description": "Daily consolidated trading volume",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "adv20_qty": {
+          "description": "Trailing twenty-business-day average volume",
+          "type": "integer",
+          "x-unit": "shares per day"
+        },
+        "realized_vol_20d_pct": {
+          "description": "Trailing realized volatility",
+          "type": "number",
+          "x-unit": "annualized percent"
+        },
+        "market_cap_usd": {
+          "description": "Close price times shares outstanding",
+          "type": "number",
+          "x-unit": "USD"
+        },
+        "float_shares": {
+          "description": "Tradable float used by positioning ratios",
+          "type": "integer",
+          "x-unit": "shares"
+        },
+        "halt_status": {
+          "description": "End-of-day halt status",
+          "type": "string",
+          "enum": [
+            "OPEN",
+            "HALTED"
+          ]
+        },
+        "source_id": {
+          "description": "Named mock source; later maps to a real adapter",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "quality_state": {
+          "description": "Publication quality state",
+          "type": "string",
+          "enum": [
+            "VALID",
+            "DEGRADED",
+            "QUARANTINED"
+          ]
+        },
+        "revision": {
+          "description": "Source-record revision number starting at 1",
+          "type": "integer",
+          "minimum": 1
+        },
+        "data_mode": {
+          "description": "Provenance mode; Phase 1 accepts SIM only",
+          "type": "string",
+          "enum": [
+            "SIM"
+          ],
+          "const": "SIM"
+        }
+      },
+      "required": [
+        "scenario_id",
+        "observation_id",
+        "security_id",
+        "trade_date",
+        "published_at",
+        "observed_at",
+        "ingested_at",
+        "first_knowable_at",
+        "open_price",
+        "high_price",
+        "low_price",
+        "close_price",
+        "adjusted_close_price",
+        "volume_qty",
+        "adv20_qty",
+        "realized_vol_20d_pct",
+        "market_cap_usd",
+        "float_shares",
+        "halt_status",
+        "source_id",
+        "quality_state",
+        "revision",
+        "data_mode"
+      ]
+    },
+    "OptionsSnapshotRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scenario_id": {
+          "description": "Stable scenario identifier shared by every file",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "observation_id": {
+          "description": "Immutable observation identifier",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "security_id": {
+          "description": "Stable security identifier used for joins",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "business_date": {
+          "description": "Business date represented by the record",
+          "type": "string",
+          "format": "date",
+          "minLength": 1,
+          "x-unit": "YYYY-MM-DD"
+        },
+        "observed_at": {
+          "description": "Time the mock source observed the value",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "ingested_at": {
+          "description": "Time the platform persisted this exact source revision",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "first_knowable_at": {
+          "description": "Earliest time this exact revision may enter features",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "put_volume_qty": {
+          "description": "Daily put-contract volume",
+          "type": "integer",
+          "x-unit": "contracts"
+        },
+        "call_volume_qty": {
+          "description": "Daily call-contract volume",
+          "type": "integer",
+          "x-unit": "contracts"
+        },
+        "put_call_ratio": {
+          "description": "Put volume divided by call volume",
+          "type": "number",
+          "x-unit": "ratio"
+        },
+        "total_open_interest_qty": {
+          "description": "Total listed option open interest",
+          "type": "integer",
+          "x-unit": "contracts"
+        },
+        "open_interest_change_5d_pct": {
+          "description": "Five-business-day open-interest change",
+          "type": "number",
+          "x-unit": "percent"
+        },
+        "iv30_pct": {
+          "description": "Thirty-day at-the-money implied volatility",
+          "type": "number",
+          "x-unit": "annualized percent"
+        },
+        "iv_rank_1y_pct": {
+          "description": "One-year implied-volatility rank",
+          "type": "number",
+          "x-unit": "percentile 0-100"
+        },
+        "skew_25d_vol_points": {
+          "description": "Twenty-five-delta put IV less call IV",
+          "type": "number",
+          "x-unit": "volatility points"
+        },
+        "source_id": {
+          "description": "Named mock source; later maps to a real adapter",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "quality_state": {
+          "description": "Publication quality state",
+          "type": "string",
+          "enum": [
+            "VALID",
+            "DEGRADED",
+            "QUARANTINED"
+          ]
+        },
+        "revision": {
+          "description": "Source-record revision number starting at 1",
+          "type": "integer",
+          "minimum": 1
+        },
+        "data_mode": {
+          "description": "Provenance mode; Phase 1 accepts SIM only",
+          "type": "string",
+          "enum": [
+            "SIM"
+          ],
+          "const": "SIM"
+        }
+      },
+      "required": [
+        "scenario_id",
+        "observation_id",
+        "security_id",
+        "business_date",
+        "observed_at",
+        "ingested_at",
+        "first_knowable_at",
+        "put_volume_qty",
+        "call_volume_qty",
+        "put_call_ratio",
+        "total_open_interest_qty",
+        "open_interest_change_5d_pct",
+        "iv30_pct",
+        "iv_rank_1y_pct",
+        "skew_25d_vol_points",
+        "source_id",
+        "quality_state",
+        "revision",
+        "data_mode"
+      ]
+    },
+    "EtfSnapshotRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scenario_id": {
+          "description": "Stable scenario identifier shared by every file",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "observation_id": {
+          "description": "Immutable observation identifier",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "security_id": {
+          "description": "Stable security identifier used for joins",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "business_date": {
+          "description": "Business date represented by the record",
+          "type": "string",
+          "format": "date",
+          "minLength": 1,
+          "x-unit": "YYYY-MM-DD"
+        },
+        "observed_at": {
+          "description": "Time the mock source observed the value",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "ingested_at": {
+          "description": "Time the platform persisted this exact source revision",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "first_knowable_at": {
+          "description": "Earliest time this exact revision may enter features",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "aum_usd": {
+          "description": "ETF assets under management",
+          "type": "number",
+          "x-unit": "USD"
+        },
+        "net_flow_1d_usd": {
+          "description": "Estimated one-day net creation/redemption flow",
+          "type": "number",
+          "x-unit": "USD"
+        },
+        "net_flow_5d_usd": {
+          "description": "Estimated five-day net creation/redemption flow",
+          "type": "number",
+          "x-unit": "USD"
+        },
+        "flow_pct_aum": {
+          "description": "Five-day net flow divided by AUM",
+          "type": "number",
+          "x-unit": "percent"
+        },
+        "holdings_count": {
+          "description": "Number of ETF holdings",
+          "type": "integer",
+          "x-unit": "securities"
+        },
+        "estimated_discount_bps": {
+          "description": "Estimated NAV discount; negative denotes premium",
+          "type": "number",
+          "x-unit": "basis points"
+        },
+        "source_id": {
+          "description": "Named mock source; later maps to a real adapter",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "quality_state": {
+          "description": "Publication quality state",
+          "type": "string",
+          "enum": [
+            "VALID",
+            "DEGRADED",
+            "QUARANTINED"
+          ]
+        },
+        "revision": {
+          "description": "Source-record revision number starting at 1",
+          "type": "integer",
+          "minimum": 1
+        },
+        "data_mode": {
+          "description": "Provenance mode; Phase 1 accepts SIM only",
+          "type": "string",
+          "enum": [
+            "SIM"
+          ],
+          "const": "SIM"
+        }
+      },
+      "required": [
+        "scenario_id",
+        "observation_id",
+        "security_id",
+        "business_date",
+        "observed_at",
+        "ingested_at",
+        "first_knowable_at",
+        "aum_usd",
+        "net_flow_1d_usd",
+        "net_flow_5d_usd",
+        "flow_pct_aum",
+        "holdings_count",
+        "estimated_discount_bps",
+        "source_id",
+        "quality_state",
+        "revision",
+        "data_mode"
+      ]
+    },
+    "SecurityEventRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scenario_id": {
+          "description": "Stable scenario identifier shared by every file",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "event_id": {
+          "description": "Stable event identifier",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "security_id": {
+          "description": "Stable security identifier used for joins",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "issuer_id": {
+          "description": "Stable issuer identifier",
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "event_type": {
+          "description": "Domain-specific event classification",
+          "type": "string"
+        },
+        "event_time": {
+          "description": "Effective event time",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "published_at": {
+          "description": "Source publication timestamp",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "observed_at": {
+          "description": "Time the mock source observed the value",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "ingested_at": {
+          "description": "Time the platform persisted this exact source revision",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "first_knowable_at": {
+          "description": "Earliest time this exact revision may enter features",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "event_importance": {
+          "description": "Event materiality tier",
+          "type": "string",
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH"
+          ]
+        },
+        "description": {
+          "description": "Plain-language fictional event description",
+          "type": "string",
+          "minLength": 1
+        },
+        "source_id": {
+          "description": "Named mock source; later maps to a real adapter",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "revision": {
+          "description": "Source-record revision number starting at 1",
+          "type": "integer",
+          "minimum": 1
+        },
+        "data_mode": {
+          "description": "Provenance mode; Phase 1 accepts SIM only",
+          "type": "string",
+          "enum": [
+            "SIM"
+          ],
+          "const": "SIM"
+        }
+      },
+      "required": [
+        "scenario_id",
+        "event_id",
+        "security_id",
+        "event_type",
+        "event_time",
+        "published_at",
+        "observed_at",
+        "ingested_at",
+        "first_knowable_at",
+        "event_importance",
+        "description",
+        "source_id",
+        "revision",
+        "data_mode"
+      ]
+    },
+    "TruthEventRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scenario_id": {
+          "description": "Stable scenario identifier shared by every file",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "truth_event_id": {
+          "description": "Test-only truth-event identifier",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "security_id": {
+          "description": "Stable security identifier used for joins",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "event_type": {
+          "description": "Domain-specific event classification",
+          "type": "string"
+        },
+        "start_time": {
+          "description": "Truth-event start",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "end_time": {
+          "description": "Truth-event end",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "minLength": 1,
+          "x-unit": "UTC ISO-8601"
+        },
+        "outcome_horizon_days": {
+          "description": "Evaluation horizon",
+          "type": "integer",
+          "x-unit": "business days"
+        },
+        "outcome_label": {
+          "description": "Hidden evaluation outcome",
+          "type": "string",
+          "enum": [
+            "POSITIVE",
+            "NEGATIVE",
+            "NEAR_MISS",
+            "CONTEXT_ONLY"
+          ]
+        },
+        "causal_driver": {
+          "description": "Hidden simulated causal driver",
+          "type": "string",
+          "minLength": 1
+        },
+        "notes": {
+          "description": "Test-only scenario note",
+          "type": "string"
+        },
+        "data_mode": {
+          "description": "Provenance mode; Phase 1 accepts SIM only",
+          "type": "string",
+          "enum": [
+            "SIM"
+          ],
+          "const": "SIM"
+        }
+      },
+      "required": [
+        "scenario_id",
+        "truth_event_id",
+        "security_id",
+        "event_type",
+        "start_time",
+        "end_time",
+        "outcome_horizon_days",
+        "outcome_label",
+        "causal_driver",
+        "data_mode"
+      ]
+    },
+    "DataDictionaryRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "dataset": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative CSV dataset path"
+        },
+        "column_name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Exact case-sensitive CSV header"
+        },
+        "data_type": {
+          "type": "string",
+          "enum": [
+            "string",
+            "integer",
+            "number",
+            "boolean",
+            "date",
+            "timestamp",
+            "enum"
+          ]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Business meaning of the field"
+        },
+        "allowed_values": {
+          "type": "string"
+        },
+        "live_replacement_source": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Expected future source category"
+        }
+      },
+      "required": [
+        "dataset",
+        "column_name",
+        "data_type",
+        "required",
+        "unit",
+        "description",
+        "allowed_values",
+        "live_replacement_source"
+      ]
+    }
+  }
+}

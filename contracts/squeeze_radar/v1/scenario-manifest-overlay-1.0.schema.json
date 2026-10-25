@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quant-sandbox.local/contracts/squeeze-radar/scenario-manifest-overlay-1.0.schema.json",
+  "title": "Squeeze Radar synthetic scenario manifest overlay",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["extends", "manifest_id", "scenario_id"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "extends": { "type": "string", "pattern": "^[A-Za-z0-9._-]+\\.json$" },
+    "manifest_id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$" },
+    "scenario_id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$" }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "../scenario-manifest-overlay-1.0.schema.json",
+  "extends": "base.json",
+  "manifest_id": "sqz-large-demo",
+  "scenario_id": "sqz_large_demo_v1",
+  "calendar": {
+    "start_date": "2026-01-05",
+    "business_day_count": 250
+  },
+  "generated_at": "2026-12-18T21:00:00Z"
+}

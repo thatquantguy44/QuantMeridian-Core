@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://market-terminal.local/contracts/squeeze_radar/v1/synthetic-freshness-policy-1.0.schema.json",
+  "title": "Squeeze Radar synthetic freshness policy v1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "policyVersion", "dataMode", "calendar", "datasets"],
+  "properties": {
+    "$schema": { "const": "../synthetic-freshness-policy-1.0.schema.json" },
+    "policyVersion": { "type": "string", "minLength": 1 },
+    "dataMode": { "const": "SIM" },
+    "calendar": { "const": "WEEKDAYS_ONLY" },
+    "datasets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inventory_snapshots.csv",
+        "loan_snapshots.csv",
+        "market_borrow_snapshots.csv",
+        "equity_market_daily.csv",
+        "options_snapshots.csv",
+        "etf_snapshots.csv",
+        "short_sale_volume.csv"
+      ],
+      "properties": {
+        "inventory_snapshots.csv": { "$ref": "#/$defs/schedule" },
+        "loan_snapshots.csv": { "$ref": "#/$defs/schedule" },
+        "market_borrow_snapshots.csv": { "$ref": "#/$defs/schedule" },
+        "equity_market_daily.csv": { "$ref": "#/$defs/schedule" },
+        "options_snapshots.csv": { "$ref": "#/$defs/schedule" },
+        "etf_snapshots.csv": { "$ref": "#/$defs/schedule" },
+        "short_sale_volume.csv": { "$ref": "#/$defs/schedule" }
+      }
+    }
+  },
+  "$defs": {
+    "schedule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "calendar", "publicationTimeUtc", "gracePeriodMs"],
+      "properties": {
+        "mode": { "const": "NEXT_BUSINESS_PUBLICATION" },
+        "calendar": { "const": "WEEKDAYS_ONLY" },
+        "publicationTimeUtc": {
+          "type": "string",
+          "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
+        },
+        "gracePeriodMs": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "../synthetic-freshness-policy-1.0.schema.json",
+  "policyVersion": "sqz-synthetic-freshness-1.0",
+  "dataMode": "SIM",
+  "calendar": "WEEKDAYS_ONLY",
+  "datasets": {
+    "inventory_snapshots.csv": {
+      "mode": "NEXT_BUSINESS_PUBLICATION",
+      "calendar": "WEEKDAYS_ONLY",
+      "publicationTimeUtc": "20:00:00",
+      "gracePeriodMs": 1800000
+    },
+    "loan_snapshots.csv": {
+      "mode": "NEXT_BUSINESS_PUBLICATION",
+      "calendar": "WEEKDAYS_ONLY",
+      "publicationTimeUtc": "20:00:00",
+      "gracePeriodMs": 1800000
+    },
+    "market_borrow_snapshots.csv": {
+      "mode": "NEXT_BUSINESS_PUBLICATION",
+      "calendar": "WEEKDAYS_ONLY",
+      "publicationTimeUtc": "20:00:00",
+      "gracePeriodMs": 1800000
+    },
+    "equity_market_daily.csv": {
+      "mode": "NEXT_BUSINESS_PUBLICATION",
+      "calendar": "WEEKDAYS_ONLY",
+      "publicationTimeUtc": "20:00:00",
+      "gracePeriodMs": 1800000
+    },
+    "options_snapshots.csv": {
+      "mode": "NEXT_BUSINESS_PUBLICATION",
+      "calendar": "WEEKDAYS_ONLY",
+      "publicationTimeUtc": "20:00:00",
+      "gracePeriodMs": 1800000
+    },
+    "etf_snapshots.csv": {
+      "mode": "NEXT_BUSINESS_PUBLICATION",
+      "calendar": "WEEKDAYS_ONLY",
+      "publicationTimeUtc": "20:00:00",
+      "gracePeriodMs": 1800000
+    },
+    "short_sale_volume.csv": {
+      "mode": "NEXT_BUSINESS_PUBLICATION",
+      "calendar": "WEEKDAYS_ONLY",
+      "publicationTimeUtc": "20:00:00",
+      "gracePeriodMs": 7200000
+    }
+  }
+}

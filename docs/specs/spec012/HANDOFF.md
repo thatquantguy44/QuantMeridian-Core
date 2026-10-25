@@ -1,6 +1,6 @@
 # Spec012 build handoff
 
-**Updated:** 2026-10-18
+**Updated:** 2026-10-20. Since the PR #170 check below, PR #175 merged the SU-002 contracts package (`services/sources_uses_api`: contracts and canonical hashes, no solver or endpoint).
 
 **Branch:** `claude/synthetic-snu-poc-27n9hu`. The SU-SIM showcase merged into `main` in
 [PR #166](https://github.com/thatquantguy44/QuantMeridian/pull/166) (merge commit `2b32b7c`). The
@@ -30,7 +30,7 @@ demo guide in `docs/demo_books/`.
 2. Read `PLAN.md` and `TASKS.md`.
 3. If you are demoing, read `docs/demo_books/sources-uses-synthetic-poc.md`. Every number in it
    was produced by the model at default settings.
-4. Use the pinned Agent Skills in `.agents/skills/` (see `AGENTS.md`). Run
+4. Use the full pinned Agent Skills mirror in `.agents/` (skills are in `.agents/skills/`; see `AGENTS.md`). Run
    `npm run check:agent-skills-pin` before and after SXU work.
 
 Do not infer production solver behaviour from the showcase. The showcase was built to avoid the
@@ -88,8 +88,7 @@ the workspace instead. Turning SIM off hides the PoC entirely.
 
 ## What does not exist yet (the production path)
 
-- No `services/sources_uses_api` (port 8015) and no versioned request/result service contract.
-- No canonical configuration/run hash (SU-009, AC-001, AC-009).
+- ~~No `services/sources_uses_api` and no versioned contract; no canonical hash.~~ PR #175 (SU-002) added the package with versioned contracts and canonical configuration/run hashes. It has **no solve endpoint** yet.
 - No server-side LP/MIP on `services/optimization_core`. Owner decision 1 in `docs/handoff.md`
   says each module gets its own Python service sharing that library.
 - The browser `simplex.ts` is a showcase solver. Do not promote it to production without a
@@ -134,7 +133,7 @@ need owner review.
 - **SXU and solver suites:** `sourcesUses` 8, `sourcesUsesSynthetic` 34, `simplex` 6. All pass.
 - **`npm run typecheck`:** passed.
 - **`npm run build:client`:** passed. The existing large-chunk warning remains.
-- **`npm run check:agent-skills-pin`:** passed for 13 files.
+- **`npm run check:agent-skills-pin`:** passed for the full mirror: 188 paths and 24 skills.
 - **Playwright smoke (`test/smoke.spec.ts -g SXU`):** passed.
 - **Phone width:** no horizontal overflow at a 390px viewport.
 

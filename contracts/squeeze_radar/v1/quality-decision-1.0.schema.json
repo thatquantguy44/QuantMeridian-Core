@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://market-terminal.local/contracts/squeeze_radar/v1/quality-decision-1.0.schema.json",
+  "title": "Squeeze Radar quality gate report v1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contractVersion", "policyVersion", "dataset", "decisionAt", "disposition", "decisions"],
+  "properties": {
+    "contractVersion": { "const": "1.0" },
+    "policyVersion": { "type": "string", "minLength": 1 },
+    "dataset": { "$ref": "#/$defs/dataset" },
+    "decisionAt": { "type": "string", "format": "date-time", "pattern": "Z$" },
+    "disposition": { "$ref": "#/$defs/disposition" },
+    "decisions": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/decision" }
+    }
+  },
+  "$defs": {
+    "dataset": {
+      "enum": [
+        "securities.csv",
+        "inventory_snapshots.csv",
+        "loan_snapshots.csv",
+        "borrow_events.csv",
+        "market_borrow_snapshots.csv",
+        "short_interest.csv",
+        "short_sale_volume.csv",
+        "equity_market_daily.csv",
+        "options_snapshots.csv",
+        "etf_snapshots.csv",
+        "security_events.csv"
+      ]
+    },
+    "disposition": { "enum": ["ACCEPT", "DEGRADE", "QUARANTINE", "SUPPRESS"] },
+    "nonEmptyUniqueStrings": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "affected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dataset", "coverageKeys", "recordIds"],
+      "properties": {
+        "dataset": { "$ref": "#/$defs/dataset" },
+        "coverageKeys": { "$ref": "#/$defs/nonEmptyUniqueStrings" },
+        "recordIds": { "$ref": "#/$defs/nonEmptyUniqueStrings" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decisionAt", "requirement"],
+      "properties": {
+        "decisionAt": { "type": "string", "format": "date-time", "pattern": "Z$" },
+        "requirement": { "enum": ["REQUIRED", "OPTIONAL"] },
+        "unitCount": { "type": "integer", "minimum": 0 },
+        "validCount": { "type": "integer", "minimum": 0 },
+        "degradedCount": { "type": "integer", "minimum": 0 },
+        "quarantinedCount": { "type": "integer", "minimum": 0 },
+        "maximumAgeMs": { "type": ["integer", "null"], "minimum": 0 },
+        "freshnessMode": { "enum": ["ELAPSED", "NEXT_BUSINESS_PUBLICATION"] },
+        "freshnessBudgetMs": { "type": "integer", "minimum": 0 },
+        "gracePeriodMs": { "type": "integer", "minimum": 0 },
+        "earliestFreshnessDeadlineAt": {
+          "type": ["string", "null"],
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "expectedCoverageCount": { "type": "integer", "minimum": 1 },
+        "observedCoverageCount": { "type": "integer", "minimum": 0 },
+        "coverageRatio": { "type": "number", "minimum": 0, "maximum": 1 },
+        "coverageGrain": {
+          "enum": [
+            "SECURITY_LISTING",
+            "BOOK_SECURITY",
+            "BOOK_SECURITY_WITH_SOURCE_HEARTBEAT",
+            "BOOK_SOURCE_HEARTBEAT",
+            "PROVIDER_SECURITY",
+            "SOURCE_SECURITY",
+            "VENUE_SCOPE_SECURITY",
+            "LISTING_SECURITY",
+            "PROVIDER_UNDERLYING",
+            "ETF_SECURITY",
+            "SOURCE_HEARTBEAT"
+          ]
+        },
+        "minimumCoverageRatio": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contractVersion", "policyVersion", "ruleId", "severity", "disposition", "reasonCode", "affected", "evidence"],
+      "properties": {
+        "contractVersion": { "const": "1.0" },
+        "policyVersion": { "type": "string", "minLength": 1 },
+        "ruleId": { "enum": ["ROW_QUALITY", "SOURCE_FRESHNESS", "SOURCE_COVERAGE"] },
+        "severity": { "enum": ["INFO", "WARNING", "ERROR", "CRITICAL"] },
+        "disposition": { "$ref": "#/$defs/disposition" },
+        "reasonCode": {
+          "enum": [
+            "QUALITY_VALID",
+            "QUALITY_DEGRADED_ALLOWED",
+            "QUALITY_DEGRADED_NOT_ALLOWED",
+            "QUALITY_QUARANTINED",
+            "FRESHNESS_WITHIN_BUDGET",
+            "STALE_REQUIRED_SOURCE",
+            "STALE_OPTIONAL_SOURCE",
+            "COVERAGE_WITHIN_MINIMUM",
+            "REQUIRED_COVERAGE_COLLAPSE",
+            "OPTIONAL_COVERAGE_COLLAPSE"
+          ]
+        },
+        "affected": { "$ref": "#/$defs/affected" },
+        "evidence": { "$ref": "#/$defs/evidence" }
+      }
+    }
+  }
+}
