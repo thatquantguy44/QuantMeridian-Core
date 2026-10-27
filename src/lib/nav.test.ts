@@ -13,6 +13,14 @@ import { NAV } from "./nav";
  * under the same module gate (on() code).
  */
 describe("Nav/Route consistency", () => {
+  it("exposes the MDLS model dictionary at /models", () => {
+    expect(NAV.find((item) => item.code === "MDLS")).toMatchObject({
+      label: "Model Dictionary",
+      href: "/models",
+      group: "MLTOOLS",
+    });
+  });
+
   it("all enabled nav items should have corresponding routes", () => {
     // Map of code → expected href patterns
     const expectedRoutes: Record<string, string[]> = {
@@ -24,10 +32,12 @@ describe("Nav/Route consistency", () => {
       LENS: ["/market-lens"],
       MKC: ["/market-chart"],
       MVOL: ["/market-volatility"],
+      VIXR: ["/market-volatility/implied-vs-forward"],
       INDEM: ["/securities-lending/indemnification"],
       MMKT: ["/money-market"],
       MMFO: ["/money-market-fund-optimizer"],
       MCS: ["/simulations/mcs"],
+      MDLS: ["/models"],
       VOLF: ["/ml/volatility-forecaster"],
       ECON: ["/economics"],
       ECOIQ: ["/economics/ecoiq"],
@@ -92,10 +102,12 @@ describe("Nav/Route consistency", () => {
       "/market-lens",
       "/market-chart",
       "/market-volatility",
+      "/market-volatility/implied-vs-forward",
       "/securities-lending/indemnification",
       "/money-market",
       "/money-market-fund-optimizer",
       "/simulations/mcs",
+      "/models",
       "/ml/volatility-forecaster",
       "/economics",
       "/economics/ecoiq",

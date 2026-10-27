@@ -9,6 +9,8 @@ const BADGE_EXEMPT_PAGES = [
   "economics/motion/page.tsx",
   // Module guides are documentation only: no market, model or desk data is shown.
   "guides/page.tsx",
+  // MDLS is a documentation placeholder and deliberately has no data provenance yet.
+  "models/page.tsx",
 ];
 
 function findPages(dir: string): string[] {

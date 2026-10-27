@@ -1,0 +1,2 @@
+# Preserve the byte-for-byte vendored Agent Skills snapshot.
+/.agents/** -whitespace

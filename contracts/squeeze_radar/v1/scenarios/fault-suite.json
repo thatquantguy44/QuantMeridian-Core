@@ -1,0 +1,14 @@
+{
+  "$schema": "../scenario-manifest-overlay-1.0.schema.json",
+  "extends": "base.json",
+  "manifest_id": "sqz-fault-suite",
+  "scenario_id": "sqz_fault_suite_v1",
+  "faults": [
+    { "fault_id": "stale-equity-qava", "type": "STALE_SOURCE", "dataset": "equity_market_daily.csv", "security_id": "SEC-QAVA", "after_date": "2026-10-09", "expected_gate": "SOURCE_FRESHNESS" },
+    { "fault_id": "late-borrow-qbri", "type": "LATE_INGESTION", "target": { "dataset": "market_borrow_snapshots.csv", "security_id": "SEC-QBRI", "record_date": "2026-10-08", "revision": 1 }, "delay_seconds": 86400, "expected_gate": "INGEST_DELAY" },
+    { "fault_id": "out-of-order-options-qcpe", "type": "OUT_OF_ORDER_RECORD", "target": { "dataset": "options_snapshots.csv", "security_id": "SEC-QCPE", "record_date": "2026-10-07", "revision": 1 }, "delay_seconds": 172800, "expected_gate": "OUT_OF_ORDER_ARRIVAL" },
+    { "fault_id": "backfill-equity-qdhh", "type": "BACKFILL_REVISION", "target": { "dataset": "equity_market_daily.csv", "security_id": "SEC-QDHH", "record_date": "2026-10-08", "revision": 1 }, "field": "close_price", "value": 68.25, "first_knowable_at": "2026-10-12T12:00:00Z", "expected_gate": "REVISION_LINEAGE" },
+    { "fault_id": "post-decision-borrow-qevc", "type": "POST_DECISION_REVISION", "target": { "dataset": "market_borrow_snapshots.csv", "security_id": "SEC-QEVC", "record_date": "2026-10-08", "revision": 1 }, "field": "current_fee_bps", "value": 275, "decision_at": "2026-10-09T20:05:00Z", "first_knowable_at": "2026-10-12T14:00:00Z", "expected_gate": "POINT_IN_TIME_REVISION" },
+    { "fault_id": "bad-utilization-unit-qfrg", "type": "BAD_UNIT", "target": { "dataset": "market_borrow_snapshots.csv", "security_id": "SEC-QFRG", "record_date": "2026-10-08", "revision": 1 }, "field": "utilization_pct", "factor": 0.01, "expected_gate": "MARKET_UTILIZATION" }
+  ]
+}

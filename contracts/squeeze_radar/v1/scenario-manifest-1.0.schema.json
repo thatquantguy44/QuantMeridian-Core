@@ -1,0 +1,299 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quant-sandbox.local/contracts/squeeze-radar/scenario-manifest-1.0.schema.json",
+  "title": "Squeeze Radar synthetic scenario manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest_version",
+    "manifest_id",
+    "generator_version",
+    "scenario_id",
+    "seed",
+    "generated_at",
+    "data_mode",
+    "base_currency",
+    "calendar",
+    "fictional_identity_policy",
+    "fictional_universe",
+    "random_streams",
+    "regimes",
+    "events",
+    "publication_schedules",
+    "invariants",
+    "faults",
+    "truth_events"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "manifest_version": { "type": "string", "const": "1.0.0" },
+    "manifest_id": { "$ref": "#/$defs/id" },
+    "generator_version": { "type": "string", "const": "sqz-csv-gen-1.2.0" },
+    "scenario_id": { "$ref": "#/$defs/id" },
+    "seed": { "type": "integer", "minimum": 0 },
+    "generated_at": { "$ref": "#/$defs/timestamp" },
+    "data_mode": { "const": "SIM" },
+    "base_currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+    "calendar": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start_date", "business_day_count"],
+      "properties": {
+        "start_date": { "$ref": "#/$defs/date" },
+        "business_day_count": { "type": "integer", "minimum": 5, "maximum": 1000 }
+      }
+    },
+    "fictional_identity_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fictional_only", "required_name_suffix"],
+      "properties": {
+        "fictional_only": { "const": true },
+        "required_name_suffix": { "const": " Synthetic" }
+      }
+    },
+    "fictional_universe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["securities"],
+      "properties": {
+        "securities": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/security" }
+        }
+      }
+    },
+    "random_streams": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["equity", "market_borrow", "inventory", "short_interest", "short_volume", "options", "etf"],
+      "properties": {
+        "equity": { "$ref": "#/$defs/id" },
+        "market_borrow": { "$ref": "#/$defs/id" },
+        "inventory": { "$ref": "#/$defs/id" },
+        "short_interest": { "$ref": "#/$defs/id" },
+        "short_volume": { "$ref": "#/$defs/id" },
+        "options": { "$ref": "#/$defs/id" },
+        "etf": { "$ref": "#/$defs/id" }
+      }
+    },
+    "regimes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/regime" }
+    },
+    "events": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/event" }
+    },
+    "publication_schedules": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/publicationSchedule" }
+    },
+    "invariants": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "MARKET_AVAILABILITY",
+          "MARKET_UTILIZATION",
+          "INTERNAL_ELIGIBLE",
+          "INTERNAL_AVAILABLE",
+          "SHORT_INTEREST_FLOAT"
+        ]
+      }
+    },
+    "faults": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/fault" }
+    },
+    "truth_events": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/truthEvent" }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "security": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["security_id", "issuer_id", "listing_id", "ticker", "security_name", "asset_type", "sector", "shares_outstanding", "float_shares", "initial_price", "initial_volume_qty", "initial_lendable_qty", "initial_utilization_pct", "initial_fee_bps", "initial_inventory_qty"],
+      "properties": {
+        "security_id": { "$ref": "#/$defs/id" },
+        "issuer_id": { "$ref": "#/$defs/id" },
+        "listing_id": { "$ref": "#/$defs/id" },
+        "ticker": { "type": "string", "pattern": "^Q[A-Z0-9]{3,7}$" },
+        "security_name": { "type": "string", "pattern": " Synthetic$" },
+        "asset_type": { "enum": ["EQUITY", "ETF"] },
+        "sector": { "type": "string", "minLength": 1 },
+        "shares_outstanding": { "type": "integer", "minimum": 1 },
+        "float_shares": { "type": "integer", "minimum": 1 },
+        "initial_price": { "type": "number", "exclusiveMinimum": 0 },
+        "initial_volume_qty": { "type": "integer", "minimum": 1 },
+        "initial_lendable_qty": { "type": "integer", "minimum": 1 },
+        "initial_utilization_pct": { "type": "number", "minimum": 0, "maximum": 100 },
+        "initial_fee_bps": { "type": "number", "minimum": 0 },
+        "initial_inventory_qty": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "regime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["regime_id", "security_ids", "start_date", "end_date", "effects"],
+      "properties": {
+        "regime_id": { "$ref": "#/$defs/id" },
+        "security_ids": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "start_date": { "$ref": "#/$defs/date" },
+        "end_date": { "$ref": "#/$defs/date" },
+        "effects": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "price_change_daily_pct": { "type": "number" },
+            "utilization_change_daily_points": { "type": "number" },
+            "fee_change_daily_bps": { "type": "number" },
+            "lendable_change_daily_pct": { "type": "number" },
+            "volume_multiplier_daily": { "type": "number" },
+            "call_volume_multiplier": { "type": "number", "exclusiveMinimum": 0 }
+          }
+        }
+      }
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event_id", "security_id", "issuer_id", "event_type", "event_time", "event_importance", "description"],
+      "properties": {
+        "event_id": { "$ref": "#/$defs/id" },
+        "security_id": { "$ref": "#/$defs/id" },
+        "issuer_id": { "$ref": "#/$defs/id" },
+        "event_type": { "$ref": "#/$defs/id" },
+        "event_time": { "$ref": "#/$defs/timestamp" },
+        "event_importance": { "enum": ["LOW", "MEDIUM", "HIGH"] },
+        "description": { "type": "string", "minLength": 1 }
+      }
+    },
+    "publicationSchedule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observed_time_utc", "ingest_delay_seconds", "knowable_delay_seconds"],
+      "properties": {
+        "observed_time_utc": { "type": "string", "pattern": "^(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d$" },
+        "ingest_delay_seconds": { "type": "integer", "minimum": 0 },
+        "knowable_delay_seconds": { "type": "integer", "minimum": 0 },
+        "publication_delay_business_days": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dataset", "security_id", "record_date"],
+      "properties": {
+        "dataset": { "type": "string", "pattern": "^[a-z_]+\\.csv$" },
+        "security_id": { "$ref": "#/$defs/id" },
+        "record_date": { "$ref": "#/$defs/date" },
+        "revision": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "fault": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["fault_id", "type", "dataset", "security_id", "after_date", "expected_gate"],
+          "properties": {
+            "fault_id": { "$ref": "#/$defs/id" },
+            "type": { "const": "STALE_SOURCE" },
+            "dataset": { "type": "string" },
+            "security_id": { "$ref": "#/$defs/id" },
+            "after_date": { "$ref": "#/$defs/date" },
+            "expected_gate": { "$ref": "#/$defs/id" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["fault_id", "type", "target", "delay_seconds", "expected_gate"],
+          "properties": {
+            "fault_id": { "$ref": "#/$defs/id" },
+            "type": { "enum": ["LATE_INGESTION", "OUT_OF_ORDER_RECORD"] },
+            "target": { "$ref": "#/$defs/target" },
+            "delay_seconds": { "type": "integer", "minimum": 1 },
+            "expected_gate": { "$ref": "#/$defs/id" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["fault_id", "type", "target", "field", "value", "first_knowable_at", "expected_gate"],
+          "properties": {
+            "fault_id": { "$ref": "#/$defs/id" },
+            "type": { "const": "BACKFILL_REVISION" },
+            "target": { "$ref": "#/$defs/target" },
+            "field": { "type": "string" },
+            "value": { "type": "number" },
+            "first_knowable_at": { "$ref": "#/$defs/timestamp" },
+            "expected_gate": { "$ref": "#/$defs/id" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["fault_id", "type", "target", "field", "value", "decision_at", "first_knowable_at", "expected_gate"],
+          "properties": {
+            "fault_id": { "$ref": "#/$defs/id" },
+            "type": { "const": "POST_DECISION_REVISION" },
+            "target": { "$ref": "#/$defs/target" },
+            "field": { "type": "string" },
+            "value": { "type": "number" },
+            "decision_at": { "$ref": "#/$defs/timestamp" },
+            "first_knowable_at": { "$ref": "#/$defs/timestamp" },
+            "expected_gate": { "$ref": "#/$defs/id" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["fault_id", "type", "target", "field", "factor", "expected_gate"],
+          "properties": {
+            "fault_id": { "$ref": "#/$defs/id" },
+            "type": { "const": "BAD_UNIT" },
+            "target": { "$ref": "#/$defs/target" },
+            "field": { "type": "string" },
+            "factor": { "type": "number", "not": { "const": 1 } },
+            "expected_gate": { "$ref": "#/$defs/id" }
+          }
+        }
+      ]
+    },
+    "truthEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["truth_event_id", "security_id", "event_type", "start_time", "end_time", "outcome_horizon_days", "outcome_label", "causal_driver", "notes"],
+      "properties": {
+        "truth_event_id": { "$ref": "#/$defs/id" },
+        "security_id": { "$ref": "#/$defs/id" },
+        "event_type": { "$ref": "#/$defs/id" },
+        "start_time": { "$ref": "#/$defs/timestamp" },
+        "end_time": { "$ref": "#/$defs/timestamp" },
+        "outcome_horizon_days": { "type": "integer", "minimum": 1 },
+        "outcome_label": { "enum": ["POSITIVE", "NEGATIVE", "NEAR_MISS", "CONTEXT_ONLY"] },
+        "causal_driver": { "$ref": "#/$defs/id" },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

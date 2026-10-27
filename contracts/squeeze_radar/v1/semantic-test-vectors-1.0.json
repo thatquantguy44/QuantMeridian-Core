@@ -1,0 +1,352 @@
+{
+  "vector_version": "1.0",
+  "semantics_version": "sqz-semantics-1.0.0",
+  "data_mode": "SIM",
+  "cases": [
+    {
+      "id": "utilization-valid",
+      "rule": "MARKET_UTILIZATION_PCT",
+      "input": { "on_loan_qty": 750, "lendable_qty": 1000 },
+      "expected": { "status": "VALID", "value": 75 }
+    },
+    {
+      "id": "utilization-zero-supply",
+      "rule": "MARKET_UTILIZATION_PCT",
+      "input": { "on_loan_qty": 0, "lendable_qty": 0 },
+      "expected": { "status": "UNAVAILABLE", "reason_code": "ZERO_DENOMINATOR" }
+    },
+    {
+      "id": "utilization-impossible",
+      "rule": "MARKET_UTILIZATION_PCT",
+      "input": { "on_loan_qty": 1001, "lendable_qty": 1000 },
+      "expected": { "status": "INVALID", "reason_code": "ON_LOAN_EXCEEDS_LENDABLE" }
+    },
+    {
+      "id": "utilization-malformed-input-dominates-missing-input",
+      "rule": "MARKET_UTILIZATION_PCT",
+      "input": { "on_loan_qty": null, "lendable_qty": "1000" },
+      "expected": { "status": "INVALID", "reason_code": "INVALID_NUMERIC_INPUT" }
+    },
+    {
+      "id": "market-availability-valid",
+      "rule": "MARKET_AVAILABLE_QTY",
+      "input": { "lendable_qty": 1000, "on_loan_qty": 750, "reported_available_qty": 250 },
+      "expected": { "status": "VALID", "value": 250 }
+    },
+    {
+      "id": "market-availability-break",
+      "rule": "MARKET_AVAILABLE_QTY",
+      "input": { "lendable_qty": 1000, "on_loan_qty": 750, "reported_available_qty": 249 },
+      "expected": { "status": "INVALID", "reason_code": "AVAILABILITY_RECONCILIATION_FAILED" }
+    },
+    {
+      "id": "internal-eligible-valid",
+      "rule": "INTERNAL_ELIGIBLE_QTY",
+      "input": { "gross_inventory_qty": 1000, "restricted_qty": 100, "reported_eligible_lendable_qty": 900 },
+      "expected": { "status": "VALID", "value": 900 }
+    },
+    {
+      "id": "internal-availability-valid",
+      "rule": "INTERNAL_AVAILABLE_QTY",
+      "input": { "eligible_lendable_qty": 900, "reserved_qty": 50, "on_loan_qty": 600, "reported_available_qty": 250 },
+      "expected": { "status": "VALID", "value": 250 }
+    },
+    {
+      "id": "internal-availability-negative",
+      "rule": "INTERNAL_AVAILABLE_QTY",
+      "input": { "eligible_lendable_qty": 500, "reserved_qty": 100, "on_loan_qty": 450, "reported_available_qty": -50 },
+      "expected": { "status": "INVALID", "reason_code": "NEGATIVE_AVAILABILITY" }
+    },
+    {
+      "id": "fee-convention-direct-fee",
+      "rule": "EQUIVALENT_FEE_BPS",
+      "input": { "quoted_bps": 125, "rate_convention": "FEE" },
+      "expected": { "status": "VALID", "value": 125 }
+    },
+    {
+      "id": "fee-convention-cash-rebate",
+      "rule": "EQUIVALENT_FEE_BPS",
+      "input": { "quoted_bps": 350, "rate_convention": "REBATE", "benchmark_bps": 500 },
+      "expected": { "status": "VALID", "value": 150 }
+    },
+    {
+      "id": "fee-convention-rebate-without-benchmark",
+      "rule": "EQUIVALENT_FEE_BPS",
+      "input": { "quoted_bps": 350, "rate_convention": "REBATE" },
+      "expected": { "status": "UNAVAILABLE", "reason_code": "REBATE_BENCHMARK_REQUIRED" }
+    },
+    {
+      "id": "loan-comparison-compatible",
+      "rule": "LOAN_RATE_COMPARABILITY",
+      "input": {
+        "left_currency": "USD",
+        "right_currency": "USD",
+        "left_collateral_type": "CASH",
+        "right_collateral_type": "CASH",
+        "left_term_type": "OPEN",
+        "right_term_type": "OPEN",
+        "left_rate_convention": "FEE",
+        "right_rate_convention": "FEE",
+        "left_methodology_version": "SIM_LOAN_V1",
+        "right_methodology_version": "SIM_LOAN_V1",
+        "left_source_cohort": "SIM_INTERNAL",
+        "right_source_cohort": "SIM_INTERNAL",
+        "left_status": "SETTLED",
+        "right_status": "SETTLED"
+      },
+      "expected": { "status": "VALID", "value": true }
+    },
+    {
+      "id": "loan-comparison-currency-mismatch",
+      "rule": "LOAN_RATE_COMPARABILITY",
+      "input": {
+        "left_currency": "USD",
+        "right_currency": "EUR",
+        "left_collateral_type": "CASH",
+        "right_collateral_type": "CASH",
+        "left_term_type": "OPEN",
+        "right_term_type": "OPEN",
+        "left_rate_convention": "FEE",
+        "right_rate_convention": "FEE",
+        "left_methodology_version": "SIM_LOAN_V1",
+        "right_methodology_version": "SIM_LOAN_V1",
+        "left_source_cohort": "SIM_INTERNAL",
+        "right_source_cohort": "SIM_INTERNAL",
+        "left_status": "SETTLED",
+        "right_status": "SETTLED"
+      },
+      "expected": { "status": "UNAVAILABLE", "reason_code": "CURRENCY_MISMATCH" }
+    },
+    {
+      "id": "loan-comparison-collateral-mismatch",
+      "rule": "LOAN_RATE_COMPARABILITY",
+      "input": {
+        "left_currency": "USD",
+        "right_currency": "USD",
+        "left_collateral_type": "CASH",
+        "right_collateral_type": "NON_CASH",
+        "left_term_type": "OPEN",
+        "right_term_type": "OPEN",
+        "left_rate_convention": "FEE",
+        "right_rate_convention": "FEE",
+        "left_methodology_version": "SIM_LOAN_V1",
+        "right_methodology_version": "SIM_LOAN_V1",
+        "left_source_cohort": "SIM_INTERNAL",
+        "right_source_cohort": "SIM_INTERNAL",
+        "left_status": "SETTLED",
+        "right_status": "SETTLED"
+      },
+      "expected": { "status": "UNAVAILABLE", "reason_code": "COLLATERAL_MISMATCH" }
+    },
+    {
+      "id": "loan-comparison-rate-convention-mismatch",
+      "rule": "LOAN_RATE_COMPARABILITY",
+      "input": {
+        "left_currency": "USD",
+        "right_currency": "USD",
+        "left_collateral_type": "CASH",
+        "right_collateral_type": "CASH",
+        "left_term_type": "OPEN",
+        "right_term_type": "OPEN",
+        "left_rate_convention": "FEE",
+        "right_rate_convention": "REBATE",
+        "left_methodology_version": "SIM_LOAN_V1",
+        "right_methodology_version": "SIM_LOAN_V1",
+        "left_source_cohort": "SIM_INTERNAL",
+        "right_source_cohort": "SIM_INTERNAL",
+        "left_status": "SETTLED",
+        "right_status": "SETTLED"
+      },
+      "expected": { "status": "UNAVAILABLE", "reason_code": "RATE_CONVENTION_MISMATCH" }
+    },
+    {
+      "id": "loan-comparison-methodology-mismatch",
+      "rule": "LOAN_RATE_COMPARABILITY",
+      "input": {
+        "left_currency": "USD",
+        "right_currency": "USD",
+        "left_collateral_type": "CASH",
+        "right_collateral_type": "CASH",
+        "left_term_type": "OPEN",
+        "right_term_type": "OPEN",
+        "left_rate_convention": "FEE",
+        "right_rate_convention": "FEE",
+        "left_methodology_version": "SIM_LOAN_V1",
+        "right_methodology_version": "SIM_PROVIDER_V1",
+        "left_source_cohort": "SIM_INTERNAL",
+        "right_source_cohort": "SIM_INTERNAL",
+        "left_status": "SETTLED",
+        "right_status": "SETTLED"
+      },
+      "expected": { "status": "UNAVAILABLE", "reason_code": "METHODOLOGY_MISMATCH" }
+    },
+    {
+      "id": "short-interest-float-valid",
+      "rule": "SHORT_INTEREST_PCT",
+      "input": { "position_qty": 20000000, "float_shares": 80000000, "basis": "FLOAT" },
+      "expected": { "status": "VALID", "value": 25 }
+    },
+    {
+      "id": "short-interest-over-one-hundred-is-representable",
+      "rule": "SHORT_INTEREST_PCT",
+      "input": { "position_qty": 120000000, "float_shares": 100000000, "basis": "FLOAT" },
+      "expected": { "status": "VALID", "value": 120 }
+    },
+    {
+      "id": "short-interest-zero-basis",
+      "rule": "SHORT_INTEREST_PCT",
+      "input": { "position_qty": 1000, "float_shares": 0, "basis": "FLOAT" },
+      "expected": { "status": "UNAVAILABLE", "reason_code": "ZERO_DENOMINATOR" }
+    },
+    {
+      "id": "short-interest-shares-outstanding-valid",
+      "rule": "SHORT_INTEREST_PCT",
+      "input": { "position_qty": 25000000, "shares_outstanding": 100000000, "basis": "SHARES_OUTSTANDING" },
+      "expected": { "status": "VALID", "value": 25 }
+    },
+    {
+      "id": "short-measure-official-kept-official",
+      "rule": "SHORT_MEASURE_COMPATIBILITY",
+      "input": { "measure_kind": "OFFICIAL", "requested_kind": "OFFICIAL" },
+      "expected": { "status": "VALID", "value": true }
+    },
+    {
+      "id": "short-measure-estimate-cannot-fill-official",
+      "rule": "SHORT_MEASURE_COMPATIBILITY",
+      "input": { "measure_kind": "ESTIMATED", "requested_kind": "OFFICIAL" },
+      "expected": { "status": "INVALID", "reason_code": "MEASURE_KIND_MISMATCH" }
+    },
+    {
+      "id": "short-sale-volume-is-not-position",
+      "rule": "SHORT_MEASURE_COMPATIBILITY",
+      "input": { "measure_kind": "SHORT_SALE_VOLUME", "requested_kind": "OFFICIAL" },
+      "expected": { "status": "INVALID", "reason_code": "SHORT_VOLUME_IS_NOT_POSITION" }
+    },
+    {
+      "id": "short-measure-unknown-kind",
+      "rule": "SHORT_MEASURE_COMPATIBILITY",
+      "input": { "measure_kind": "SOCIAL_SENTIMENT", "requested_kind": "SOCIAL_SENTIMENT" },
+      "expected": { "status": "INVALID", "reason_code": "UNSUPPORTED_SHORT_MEASURE_KIND" }
+    },
+    {
+      "id": "short-sale-volume-ratio-valid",
+      "rule": "SHORT_SALE_VOLUME_PCT",
+      "input": { "short_volume_qty": 400, "short_exempt_volume_qty": 50, "total_reported_volume_qty": 1000 },
+      "expected": { "status": "VALID", "value": 40 }
+    },
+    {
+      "id": "short-sale-volume-exempt-exceeds-short",
+      "rule": "SHORT_SALE_VOLUME_PCT",
+      "input": { "short_volume_qty": 40, "short_exempt_volume_qty": 50, "total_reported_volume_qty": 1000 },
+      "expected": { "status": "INVALID", "reason_code": "SHORT_EXEMPT_EXCEEDS_SHORT_VOLUME" }
+    },
+    {
+      "id": "short-sale-volume-exceeds-total",
+      "rule": "SHORT_SALE_VOLUME_PCT",
+      "input": { "short_volume_qty": 1100, "short_exempt_volume_qty": 50, "total_reported_volume_qty": 1000 },
+      "expected": { "status": "INVALID", "reason_code": "SHORT_VOLUME_EXCEEDS_TOTAL_VOLUME" }
+    },
+    {
+      "id": "days-to-cover-valid",
+      "rule": "DAYS_TO_COVER",
+      "input": { "position_qty": 5000000, "adv20_qty": 2000000 },
+      "expected": { "status": "VALID", "value": 2.5 }
+    },
+    {
+      "id": "days-to-cover-zero-adv",
+      "rule": "DAYS_TO_COVER",
+      "input": { "position_qty": 5000000, "adv20_qty": 0 },
+      "expected": { "status": "UNAVAILABLE", "reason_code": "ZERO_DENOMINATOR" }
+    },
+    {
+      "id": "adjusted-price-return-valid",
+      "rule": "PRICE_RETURN_PCT",
+      "input": { "start_price": 100, "end_price": 110, "start_basis": "ADJUSTED", "end_basis": "ADJUSTED" },
+      "expected": { "status": "VALID", "value": 10 }
+    },
+    {
+      "id": "price-return-mixed-basis",
+      "rule": "PRICE_RETURN_PCT",
+      "input": { "start_price": 100, "end_price": 110, "start_basis": "RAW", "end_basis": "ADJUSTED" },
+      "expected": { "status": "INVALID", "reason_code": "PRICE_BASIS_MISMATCH" }
+    },
+    {
+      "id": "put-call-ratio-valid",
+      "rule": "PUT_CALL_RATIO",
+      "input": { "put_volume_qty": 400, "call_volume_qty": 800 },
+      "expected": { "status": "VALID", "value": 0.5 }
+    },
+    {
+      "id": "put-call-ratio-zero-call-volume",
+      "rule": "PUT_CALL_RATIO",
+      "input": { "put_volume_qty": 400, "call_volume_qty": 0 },
+      "expected": { "status": "UNAVAILABLE", "reason_code": "ZERO_DENOMINATOR" }
+    },
+    {
+      "id": "open-interest-change-valid",
+      "rule": "OPEN_INTEREST_CHANGE_PCT",
+      "input": { "prior_open_interest_qty": 1000, "current_open_interest_qty": 1200 },
+      "expected": { "status": "VALID", "value": 20 }
+    },
+    {
+      "id": "open-interest-change-zero-prior",
+      "rule": "OPEN_INTEREST_CHANGE_PCT",
+      "input": { "prior_open_interest_qty": 0, "current_open_interest_qty": 1200 },
+      "expected": { "status": "UNAVAILABLE", "reason_code": "ZERO_DENOMINATOR" }
+    },
+    {
+      "id": "options-measures-valid",
+      "rule": "OPTIONS_MEASURE_VALIDITY",
+      "input": { "iv30_pct": 48.5, "iv_rank_1y_pct": 71, "skew_25d_vol_points": 6.25 },
+      "expected": { "status": "VALID", "value": true }
+    },
+    {
+      "id": "options-iv-rank-out-of-range",
+      "rule": "OPTIONS_MEASURE_VALIDITY",
+      "input": { "iv30_pct": 48.5, "iv_rank_1y_pct": 120, "skew_25d_vol_points": 6.25 },
+      "expected": { "status": "INVALID", "reason_code": "IV_RANK_OUT_OF_RANGE" }
+    },
+    {
+      "id": "options-negative-iv",
+      "rule": "OPTIONS_MEASURE_VALIDITY",
+      "input": { "iv30_pct": -1, "iv_rank_1y_pct": 50, "skew_25d_vol_points": 0 },
+      "expected": { "status": "INVALID", "reason_code": "IV_NEGATIVE" }
+    },
+    {
+      "id": "publication-valid",
+      "rule": "PUBLICATION_ELIGIBILITY",
+      "input": { "quality_state": "VALID", "is_stale": false, "required_source": true, "allow_degraded": false },
+      "expected": { "status": "VALID", "value": true }
+    },
+    {
+      "id": "publication-quarantined",
+      "rule": "PUBLICATION_ELIGIBILITY",
+      "input": { "quality_state": "QUARANTINED", "is_stale": false, "required_source": true, "allow_degraded": false },
+      "expected": { "status": "INVALID", "reason_code": "QUARANTINED" }
+    },
+    {
+      "id": "publication-stale-required-source",
+      "rule": "PUBLICATION_ELIGIBILITY",
+      "input": { "quality_state": "VALID", "is_stale": true, "required_source": true, "allow_degraded": false },
+      "expected": { "status": "UNAVAILABLE", "reason_code": "STALE_REQUIRED_SOURCE" }
+    },
+    {
+      "id": "publication-degraded-needs-policy",
+      "rule": "PUBLICATION_ELIGIBILITY",
+      "input": { "quality_state": "DEGRADED", "is_stale": false, "required_source": false, "allow_degraded": false },
+      "expected": { "status": "UNAVAILABLE", "reason_code": "DEGRADED_POLICY_REQUIRED" }
+    },
+    {
+      "id": "publication-degraded-policy-approved",
+      "rule": "PUBLICATION_ELIGIBILITY",
+      "input": { "quality_state": "DEGRADED", "is_stale": false, "required_source": false, "allow_degraded": true },
+      "expected": { "status": "VALID", "value": true }
+    },
+    {
+      "id": "publication-unknown-quality-dominates-staleness",
+      "rule": "PUBLICATION_ELIGIBILITY",
+      "input": { "quality_state": "MYSTERY", "is_stale": true, "required_source": true, "allow_degraded": false },
+      "expected": { "status": "INVALID", "reason_code": "UNKNOWN_QUALITY_STATE" }
+    }
+  ]
+}

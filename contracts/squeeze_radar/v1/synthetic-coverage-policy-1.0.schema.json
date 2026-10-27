@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://market-terminal.local/contracts/squeeze_radar/v1/synthetic-coverage-policy-1.0.schema.json",
+  "title": "Squeeze Radar synthetic coverage policy v1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "policyVersion", "dataMode", "systemicCollapseBelowRatio", "datasets"],
+  "properties": {
+    "$schema": { "const": "../synthetic-coverage-policy-1.0.schema.json" },
+    "policyVersion": { "type": "string", "minLength": 1 },
+    "dataMode": { "const": "SIM" },
+    "systemicCollapseBelowRatio": { "const": 0.75 },
+    "datasets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "securities.csv",
+        "inventory_snapshots.csv",
+        "loan_snapshots.csv",
+        "borrow_events.csv",
+        "market_borrow_snapshots.csv",
+        "short_interest.csv",
+        "short_sale_volume.csv",
+        "equity_market_daily.csv",
+        "options_snapshots.csv",
+        "etf_snapshots.csv",
+        "security_events.csv"
+      ],
+      "properties": {
+        "securities.csv": { "$ref": "#/$defs/datasetCoverage" },
+        "inventory_snapshots.csv": { "$ref": "#/$defs/datasetCoverage" },
+        "loan_snapshots.csv": { "$ref": "#/$defs/datasetCoverage" },
+        "borrow_events.csv": { "$ref": "#/$defs/datasetCoverage" },
+        "market_borrow_snapshots.csv": { "$ref": "#/$defs/datasetCoverage" },
+        "short_interest.csv": { "$ref": "#/$defs/datasetCoverage" },
+        "short_sale_volume.csv": { "$ref": "#/$defs/datasetCoverage" },
+        "equity_market_daily.csv": { "$ref": "#/$defs/datasetCoverage" },
+        "options_snapshots.csv": { "$ref": "#/$defs/datasetCoverage" },
+        "etf_snapshots.csv": { "$ref": "#/$defs/datasetCoverage" },
+        "security_events.csv": { "$ref": "#/$defs/datasetCoverage" }
+      }
+    }
+  },
+  "$defs": {
+    "datasetCoverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["coverageGrain"],
+      "properties": {
+        "coverageGrain": {
+          "enum": [
+            "SECURITY_LISTING",
+            "BOOK_SECURITY",
+            "BOOK_SECURITY_WITH_SOURCE_HEARTBEAT",
+            "BOOK_SOURCE_HEARTBEAT",
+            "PROVIDER_SECURITY",
+            "SOURCE_SECURITY",
+            "VENUE_SCOPE_SECURITY",
+            "LISTING_SECURITY",
+            "PROVIDER_UNDERLYING",
+            "ETF_SECURITY",
+            "SOURCE_HEARTBEAT"
+          ]
+        }
+      }
+    }
+  }
+}

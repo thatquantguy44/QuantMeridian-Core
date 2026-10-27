@@ -3,6 +3,9 @@
 /.pnp
 .pnp.js
 
+# .agents/ is an intentionally tracked, immutable upstream snapshot.
+# Do not add it to this ignore file; CI verifies every mirrored path.
+
 # vite
 /dist/
 /dist-server/
@@ -12,6 +15,7 @@
 
 # local provider cache
 /data/master/
+/data/synthetic/
 /market_data_pipeline/data/export/
 /batchers/.venv*/
 /batchers/.snapshot-backup/
