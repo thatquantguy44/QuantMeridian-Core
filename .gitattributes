@@ -1,2 +1,5 @@
 # Preserve the byte-for-byte vendored Agent Skills snapshot.
 /.agents/** -whitespace
+
+# Published test snapshots are verified byte-for-byte, including CSV CRLFs.
+/src/lib/server/presidential/fixtures/** -text whitespace=cr-at-eol

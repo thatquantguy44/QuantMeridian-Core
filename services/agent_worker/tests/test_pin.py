@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -189,13 +190,122 @@ def test_shipped_pin_is_well_formed() -> None:
     paths = shipped["assets"]["paths"]
     assert len(set(paths)) == len(paths)
     assert all(not p.startswith("/") and ".." not in Path(p).parts for p in paths)
-    assert len(shipped["reviewed"]["source_commit"]) == 40
+    assert shipped["reviewed"].get("source_commit") or shipped["reviewed"].get("source_path")
 
 
 def test_read_pin_rejects_an_unknown_schema_version(tmp_path: Path) -> None:
     bad = _write(tmp_path / "pin.json", json.dumps({"schema_version": "quantsmith-pin/2"}))
     with pytest.raises(ValueError, match="unsupported pin schema_version"):
         pin.read_pin(bad)
+
+
+def test_read_pin_accepts_a_local_source_without_git(tmp_path: Path) -> None:
+    local = json.loads(PIN_PATH.read_text())
+    local["reviewed"].pop("source_commit", None)
+    local["reviewed"]["source_path"] = "../QuantSmith local copy"
+    path = _write(tmp_path / "pin.json", json.dumps(local))
+    assert pin.read_pin(path)["reviewed"]["source_path"] == "../QuantSmith local copy"
+
+
+@pytest.mark.parametrize("source", [{}, {"source_path": "   "}, {"source_commit": "bad"}])
+def test_read_pin_rejects_missing_or_invalid_source_metadata(tmp_path: Path, source: dict) -> None:
+    local = json.loads(PIN_PATH.read_text())
+    local["reviewed"] = {"on": "2026-10-30", **source}
+    with pytest.raises(ValueError, match="source"):
+        pin.read_pin(_write(tmp_path / "pin.json", json.dumps(local)))
+
+
+def test_source_path_resolves_from_repo_not_working_directory(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.delenv(pin.ROOT_ENV, raising=False)
+    monkeypatch.chdir(tmp_path)
+    local = {"reviewed": {"source_path": "../QuantSmith local copy"}}
+    assert Path(pin.configured_root(local)) == (REPO_ROOT / "../QuantSmith local copy").resolve()
+
+
+def test_explicit_root_then_environment_override_recorded_path(monkeypatch) -> None:
+    local = {"reviewed": {"source_path": "/recorded/copy"}}
+    monkeypatch.setenv(pin.ROOT_ENV, "/environment/copy")
+    assert pin.configured_root(local, "/explicit/copy") == "/explicit/copy"
+    assert pin.configured_root(local) == "/environment/copy"
+
+
+def test_relative_environment_path_uses_repo_root(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setenv(pin.ROOT_ENV, "../QuantSmith local copy")
+    monkeypatch.chdir(tmp_path)
+    assert Path(pin.configured_root({})) == (REPO_ROOT / "../QuantSmith local copy").resolve()
+
+
+def test_cli_uses_a_recorded_non_git_path_and_still_detects_drift(
+    tmp_path: Path, monkeypatch
+) -> None:
+    monkeypatch.delenv(pin.ROOT_ENV, raising=False)
+    repo = tmp_path / "QuantSmith local copy"
+    package = _write(repo / "src" / "quantsmith" / "__init__.py", "x = 1\n").parent
+    _write(repo / "pyproject.toml", '[project]\nversion = "0.1.0"\n')
+    _write(repo / "knowledge" / "pack.json", "{}")
+    local = json.loads(PIN_PATH.read_text())
+    local["reviewed"] = {"on": "2026-10-30", "source_path": str(repo)}
+    local["assets"] = {"paths": ["knowledge"], "digest": pin.assets_digest(repo, ["knowledge"])}
+    local["package"]["code_digest"] = pin.code_digest(package)
+    path = _write(tmp_path / "local-pin.json", json.dumps(local))
+    result = _run("--pin", str(path), "--check")
+    assert result.returncode == 0, result.stderr
+    assert json.loads(result.stdout)["mode"] == "path"
+    _write(package / "__init__.py", "x = 2\n")
+    changed = _run("--pin", str(path), "--check")
+    assert changed.returncode == 1
+    assert json.loads(changed.stdout)["mismatches"] == ["code"]
+
+
+@pytest.mark.parametrize("missing", [False, True])
+def test_shell_check_supports_path_only_pin_without_silent_fallback(
+    tmp_path: Path, missing: bool
+) -> None:
+    project = tmp_path / "terminal"
+    repo = tmp_path / "QuantSmith"
+    package = _write(repo / "src" / "quantsmith" / "__init__.py", "x = 1\n").parent
+    _write(repo / "pyproject.toml", '[project]\nversion = "0.1.0"\n')
+    _write(repo / "knowledge" / "pack.json", "{}")
+    local = json.loads(PIN_PATH.read_text())
+    local["reviewed"] = {
+        "on": "2026-10-30",
+        "source_path": "../missing" if missing else "../QuantSmith",
+    }
+    local["package"]["code_digest"] = pin.code_digest(package)
+    local["assets"] = {"paths": ["knowledge"], "digest": pin.assets_digest(repo, ["knowledge"])}
+    _write(project / "contracts/agent/quantsmith-pin.json", json.dumps(local))
+    _write(
+        project / "docs/specs/spec005/QUANTSMITH_PIN.md",
+        (
+            f"| Package version | `0.1.0` |\n"
+            f"| Code digest | `{local['package']['code_digest']}` |\n"
+            f"| Assets digest | `{local['assets']['digest']}` |\n"
+        ),
+    )
+    script = _write(
+        project / "scripts/check-quantsmith-pin.sh",
+        (REPO_ROOT / "scripts/check-quantsmith-pin.sh").read_bytes(),
+    )
+    _write(
+        project / "services/agent_worker/src/agent_worker/pin.py", Path(pin.__file__).read_bytes()
+    )
+    environment = {key: value for key, value in os.environ.items() if key != pin.ROOT_ENV}
+    result = subprocess.run(
+        ["bash", str(script)],
+        cwd=project,
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "pin record PASSED" in result.stdout
+    if missing:
+        assert "code and assets digests match" not in result.stdout
+        assert "could not fingerprint" in result.stdout
+    else:
+        assert "code and assets digests match" in result.stdout
+        assert "Traceback" not in result.stderr
 
 
 # --- command line ------------------------------------------------------------------------------

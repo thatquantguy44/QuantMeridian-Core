@@ -1,0 +1,531 @@
+{
+  "artifacts": [
+    {
+      "boundSelectionKeys": [
+        "crsp-market-proxy-common-sample-annual",
+        "shiller-sp-composite-annual"
+      ],
+      "bytes": 2149,
+      "path": "evidence/public-series-comparison.json",
+      "role": "public-series-comparison.json",
+      "sha256": "dd7280138f2bb22cf78723f82f436a3e1b630a7e6966017f1a26a3fa4637e1ce"
+    },
+    {
+      "boundSelectionKeys": [
+        "crsp-market-proxy-common-sample-annual",
+        "shiller-sp-composite-annual"
+      ],
+      "bytes": 356,
+      "path": "evidence/public-series-comparison.csv",
+      "role": "public-series-comparison.csv",
+      "sha256": "d7f7c1b1435043e7136f25ce337194645a69f858c5ad968fb35d0c8e5207d973"
+    },
+    {
+      "boundSelectionKeys": [
+        "crsp-market-proxy-inherited-conditions-annual",
+        "shiller-sp-composite-inherited-conditions-annual"
+      ],
+      "bytes": 1764,
+      "path": "evidence/inherited-conditions-join-audit.json",
+      "role": "inherited-conditions-join-audit.json",
+      "sha256": "e14b3fb41ad8215d3c31dad1335cd3e9c62be84ab838662ab1516648431a7509"
+    },
+    {
+      "boundSelectionKeys": [
+        "crsp-market-proxy-inherited-conditions-annual",
+        "shiller-sp-composite-inherited-conditions-annual"
+      ],
+      "bytes": 618,
+      "path": "evidence/inherited-conditions-ledger.csv",
+      "role": "inherited-conditions-ledger.csv",
+      "sha256": "971e02a9795bbb20a47853c2ebb748e35768b91afee6ac8bd5dd64e8d438459e"
+    },
+    {
+      "boundSelectionKeys": [
+        "crsp-market-proxy-common-sample-annual",
+        "shiller-sp-composite-annual"
+      ],
+      "bytes": 337,
+      "path": "evidence/presidential-cycle-ledger.csv",
+      "role": "presidential-cycle-ledger.csv",
+      "sha256": "754a3ca412662a6f7f34751ca6521cb9c0ec3a5fcf85a4ba67cd0252ae26e1a8"
+    },
+    {
+      "boundSelectionKeys": [
+        "crsp-market-proxy-common-sample-annual",
+        "shiller-sp-composite-annual"
+      ],
+      "bytes": 2918,
+      "path": "evidence/presidential-cycle-summary.json",
+      "role": "presidential-cycle-summary.json",
+      "sha256": "d3f09415062bbf583abf3e6ae07295764c8263f43aaa652b973207c1925ce3a0"
+    },
+    {
+      "boundSelectionKeys": [
+        "crsp-market-proxy-common-sample-annual",
+        "shiller-sp-composite-annual"
+      ],
+      "bytes": 1478,
+      "path": "evidence/shiller_total_return_monthly.csv",
+      "role": "shiller_total_return_monthly.csv",
+      "sha256": "28ab25319f9716c4acc0187a68a7c41bb90c32a54cd6c6926884b8e4574045a9"
+    }
+  ],
+  "createdAt": "2026-11-13T00:00:00.000000Z",
+  "datasets": [
+    {
+      "bytes": 6822,
+      "canonicalSha256": "11071a18591cde5fa4c3d5c7c25495e2208f52f367f2eb820bb8907bda2d4b5a",
+      "construction": "Fictional inputs; Compounded monthly Kenneth French Mkt-RF plus RF returns.",
+      "datasetId": "annual-crsp-market-proxy-1936-1938",
+      "firstYear": 1936,
+      "lastYear": 1938,
+      "manifestBytes": 1048,
+      "manifestPath": "datasets/crsp-market-proxy-annual.manifest.json",
+      "manifestSha256": "8ba72cb6bb471427c95d71f3c97f1cd2601a93df27a1914ea8a00fc9e8c7b8d1",
+      "path": "datasets/crsp-market-proxy-annual.json",
+      "sampleId": "1936-1938",
+      "selectionKey": "crsp-market-proxy-annual",
+      "sha256": "a1b56ee6587c444351b18e7dfec3d4cc52271c5a339afeb6ecc7f24764e6d0c9",
+      "title": "Fictional fixture \u2014 Public CRSP-market-proxy annual reconstruction, 1936\u20131938",
+      "windowCount": 3
+    },
+    {
+      "bytes": 6605,
+      "canonicalSha256": "3a2f26a7410660473aecc629cba91d4f95f9909b21899f80c17a36ae6ab0ecf6",
+      "construction": "Fictional inputs; Compounded monthly Kenneth French Mkt-RF plus RF returns.",
+      "datasetId": "annual-crsp-market-proxy-1936-1937",
+      "firstYear": 1936,
+      "lastYear": 1937,
+      "manifestBytes": 1048,
+      "manifestPath": "datasets/crsp-market-proxy-common-sample-annual.manifest.json",
+      "manifestSha256": "5d0198b8969ebf94a337ac3429372a89566c8d5c05ba0cd7a5e8e8ae4bd82cb8",
+      "path": "datasets/crsp-market-proxy-common-sample-annual.json",
+      "sampleId": "1936-1937",
+      "selectionKey": "crsp-market-proxy-common-sample-annual",
+      "sha256": "d9dbef3077ae66b6da5554db85838e7b2105f3b7eb63531b8fc377e0b6337f0d",
+      "title": "Fictional fixture \u2014 Public CRSP-market-proxy annual reconstruction, 1936\u20131937",
+      "windowCount": 2
+    },
+    {
+      "bytes": 5411,
+      "canonicalSha256": "39a81733928aa96fe08526baf9a836e21e7898c1b0c0118adae216138570fc79",
+      "construction": "Fictional inputs; Compounded monthly nominal returns reconstructed as (P_t + D_t / 12) / P_(t-1) - 1 from the Shiller workbook.",
+      "datasetId": "annual-shiller-sp-composite-approximation-1936-1937",
+      "firstYear": 1936,
+      "lastYear": 1937,
+      "manifestBytes": 1118,
+      "manifestPath": "datasets/shiller-sp-composite-annual.manifest.json",
+      "manifestSha256": "53f2e803891158a80ad0cf2f3d7cc7d042a67072f39f4870356d98a183f826ed",
+      "path": "datasets/shiller-sp-composite-annual.json",
+      "sampleId": "1936-1937",
+      "selectionKey": "shiller-sp-composite-annual",
+      "sha256": "0ebc077badeb8aa78d5655a3ab49a6050c3a117ad0d889f7287fb29fbd0e095f",
+      "title": "Fictional fixture \u2014 Shiller S&P Composite dividend-reinvestment-style annual reconstruction, 1936\u20131937",
+      "windowCount": 2
+    },
+    {
+      "bytes": 7343,
+      "canonicalSha256": "be49fd5a11440ccbc73d619d38c1432ddee20c0c00da5e95352d73c909d9434f",
+      "construction": "Fictional inputs; Compounded monthly Kenneth French Mkt-RF plus RF returns.",
+      "datasetId": "annual-crsp-market-proxy-1936-1937-inherited-conditions",
+      "firstYear": 1936,
+      "lastYear": 1937,
+      "manifestBytes": 1426,
+      "manifestPath": "datasets/crsp-market-proxy-inherited-conditions-annual.manifest.json",
+      "manifestSha256": "b933610bb4b0961e4e008c9cab09f3bef0761c3dfbb30a941c4e43c5232e9b1a",
+      "path": "datasets/crsp-market-proxy-inherited-conditions-annual.json",
+      "sampleId": "1936-1937",
+      "selectionKey": "crsp-market-proxy-inherited-conditions-annual",
+      "sha256": "04333a590e5735f900ab9828a0ff223c6d0ce0e115e8859bed1369c2fc4f0645",
+      "title": "Fictional fixture \u2014 Public CRSP-market-proxy annual reconstruction, 1936\u20131937 with inherited conditions",
+      "windowCount": 2
+    },
+    {
+      "bytes": 6149,
+      "canonicalSha256": "417e40f04f697b42fada323fe2eaaa228cf944a57abe098e6ac9f6bacecc1481",
+      "construction": "Fictional inputs; Compounded monthly nominal returns reconstructed as (P_t + D_t / 12) / P_(t-1) - 1 from the Shiller workbook.",
+      "datasetId": "annual-shiller-sp-composite-approximation-1936-1937-inherited-conditions",
+      "firstYear": 1936,
+      "lastYear": 1937,
+      "manifestBytes": 1496,
+      "manifestPath": "datasets/shiller-sp-composite-inherited-conditions-annual.manifest.json",
+      "manifestSha256": "401523b5c022ee4d84745d6ce2c9b2a2fe2d67c7595ae13b992def96ea5626db",
+      "path": "datasets/shiller-sp-composite-inherited-conditions-annual.json",
+      "sampleId": "1936-1937",
+      "selectionKey": "shiller-sp-composite-inherited-conditions-annual",
+      "sha256": "76340e3818faf8546cf2cb97fd338928dbab9cd91ba37fd765d1370de9ccfb45",
+      "title": "Fictional fixture \u2014 Shiller S&P Composite dividend-reinvestment-style annual reconstruction, 1936\u20131937 with inherited conditions",
+      "windowCount": 2
+    }
+  ],
+  "decisionPolicy": "window_start",
+  "inputInventory": {
+    "captureFirstSeenAt": "2026-11-13T00:00:00.000000Z",
+    "captures": [
+      {
+        "captureId": "346ebde8143941cdb4a87b9aa696ac51",
+        "captureSequence": 3,
+        "configSha256": "30794a2524d6663becf3a4ee3dbf6e3e1532c28824fcbb14e457faa9393eafe6",
+        "factInventory": {
+          "capture_id": "346ebde8143941cdb4a87b9aa696ac51",
+          "capture_sequence": 3,
+          "count": 2,
+          "versions_sha256": "cd8a8942fa86784a1794e88fd412558197319d37951f909631fe6215fb6ccbe2"
+        },
+        "firstSeenAt": "2026-11-13T00:00:00.000000Z",
+        "rawSha256": "396e227a7e80a0b9d478a3520e74a59ced9c85189aa702c745cec2c049dfbc9d",
+        "retrievedAt": null,
+        "sourceId": "FEDFUNDS_001"
+      },
+      {
+        "captureId": "5e6ac25c25d84c3d863fc43d1569f30c",
+        "captureSequence": 1,
+        "configSha256": "30794a2524d6663becf3a4ee3dbf6e3e1532c28824fcbb14e457faa9393eafe6",
+        "factInventory": {
+          "capture_id": "5e6ac25c25d84c3d863fc43d1569f30c",
+          "capture_sequence": 1,
+          "count": 48,
+          "versions_sha256": "d1242f6f50537145c9439495e32f14c9e32ab5992740db1cb48c47819f1a18b7"
+        },
+        "firstSeenAt": "2026-11-13T00:00:00.000000Z",
+        "rawSha256": "ec2ba542439b32869cfa72026fc283d2c0d59ac6b6cab56e16c7b936c7553f7c",
+        "retrievedAt": null,
+        "sourceId": "FF_MKT_001"
+      },
+      {
+        "captureId": "28512404cc6949a38116be6ee1e821c1",
+        "captureSequence": 2,
+        "configSha256": "30794a2524d6663becf3a4ee3dbf6e3e1532c28824fcbb14e457faa9393eafe6",
+        "factInventory": {
+          "capture_id": "28512404cc6949a38116be6ee1e821c1",
+          "capture_sequence": 2,
+          "count": 48,
+          "versions_sha256": "7036e29525cf96535d12724a5a3e90fa87defd06036e73aafbf8c4424805eb77"
+        },
+        "firstSeenAt": "2026-11-13T00:00:00.000000Z",
+        "rawSha256": "1b1d4a9f1432b592a2454ce49dd6c82cc1c7425a854c38f28a1acfdce842fb4c",
+        "retrievedAt": null,
+        "sourceId": "SHILLER_001"
+      }
+    ],
+    "reviewAdmittedAt": "2026-11-13T00:00:00.000000Z",
+    "reviewControlsSha256": "984960c3e0a8ee5efa1b3b95c8f3a78991fe27077efabd0bd0235b04dae31d74",
+    "reviewId": "b3d79621de484983b7407b37f069ccd2",
+    "reviewWorkbookSha256": "cf52fb079d13356403bacfe7590b3b411af01d97bd88b708f90cdd68eff4d3fd"
+  },
+  "inputKind": "SYNTHETIC_FIXTURE",
+  "limitations": [
+    "Historical replication and source authenticity have not been independently verified.",
+    "Inherited input availability dates are assumptions, not verified real-time vintages.",
+    "Fictional fixture; no historical observations."
+  ],
+  "producer": {
+    "commit": null,
+    "dirty": null,
+    "methodVersion": "presidential-donor/0.1.0",
+    "repository": "https://github.com/thatquantguy44/market-medallion",
+    "sourceTreeScope": "named presidential_research modules and shared/files.py",
+    "sourceTreeSha256": "ef49688d96643d82c0cd7a72cb334228cfb3c9a22e4cc5131ab0013c63698278"
+  },
+  "profileId": "fixture-complete",
+  "quality": {
+    "publishedArtifacts": 7,
+    "publishedDatasets": 5,
+    "requiredArtifacts": 7,
+    "requiredDatasets": 5,
+    "status": "PASSED"
+  },
+  "schemaVersion": "presidential-research-bundle/1",
+  "semanticInventory": {
+    "artifacts": [
+      {
+        "boundSelectionKeys": [
+          "crsp-market-proxy-common-sample-annual",
+          "shiller-sp-composite-annual"
+        ],
+        "bytes": 2149,
+        "path": "evidence/public-series-comparison.json",
+        "role": "public-series-comparison.json",
+        "sha256": "dd7280138f2bb22cf78723f82f436a3e1b630a7e6966017f1a26a3fa4637e1ce"
+      },
+      {
+        "boundSelectionKeys": [
+          "crsp-market-proxy-common-sample-annual",
+          "shiller-sp-composite-annual"
+        ],
+        "bytes": 356,
+        "path": "evidence/public-series-comparison.csv",
+        "role": "public-series-comparison.csv",
+        "sha256": "d7f7c1b1435043e7136f25ce337194645a69f858c5ad968fb35d0c8e5207d973"
+      },
+      {
+        "boundSelectionKeys": [
+          "crsp-market-proxy-inherited-conditions-annual",
+          "shiller-sp-composite-inherited-conditions-annual"
+        ],
+        "bytes": 1764,
+        "path": "evidence/inherited-conditions-join-audit.json",
+        "role": "inherited-conditions-join-audit.json",
+        "sha256": "e14b3fb41ad8215d3c31dad1335cd3e9c62be84ab838662ab1516648431a7509"
+      },
+      {
+        "boundSelectionKeys": [
+          "crsp-market-proxy-inherited-conditions-annual",
+          "shiller-sp-composite-inherited-conditions-annual"
+        ],
+        "bytes": 618,
+        "path": "evidence/inherited-conditions-ledger.csv",
+        "role": "inherited-conditions-ledger.csv",
+        "sha256": "971e02a9795bbb20a47853c2ebb748e35768b91afee6ac8bd5dd64e8d438459e"
+      },
+      {
+        "boundSelectionKeys": [
+          "crsp-market-proxy-common-sample-annual",
+          "shiller-sp-composite-annual"
+        ],
+        "bytes": 337,
+        "path": "evidence/presidential-cycle-ledger.csv",
+        "role": "presidential-cycle-ledger.csv",
+        "sha256": "754a3ca412662a6f7f34751ca6521cb9c0ec3a5fcf85a4ba67cd0252ae26e1a8"
+      },
+      {
+        "boundSelectionKeys": [
+          "crsp-market-proxy-common-sample-annual",
+          "shiller-sp-composite-annual"
+        ],
+        "bytes": 2918,
+        "path": "evidence/presidential-cycle-summary.json",
+        "role": "presidential-cycle-summary.json",
+        "sha256": "d3f09415062bbf583abf3e6ae07295764c8263f43aaa652b973207c1925ce3a0"
+      },
+      {
+        "boundSelectionKeys": [
+          "crsp-market-proxy-common-sample-annual",
+          "shiller-sp-composite-annual"
+        ],
+        "bytes": 1478,
+        "path": "evidence/shiller_total_return_monthly.csv",
+        "role": "shiller_total_return_monthly.csv",
+        "sha256": "28ab25319f9716c4acc0187a68a7c41bb90c32a54cd6c6926884b8e4574045a9"
+      }
+    ],
+    "datasets": [
+      {
+        "bytes": 6822,
+        "canonicalSha256": "11071a18591cde5fa4c3d5c7c25495e2208f52f367f2eb820bb8907bda2d4b5a",
+        "construction": "Fictional inputs; Compounded monthly Kenneth French Mkt-RF plus RF returns.",
+        "datasetId": "annual-crsp-market-proxy-1936-1938",
+        "firstYear": 1936,
+        "lastYear": 1938,
+        "manifestBytes": 1048,
+        "manifestPath": "datasets/crsp-market-proxy-annual.manifest.json",
+        "manifestSha256": "8ba72cb6bb471427c95d71f3c97f1cd2601a93df27a1914ea8a00fc9e8c7b8d1",
+        "path": "datasets/crsp-market-proxy-annual.json",
+        "sampleId": "1936-1938",
+        "selectionKey": "crsp-market-proxy-annual",
+        "sha256": "a1b56ee6587c444351b18e7dfec3d4cc52271c5a339afeb6ecc7f24764e6d0c9",
+        "title": "Fictional fixture \u2014 Public CRSP-market-proxy annual reconstruction, 1936\u20131938",
+        "windowCount": 3
+      },
+      {
+        "bytes": 6605,
+        "canonicalSha256": "3a2f26a7410660473aecc629cba91d4f95f9909b21899f80c17a36ae6ab0ecf6",
+        "construction": "Fictional inputs; Compounded monthly Kenneth French Mkt-RF plus RF returns.",
+        "datasetId": "annual-crsp-market-proxy-1936-1937",
+        "firstYear": 1936,
+        "lastYear": 1937,
+        "manifestBytes": 1048,
+        "manifestPath": "datasets/crsp-market-proxy-common-sample-annual.manifest.json",
+        "manifestSha256": "5d0198b8969ebf94a337ac3429372a89566c8d5c05ba0cd7a5e8e8ae4bd82cb8",
+        "path": "datasets/crsp-market-proxy-common-sample-annual.json",
+        "sampleId": "1936-1937",
+        "selectionKey": "crsp-market-proxy-common-sample-annual",
+        "sha256": "d9dbef3077ae66b6da5554db85838e7b2105f3b7eb63531b8fc377e0b6337f0d",
+        "title": "Fictional fixture \u2014 Public CRSP-market-proxy annual reconstruction, 1936\u20131937",
+        "windowCount": 2
+      },
+      {
+        "bytes": 5411,
+        "canonicalSha256": "39a81733928aa96fe08526baf9a836e21e7898c1b0c0118adae216138570fc79",
+        "construction": "Fictional inputs; Compounded monthly nominal returns reconstructed as (P_t + D_t / 12) / P_(t-1) - 1 from the Shiller workbook.",
+        "datasetId": "annual-shiller-sp-composite-approximation-1936-1937",
+        "firstYear": 1936,
+        "lastYear": 1937,
+        "manifestBytes": 1118,
+        "manifestPath": "datasets/shiller-sp-composite-annual.manifest.json",
+        "manifestSha256": "53f2e803891158a80ad0cf2f3d7cc7d042a67072f39f4870356d98a183f826ed",
+        "path": "datasets/shiller-sp-composite-annual.json",
+        "sampleId": "1936-1937",
+        "selectionKey": "shiller-sp-composite-annual",
+        "sha256": "0ebc077badeb8aa78d5655a3ab49a6050c3a117ad0d889f7287fb29fbd0e095f",
+        "title": "Fictional fixture \u2014 Shiller S&P Composite dividend-reinvestment-style annual reconstruction, 1936\u20131937",
+        "windowCount": 2
+      },
+      {
+        "bytes": 7343,
+        "canonicalSha256": "be49fd5a11440ccbc73d619d38c1432ddee20c0c00da5e95352d73c909d9434f",
+        "construction": "Fictional inputs; Compounded monthly Kenneth French Mkt-RF plus RF returns.",
+        "datasetId": "annual-crsp-market-proxy-1936-1937-inherited-conditions",
+        "firstYear": 1936,
+        "lastYear": 1937,
+        "manifestBytes": 1426,
+        "manifestPath": "datasets/crsp-market-proxy-inherited-conditions-annual.manifest.json",
+        "manifestSha256": "b933610bb4b0961e4e008c9cab09f3bef0761c3dfbb30a941c4e43c5232e9b1a",
+        "path": "datasets/crsp-market-proxy-inherited-conditions-annual.json",
+        "sampleId": "1936-1937",
+        "selectionKey": "crsp-market-proxy-inherited-conditions-annual",
+        "sha256": "04333a590e5735f900ab9828a0ff223c6d0ce0e115e8859bed1369c2fc4f0645",
+        "title": "Fictional fixture \u2014 Public CRSP-market-proxy annual reconstruction, 1936\u20131937 with inherited conditions",
+        "windowCount": 2
+      },
+      {
+        "bytes": 6149,
+        "canonicalSha256": "417e40f04f697b42fada323fe2eaaa228cf944a57abe098e6ac9f6bacecc1481",
+        "construction": "Fictional inputs; Compounded monthly nominal returns reconstructed as (P_t + D_t / 12) / P_(t-1) - 1 from the Shiller workbook.",
+        "datasetId": "annual-shiller-sp-composite-approximation-1936-1937-inherited-conditions",
+        "firstYear": 1936,
+        "lastYear": 1937,
+        "manifestBytes": 1496,
+        "manifestPath": "datasets/shiller-sp-composite-inherited-conditions-annual.manifest.json",
+        "manifestSha256": "401523b5c022ee4d84745d6ce2c9b2a2fe2d67c7595ae13b992def96ea5626db",
+        "path": "datasets/shiller-sp-composite-inherited-conditions-annual.json",
+        "sampleId": "1936-1937",
+        "selectionKey": "shiller-sp-composite-inherited-conditions-annual",
+        "sha256": "76340e3818faf8546cf2cb97fd338928dbab9cd91ba37fd765d1370de9ccfb45",
+        "title": "Fictional fixture \u2014 Shiller S&P Composite dividend-reinvestment-style annual reconstruction, 1936\u20131937 with inherited conditions",
+        "windowCount": 2
+      }
+    ],
+    "decisionPolicy": "window_start",
+    "inputInventory": {
+      "captureFirstSeenAt": "2026-11-13T00:00:00.000000Z",
+      "captures": [
+        {
+          "captureId": "346ebde8143941cdb4a87b9aa696ac51",
+          "captureSequence": 3,
+          "configSha256": "30794a2524d6663becf3a4ee3dbf6e3e1532c28824fcbb14e457faa9393eafe6",
+          "factInventory": {
+            "capture_id": "346ebde8143941cdb4a87b9aa696ac51",
+            "capture_sequence": 3,
+            "count": 2,
+            "versions_sha256": "cd8a8942fa86784a1794e88fd412558197319d37951f909631fe6215fb6ccbe2"
+          },
+          "firstSeenAt": "2026-11-13T00:00:00.000000Z",
+          "rawSha256": "396e227a7e80a0b9d478a3520e74a59ced9c85189aa702c745cec2c049dfbc9d",
+          "retrievedAt": null,
+          "sourceId": "FEDFUNDS_001"
+        },
+        {
+          "captureId": "5e6ac25c25d84c3d863fc43d1569f30c",
+          "captureSequence": 1,
+          "configSha256": "30794a2524d6663becf3a4ee3dbf6e3e1532c28824fcbb14e457faa9393eafe6",
+          "factInventory": {
+            "capture_id": "5e6ac25c25d84c3d863fc43d1569f30c",
+            "capture_sequence": 1,
+            "count": 48,
+            "versions_sha256": "d1242f6f50537145c9439495e32f14c9e32ab5992740db1cb48c47819f1a18b7"
+          },
+          "firstSeenAt": "2026-11-13T00:00:00.000000Z",
+          "rawSha256": "ec2ba542439b32869cfa72026fc283d2c0d59ac6b6cab56e16c7b936c7553f7c",
+          "retrievedAt": null,
+          "sourceId": "FF_MKT_001"
+        },
+        {
+          "captureId": "28512404cc6949a38116be6ee1e821c1",
+          "captureSequence": 2,
+          "configSha256": "30794a2524d6663becf3a4ee3dbf6e3e1532c28824fcbb14e457faa9393eafe6",
+          "factInventory": {
+            "capture_id": "28512404cc6949a38116be6ee1e821c1",
+            "capture_sequence": 2,
+            "count": 48,
+            "versions_sha256": "7036e29525cf96535d12724a5a3e90fa87defd06036e73aafbf8c4424805eb77"
+          },
+          "firstSeenAt": "2026-11-13T00:00:00.000000Z",
+          "rawSha256": "1b1d4a9f1432b592a2454ce49dd6c82cc1c7425a854c38f28a1acfdce842fb4c",
+          "retrievedAt": null,
+          "sourceId": "SHILLER_001"
+        }
+      ],
+      "reviewAdmittedAt": "2026-11-13T00:00:00.000000Z",
+      "reviewControlsSha256": "984960c3e0a8ee5efa1b3b95c8f3a78991fe27077efabd0bd0235b04dae31d74",
+      "reviewId": "b3d79621de484983b7407b37f069ccd2",
+      "reviewWorkbookSha256": "cf52fb079d13356403bacfe7590b3b411af01d97bd88b708f90cdd68eff4d3fd"
+    },
+    "inputKind": "SYNTHETIC_FIXTURE",
+    "limitations": [
+      "Historical replication and source authenticity have not been independently verified.",
+      "Inherited input availability dates are assumptions, not verified real-time vintages.",
+      "Fictional fixture; no historical observations."
+    ],
+    "producer": {
+      "commit": null,
+      "dirty": null,
+      "methodVersion": "presidential-donor/0.1.0",
+      "repository": "https://github.com/thatquantguy44/market-medallion",
+      "sourceTreeScope": "named presidential_research modules and shared/files.py",
+      "sourceTreeSha256": "ef49688d96643d82c0cd7a72cb334228cfb3c9a22e4cc5131ab0013c63698278"
+    },
+    "profileId": "fixture-complete",
+    "quality": {
+      "publishedArtifacts": 7,
+      "publishedDatasets": 5,
+      "requiredArtifacts": 7,
+      "requiredDatasets": 5,
+      "status": "PASSED"
+    },
+    "sources": [
+      {
+        "id": "CTRL_074_A",
+        "locator": null,
+        "note": "Invented test inputs; no real source observations.",
+        "title": "Fictional fixture: CTRL_074_A"
+      },
+      {
+        "id": "FF_MKT_001",
+        "locator": null,
+        "note": "Invented test inputs; no real source observations.",
+        "title": "Fictional fixture: FF_MKT_001"
+      },
+      {
+        "id": "INHERITED_CAPE_FEDFUNDS_001",
+        "locator": null,
+        "note": "Invented test inputs; no real source observations.",
+        "title": "Fictional fixture: INHERITED_CAPE_FEDFUNDS_001"
+      },
+      {
+        "id": "SHILLER_001",
+        "locator": null,
+        "note": "Invented test inputs; no real source observations.",
+        "title": "Fictional fixture: SHILLER_001"
+      }
+    ]
+  },
+  "snapshotId": "2d29f131c487eb535a998a3236e7ecfb27d707b5b5e5a35cedbad9050433f950",
+  "sources": [
+    {
+      "id": "CTRL_074_A",
+      "locator": null,
+      "note": "Invented test inputs; no real source observations.",
+      "title": "Fictional fixture: CTRL_074_A"
+    },
+    {
+      "id": "FF_MKT_001",
+      "locator": null,
+      "note": "Invented test inputs; no real source observations.",
+      "title": "Fictional fixture: FF_MKT_001"
+    },
+    {
+      "id": "INHERITED_CAPE_FEDFUNDS_001",
+      "locator": null,
+      "note": "Invented test inputs; no real source observations.",
+      "title": "Fictional fixture: INHERITED_CAPE_FEDFUNDS_001"
+    },
+    {
+      "id": "SHILLER_001",
+      "locator": null,
+      "note": "Invented test inputs; no real source observations.",
+      "title": "Fictional fixture: SHILLER_001"
+    }
+  ]
+}

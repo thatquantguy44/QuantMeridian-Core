@@ -1,0 +1,170 @@
+{
+  "snapshot_hash_checks": [
+    {
+      "snapshot": "agent_inputs/research_analyst/README.md",
+      "matches": true
+    },
+    {
+      "snapshot": "agent_inputs/research_analyst/instructions.md",
+      "matches": true
+    },
+    {
+      "snapshot": "agent_inputs/research_analyst/prompt.md",
+      "matches": true
+    },
+    {
+      "snapshot": "agent_inputs/research_analyst/tasks.md",
+      "matches": true
+    },
+    {
+      "snapshot": "agent_inputs/modeling/README.md",
+      "matches": true
+    },
+    {
+      "snapshot": "agent_inputs/modeling/instructions.md",
+      "matches": true
+    },
+    {
+      "snapshot": "agent_inputs/modeling/prompt.md",
+      "matches": true
+    },
+    {
+      "snapshot": "agent_inputs/modeling/tasks.md",
+      "matches": true
+    },
+    {
+      "snapshot": "evidence/src/lib/server/mcsEngine.ts",
+      "matches": true
+    },
+    {
+      "snapshot": "evidence/src/app/api/simulations/mcs/route.ts",
+      "matches": true
+    },
+    {
+      "snapshot": "evidence/src/app/simulations/mcs/page.tsx",
+      "matches": true
+    },
+    {
+      "snapshot": "evidence/src/lib/server/mcsEngine.test.ts",
+      "matches": true
+    },
+    {
+      "snapshot": "evidence/src/lib/server/goldFomc.ts",
+      "matches": true
+    },
+    {
+      "snapshot": "evidence/contracts/agent/quantsmith-pin.json",
+      "matches": true
+    },
+    {
+      "snapshot": "evidence/contracts/agent/agent-skills.pin.json",
+      "matches": true
+    },
+    {
+      "snapshot": "evidence/src/data/macroInputs.ts",
+      "matches": true
+    },
+    {
+      "snapshot": "evidence/src/lib/server/goldStore.ts",
+      "matches": true
+    }
+  ],
+  "local_link_checks": [
+    {
+      "document": "01_blog_series_scope.md",
+      "target": "03_sources_and_claims.md",
+      "exists": true
+    },
+    {
+      "document": "01_blog_series_scope.md",
+      "target": "evidence/src/lib/server/mcsEngine.ts",
+      "exists": true
+    },
+    {
+      "document": "01_blog_series_scope.md",
+      "target": "evidence/src/lib/server/mcsEngine.ts",
+      "exists": true
+    },
+    {
+      "document": "01_blog_series_scope.md",
+      "target": "evidence/src/lib/server/mcsEngine.ts",
+      "exists": true
+    },
+    {
+      "document": "01_blog_series_scope.md",
+      "target": "evidence/src/lib/server/mcsEngine.ts",
+      "exists": true
+    },
+    {
+      "document": "01_blog_series_scope.md",
+      "target": "evidence/src/app/api/simulations/mcs/route.ts",
+      "exists": true
+    },
+    {
+      "document": "01_blog_series_scope.md",
+      "target": "evidence/src/app/simulations/mcs/page.tsx",
+      "exists": true
+    },
+    {
+      "document": "01_blog_series_scope.md",
+      "target": "evidence/src/lib/server/goldFomc.ts",
+      "exists": true
+    },
+    {
+      "document": "01_blog_series_scope.md",
+      "target": "evidence/src/app/api/simulations/mcs/route.ts",
+      "exists": true
+    },
+    {
+      "document": "01_blog_series_scope.md",
+      "target": "evidence/src/lib/server/mcsEngine.ts",
+      "exists": true
+    },
+    {
+      "document": "03_sources_and_claims.md",
+      "target": "evidence/src/",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "01_blog_series_scope.md",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "02_model_and_validation_research.md",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "03_sources_and_claims.md",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "04_review.md",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "run_manifest.json",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "evidence/",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "agent_inputs/",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "03_sources_and_claims.md#primary-source-reading-list",
+      "exists": true
+    }
+  ],
+  "final_metric_terminology_check": "passed"
+}

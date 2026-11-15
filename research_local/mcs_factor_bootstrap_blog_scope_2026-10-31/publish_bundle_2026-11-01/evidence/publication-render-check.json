@@ -1,0 +1,35 @@
+{
+  "images": [
+    {
+      "height": 430,
+      "loaded": true,
+      "src": "assets/mcs-10000-10y.jpg",
+      "width": 1576
+    },
+    {
+      "height": 430,
+      "loaded": true,
+      "src": "assets/mcs-10000-2y.jpg",
+      "width": 1576
+    }
+  ],
+  "katexErrors": 0,
+  "mathBlocks": [
+    {
+      "contentWidth": 1000,
+      "width": 1000,
+      "withinContainer": true
+    },
+    {
+      "contentWidth": 1000,
+      "width": 1000,
+      "withinContainer": true
+    },
+    {
+      "contentWidth": 1000,
+      "width": 1000,
+      "withinContainer": true
+    }
+  ],
+  "title": "10,000 Scenarios. Same Old History."
+}

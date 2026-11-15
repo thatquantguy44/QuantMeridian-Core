@@ -21,9 +21,27 @@ export interface QuantSmithPin {
      */
     paths: [string, ...string[]];
   };
-  reviewed: {
-    on: string;
-    source_commit: string;
-    note?: string;
-  };
+  reviewed: QuantSmithCommitSource | QuantSmithLocalSource | QuantSmithLocalCommitSource;
+}
+export interface QuantSmithCommitSource {
+  on: string;
+  source_commit: string;
+  note?: string;
+}
+export interface QuantSmithLocalSource {
+  on: string;
+  /**
+   * Optional local QuantSmith root, absolute or relative to the QuantMeridian repository root. No Git checkout or commit is required. Content fingerprints remain mandatory.
+   */
+  source_path: string;
+  note?: string;
+}
+export interface QuantSmithLocalCommitSource {
+  on: string;
+  source_commit: string;
+  /**
+   * Optional local QuantSmith root, absolute or relative to the QuantMeridian repository root. No Git checkout or commit is required. Content fingerprints remain mandatory.
+   */
+  source_path: string;
+  note?: string;
 }

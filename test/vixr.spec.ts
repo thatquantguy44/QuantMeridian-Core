@@ -4,7 +4,7 @@
  *
  * Run: npx playwright test test/vixr.spec.ts   (dev server on http://localhost:3000 or BASE_URL)
  */
-import { test, expect, type Page, type Route } from "@playwright/test";
+import { test, expect, type APIRequestContext, type Page, type Route } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -21,6 +21,11 @@ const mockOk = {
   inputs: { vixSeriesId: "VIXCLS", priceSeriesId: "SPY:close", priceLabel: "SPY price (1993+)", vixFirst: crisis.vix[0][0], vixLast: crisis.vix.at(-1)![0], priceFirst: crisis.spy[0][0], priceLast: crisis.spy.at(-1)![0] },
   citations: [{ seriesId: "VIXCLS", title: "CBOE Volatility Index", source: "Cboe via FRED", url: "https://fred.stlouisfed.org/series/VIXCLS" }],
   warnings: [],
+  provenance: {
+    policy: "observed-inputs-only", verifiedAt: "2026-11-10T00:00:00Z",
+    vix: { provider: "Cboe via FRED", kind: "published index", method: "Published VIX; pre-2003 history is Cboe back-calculation.", lastIngestedAt: "2009-12-31T00:00:00Z" },
+    price: { provider: "Tiingo End-of-Day", kind: "observed close", table: "gold.equity_total_return_index", column: "close", method: "Observed SPY close in USD.", lastIngestedAt: "2009-12-31T00:00:00Z" },
+  },
 };
 
 async function openPage(page: Page) {
@@ -30,12 +35,27 @@ async function openPage(page: Page) {
   return errors;
 }
 
+async function liveHistoryQualified(request: APIRequestContext) {
+  const res = await request.get(`${BASE}/api/market-volatility/vix-forward?basis=spy_price`);
+  const body = await res.json();
+  return res.ok() && body.source === "DB";
+}
+
 const kpi = (page: Page, label: string) => page.locator("div", { hasText: new RegExp(`^${label}$`, "i") }).first().locator("xpath=..");
 
-test("live Gold data: readout, charts, tables and no NaN", async ({ page }) => {
+test("live Gold data: readout, charts, tables and no NaN", async ({ page }, testInfo) => {
+  const qualified = await liveHistoryQualified(page.request);
   const errors = await openPage(page);
+  if (!qualified) {
+    await expect(page.getByRole("alert")).toBeVisible();
+    await expect(page.getByText(/magnitude signal/i)).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Download windows as CSV" })).toBeDisabled();
+    await page.screenshot({ path: testInfo.outputPath("unavailable.png") });
+    expect(errors).toEqual([]);
+    return;
+  }
   await expect(page.getByText(/magnitude signal/i).first()).toBeVisible({ timeout: 30_000 });
-  await expect(page.getByText(/LIVE · DB/).first()).toBeVisible();
+  await expect(page.getByText(/Verified history · DB/).first()).toBeVisible();
   for (const name of ["Implied move vs realized 30-day return", "Implied ±1σ band vs outcome over time", "Standardized move distribution", "VIX vs subsequent realized volatility", "Regressions", "Forward returns by VIX bucket"]) {
     await expect(page.getByText(name, { exact: true })).toBeVisible();
   }
@@ -46,6 +66,8 @@ test("live Gold data: readout, charts, tables and no NaN", async ({ page }) => {
   // Full history reaches back to 1993 and the latest VIX is in the KPI strip.
   await expect(page.getByText(/1993–20\d\d/)).toBeVisible();
   expect(errors).toEqual([]);
+  await page.screenshot({ path: testInfo.outputPath("overview.png") });
+  await page.getByTestId("vixr-provenance").locator("..").screenshot({ path: testInfo.outputPath("source-details.png") });
 });
 
 test("controls change the statistics: date range, sampling and basis", async ({ page }) => {
@@ -77,12 +99,20 @@ test("controls change the statistics: date range, sampling and basis", async ({ 
 
 test("basis buttons request the matching series", async ({ page }) => {
   const requested: string[] = [];
-  await page.route(API, (route) => { requested.push(new URL(route.request().url()).searchParams.get("basis") ?? ""); return fulfill(route, mockOk); });
+  await page.route(API, (route) => {
+    const basis = new URL(route.request().url()).searchParams.get("basis") ?? "spy_price";
+    requested.push(basis);
+    const total = basis === "spy_total", index = basis === "sp500_index";
+    return fulfill(route, { ...mockOk, basis,
+      inputs: { ...mockOk.inputs, priceSeriesId: index ? "SP500" : total ? "SPY:total_return_index" : "SPY:close" },
+      provenance: { ...mockOk.provenance, price: { ...mockOk.provenance.price, provider: index ? "S&P Dow Jones Indices via FRED" : "Tiingo End-of-Day", kind: index ? "published index" : total ? "derived total return" : "observed close" } },
+    });
+  });
   await openPage(page);
   await expect(page.getByText(/magnitude signal/i).first()).toBeVisible();
   await page.getByRole("button", { name: /SPY total return/ }).click();
   await page.getByRole("button", { name: /S&P 500 index/ }).click();
-  await expect.poll(() => requested).toEqual(["spy_price", "spy_total", "sp500_index"]);
+  await expect.poll(() => requested.filter((value, i) => i === 0 || value !== requested[i - 1])).toEqual(["spy_price", "spy_total", "sp500_index"]);
 });
 
 test("a Gold failure shows an error and never simulated numbers", async ({ page }) => {
@@ -118,6 +148,7 @@ test("fits a phone width without horizontal page scroll", async ({ page }) => {
 });
 
 test("live data: the out-of-sample panel shows skill, a chart and the model table", async ({ page }) => {
+  test.skip(!await liveHistoryQualified(page.request), "Configured history lacks complete provider evidence; unavailable state covered by the live-page test.");
   const errors = await openPage(page);
   await expect(page.getByText(/magnitude signal/i).first()).toBeVisible({ timeout: 30_000 });
   const panel = page.locator("section", { hasText: /expanding window · no look-ahead/i }).last();
@@ -158,6 +189,10 @@ test("CSV downloads carry provenance, the right columns and honor the current co
   expect(windows.filename).toBe("vixr_windows_spy_price.csv");
   expect(windows.lines[0]).toBe("# VIX forward windows");
   expect(windows.lines.some((l) => l.startsWith("# Source: Gold VIXCLS and SPY:close"))).toBe(true);
+  expect(windows.lines.some((l) => l === "# Return provider: Tiingo End-of-Day")).toBe(true);
+  expect(windows.lines.some((l) => l.startsWith("# VIX history: Published VIX"))).toBe(true);
+  expect(windows.lines.some((l) => l.startsWith("# Return coverage:"))).toBe(true);
+  expect(windows.lines.some((l) => l.startsWith("# Fallback policy: No simulated"))).toBe(true);
   expect(windows.lines.some((l) => l === "# Sampling: non-overlapping 30-day windows")).toBe(true);
   const headerAt = windows.lines.findIndex((l) => l.startsWith("start_date,"));
   expect(windows.lines[headerAt]).toContain("implied_1sigma_pct");
@@ -183,6 +218,7 @@ test("CSV downloads carry provenance, the right columns and honor the current co
 });
 
 test("live data: forecasts CSV has one row per out-of-sample window", async ({ page }) => {
+  test.skip(!await liveHistoryQualified(page.request), "Configured history lacks complete provider evidence; exports must remain disabled.");
   await openPage(page);
   await expect(page.getByText(/magnitude signal/i).first()).toBeVisible({ timeout: 30_000 });
   const [download] = await Promise.all([page.waitForEvent("download"), page.getByRole("button", { name: "Download forecasts as CSV" }).click()]);
@@ -260,4 +296,48 @@ test("the white paper renders its formulas as math with the source available", a
   await source.getByText("LaTeX source").click();
   await expect(source.locator("pre")).toContainText("\\begin{align*}");
   await expect(source.locator("pre")).toContainText("\\sigma_k &= V_k");
+});
+
+
+test("provider provenance and derived-history disclosures are visible", async ({ page }) => {
+  await page.route(API, (route) => fulfill(route, mockOk));
+  await openPage(page);
+  const panel = page.getByTestId("vixr-provenance");
+  await expect(panel).toContainText("Tiingo End-of-Day");
+  await expect(panel).toContainText("gold.equity_total_return_index.close");
+  await expect(page.getByText(/VIX history before September 2003/)).toBeVisible();
+  await expect(page.getByText(/Retained history: VIX through/)).toBeVisible();
+});
+
+for (const source of ["SIM", "SNAPSHOT", "ERR"]) {
+  test(`a ${source} response with populated arrays cannot render analytics`, async ({ page }) => {
+    await page.route(API, (route) => fulfill(route, { ...mockOk, source }));
+    await openPage(page);
+    await expect(page.getByRole("alert")).toBeVisible();
+    await expect(page.getByText(/magnitude signal/i)).toHaveCount(0);
+    await expect(page.getByRole("img", { name: /Scatter of VIX implied/ })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Download windows as CSV" })).toBeDisabled();
+    await expect(kpi(page, "Latest VIX")).toContainText("awaiting Gold");
+  });
+}
+
+test("a failed request after success clears the previous basis and cached history", async ({ page }) => {
+  let failing = false;
+  const requests: string[] = [];
+  await page.route(API, (route) => {
+    requests.push(new URL(route.request().url()).searchParams.get("basis") ?? "");
+    return failing ? route.abort() : fulfill(route, mockOk);
+  });
+  await openPage(page);
+  await expect(page.getByText(/magnitude signal/i).first()).toBeVisible();
+  failing = true;
+  await page.getByRole("button", { name: /SPY total return/ }).click();
+  await expect(page.getByRole("alert")).toBeVisible();
+  await expect(page.getByText(/magnitude signal/i)).toHaveCount(0);
+  await expect(kpi(page, "Latest VIX")).toContainText("awaiting Gold");
+  await page.getByRole("button", { name: /SPY price/ }).click();
+  await expect(page.getByRole("alert")).toBeVisible();
+  await expect(page.getByText(/magnitude signal/i)).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Download windows as CSV" })).toBeDisabled();
+  expect(requests.slice(-2)).toEqual(["spy_total", "spy_price"]);
 });

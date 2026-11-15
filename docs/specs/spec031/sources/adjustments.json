@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "kgr-source-research/1",
+  "status": "RESEARCH_ONLY",
+  "adjustments": [
+    {
+      "id": "fed-zero-coupon-fed-page",
+      "sourceId": "fed",
+      "documentId": "fed-page",
+      "sourceLocator": "Securities Valuation and Margins Table, Notes, item 1",
+      "appliesTo": "Zero coupon bonds outside the U.S. Treasury STRIPs collateral category",
+      "sourceWording": "margin reduction of 1%",
+      "durationConditions": [{ "sourceDurationLabel": "all durations in the current note", "sourceReduction": "1%" }],
+      "arithmeticStatus": "UNRESOLVED_DO_NOT_APPLY",
+      "qualification": "The source wording is preserved; whether reduction means percentage points or proportional adjustment is not resolved by this research. Base grid conversions exclude this conditional adjustment."
+    },
+    {
+      "id": "fed-zero-coupon-fed-securities-2025",
+      "sourceId": "fed",
+      "documentId": "fed-securities-2025",
+      "sourceLocator": "Securities margins table, Notes, item 1",
+      "appliesTo": "Zero coupon bonds outside the U.S. Treasury STRIPs collateral category",
+      "sourceWording": ["margin reduction of 1%", "reduction of 3%"],
+      "durationConditions": [
+        { "sourceDurationLabel": "0-10", "sourceReduction": "1%" },
+        { "sourceDurationLabel": "greater than 10", "sourceReduction": "3%" }
+      ],
+      "arithmeticStatus": "UNRESOLVED_DO_NOT_APPLY",
+      "qualification": "Historical qualification retained separately from the base grid; no adjustment arithmetic is inferred."
+    },
+    {
+      "id": "fed-zero-coupon-fed-securities-2024",
+      "sourceId": "fed",
+      "documentId": "fed-securities-2024",
+      "sourceLocator": "Securities margins table, Notes, item 1",
+      "appliesTo": "Zero coupon bonds outside the U.S. Treasury STRIPs collateral category",
+      "sourceWording": ["margin reduction of 1%", "reduction of 3%"],
+      "durationConditions": [
+        { "sourceDurationLabel": "0-10", "sourceReduction": "1%" },
+        { "sourceDurationLabel": "greater than 10", "sourceReduction": "3%" }
+      ],
+      "arithmeticStatus": "UNRESOLVED_DO_NOT_APPLY",
+      "qualification": "Historical qualification retained separately from the base grid; no adjustment arithmetic is inferred."
+    }
+  ]
+}

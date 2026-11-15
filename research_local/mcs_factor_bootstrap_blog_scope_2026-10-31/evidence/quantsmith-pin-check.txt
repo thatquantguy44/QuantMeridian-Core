@@ -1,0 +1,12 @@
+$ npm run check:quantsmith-pin
+
+> market-terminal@0.1.0 check:quantsmith-pin
+> bash scripts/check-quantsmith-pin.sh
+
+QuantSmith pin record PASSED — docs/specs/spec005/QUANTSMITH_PIN.md and contracts/agent/quantsmith-pin.json agree.
+QuantSmith copy drift: checking ../../agentic_workflows/qf_workflow_sdk_public
+  DRIFT — fingerprints differ from the pin (code assets).
+  Strict fingerprint verification fails for this copy until it is reviewed and re-pinned
+  (see docs/specs/spec005/QUANTSMITH_PIN.md).
+
+Exit code: 0

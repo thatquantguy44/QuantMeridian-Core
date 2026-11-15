@@ -2,6 +2,15 @@
 
 Date: 2026-06-18
 
+
+> **Proposed research module (2026-11-01).** [Spec026 — Portfolio Optimization &
+> Regime Analysis](../specs/spec026/SPEC.md) adds a reviewable documentation suite
+> for the four supplied allocation/HMM notebooks, with separate app/model/service
+> boundaries, QuantSmith/Agent-Skills workflows and runtime proposals. See its
+> [gated roadmap](../specs/spec026/ROADMAP.md). Co-located model/separate API package
+> scaffolding is now accepted and verified; health remains unconfigured. No numerical
+> binding, terminal registration, source admission or deployment is approved.
+
 > **Status update (2026-10-20).** This review predates the optimization work, so read its optimizer
 > sections as history.
 >

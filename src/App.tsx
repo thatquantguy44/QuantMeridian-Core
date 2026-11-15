@@ -13,8 +13,12 @@ import MarketLens from "./app/market-lens/page";
 import MarketChart from "./app/market-chart/page";
 import MarketVolatility from "./app/market-volatility/page";
 import VixImpliedForward from "./app/market-volatility/implied-vs-forward/page";
+import FxResearch from "./app/fx/research/page";
+import PresidentialImpact from "./app/presidential-impact/page";
+import FxExposureHedging from "./app/fx/exposure-hedging/page";
 import MoneyMarketFundOptimizer from "./app/money-market-fund-optimizer/page";
 import MoneyMarket from "./app/money-market/page";
+import PortfolioRegime from "./app/portfolio-regime/page";
 import MacroChart from "./app/macro-chart/page";
 import Mcs from "./app/simulations/mcs/page";
 import Models from "./app/models/page";
@@ -25,6 +29,9 @@ import Sentiment from "./app/sentiment/page";
 import Copilot from "./app/copilot/page";
 import DataOps from "./app/dataops/page";
 import Alerts from "./app/alerts/page";
+
+
+
 
 // Economics modules (share the DrillProvider layout)
 import Economics from "./app/economics/page";
@@ -44,7 +51,6 @@ import EconMotion from "./app/economics/motion/page";
 import EconBenchmark from "./app/economics/benchmark/page";
 import EconYieldCurve from "./app/economics/yield-curve/page";
 import EconRateVol from "./app/economics/rate-vol/page";
-import EconFundingCost from "./app/economics/funding-cost/page";
 import EconRateAnalysis from "./app/economics/rate-analysis/page";
 import EconIQ from "./app/economics/ecoiq/page";
 
@@ -74,7 +80,6 @@ export function App() {
     on("BMRK") && <Route key="bmrk" path="benchmark" element={<EconBenchmark />} />,
     on("YCURV") && <Route key="ycurv" path="yield-curve" element={<EconYieldCurve />} />,
     on("RVOL") && <Route key="rvol" path="rate-vol" element={<EconRateVol />} />,
-    on("FCOST") && <Route key="fcost" path="funding-cost" element={<EconFundingCost />} />,
     on("BRA") && <Route key="bra" path="rate-analysis" element={<EconRateAnalysis />} />,
     on("EDA") && <Route key="eda" path="eda" element={<EconEda />} />,
   ].filter(Boolean);
@@ -93,9 +98,12 @@ export function App() {
         {on("MKC") && <Route path="market-chart" element={<MarketChart />} />}
         {on("MVOL") && <Route path="market-volatility" element={<MarketVolatility />} />}
         {on("VIXR") && <Route path="market-volatility/implied-vs-forward" element={<VixImpliedForward />} />}
-        {on("INDEM") && <Route path="securities-lending/indemnification" element={<Indemnification />} />}
+        {on("FXR") && <Route path="fx/research" element={<FxResearch />} />}
+        {on("PRES") && <Route path="presidential-impact" element={<PresidentialImpact />} />}
+        {on("FXH") && <Route path="fx/exposure-hedging" element={<FxExposureHedging />} />}
         {on("MMKT") && <Route path="money-market" element={<MoneyMarket />} />}
         {on("MMFO") && <Route path="money-market-fund-optimizer" element={<MoneyMarketFundOptimizer />} />}
+        {on("PORA") && <Route path="portfolio-regime" element={<PortfolioRegime />} />}
         {on("MGC") && <Route path="macro-chart" element={<MacroChart />} />}
         {on("MCS") && <Route path="simulations/mcs" element={<Mcs />} />}
         {on("MDLS") && <Route path="models" element={<Models />} />}

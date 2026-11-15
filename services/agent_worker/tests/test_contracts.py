@@ -8,6 +8,7 @@ from pathlib import Path
 
 import pytest
 from conftest import REPO_ROOT
+from pydantic import ValidationError
 
 from agent_worker import contracts
 from agent_worker.contracts import (
@@ -96,6 +97,46 @@ def test_shipped_pin_validates_and_loads_into_its_model() -> None:
     assert validate_contract("pin", doc).ok
     model = pin_models.QuantSmithPin.model_validate(doc)
     assert model.package.code_digest == doc["package"]["code_digest"]
+
+
+def test_local_path_pin_validates_without_commit_metadata() -> None:
+    doc = load("contracts/agent/quantsmith-pin.json")
+    doc["reviewed"].pop("source_commit", None)
+    doc["reviewed"]["source_path"] = "../QuantSmith local copy"
+    assert validate_contract("pin", doc).ok
+    model = pin_models.QuantSmithPin.model_validate(doc)
+    assert model.reviewed.source_path == "../QuantSmith local copy"
+
+
+@pytest.mark.parametrize(
+    "source",
+    [
+        {"source_commit": "a" * 40},
+        {"source_path": "../QuantSmith"},
+        {"source_commit": "a" * 40, "source_path": "../QuantSmith"},
+    ],
+)
+def test_pin_source_choices_are_supported_by_schema_and_generated_model(source: dict) -> None:
+    doc = load("contracts/agent/quantsmith-pin.json")
+    doc["reviewed"] = {"on": "2026-10-30", **source}
+    assert validate_contract("pin", doc).ok
+    pin_models.QuantSmithPin.model_validate(doc)
+
+
+@pytest.mark.parametrize(
+    "source",
+    [
+        {},
+        {"source_commit": None, "source_path": "../QuantSmith"},
+        {"source_commit": "a" * 40, "source_path": None},
+    ],
+)
+def test_pin_source_choices_reject_missing_or_null_sources_in_both_readers(source: dict) -> None:
+    doc = load("contracts/agent/quantsmith-pin.json")
+    doc["reviewed"] = {"on": "2026-10-30", **source}
+    assert not validate_contract("pin", doc).ok
+    with pytest.raises(ValidationError):
+        pin_models.QuantSmithPin.model_validate(doc)
 
 
 def test_example_result_validates_and_loads_into_its_model() -> None:

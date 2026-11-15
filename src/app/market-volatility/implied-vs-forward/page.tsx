@@ -2,9 +2,9 @@ import { useMemo, useState } from "react";
 import { PageHeader, KpiStrip } from "@/components/ui/PageHeader";
 import { Panel, Stat, Tag } from "@/components/ui/Panel";
 import { DataGrid, type Column } from "@/components/ui/DataGrid";
-import { ProvenanceBadge } from "@/components/ui/ProvenanceBadge";
 import { fmtNum, fmtPct, fmtSignedPct } from "@/lib/format";
-import { useVixForward } from "@/lib/useVixForward";
+import { useVixForward, type VixForwardUiSource } from "@/lib/useVixForward";
+import { classifyFreshness } from "@/lib/provenance";
 import {
   BASIS_OPTIONS, HORIZON_DAYS, NORMAL_BENCHMARK,
   alignForward, buildReadout, computeVixForwardStats, selectObservations,
@@ -31,6 +31,17 @@ function Button({ active, children, onClick, title }: { active: boolean; childre
       }`}>
       {children}
     </button>
+  );
+}
+
+/** This study verifies retained history; its database badge must not imply live quotes. */
+function VixSourceBadge({ source, asOf }: { source: VixForwardUiSource; asOf: string | null }) {
+  const freshness = source === "DB" ? classifyFreshness(asOf) : null;
+  return (
+    <span className="inline-flex items-center gap-1" title="History is reconciled to retained provider inputs and receipts; coverage dates and freshness are separate from verification.">
+      <Tag tone={source === "DB" ? "blue" : source === "LOADING" ? "amber" : "down"}>{source === "DB" ? "Verified history · DB" : source === "LOADING" ? "Checking sources" : "Data unavailable"}</Tag>
+      {freshness && (freshness.status === "AGING" || freshness.status === "STALE") && <Tag tone={freshness.status === "STALE" ? "down" : "amber"}>{freshness.label}</Tag>}
+    </span>
   );
 }
 
@@ -145,6 +156,15 @@ export default function VixImpliedForward() {
     lines: [
       ["Module", "VIXR VIX Implied vs Forward Returns"],
       ["Source", `Gold VIXCLS and ${data?.inputs.priceSeriesId ?? basisOption.short}`],
+      ["VIX provider", data?.provenance?.vix.provider ?? "unavailable"],
+      ["VIX history", data?.provenance?.vix.method ?? "unavailable"],
+      ["Return provider", data?.provenance?.price.provider ?? "unavailable"],
+      ["Return field", `${data?.provenance?.price.table ?? ""}.${data?.provenance?.price.column ?? ""}`],
+      ["Return method", data?.provenance?.price.method ?? "unavailable"],
+      ["Source checked at", data?.provenance?.verifiedAt ?? "unavailable"],
+      ["VIX coverage", `${data?.inputs.vixFirst ?? ""} to ${data?.inputs.vixLast ?? ""}`],
+      ["Return coverage", `${data?.inputs.priceFirst ?? ""} to ${data?.inputs.priceLast ?? ""}`],
+      ["Fallback policy", "No simulated, synthetic, snapshot or alternate-feed fallback"],
       ["Basis", basisOption.label],
       ["Sampling", sampling === "daily" ? "daily overlapping windows" : "non-overlapping 30-day windows"],
       ["Range", `${start || "start of data"} to ${end || "latest"}`],
@@ -154,7 +174,8 @@ export default function VixImpliedForward() {
   });
   const range = [start || undefined, end || undefined] as const;
   const loading = source === "LOADING";
-  const asOf = data?.inputs.vixLast ?? null;
+  const asOf = data?.inputs.vixLast && data.inputs.priceLast
+    ? [data.inputs.vixLast, data.inputs.priceLast].sort()[0] : null;
   const basisOption = BASIS_OPTIONS.find((option) => option.id === basis)!;
   const mz = stats?.magnitude.realizedOnVix ?? null;
   const dir = stats?.direction.returnOnVix ?? null;
@@ -186,7 +207,7 @@ export default function VixImpliedForward() {
         asOf={asOf}
         showStreaming={false}
         right={<>
-          <ProvenanceBadge source={source === "DB" ? "DB" : source === "LOADING" ? "LOADING" : "ERR"} asOf={asOf} />
+          <VixSourceBadge source={source} asOf={asOf} />
           <Tag tone="blue">{basisOption.short}</Tag>
           <Tag tone={sampling === "monthly" ? "up" : "violet"}>{sampling === "monthly" ? "non-overlapping" : "daily overlapping"}</Tag>
         </>}
@@ -235,11 +256,12 @@ export default function VixImpliedForward() {
           <p className="mt-2 text-2xs text-term-text-mute">
             On each date the VIX implies a one-standard-deviation {HORIZON_DAYS}-day move of VIX × √(30/365). Each observation compares that with the {basisOption.short} return over the next {HORIZON_DAYS} calendar days. Research context, not a trading signal.
           </p>
+          {data && <p className="mt-1 text-2xs text-term-text-dim">Retained history: VIX through {data.inputs.vixLast}; {basisOption.short} through {data.inputs.priceLast}. Source checks run on load; these are not live quotes.</p>}
         </Panel>
 
         {source === "ERR" && (
           <Panel title="Data unavailable" code="ERR" bodyClassName="p-3" resizable={false}>
-            <div role="alert" className="text-xs text-term-text-dim">{error ?? "VIX forward history unavailable."} This module reads Gold only and never substitutes simulated data.</div>
+            <div role="alert" className="text-xs text-term-text-dim">{error ?? "VIX forward history unavailable."} This module verifies Gold against retained provider records and never substitutes simulated data. Failed source checks clear all results.</div>
           </Panel>
         )}
 
@@ -357,6 +379,27 @@ export default function VixImpliedForward() {
 
           <Panel title="Data and method" code="SRC" className="xl:col-span-12" bodyClassName="p-3" resizable={false}>
             <div className="grid gap-3 text-2xs text-term-text-dim md:grid-cols-3">
+              <div className="space-y-2 md:col-span-3">
+                <div className="font-semibold uppercase tracking-wide text-term-text-mute">SPY price versus total return</div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left">
+                    <thead><tr className="border-b border-term-border"><th className="p-1">Choice</th><th className="p-1">Provider and field</th><th className="p-1">Meaning</th></tr></thead>
+                    <tbody>
+                      <tr className="border-b border-term-border"><td className="p-1">SPY price</td><td className="p-1">Tiingo EOD → Gold close</td><td className="p-1">Observed closing price in USD; excludes dividends.</td></tr>
+                      <tr><td className="p-1">SPY total return</td><td className="p-1">Tiingo EOD → Gold total_return_index</td><td className="p-1">Calculated from close, divCash and splitFactor with dividends reinvested; index starts at 100. Derived from observed inputs, rather than a quoted price.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div>1993+ describes SPY’s historical availability. The actual loaded coverage is shown below. The fund issuer link describes SPY; Tiingo supplies the SPY observations.</div>
+                <div>VIX history before September 2003 is Cboe’s published back-calculation from historical option quotes. It is not a contemporaneously published S&P 500 VIX reading for those early dates.</div>
+                <div>No simulated, synthetic, snapshot or alternate-feed fallback. Theoretical bands and statistical forecasts are calculations from the verified inputs.</div>
+                {data?.provenance && <div data-testid="vixr-provenance" className="space-y-1 border border-term-border bg-term-panel-2 p-2">
+                  <div>{data.provenance.price.provider} · {data.provenance.price.kind} · {data.provenance.price.table}.{data.provenance.price.column}</div>
+                  <div>{data.provenance.price.method}</div>
+                  <div>Reconciled to source-labelled retained provider values, ingestion records and matching provider-response receipts. VIX ingested {data.provenance.vix.lastIngestedAt}; return inputs ingested {data.provenance.price.lastIngestedAt}.</div>
+                  <div>Source checks completed {data.provenance.verifiedAt}. This is retained history, not a live connection to Tiingo or FRED.</div>
+                </div>}
+              </div>
               <div className="space-y-1">
                 <div className="font-semibold uppercase tracking-wide text-term-text-mute">Inputs</div>
                 <div>VIXCLS {data?.inputs.vixFirst ?? "-"} → {data?.inputs.vixLast ?? "-"} · {fmtNum(aligned?.diagnostics.vixRows ?? 0, 0)} rows</div>

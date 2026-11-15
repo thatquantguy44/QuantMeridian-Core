@@ -1,0 +1,631 @@
+{
+  "schemaVersion": "kgr-source-research/1",
+  "status": "RESEARCH_ONLY",
+  "records": [
+    {
+      "id": "cme-3b78e5ab2b0675a8278a",
+      "sourceId": "cme",
+      "documentId": "cme-base",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "U.S. Treasury notes",
+      "ruleType": "haircut",
+      "sourceValue": "1",
+      "sourceUnit": "haircut_percent",
+      "haircutFraction": 0.01,
+      "sourceAsOf": null,
+      "validFrom": null,
+      "validTo": null,
+      "validToInclusive": null,
+      "selectors": {
+        "productScope": "Base performance bond",
+        "tenorMeasure": "remaining_maturity_years",
+        "tenorLabel": "0 to <=1"
+      },
+      "sourceLocator": "PDF page 3, U.S. Treasuries / T-Notes",
+      "qualification": "Web-verified only; original binary capture failed. Account, concentration and FX conditions are not resolved."
+    },
+    {
+      "id": "cme-99911d99bbcb8d469260",
+      "sourceId": "cme",
+      "documentId": "cme-base",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "U.S. Treasury notes",
+      "ruleType": "haircut",
+      "sourceValue": "--",
+      "sourceUnit": "haircut_percent",
+      "haircutFraction": null,
+      "sourceAsOf": null,
+      "validFrom": null,
+      "validTo": null,
+      "validToInclusive": null,
+      "selectors": {
+        "productScope": "Base performance bond",
+        "tenorMeasure": "remaining_maturity_years",
+        "tenorLabel": ">30"
+      },
+      "sourceLocator": "PDF page 3, U.S. Treasuries / T-Notes",
+      "qualification": "Web-verified only; original binary capture failed. Account, concentration and FX conditions are not resolved."
+    },
+    {
+      "id": "cme-963986dd478fbc6ae4f2",
+      "sourceId": "cme",
+      "documentId": "cme-irs",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "U.S. Treasury bills",
+      "ruleType": "haircut",
+      "sourceValue": "0.5",
+      "sourceUnit": "haircut_percent",
+      "haircutFraction": 0.005,
+      "sourceAsOf": null,
+      "validFrom": null,
+      "validTo": null,
+      "validToInclusive": null,
+      "selectors": {
+        "productScope": "IRS performance bond",
+        "tenorMeasure": "remaining_maturity_years",
+        "tenorLabel": "0 to <=1"
+      },
+      "sourceLocator": "PDF page 3, U.S. Treasuries / T-Bills",
+      "qualification": "Web-verified only; original binary capture failed. Account, concentration and FX conditions are not resolved."
+    },
+    {
+      "id": "lch-ccc94d72d1c5bd1d880f",
+      "sourceId": "lch",
+      "documentId": "lch-haircuts",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "Australian government securities",
+      "ruleType": "haircut",
+      "sourceValue": "0.63",
+      "sourceUnit": "haircut_percent",
+      "haircutFraction": 0.0063,
+      "sourceAsOf": null,
+      "validFrom": null,
+      "validTo": null,
+      "validToInclusive": null,
+      "selectors": {
+        "bondType": "conventional",
+        "tenorMeasure": "remaining_maturity",
+        "tenorLabel": "11 business days <=1yr",
+        "maximumEligibleTermYears": 30
+      },
+      "sourceLocator": "PDF page 1, Australia row",
+      "qualification": "Publication date 2026-06-25; effective date unconfirmed. Australia maximum eligible term is 30 years for this bond type; the published haircut bucket is preserved separately. Business-day lower bound, instrument descriptions, bilateral/triparty restrictions, other limits and separate FX schedule still apply.",
+      "sourceContext": [
+        {
+          "documentId": "lch-haircuts",
+          "sourceLocator": "PDF page 4, Maximum Term Maturity / Australia",
+          "condition": "maximum_eligible_term",
+          "sourceValue": "30 yrs",
+          "sourceUnit": "years"
+        }
+      ]
+    },
+    {
+      "id": "lch-1f802ee2a7cc2b56040e",
+      "sourceId": "lch",
+      "documentId": "lch-haircuts",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "Australian government securities",
+      "ruleType": "haircut",
+      "sourceValue": "NA",
+      "sourceUnit": "haircut_percent",
+      "haircutFraction": null,
+      "sourceAsOf": null,
+      "validFrom": null,
+      "validTo": null,
+      "validToInclusive": null,
+      "selectors": {
+        "bondType": "conventional",
+        "tenorMeasure": "remaining_maturity",
+        "tenorLabel": ">30yrs <=50yrs",
+        "maximumEligibleTermYears": 30
+      },
+      "sourceLocator": "PDF page 1, Australia row",
+      "qualification": "Publication date 2026-06-25; effective date unconfirmed. Australia maximum eligible term is 30 years for this bond type; the published haircut bucket is preserved separately. Business-day lower bound, instrument descriptions, bilateral/triparty restrictions, other limits and separate FX schedule still apply.",
+      "sourceContext": [
+        {
+          "documentId": "lch-haircuts",
+          "sourceLocator": "PDF page 4, Maximum Term Maturity / Australia",
+          "condition": "maximum_eligible_term",
+          "sourceValue": "30 yrs",
+          "sourceUnit": "years"
+        }
+      ]
+    },
+    {
+      "id": "lch-f35c23adb3cc70c137ab",
+      "sourceId": "lch",
+      "documentId": "lch-haircuts",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "Australian government securities",
+      "ruleType": "haircut",
+      "sourceValue": "1.13",
+      "sourceUnit": "haircut_percent",
+      "haircutFraction": 0.0113,
+      "sourceAsOf": null,
+      "validFrom": null,
+      "validTo": null,
+      "validToInclusive": null,
+      "selectors": {
+        "bondType": "inflation_linked",
+        "tenorMeasure": "remaining_maturity",
+        "tenorLabel": "11 business days <=1yr",
+        "maximumEligibleTermYears": 25
+      },
+      "sourceLocator": "PDF page 1, Australia row",
+      "qualification": "Publication date 2026-06-25; effective date unconfirmed. Australia maximum eligible term is 25 years for this bond type; the published haircut bucket is preserved separately. Business-day lower bound, instrument descriptions, bilateral/triparty restrictions, other limits and separate FX schedule still apply.",
+      "sourceContext": [
+        {
+          "documentId": "lch-haircuts",
+          "sourceLocator": "PDF page 4, Maximum Term Maturity / Inflation Linked Bonds, Australia ILB",
+          "condition": "maximum_eligible_term",
+          "sourceValue": "25 yrs",
+          "sourceUnit": "years"
+        }
+      ]
+    },
+    {
+      "id": "lch-eebbe8b1fc46c55bc67e",
+      "sourceId": "lch",
+      "documentId": "lch-haircuts",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "Australian government securities",
+      "ruleType": "haircut",
+      "sourceValue": "NA",
+      "sourceUnit": "haircut_percent",
+      "haircutFraction": null,
+      "sourceAsOf": null,
+      "validFrom": null,
+      "validTo": null,
+      "validToInclusive": null,
+      "selectors": {
+        "bondType": "inflation_linked",
+        "tenorMeasure": "remaining_maturity",
+        "tenorLabel": ">30yrs <=50yrs",
+        "maximumEligibleTermYears": 25
+      },
+      "sourceLocator": "PDF page 1, Australia row",
+      "qualification": "Publication date 2026-06-25; effective date unconfirmed. Australia maximum eligible term is 25 years for this bond type; the published haircut bucket is preserved separately. Business-day lower bound, instrument descriptions, bilateral/triparty restrictions, other limits and separate FX schedule still apply.",
+      "sourceContext": [
+        {
+          "documentId": "lch-haircuts",
+          "sourceLocator": "PDF page 4, Maximum Term Maturity / Inflation Linked Bonds, Australia ILB",
+          "condition": "maximum_eligible_term",
+          "sourceValue": "25 yrs",
+          "sourceUnit": "years"
+        }
+      ]
+    },
+    {
+      "id": "ice-9aa2229236d0dde583f6",
+      "sourceId": "ice",
+      "documentId": "ice-permitted-cover",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "Austria sovereign debt",
+      "ruleType": "haircut",
+      "sourceValue": "3.75",
+      "sourceUnit": "haircut_percent",
+      "haircutFraction": 0.0375,
+      "sourceAsOf": null,
+      "validFrom": null,
+      "validTo": null,
+      "validToInclusive": null,
+      "selectors": {
+        "tenorMeasure": "remaining_maturity_years",
+        "tenorLabel": "<=1",
+        "instrumentTickers": [
+          "RATB",
+          "RAGB"
+        ],
+        "denominationCurrency": "EUR",
+        "requirement": "F&O Original Margin"
+      },
+      "sourceLocator": "PDF page 2, Austria row",
+      "qualification": "FRNs excluded. Domestic-currency issuance required; account-specific restrictions, FX haircuts, concentration limits and Finance Procedures also apply. July 2026 is a publication month."
+    },
+    {
+      "id": "ice-4ff6a71acdf34b278c48",
+      "sourceId": "ice",
+      "documentId": "ice-permitted-cover",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "Austria sovereign debt",
+      "ruleType": "haircut",
+      "sourceValue": "17.50",
+      "sourceUnit": "haircut_percent",
+      "haircutFraction": 0.175,
+      "sourceAsOf": null,
+      "validFrom": null,
+      "validTo": null,
+      "validToInclusive": null,
+      "selectors": {
+        "tenorMeasure": "remaining_maturity_years",
+        "tenorLabel": ">20 to <50",
+        "instrumentTickers": [
+          "RAGB"
+        ],
+        "denominationCurrency": "EUR",
+        "requirement": "F&O Original Margin"
+      },
+      "sourceLocator": "PDF page 2, Austria row",
+      "qualification": "FRNs excluded. Domestic-currency issuance required; account-specific restrictions, FX haircuts, concentration limits and Finance Procedures also apply. July 2026 is a publication month."
+    },
+    {
+      "id": "boe-cf2719458ed9bc055067",
+      "sourceId": "boe",
+      "documentId": "boe-haircuts",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "UK sovereign and central bank debt",
+      "ruleType": "haircut",
+      "sourceValue": "0.5",
+      "sourceUnit": "haircut_percent",
+      "haircutFraction": 0.005,
+      "sourceAsOf": null,
+      "validFrom": null,
+      "validTo": null,
+      "validToInclusive": null,
+      "selectors": {
+        "collateralLevel": "A",
+        "rateType": "floating",
+        "couponType": "conventional_coupon",
+        "denominationCurrencies": [
+          "GBP",
+          "EUR",
+          "USD",
+          "CAD"
+        ],
+        "tenorMeasure": "remaining_maturity_years",
+        "tenorLabel": null
+      },
+      "sourceLocator": "PDF page 1, first Level A / conventional / coupon row",
+      "qualification": "Publication date 2026-10-30; effective date not inferred. Preserve source bucket labels; facility rules, valuation and FX add-ons still apply."
+    },
+    {
+      "id": "boe-8832c8ccbe9c3ffaea96",
+      "sourceId": "boe",
+      "documentId": "boe-haircuts",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "UK sovereign and central bank debt",
+      "ruleType": "haircut",
+      "sourceValue": "10.0",
+      "sourceUnit": "haircut_percent",
+      "haircutFraction": 0.1,
+      "sourceAsOf": null,
+      "validFrom": null,
+      "validTo": null,
+      "validToInclusive": null,
+      "selectors": {
+        "collateralLevel": "A",
+        "rateType": "fixed",
+        "couponType": "conventional_coupon",
+        "denominationCurrencies": [
+          "GBP",
+          "EUR",
+          "USD",
+          "CAD"
+        ],
+        "tenorMeasure": "remaining_maturity_years",
+        "tenorLabel": ">30"
+      },
+      "sourceLocator": "PDF page 1, first Level A / conventional / coupon row",
+      "qualification": "Publication date 2026-10-30; effective date not inferred. Preserve source bucket labels; facility rules, valuation and FX add-ons still apply."
+    },
+    {
+      "id": "eurex-8b097df3ac7c8512cc4f",
+      "sourceId": "eurex",
+      "documentId": "eurex-global-securities",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "AT0000383864",
+      "ruleType": "haircut",
+      "sourceValue": "97.714",
+      "sourceUnit": "evaluation_percent",
+      "haircutFraction": 0.02286,
+      "sourceAsOf": "2026-11-04",
+      "validFrom": null,
+      "validTo": null,
+      "validToInclusive": null,
+      "selectors": {
+        "currency": "EUR",
+        "depositsAllowed": "Y",
+        "lsocEligible": "N",
+        "titleTransferEligible": "Y",
+        "collateralExpirationDate": "15/07/2027"
+      },
+      "sourceLocator": "GlobalAdmissibleSecurities.txt line 2",
+      "qualification": "Subject to the original source conditions; not an eligibility decision.",
+      "sourceFields": {
+        "#LastUpdate": "04/11/2026",
+        "ISIN": "AT0000383864",
+        "Security_Group": "B",
+        "Security_Type": "BON",
+        "Deposits_Allowed": "Y",
+        "Shares/Nominal": "9,899,531,002",
+        "CollClosingPrc": "102.2610",
+        "EvalPct": "97.714",
+        "Used_as_Collateral": "Y",
+        "Free_for_deposit": "2,474,882,751",
+        "Market_Price_Validity": "Y",
+        "Collateral_Expiration_Date": "15/07/2027",
+        "Security_Long_Name": "OESTERREICH, REPUBLIK         EO-BUNDESANL. 1997(27) 6",
+        "Currency": "EUR",
+        "LSOC_eligible": "N",
+        "TitleTransfer_eligible": "Y",
+        "ECC_eligible": "Y"
+      }
+    },
+    {
+      "id": "eurex-75a27ef5a0e242c09abf",
+      "sourceId": "eurex",
+      "documentId": "eurex-global-securities",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "AT0000A04967",
+      "ruleType": "haircut",
+      "sourceValue": "91.770",
+      "sourceUnit": "evaluation_percent",
+      "haircutFraction": 0.0823,
+      "sourceAsOf": "2026-11-04",
+      "validFrom": null,
+      "validTo": null,
+      "validToInclusive": null,
+      "selectors": {
+        "currency": "EUR",
+        "depositsAllowed": "Y",
+        "lsocEligible": "N",
+        "titleTransferEligible": "Y",
+        "collateralExpirationDate": "15/03/2037"
+      },
+      "sourceLocator": "GlobalAdmissibleSecurities.txt line 3",
+      "qualification": "Subject to the original source conditions; not an eligibility decision.",
+      "sourceFields": {
+        "#LastUpdate": "04/11/2026",
+        "ISIN": "AT0000A04967",
+        "Security_Group": "B",
+        "Security_Type": "BON",
+        "Deposits_Allowed": "Y",
+        "Shares/Nominal": "15,766,012,000",
+        "CollClosingPrc": "104.2680",
+        "EvalPct": "91.770",
+        "Used_as_Collateral": "Y",
+        "Free_for_deposit": "3,941,503,000",
+        "Market_Price_Validity": "Y",
+        "Collateral_Expiration_Date": "15/03/2037",
+        "Security_Long_Name": "Österreich, Republik          EO-Med.-T. Nts 2007(37) 144A",
+        "Currency": "EUR",
+        "LSOC_eligible": "N",
+        "TitleTransfer_eligible": "Y",
+        "ECC_eligible": "Y"
+      }
+    },
+    {
+      "id": "boe-f6e6578801776db43529",
+      "sourceId": "boe",
+      "documentId": "boe-level-a",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "CA135087B949",
+      "ruleType": "eligibility_listing",
+      "sourceValue": "LISTED",
+      "sourceUnit": "label",
+      "haircutFraction": null,
+      "sourceAsOf": "2026-11-05",
+      "validFrom": null,
+      "validTo": null,
+      "validToInclusive": null,
+      "selectors": {
+        "collateralLevel": "A"
+      },
+      "sourceLocator": "CSV line 4",
+      "qualification": "Listed in the source level; facility rules and individual conditions still apply. Blank settlement flags remain blank.",
+      "sourceFields": {
+        "ISIN": "CA135087B949",
+        "CREST": "",
+        "Euroclear": "",
+        "Clearstream": "",
+        "CCBM": "",
+        "BoC": "X",
+        "FRBNY": ""
+      }
+    },
+    {
+      "id": "boe-732b9eef1b7b504d0260",
+      "sourceId": "boe",
+      "documentId": "boe-level-b",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "AT0000383864",
+      "ruleType": "eligibility_listing",
+      "sourceValue": "LISTED",
+      "sourceUnit": "label",
+      "haircutFraction": null,
+      "sourceAsOf": "2026-11-02",
+      "validFrom": null,
+      "validTo": null,
+      "validToInclusive": null,
+      "selectors": {
+        "collateralLevel": "B"
+      },
+      "sourceLocator": "CSV line 3",
+      "qualification": "Listed in the source level; facility rules and individual conditions still apply. Blank settlement flags remain blank.",
+      "sourceFields": {
+        "ISIN": "AT0000383864"
+      }
+    },
+    {
+      "id": "boe-58973eda9a097016e59d",
+      "sourceId": "boe",
+      "documentId": "boe-level-c",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "ES0413860786",
+      "ruleType": "eligibility_listing",
+      "sourceValue": "LISTED",
+      "sourceUnit": "label",
+      "haircutFraction": null,
+      "sourceAsOf": "2026-11-02",
+      "validFrom": null,
+      "validTo": null,
+      "validToInclusive": null,
+      "selectors": {
+        "collateralLevel": "C"
+      },
+      "sourceLocator": "CSV line 3",
+      "qualification": "Listed in the source level; facility rules and individual conditions still apply. Blank settlement flags remain blank.",
+      "sourceFields": {
+        "ISIN": "ES0413860786"
+      }
+    },
+    {
+      "id": "fed-e3e90272782ae3c41c90",
+      "sourceId": "fed",
+      "documentId": "fed-page",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "U.S. Treasuries & Fully Guaranteed Agencies / STRIPS",
+      "ruleType": "haircut",
+      "sourceValue": "96",
+      "sourceUnit": "evaluation_percent",
+      "haircutFraction": 0.04,
+      "sourceAsOf": null,
+      "validFrom": "2026-07-01",
+      "validTo": null,
+      "validToInclusive": null,
+      "selectors": {
+        "tenorMeasure": "duration_years",
+        "tenorLabel": "0-1",
+        "valueLayer": "base_schedule"
+      },
+      "sourceLocator": "Securities table row 7, column 2",
+      "qualification": "Base securities grid before conditional adjustments; source margins are lending-value percentages. See the version-specific zero-coupon note in adjustments.json. Blank cells remain unavailable. Loan tables use a separate methodology.",
+      "adjustmentRefs": [
+        "fed-zero-coupon-fed-page"
+      ]
+    },
+    {
+      "id": "fed-e0d004ee6a01aa661d00",
+      "sourceId": "fed",
+      "documentId": "fed-securities-2025",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "U.S. Treasuries & Fully Guaranteed Agencies / STRIPS",
+      "ruleType": "haircut",
+      "sourceValue": "96%",
+      "sourceUnit": "evaluation_percent",
+      "haircutFraction": 0.04,
+      "sourceAsOf": null,
+      "validFrom": "2025-07-01",
+      "validTo": "2026-06-30",
+      "validToInclusive": true,
+      "selectors": {
+        "tenorMeasure": "duration_years",
+        "tenorLabel": "0-1",
+        "valueLayer": "base_schedule"
+      },
+      "sourceLocator": "Securities table row 7, column 2",
+      "qualification": "Base securities grid before conditional adjustments; source margins are lending-value percentages. See the version-specific zero-coupon note in adjustments.json. Blank cells remain unavailable. Loan tables use a separate methodology.",
+      "adjustmentRefs": [
+        "fed-zero-coupon-fed-securities-2025"
+      ]
+    },
+    {
+      "id": "fed-7b449f82b268710d9b53",
+      "sourceId": "fed",
+      "documentId": "fed-securities-2024",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "U.S. Treasuries & Fully Guaranteed Agencies / STRIPS",
+      "ruleType": "haircut",
+      "sourceValue": "97%",
+      "sourceUnit": "evaluation_percent",
+      "haircutFraction": 0.03,
+      "sourceAsOf": null,
+      "validFrom": "2024-09-03",
+      "validTo": "2025-06-30",
+      "validToInclusive": true,
+      "selectors": {
+        "tenorMeasure": "duration_years",
+        "tenorLabel": "0-1",
+        "valueLayer": "base_schedule"
+      },
+      "sourceLocator": "Securities table row 7, column 2",
+      "qualification": "Base securities grid before conditional adjustments; source margins are lending-value percentages. See the version-specific zero-coupon note in adjustments.json. Blank cells remain unavailable. Loan tables use a separate methodology.",
+      "adjustmentRefs": [
+        "fed-zero-coupon-fed-securities-2024"
+      ]
+    },
+    {
+      "id": "ice-b9015efbd99449078962",
+      "sourceId": "ice",
+      "documentId": "ice-fx-history",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "CAD/AUD",
+      "ruleType": "fx_haircut",
+      "sourceValue": "5.5",
+      "sourceUnit": "haircut_percent",
+      "haircutFraction": 0.055,
+      "sourceAsOf": null,
+      "validFrom": "2019-10-30",
+      "validTo": "2020-05-13",
+      "validToInclusive": null,
+      "selectors": {
+        "assetCurrency": "CAD",
+        "liabilityCurrency": "AUD",
+        "requirementType": "initial_margin",
+        "currencyRelationship": "collateral_currency_differs_from_liability_currency",
+        "sourceStatus": "INACTIVE"
+      },
+      "sourceLocator": "CSV line 2",
+      "qualification": "Landing-page scope is collateral currency differing from the initial-margin liability currency. Preserves published ACTIVE/INACTIVE status. End-date inclusivity and present-day freshness are unconfirmed; this is not an automatic replay policy.",
+      "sourceFields": {
+        "LIABILITY_CURRENCY": "AUD",
+        "ASSET_CURRENCY": "CAD",
+        "HAIRCUT_PCT": "5.5",
+        "HAIRCUT_STATUS": "INACTIVE",
+        "START_DATE": "2019-10-30",
+        "END_DATE": "2020-05-13"
+      },
+      "sourceContext": [
+        {
+          "documentId": "ice-page",
+          "sourceLocator": "Acceptable Collateral & Haircut Calculation, paragraph linking cross currency haircuts",
+          "condition": "currency_mismatch_to_initial_margin_liability",
+          "sourceValue": "initial margin liability",
+          "sourceUnit": "scope_label"
+        }
+      ]
+    },
+    {
+      "id": "ice-e7c3044f3f9a265d86ea",
+      "sourceId": "ice",
+      "documentId": "ice-fx-history",
+      "recordStatus": "RESEARCH_ONLY",
+      "subject": "CAD/AUD",
+      "ruleType": "fx_haircut",
+      "sourceValue": "7.75",
+      "sourceUnit": "haircut_percent",
+      "haircutFraction": 0.0775,
+      "sourceAsOf": null,
+      "validFrom": "2020-05-14",
+      "validTo": null,
+      "validToInclusive": null,
+      "selectors": {
+        "assetCurrency": "CAD",
+        "liabilityCurrency": "AUD",
+        "requirementType": "initial_margin",
+        "currencyRelationship": "collateral_currency_differs_from_liability_currency",
+        "sourceStatus": "ACTIVE"
+      },
+      "sourceLocator": "CSV line 3",
+      "qualification": "Landing-page scope is collateral currency differing from the initial-margin liability currency. Preserves published ACTIVE/INACTIVE status. End-date inclusivity and present-day freshness are unconfirmed; this is not an automatic replay policy.",
+      "sourceFields": {
+        "LIABILITY_CURRENCY": "AUD",
+        "ASSET_CURRENCY": "CAD",
+        "HAIRCUT_PCT": "7.75",
+        "HAIRCUT_STATUS": "ACTIVE",
+        "START_DATE": "2020-05-14",
+        "END_DATE": ""
+      },
+      "sourceContext": [
+        {
+          "documentId": "ice-page",
+          "sourceLocator": "Acceptable Collateral & Haircut Calculation, paragraph linking cross currency haircuts",
+          "condition": "currency_mismatch_to_initial_margin_liability",
+          "sourceValue": "initial margin liability",
+          "sourceUnit": "scope_label"
+        }
+      ]
+    }
+  ]
+}

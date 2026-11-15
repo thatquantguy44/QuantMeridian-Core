@@ -1,0 +1,170 @@
+{
+  "controls": [
+    {
+      "endDate": "1937-01-03",
+      "houseControl": "D",
+      "id": "control-74-1935-01-03",
+      "presidentId": "franklin-d-roosevelt",
+      "presidentName": "Franklin D. Roosevelt",
+      "presidentParty": "D",
+      "senateControl": "D",
+      "sourceId": "CTRL_074_A",
+      "startDate": "1935-01-03"
+    }
+  ],
+  "currency": "USD",
+  "fundamentals": [],
+  "id": "annual-crsp-market-proxy-1936-1936",
+  "kind": "USER_SUPPLIED",
+  "levels": [
+    {
+      "date": "1935-01-31",
+      "sourceId": "FF_MKT_001",
+      "value": 100.1
+    },
+    {
+      "date": "1935-02-28",
+      "sourceId": "FF_MKT_001",
+      "value": 100.20009999999998
+    },
+    {
+      "date": "1935-03-31",
+      "sourceId": "FF_MKT_001",
+      "value": 100.30030009999997
+    },
+    {
+      "date": "1935-04-30",
+      "sourceId": "FF_MKT_001",
+      "value": 100.40060040009996
+    },
+    {
+      "date": "1935-05-31",
+      "sourceId": "FF_MKT_001",
+      "value": 100.50100100050005
+    },
+    {
+      "date": "1935-06-30",
+      "sourceId": "FF_MKT_001",
+      "value": 100.60150200150055
+    },
+    {
+      "date": "1935-07-31",
+      "sourceId": "FF_MKT_001",
+      "value": 100.70210350350204
+    },
+    {
+      "date": "1935-08-31",
+      "sourceId": "FF_MKT_001",
+      "value": 100.80280560700554
+    },
+    {
+      "date": "1935-09-30",
+      "sourceId": "FF_MKT_001",
+      "value": 100.90360841261253
+    },
+    {
+      "date": "1935-10-31",
+      "sourceId": "FF_MKT_001",
+      "value": 101.00451202102514
+    },
+    {
+      "date": "1935-11-30",
+      "sourceId": "FF_MKT_001",
+      "value": 101.10551653304616
+    },
+    {
+      "date": "1935-12-31",
+      "sourceId": "FF_MKT_001",
+      "value": 101.2066220495792
+    },
+    {
+      "date": "1936-01-31",
+      "sourceId": "FF_MKT_001",
+      "value": 102.21868827007499
+    },
+    {
+      "date": "1936-02-29",
+      "sourceId": "FF_MKT_001",
+      "value": 103.24087515277574
+    },
+    {
+      "date": "1936-03-31",
+      "sourceId": "FF_MKT_001",
+      "value": 104.2732839043035
+    },
+    {
+      "date": "1936-04-30",
+      "sourceId": "FF_MKT_001",
+      "value": 105.31601674334654
+    },
+    {
+      "date": "1936-05-31",
+      "sourceId": "FF_MKT_001",
+      "value": 106.36917691078
+    },
+    {
+      "date": "1936-06-30",
+      "sourceId": "FF_MKT_001",
+      "value": 107.4328686798878
+    },
+    {
+      "date": "1936-07-31",
+      "sourceId": "FF_MKT_001",
+      "value": 108.50719736668668
+    },
+    {
+      "date": "1936-08-31",
+      "sourceId": "FF_MKT_001",
+      "value": 109.59226934035355
+    },
+    {
+      "date": "1936-09-30",
+      "sourceId": "FF_MKT_001",
+      "value": 110.68819203375709
+    },
+    {
+      "date": "1936-10-31",
+      "sourceId": "FF_MKT_001",
+      "value": 111.79507395409466
+    },
+    {
+      "date": "1936-11-30",
+      "sourceId": "FF_MKT_001",
+      "value": 112.9130246936356
+    },
+    {
+      "date": "1936-12-31",
+      "sourceId": "FF_MKT_001",
+      "value": 114.04215494057196
+    }
+  ],
+  "nominalReal": "NOMINAL",
+  "returnBasis": "TOTAL_RETURN",
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "FF_MKT_001",
+      "locator": null,
+      "note": "Invented test inputs; no real source observations.",
+      "title": "Fictional fixture: FF_MKT_001"
+    },
+    {
+      "id": "CTRL_074_A",
+      "locator": null,
+      "note": "Invented test inputs; no real source observations.",
+      "title": "Fictional fixture: CTRL_074_A"
+    }
+  ],
+  "title": "Fictional fixture \u2014 Public CRSP-market-proxy annual reconstruction, 1936\u20131936",
+  "windows": [
+    {
+      "complete": true,
+      "decisionDate": "1935-12-31",
+      "endDate": "1936-12-31",
+      "id": "annual-1936",
+      "kind": "CALENDAR_YEAR",
+      "label": "1936",
+      "startDate": "1935-12-31"
+    }
+  ]
+}

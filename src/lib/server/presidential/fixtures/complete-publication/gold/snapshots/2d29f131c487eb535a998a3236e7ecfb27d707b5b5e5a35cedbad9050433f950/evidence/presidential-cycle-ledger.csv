@@ -1,0 +1,2 @@
+year,termStartYear,termCycleYear,inaugurationTransition,presidentChangedWithinWindow,endOfYearPresidentId,endOfYearPresidentName,endOfYearPresidentParty,crspMarketProxyReturnDecimal,shillerSpCompositeApproximationReturnDecimal
+1937,1937,1,True,False,franklin-d-roosevelt,Franklin D. Roosevelt,D,0.01814924501196291,0.11138158116916674

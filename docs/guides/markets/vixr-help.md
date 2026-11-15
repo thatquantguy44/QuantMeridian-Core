@@ -1,10 +1,10 @@
 # VIX Implied vs Forward Returns (VIXR): help and FAQ
 
-> Gold data only. The headline statistics are in-sample; the Out-of-sample test panel checks them in real time. Read the [white paper](/guides/VIXR/whitepaper) for the method and reference results.
+> Gold values reconciled to retained provider evidence. The headline statistics are in-sample; the Out-of-sample test panel evaluates forecasts using earlier windows only. Read the [white paper](/guides/VIXR/whitepaper) for the method and reference results.
 
 ## Quick start
 
-1. Open [VIX Implied vs Forward](/market-volatility/implied-vs-forward). The badge should read `DB`.
+1. Open [VIX Implied vs Forward](/market-volatility/implied-vs-forward). The badge should read `Verified history · DB`.
 2. Read the **Readout** panel: one line each on magnitude, calibration, tails and direction.
 3. Look at the **scatter**: dots between the green curves landed inside the VIX's ±1σ move.
 4. Switch **Since 2008** and **Before 2008** to see whether the result holds in both halves of the history.
@@ -20,8 +20,8 @@
 |---|---|
 | `VIXR` / VIX Implied vs Forward Returns | Module code and name |
 | **Guide** | Opens this help and the white paper |
-| `DATA AS OF` | Date of the last VIX close in Gold |
-| `DB` / `ERR` badge | Gold data loaded, or the read failed (no simulated fallback). A freshness tag appears when the load is behind. |
+| `DATA AS OF` | Earlier of the last VIX and return-basis dates; separate dates appear below the controls |
+| Source badge | `Verified history · DB` means stored Gold values matched retained provider evidence; `Data unavailable` means a read or source check failed. Neither means a live upstream quote connection. |
 | Basis tag | `SPY PX`, `SPY TR` or `SPX`: the series the returns are measured on |
 | Sampling tag | `non-overlapping` or `daily overlapping` |
 
@@ -42,9 +42,9 @@
 
 | Control | Meaning | Default |
 |---|---|---|
-| **SPY price (1993+)** | SPY close without dividends: closest long-history match to the S&P 500 price index | Selected |
-| **SPY total return (1993+)** | SPY with dividends reinvested | |
-| **S&P 500 index (FRED, 2016+)** | The index itself; FRED publishes only ten years | |
+| **SPY price (1993+)** | Tiingo observed SPY close in USD without dividends: closest long-history match to the S&P 500 price index | Selected |
+| **SPY total return (1993+)** | Pipeline-calculated index from Tiingo close, cash dividends and split factors, starting at 100 with dividends reinvested | |
+| **S&P 500 index (FRED, 10Y)** | The index itself; FRED publishes only ten years | |
 | **Non-overlapping** / **Daily** | Back-to-back independent windows, or one window per trading day | Non-overlapping |
 | **VIX levels** / **Quintiles** | Fixed VIX bands, or five equal-count groups from the selected sample | VIX levels |
 | **Full history**, **Since 2008**, **Last 10Y**, **Before 2008** | Date presets; highlighted when the From/To dates match one | Full history |
@@ -130,6 +130,10 @@ Twelve collapsible sections with every formula the module evaluates, rendered as
 
 ### Data and method panel (`SRC`)
 
+The comparison table explains the two SPY choices and names Tiingo as the observation provider. The State Street link is the fund reference. VIX is supplied by Cboe via FRED; its pre-September-2003 history was back-calculated by Cboe from historical option quotes. The panel distinguishes observed closes, published indices and calculated total returns, and shows coverage, ingestion and source-check times. The statistical forecasts and theoretical curves are calculations, not market observations.
+
+Source checks reconcile Gold values to source-labelled Silver records and require matching Bronze provider-response receipts; total return requires complete dividend and split records, with no zero/one defaults. Missing provider evidence, a connection failure or a rejected response clears the analytics. There is no simulated, synthetic, cached snapshot or alternate-feed fallback. Stored history may remain usable while a provider is offline, but its through-date is explicit and it is never presented as a live feed.
+
 Input coverage and row counts, window diagnostics (windows built, index dates without a VIX, windows still open, data gaps, invalid rows), any warnings, the method in brief and links to the sources.
 
 ## Assumptions and defaults
@@ -205,7 +209,8 @@ Yes. The **CSV** buttons on the scatter, bucket and out-of-sample panels downloa
 | `ERR` badge with "MACRO_DB_URL not configured" | The terminal has no Gold connection. Set `MACRO_DB_URL` in `.env.local` and restart. |
 | "No Gold observations found for …" | The series is missing from Gold; run the macro ETL for `VIXCLS` or the equity load for `SPY`. |
 | "Not enough observations in this range" | Fewer than 10 windows; widen the dates or switch to Daily. |
-| Freshness tag (for example `STALE · 17D`) | The Gold load is behind; the statistics are correct up to the as-of date. |
+| History-behind warning | The retained load is old; check the separate VIX and return-series dates and refresh the upstream pipeline. |
+| Missing provider evidence, response receipt or reconciliation failed | Retain the required source-labelled Silver records and investigate the input mismatch; VIXR withholds results rather than filling missing inputs. |
 | S&P 500 index starts in 2016 | Expected: FRED's licence limit. |
 | A regression shows "not enough variation" | The VIX barely changed in the selected range. |
 | "Not enough history for an out-of-sample test" | The selection has fewer prior windows than the warm-up needs. Widen the dates or switch to Daily. |

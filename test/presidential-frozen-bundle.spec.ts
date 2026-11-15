@@ -1,0 +1,32 @@
+import { expect, test } from "@playwright/test";
+import { readFile } from "node:fs/promises";
+
+test("frozen historical snapshot reconciles in PRES and replays offline", async ({ page }) => {
+  test.skip(process.env.PRES_FROZEN_E2E !== "1", "Requires explicitly admitted local historical snapshot.");
+  const errors: string[] = [];
+  page.on("pageerror", error => errors.push(error.message));
+  await page.goto("/presidential-impact");
+  await page.getByRole("button", { name: "Check for pipeline snapshots" }).click();
+  await expect(page.getByLabel("Pipeline dataset").locator("option")).toHaveCount(5);
+  await page.getByLabel("Pipeline dataset").selectOption("shiller-sp-composite-annual");
+  await page.getByRole("button", { name: "Load pipeline snapshot" }).click();
+  await expect(page.getByLabel("Pipeline snapshot provenance")).toContainText("public-reconstruction-2026-11-03");
+  await expect(page.getByText(/Full paired sample: 87 included/)).toBeVisible();
+  const ledger = page.getByRole("table", { name: "Matched annual comparison ledger" });
+  await expect(ledger.locator("tbody tr")).toHaveCount(87);
+  await expect(page.getByRole("table", { name: "Presidential cycle annual ledger" }).locator("tbody tr")).toHaveCount(86);
+  await page.getByLabel("Comparison sample").selectOption("inherited");
+  await expect(ledger.locator("tbody tr")).toHaveCount(68);
+  await expect(page.getByText(/Full paired sample: 68 included/)).toBeVisible();
+  const download = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Download paired replay" }).click();
+  const replay = await readFile((await (await download).path())!);
+  const blocked: string[] = [];
+  await page.route("**/api/presidential/research/**", route => { blocked.push(route.request().url()); return route.abort(); });
+  await page.getByRole("button", { name: "Clear dataset", exact: true }).click();
+  await page.getByLabel("Import saved research run").setInputFiles({ name: "frozen.json", mimeType: "application/json", buffer: replay });
+  await expect(page.getByLabel("Comparison sample")).toHaveValue("inherited");
+  await expect(page.getByText(/Full paired sample: 68 included/)).toBeVisible();
+  expect(blocked).toEqual([]);
+  expect(errors).toEqual([]);
+});

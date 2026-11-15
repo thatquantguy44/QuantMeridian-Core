@@ -1,12 +1,12 @@
 # Plan: Production Squeeze Radar
 
 - **Spec:** [spec021-production-squeeze-radar](SPEC.md)
-- **Status:** Phase 1 synthetic architecture approved in principle; generator parameters and remaining workflow/model decisions are open
-- **Last updated:** 2026-10-24
+- **Status:** Phase 1 synthetic architecture and T09-T16 product/service policy approved; later workflow and live decisions remain open
+- **Last updated:** 2026-10-25
 
 ## Approach
 
-Build SQZ contract-first and synthetic-first. Phase 1 replaces the current collection of independently sampled fields with one deterministic scenario engine that generates coherent, point-in-time histories and hidden truth labels across every domain. A versioned scoring job consumes only published SIM observations and exposes signal snapshots through same-origin routes. The contracts intentionally match the future production boundary, but no vendor, live cache, or real internal book is connected in Phase 1.
+Build SQZ contract-first and synthetic-first. Phase 1 replaces the current collection of independently sampled fields with one deterministic scenario engine that generates coherent, point-in-time histories and hidden truth labels across every domain. A versioned scoring job consumes only published SIM observations and exposes signal snapshots through same-origin routes. The approved T09-T16 model, evaluation, entitlement, storage, and service defaults are versioned in [PHASE1_POLICY.md](PHASE1_POLICY.md). The contracts intentionally match the future production boundary, but no vendor, live cache, or real internal book is connected in Phase 1.
 
 ```text
              Versioned synthetic scenario manifest + seed
@@ -72,7 +72,7 @@ Realism is assessed through invariants, distributions, temporal behavior and bli
 | Alert/case service | In-platform state transitions, assignment and audit | Recalculating historical trigger evidence or emitting external notifications |
 | SLAB / upstream books | Authoritative loans, inventory, recalls, restrictions, realized rate changes | External market benchmark methodology |
 
-Phase 1 may publish the synthetic snapshots through a local service/store, but the contract boundary must stay compatible with the intended Gold-backed architecture. If upstream Gold schemas live in another repository or service, this repository owns versioned input/output contracts and fixtures rather than writing directly to that database. No external database is required for the synthetic release.
+Phase 1 publishes through one private TypeScript service at `services/squeeze_radar_api`, bound to `127.0.0.1:8019`, after the in-process `SqueezeRadarService` contract stabilizes. The browser continues to call only authenticated same-origin terminal routes. The service uses local SQLite under ignored `.data/squeeze_radar/`, requires no external database, and does not split ingestion, scoring, evaluation, storage, and query into separate microservices. Its contract boundary remains compatible with the intended future Gold-backed architecture.
 
 The initial executable boundary is the normalized CSV v1 fixture pack documented in [DATA_CONTRACT.md](DATA_CONTRACT.md). The versioned generator configuration, named-stream rules, fault composition, and truth isolation are documented in [SCENARIO_MANIFEST.md](SCENARIO_MANIFEST.md); security boundaries and abuse cases are documented in [THREAT_MODEL.md](THREAT_MODEL.md). Future source adapters replace file producers, not model-facing semantics. The pack covers source inputs and truth isolation; API, feature, signal, workflow, policy, and export schemas remain follow-on contracts.
 
@@ -163,7 +163,14 @@ The synthetic research board serves market projections first. Synthetic internal
 
 ### 1. Borrow Stress baseline
 
-Start with a transparent monotonic rules model, calculated within comparable universe cohorts. Candidate features:
+Use separate transparent monotonic rules models for market and internal stress, calculated within comparable universe cohorts. Registered weights are:
+
+- **Market:** utilization 25%, fee level 25%, availability scarcity 10%, fee pressure 15%, supply contraction 15%, demand/on-loan expansion 10%.
+- **Internal:** utilization 35%, available-inventory scarcity 25%, request-to-available pressure 15%, unfilled-request ratio 15%, inventory drawdown 10%.
+
+The registered current-tightness/deterioration split is 60%/40%. Users may change only that high-level split in a private `CUSTOM` profile; the feature weights inside each component retain their registered relative proportions. Custom outputs cannot drive alerts, promotion, or official evaluation. Recall/buy-in pressure remains context until a later contract provides sufficient history.
+
+Supporting feature families include:
 
 - provider-native utilization and its 1/5/20-day change;
 - current/new-loan fee level, curve, percentile, velocity and acceleration;
@@ -171,11 +178,11 @@ Start with a transparent monotonic rules model, calculated within comparable uni
 - borrow requests, fill rate, rejects, returns, recalls and buy-ins;
 - contributor count/coverage and internal-versus-market concentration.
 
-The baseline publishes a 0–100 rank plus `NORMAL`, `TIGHTENING`, `SPECIAL`, or `SEVERE` policy band. Bands are configurations, not universal truths. The score is unavailable if the minimum supply/fee block is absent; attention and equity price cannot rescue it.
+Each baseline publishes a 0–100 rank with `NORMAL` 0-39, `TIGHTENING` 40-59, `SPECIAL` 60-79, or `SEVERE` 80-100. The score is unavailable if its hard block is absent; attention and equity price cannot rescue it. Market and Internal Borrow Stress are not combined by default.
 
 ### 2. Squeeze Risk baseline and challenger
 
-The first implementation is an interpretable baseline, such as monotonic logistic regression or a declared points model. Inputs may include:
+The active Phase 1 implementation is a declared rules/points baseline. Its registered blocks are official-style short interest and days-to-cover 30%, Market Borrow Stress 30%, trailing abnormal price/volume behavior 25%, and float/liquidity fragility 15%. Inputs and context include:
 
 - reported short interest and its age; separately identified vendor estimate if approved;
 - days to cover with a declared ADV window;
@@ -183,7 +190,7 @@ The first implementation is an interpretable baseline, such as monotonic logisti
 - abnormal price/volume, realized/implied volatility, skew and open interest;
 - float/liquidity, event proximity, threshold/FTD context and ETF transmission.
 
-The output is a calibrated probability or risk band for a precisely declared price/volume event over a fixed horizon, not “probability that shorts will be forced to cover.” A more complex challenger may be evaluated offline but cannot be promoted unless it improves calibration and decision utility across out-of-time cohorts without unacceptable instability.
+The output is a 0-100 rank with `LOW` 0-39, `ELEVATED` 40-59, `HIGH` 60-79, or `EXTREME` 80-100 for a declared 1/5/10-business-day mode; five days is the default. Phase 1 does not display a probability. Estimated short interest, options, ETF, event, threshold-list, and FTD data are contextual reason codes only and cannot alter the v1 numeric score. A probabilistic challenger may be evaluated offline, but cannot be promoted in Phase 1. Displayed calibrated probability remains a high-priority future improvement requiring a new owner decision.
 
 ### 3. Re-rate Opportunity baseline
 
@@ -201,7 +208,7 @@ eligible settled quantity × price × positive annualized gap
 = indicated annualized gross run-rate shown in V1
 ```
 
-Normalization must account for rate/rebate convention, collateral, open/term status, settlement, benchmark cohort and contributor quality. V1 compares only identical currencies; a mismatch is unavailable, not FX-converted. The displayed dollar value is an **annualized gross run-rate** on current eligible settled quantity using the approved rate day-count convention—not a forecast of realized revenue. Capacity, relationship/contract restrictions, minimum spreads, owner guidelines, recall risk, and demand sustainability are shown alongside it. “Indicated” becomes “realized” only when append-only review/outcome events correlate an approved downstream effective rate change and retained balances. Rejected and unactioned candidates remain in the evaluation population to avoid selection bias.
+Normalization must account for rate/rebate convention, collateral, open/term status, settlement, benchmark cohort and contributor quality. V1 compares only identical currencies; a mismatch is unavailable, not FX-converted. Eligible loans are synthetic, settled, open, entitled, and require a current comparable benchmark. A candidate requires at least a 25-bps positive gap. The displayed dollar value is an **annualized gross run-rate** on current eligible settled quantity—not a forecast of realized revenue. Over the ten-business-day review window, `REALIZED` requires at least 80% of the indicated gap and 90% retained balance; a positive uplift missing either threshold is `PARTIAL`; no positive uplift by the deadline is `NOT_REALIZED`. Capacity, relationship/contract restrictions, owner guidelines, recall risk, and demand sustainability remain visible constraints. Rejected and unactioned candidates remain in the evaluation population.
 
 ### Coverage and explanations
 
@@ -220,16 +227,17 @@ Each signal includes:
 
 ### Outcome labels
 
-The owner must approve exact definitions before code. The proposed framework is:
+The owner-approved Phase 1 definitions are:
 
-- **Borrow Stress:** entry into an approved special/HTB band, fee increase beyond a cohort-relative threshold, availability drawdown, or recall shock within 1/5 business days.
-- **Squeeze Risk:** forward 1/5/10-day market- or sector-adjusted return plus abnormal volume/realized-volatility conditions. Report continuous outcomes as well as event labels.
-- **Re-rate Opportunity:** approved market/internal rate improvement multiplied by retained eligible balance, plus false-opportunity and balance-loss measures.
+- **Borrow Stress:** registered 0-100 scores and lifecycle bands for the independent market and internal models.
+- **Squeeze Risk:** a sector-adjusted return of at least 10%/20%/25% over 1/5/10 business days plus volume or realized volatility at least 1.5 times its trailing 20-business-day baseline. The label is descriptive and never asserts forced covering or manipulation.
+- **Re-rate Opportunity:** the approved ten-day effective-uplift and retained-balance classifications in [PHASE1_POLICY.md](PHASE1_POLICY.md).
 
 ### Evaluation protocol
 
 - Reconstruct each decision using only the exact revisions whose `firstKnowableAt` is no later than the decision time and whose entitlements were valid for that purpose.
-- Use expanding or rolling walk-forward training and validation; purge overlapping label windows and embargo adjacent observations.
+- Use expanding walk-forward folds with at least 120 training, 40 validation, and 20 untouched test business days, advancing 20 days per fold. Full evaluation requires a held-out manifest with at least 200 business days.
+- Purge observations by the selected outcome horizon and then embargo 10 business days.
 - Keep delisted names, symbol changes and corporate actions; avoid survivorship and revised-data leakage.
 - Freeze transformations and cohorts within each fold.
 - Compare against simple baselines: last state, utilization/fee threshold, reported-SI threshold, and internal-market rate gap.
@@ -239,7 +247,7 @@ The owner must approve exact definitions before code. The proposed framework is:
 
 ### Promotion policy
 
-A candidate is promoted only when it passes reproducibility, point-in-time leakage, calibration, stability, workload, fairness/coverage, security, and owner-utility gates. The registry records reviewer, evidence, activation time and rollback version. When monitoring fails, freeze new alerts and serve the last approved snapshot/model if it remains within its freshness budget; otherwise show unavailable.
+Registry history is append-only with one active baseline pointer. A registered baseline version requires deterministic replay, point-in-time leakage checks, complete evidence, and Model Reviewer persona approval. Statistical challengers may be compared offline but cannot become active in Phase 1. Rollback changes the pointer without rewriting history. When monitoring fails, freeze new alerts and serve the last approved snapshot/model if it remains within its freshness budget; otherwise show unavailable.
 
 ## API contract
 
@@ -262,7 +270,7 @@ All routes are authenticated, same-origin, versioned, bounded, and policy-aware.
 | `POST /api/securities-lending/squeeze/v1/exports/{id}/cancel` | Cancel a pending export without revealing restricted job data |
 | `GET/POST/PATCH/DELETE /api/securities-lending/squeeze/v1/saved-views` | Owner-scoped saved-view CRUD with schema versioning and policy revalidation |
 
-List routes accept an `asOf` bounded by retention, a `view`, cursor, page size, allow-listed filters, and an allow-listed stable sort with security ID as tie-breaker. A cursor is bound to immutable snapshot ID/decision time, signal/config versions, policy-projection version, entitlement-context hash, and filter/sort hash; mismatch or expiry returns a typed restart error instead of mixing pages. Responses include `dataMode`, `decisionAt`, `publishedAt`, `sourceAges`, `signalVersions`, `coverage`, and `policyProjection`. Errors use stable codes such as `SOURCE_STALE`, `SIGNAL_UNAVAILABLE`, `NOT_ENTITLED`, `AS_OF_OUT_OF_RANGE`, `CURSOR_EXPIRED`, `VERSION_CONFLICT`, and `EXPORT_NOT_LICENSED`; they never reveal restricted field existence. These same-origin routes and internal service calls stay inside the platform boundary. No route may proxy SQZ data to an external destination.
+List routes accept an `asOf` bounded by the approved 400-day SIM retention, a `view`, cursor, page size, allow-listed filters, and an allow-listed stable sort with security ID as tie-breaker. Board pages default to 50 and are capped at 200; each persona may store at most 50 private saved views. A cursor expires after 30 minutes and is bound to immutable snapshot ID/decision time, signal/config versions, policy-projection version, persona/purpose, custom-profile version, and filter/sort hash; mismatch or expiry returns a typed restart error instead of mixing pages. Responses include `dataMode`, `decisionAt`, `publishedAt`, `sourceAges`, `signalVersions`, `coverage`, and `policyProjection`. Errors use stable codes such as `SOURCE_STALE`, `SIGNAL_UNAVAILABLE`, `NOT_ENTITLED`, `AS_OF_OUT_OF_RANGE`, `CURSOR_EXPIRED`, `VERSION_CONFLICT`, and `EXPORT_NOT_LICENSED`; they never reveal restricted field existence. These same-origin routes and internal service calls stay inside the platform boundary. No route may accept an external destination or proxy SQZ data externally.
 
 ## UI information architecture
 
@@ -302,7 +310,7 @@ Allowed transitions are append-only: `OPEN -> ACKNOWLEDGED -> IN_REVIEW -> RESOL
 
 The service exposes per-source ingest delay, last success, last-good age, rejected rows, coverage and quarantine counts; mapping and reconciliation breaks; feature/signal coverage; distribution and calibration drift; in-platform alerts created/deduplicated; API latency/error/cache age; export counts; egress-denial counts; and entitlement denials. Record-level values, identifiers, economics and derived SQZ dimensions never enter external observability systems. Each production alert links to an in-platform owner and runbook.
 
-The exact SLOs are owner decisions. The design supports separate source-cadence objectives, snapshot publication objectives, and API objectives rather than calling delayed official short interest “stale” because it is not real time.
+The Phase 1 local/SIM read objective is p95 under 500 ms for summary, board, detail, model-card, and Data Health reads at a maximum 1,000-security synthetic universe. This is test-environment evidence, not a production SLO. Source-specific cadence objectives remain separate so delayed official-style short interest is not mislabeled as real time. Future live SLOs remain owner decisions.
 
 ## Rollout
 
@@ -312,7 +320,7 @@ The exact SLOs are owner decisions. The design supports separate source-cadence 
 4. **Synthetic alerts UAT:** replayable episodes, measured workload and license-compatible evidence behavior using SIM values.
 5. **Phase 1 release:** full fictional universe, disclosures, API/UI/export provenance, validation report and rollback complete.
 6. **Future live readiness:** source/vendor/internal integration begins only after a separate owner approval and the production release gates in SPEC.md.
-7. **Challengers:** options/ETF/network or statistical models only after additive validation; never required to keep the baseline available.
+7. **Challengers:** options/ETF/network or statistical models may appear in offline comparison reports; they cannot be promoted in Phase 1 and are never required to keep the baseline available.
 
 Feature flags independently control each signal product, synthetic internal fields, cases and exports. Phase 1 rejects non-SIM inputs. Future live mode requires a separate configuration and cannot mix observations with SIM in one response, case or export.
 

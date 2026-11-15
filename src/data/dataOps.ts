@@ -3,7 +3,7 @@ import { Rng } from "@/lib/rng";
 /** Data health, lineage and provider-readiness console. */
 
 export type ProviderStatus = "LIVE" | "CACHED" | "SIM" | "STALE" | "ERROR" | "FALLBACK_AVAILABLE";
-export type ProviderName = "FRED" | "YAHOO" | "MACRO_ETL" | "INTELLIGENCE_FEEDS" | "NEWS" | "SOCIAL" | "NEWS_NLP" | "SYNTHETIC" | "LOCAL_BOOK";
+export type ProviderName = "FRED" | "YAHOO" | "MACRO_ETL" | "INTELLIGENCE_FEEDS" | "NEWS" | "SOCIAL" | "NEWS_NLP" | "SYNTHETIC";
 
 export interface ProviderHealth {
   provider: ProviderName;
@@ -126,7 +126,6 @@ export function getProviderHealth(): ProviderHealth[] {
     { provider: "NEWS", status: "SIM", coveragePct: 30, freshnessMin: 10, seriesCount: 4, failedSeries: 0, lastRun: "provider-chain probe pending", upgradePath: "Set one of ALPHAVANTAGE_API_KEY, MARKETAUX_API_KEY, FINNHUB_API_KEY, NEWSAPI_API_KEY" },
     { provider: "SOCIAL", status: "SIM", coveragePct: 25, freshnessMin: 10, seriesCount: 2, failedSeries: 0, lastRun: "provider-chain probe pending", upgradePath: "Set REDDIT_USER_AGENT or STOCKTWITS_ENABLED=1 / STOCKTWITS_ACCESS_TOKEN" },
     { provider: "NEWS_NLP", status: "SIM", coveragePct: 35, freshnessMin: 6, seriesCount: 12, failedSeries: 0, lastRun: "heuristic fallback", upgradePath: "Run the news_nlp FinBERT service and set NEWS_NLP_URL (else news/social providers + in-house lexicon)" },
-    { provider: "LOCAL_BOOK", status: "SIM", coveragePct: 61, freshnessMin: 5, seriesCount: 38, failedSeries: 0, lastRun: "2026-06-18 09:17", upgradePath: "Connect custody, loan, margin and treasury books" },
     { provider: "SYNTHETIC", status: "FALLBACK_AVAILABLE", coveragePct: 100, freshnessMin: 0, seriesCount: 220, failedSeries: 0, lastRun: "deterministic", upgradePath: "Retain as explicit fallback provider; never count as live" },
   ];
 }
@@ -179,14 +178,6 @@ const PROVIDER_SERIES: Record<ProviderName, { id: string; dataset: string; name:
     { id: "reddit_social", dataset: "social_provider_chain", name: "Reddit Market Subreddits" },
     { id: "stocktwits_social", dataset: "social_provider_chain", name: "StockTwits Trending Symbols" },
   ],
-  LOCAL_BOOK: [
-    { id: "collateral_assets", dataset: "desk_books", name: "Collateral Asset Schedule" },
-    { id: "margin_calls", dataset: "desk_books", name: "Margin Call Book" },
-    { id: "cash_sources", dataset: "desk_books", name: "Cash Sources" },
-    { id: "cash_uses", dataset: "desk_books", name: "Cash Uses" },
-    { id: "loan_book", dataset: "desk_books", name: "Securities Lending Loan Book" },
-    { id: "reinvestment_positions", dataset: "desk_books", name: "Cash Reinvestment Positions" },
-  ],
   NEWS_NLP: [
     { id: "news_scored", dataset: "silver_nlp", name: "Headline Sentiment (FinBERT)" },
     { id: "news_entities", dataset: "silver_nlp", name: "Entity / Ticker Extraction" },
@@ -195,9 +186,7 @@ const PROVIDER_SERIES: Record<ProviderName, { id: string; dataset: string; name:
   ],
   SYNTHETIC: [
     { id: "demo_universe", dataset: "fallback_generators", name: "Demo Security Universe" },
-    { id: "demo_books", dataset: "fallback_generators", name: "Demo Desk Books" },
     { id: "demo_macro", dataset: "fallback_generators", name: "Demo Macro Series" },
-    { id: "demo_optimization", dataset: "fallback_generators", name: "Demo Optimization Runs" },
     { id: "demo_alerts", dataset: "fallback_generators", name: "Demo Alerts" },
   ],
 };
@@ -212,7 +201,6 @@ export function getProviderRuns(): ProviderRun[] {
     { provider: "NEWS", pipeline: "news_feed", runs: 4, base: 8988 },
     { provider: "SOCIAL", pipeline: "social_feed", runs: 4, base: 8982 },
     { provider: "NEWS_NLP", pipeline: "news_nlp", runs: 4, base: 8975 },
-    { provider: "LOCAL_BOOK", pipeline: "terminal_fixture", runs: 4, base: 8950 },
     { provider: "SYNTHETIC", pipeline: "terminal_fixture", runs: 4, base: 8900 },
   ];
 
@@ -343,8 +331,8 @@ const MODULE_ITEM_NAMES: Record<string, string[]> = {
 const STATUS_PROVIDERS: Record<ModuleDataStatus, ProviderName[]> = {
   LIVE: ["FRED", "MACRO_ETL", "SYNTHETIC"],
   CACHED: ["YAHOO", "MACRO_ETL", "FRED"],
-  SIM: ["SYNTHETIC", "LOCAL_BOOK"],
-  STALE: ["YAHOO", "FRED", "LOCAL_BOOK"],
+  SIM: ["SYNTHETIC"],
+  STALE: ["YAHOO", "FRED"],
 };
 
 function statusBuckets(m: ModuleCoverage): ModuleDataStatus[] {
@@ -387,7 +375,7 @@ export function getModuleDataItems(): ModuleDataItem[] {
         status,
         provider,
         dataset,
-        lastRunId: provider === "YAHOO" ? "RUN-9050" : provider === "FRED" ? "RUN-9100" : provider === "MACRO_ETL" ? "RUN-9000" : provider === "LOCAL_BOOK" ? "RUN-8950" : "RUN-8900",
+        lastRunId: provider === "YAHOO" ? "RUN-9050" : provider === "FRED" ? "RUN-9100" : provider === "MACRO_ETL" ? "RUN-9000" : "RUN-8900",
         asOf: status === "SIM" ? "deterministic" : "2026-06-18",
         freshnessMin: status === "LIVE" ? rng.int(0, 30) : status === "CACHED" ? rng.int(35, 240) : status === "STALE" ? rng.int(360, 1440) : 0,
         rows: status === "SIM" ? rng.int(20, 800) : rng.int(120, 24000),
@@ -408,9 +396,7 @@ export function getDataQualityIssues(): DataQualityIssue[] {
   return [
     { id: "DQ-401", severity: "HIGH", provider: "YAHOO", dataset: "market_prices", check: "stale close", detail: "Seven ETF proxies are older than expected cache window.", rowsImpacted: 7, firstSeen: "2026-06-18 08:18", lastSeen: "2026-06-18 09:07", owner: "Market Data", remediation: "Refresh Yahoo adapter or switch snapshot to licensed EOD vendor.", sampleRows: ["TLT close as-of 2026-06-18 retained from cache", "HYG close exceeded 45m freshness SLA", "UUP retry exhausted after cache lookup"], affectedSeries: ["TLT", "HYG", "LQD", "UUP", "VIXY", "EEM", "VGK"] },
     { id: "DQ-402", severity: "MED", provider: "FRED", dataset: "credit_spreads", check: "missing observation", detail: "HY OAS has one missing print in the 20y window.", rowsImpacted: 1, firstSeen: "2026-06-18 09:10", lastSeen: "2026-06-18 09:10", owner: "Macro Data", remediation: "Backfill missing vintage or interpolate only for visual continuity.", sampleRows: ["BAMLH0A0HYM2 2026-06-17 null observation"], affectedSeries: ["BAMLH0A0HYM2"] },
-    { id: "DQ-403", severity: "MED", provider: "LOCAL_BOOK", dataset: "collateral_assets", check: "synthetic source", detail: "Collateral schedules are fixture generated.", rowsImpacted: 42, firstSeen: "2026-06-18 09:17", lastSeen: "2026-06-18 09:17", owner: "Collateral Ops", remediation: "Map eligibility, concentration, and haircut schedules from collateral system.", sampleRows: ["UST_10Y schedule generated", "AGENCY_MBS eligibility generated", "EQUITY_ETF haircut generated"], affectedSeries: ["collateral_assets", "eligibility_rules", "haircut_schedules"] },
     { id: "DQ-404", severity: "LOW", provider: "MACRO_ETL", dataset: "fed_probabilities", check: "fallback curve", detail: "CME live settlements unavailable; deterministic futures curve used.", rowsImpacted: 6, firstSeen: "2026-06-18 06:30", lastSeen: "2026-06-18 06:30", owner: "Macro ETL", remediation: "Use browser-capable fetcher, licensed settlement file, or CME data agreement.", sampleRows: ["2026-07-29 price_source=sim", "2026-09-16 price_source=sim"], affectedSeries: ["fed_probabilities", "fed_probability_vintages"] },
-    { id: "DQ-405", severity: "LOW", provider: "SYNTHETIC", dataset: "demo_books", check: "expected fallback", detail: "Offline fallback active for non-public desk books.", rowsImpacted: 220, firstSeen: "deterministic", lastSeen: "deterministic", owner: "Demo Runtime", remediation: "Retain as visible fallback until internal books are connected.", sampleRows: ["loan_book generated", "margin_calls generated", "optimization_runs generated"], affectedSeries: ["demo_books", "demo_optimization", "demo_alerts"] },
   ];
 }
 

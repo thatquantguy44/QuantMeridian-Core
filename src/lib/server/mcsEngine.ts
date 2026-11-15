@@ -40,7 +40,8 @@ export interface NsFactorRow {
   beta1: number;
   beta2: number;
   lambda: number;
-  fit_valid: number;
+  /** SQLite integer or PostgreSQL bigint (returned as text by pg). */
+  fit_valid: number | string;
   /** Named macro regime on this date (gold.macro_regime_daily), if joined. */
   regime_name?: string | null;
 }
@@ -118,7 +119,7 @@ function mulberry32(seed: number): () => number {
  * desired fit window (e.g. trailing N years) by the caller.
  */
 export function fitVar1(rows: NsFactorRow[]): Var1Fit {
-  const valid = rows.filter((r) => r.fit_valid === 1);
+  const valid = rows.filter((r) => r.fit_valid === 1 || r.fit_valid === "1");
   if (valid.length < 30) {
     throw new Error(`insufficient fitted NS observations for a VAR(1) (${valid.length} rows, need >= 30)`);
   }

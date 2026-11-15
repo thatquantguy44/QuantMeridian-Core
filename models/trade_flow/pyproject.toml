@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trade-flow-research"
+version = "0.1.0"
+description = "Bounded Kraken diagnostics and SIM SOFR level/slope flow research."
+requires-python = ">=3.12"
+dependencies = []
+
+[project.optional-dependencies]
+capture = ["websockets==16.1.1"]
+
+[project.scripts]
+trade-flow = "trade_flow.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["trade_flow*"]
+namespaces = false

@@ -1,0 +1,132 @@
+{
+  "local_links": [
+    {
+      "document": "01_blog_series_scope.md",
+      "target": "03_sources_and_claims.md",
+      "exists": true
+    },
+    {
+      "document": "01_blog_series_scope.md",
+      "target": "evidence/src/lib/server/mcsEngine.ts",
+      "exists": true
+    },
+    {
+      "document": "01_blog_series_scope.md",
+      "target": "evidence/src/lib/server/mcsEngine.ts",
+      "exists": true
+    },
+    {
+      "document": "01_blog_series_scope.md",
+      "target": "evidence/src/lib/server/mcsEngine.ts",
+      "exists": true
+    },
+    {
+      "document": "01_blog_series_scope.md",
+      "target": "evidence/src/lib/server/mcsEngine.ts",
+      "exists": true
+    },
+    {
+      "document": "01_blog_series_scope.md",
+      "target": "evidence/src/app/api/simulations/mcs/route.ts",
+      "exists": true
+    },
+    {
+      "document": "01_blog_series_scope.md",
+      "target": "evidence/src/app/simulations/mcs/page.tsx",
+      "exists": true
+    },
+    {
+      "document": "01_blog_series_scope.md",
+      "target": "evidence/src/lib/server/goldFomc.ts",
+      "exists": true
+    },
+    {
+      "document": "01_blog_series_scope.md",
+      "target": "evidence/src/app/api/simulations/mcs/route.ts",
+      "exists": true
+    },
+    {
+      "document": "01_blog_series_scope.md",
+      "target": "evidence/src/lib/server/mcsEngine.ts",
+      "exists": true
+    },
+    {
+      "document": "03_sources_and_claims.md",
+      "target": "evidence/src/",
+      "exists": true
+    },
+    {
+      "document": "05_publish_today_direction.md",
+      "target": "06_blog_draft.md",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "08_ready_to_post.md",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "06_blog_draft.md",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "05_publish_today_direction.md",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "07_draft_review.md",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "01_blog_series_scope.md",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "02_model_and_validation_research.md",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "03_sources_and_claims.md",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "04_review.md",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "run_manifest.json",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "evidence/",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "agent_inputs/",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "03_sources_and_claims.md#primary-source-reading-list",
+      "exists": true
+    },
+    {
+      "document": "07_draft_review.md",
+      "target": "07_draft_review.md",
+      "exists": true
+    }
+  ],
+  "placeholders": "none",
+  "format": "one title, subtitle, pull quote, four numbered reader questions and further reading",
+  "review_mode": "coordinator editorial check against reviewed draft and frozen source; no new empirical validation"
+}

@@ -1,0 +1,3 @@
+year,decisionDate,crspMarketProxyReturnDecimal,shillerSpCompositeApproximationReturnDecimal,differenceDecimal,presidentParty,houseControl,senateControl,controlSourceId
+1936,1935-12-31,0.01814924501196291,0.12227277675072301,0.1041235317387601,D,D,D,CTRL_074_A
+1937,1936-12-31,0.01814924501196291,0.11138158116916674,0.09323233615720383,D,D,D,CTRL_074_A

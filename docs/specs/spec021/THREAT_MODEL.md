@@ -3,7 +3,7 @@
 - **Scope:** Phase 1 synthetic system and future-compatible boundaries
 - **Method:** STRIDE plus abuse-case review
 - **Data mode:** `SIM` only; live vendors and real internal books are deferred
-- **Review state:** Technical controls and test mappings defined; owner approved no automatic external egress and governed user download/export as the sole exception; role names, retention, export limits, and security-owner approval remain decisions where noted
+- **Review state:** Technical controls and test mappings defined; owner approved no automatic external egress, governed user download/export as the sole exception, Phase 1 personas/purposes and local SIM retention; export limits, named security owner and future-live controls remain decisions where noted
 
 ## Security objectives
 
@@ -61,13 +61,17 @@ For a future live feed, source acquisition and the post-acceptance data plane mu
 
 ## Access model
 
-The final organization-specific role names are unresolved. Implementation must use policy capabilities rather than hard-coded role labels.
+Phase 1 uses the four server-enforced test personas and purposes approved in
+[PHASE1_POLICY.md](PHASE1_POLICY.md). They exercise capabilities; they are not a production identity
+provider or permission directory. Future organization-specific role names and mappings remain
+unresolved, so implementation must authorize capabilities rather than assume that a test-persona
+label is a trustworthy caller credential.
 
 | Capability | Market-level SIM | Restricted internal-book SIM | Hidden truth | State changes | Export |
 |---|---:|---:|---:|---:|---:|
-| Research projection | Allow | Deny | Deny | Deny | Owner decision |
-| Internal desk projection | Allow | Scoped rows and fields | Deny | Explicit action capability | Explicit export capability |
-| Compliance/risk projection | Allow | Read-only approved fields | Deny | Review/disposition capability only | Owner decision |
+| Research projection | Allow | Deny | Deny | Deny | Deny by default |
+| Internal desk projection | Allow | Scoped rows and fields | Deny | Explicit review capability | Governed export capability when separately enabled |
+| Model-review projection | Allow | Feature/signal evidence; party/economics redacted | Deny | Registry approval and rollback | Deny by default |
 | Data operations projection | Operational metadata | Redacted economics | Deny | Quarantine/recovery only | Deny by default |
 | Generator/test process | Generated inputs | Generated inputs | Local test access | No workflow action | No user export |
 
@@ -146,7 +150,7 @@ A malformed manifest declares `LIVE`, an adapter reuses a SIM source ID, or scor
 
 | Verification ID | Required evidence | Owning task | Current state |
 |---|---|---|---|
-| `SQZ-SEC-001` | Unauthenticated, expired-session, and forged-role matrix | T16/T27 | Planned; auth contract unresolved |
+| `SQZ-SEC-001` | Unauthenticated, expired-session, and forged-persona matrix | T16/T27 | Phase 1 persona/purpose policy approved; terminal session binding and production identity remain unresolved |
 | `SQZ-SEC-002` | Server-only credential and approved inbound-source identity tests | T23/T27 | Deferred with live adapters; outbound notification credentials are prohibited |
 | `SQZ-SEC-003` | Manifest digest, exact-header, version-dispatch, revision, and lineage tests | T05a/T06/T09 | Implemented for generator/CSV boundary |
 | `SQZ-SEC-004` | Filter/sort allow-list and cursor tamper/mismatch tests | T16 | Planned |
@@ -167,14 +171,19 @@ A malformed manifest declares `LIVE`, an adapter reuses a SIM source ID, or scor
 
 The following are deliberately not encoded as defaults:
 
-1. Identity provider/session contract and capability-to-role mapping.
-2. Desk/book/owner scoping source and policy administrator.
+1. Production identity provider/session contract and organization capability-to-role mapping. T16
+   may implement only the server-enforced Phase 1 test-persona contract.
+2. Future LIVE desk/book/owner scoping source and policy administrator. Phase 1 uses manifest and
+   test-persona scopes.
 3. Restricted-field catalog, redaction shape, and enumeration response policy.
 4. Cache provider, allowed shared-cache surfaces, TTLs, and invalidation policy.
 5. Saved-view store and permitted deep-link state.
-6. Audit store, retention, tamper evidence, and correlation-ID policy.
+6. Production audit store, tamper evidence, and correlation-ID policy. Phase 1 local SIM records
+   use the approved 400-day retention.
 7. Export size/retention/encryption limits and download authorization window. User-initiated governed export is approved in principle; its limits remain open.
 8. Live vendor credential, payload-retention, licensing, and deletion controls for inbound ingestion. They cannot authorize outbound transmission after first-byte/record acceptance.
 9. Endpoint/DLP policy for OS/browser capture if production policy must prohibit user-created screenshots outside application control. SQZ itself will not provide screenshot or external-share features.
 
-No later task may resolve one of these by quietly inventing a threshold, role, or retention period in code. Record the owner decision first.
+No later task may resolve one of these by quietly inventing a production threshold, role mapping,
+or live-data retention period in code. Record the owner decision first; do not silently promote a
+Phase 1 SIM default into production policy.

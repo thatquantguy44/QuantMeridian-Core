@@ -240,4 +240,4 @@ When the ticket cap binds (all 12 used), relaxing it may raise return; when a fl
 - As-built execution paper: `docs/whitepapers/money_market_execution.md`
 - Specs: `docs/specs/spec011/SPEC.md`, `docs/specs/spec011/HANDOFF.md`, `docs/specs/spec011/TASKS.md`
 - Code: `src/app/money-market/`, `src/data/mmkt.ts`, `src/lib/server/mmktSimRateSets.ts`, `services/money_market_api/`
-- Related: [MMFO](/guides/MMFO/whitepaper), [CASH](/guides/CASH/whitepaper), [Optimization Center](/guides/OPT/whitepaper)
+- Related: [MMFO](/guides/MMFO/whitepaper)

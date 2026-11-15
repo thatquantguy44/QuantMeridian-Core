@@ -1,0 +1,78 @@
+{
+  "assignment": {
+    "not_primary_political_assignment": "This end-of-year cycle convention is a supplementary descriptive view and does not replace the frozen window_start political configuration analysis.",
+    "primary_view": "All four calendar return years are assigned to the president in office on that return year's December 31.",
+    "succession_note": "A separate flag identifies windows in which the president changed between the annual window start and end, including midterm successions.",
+    "transition_flag_view": "The same observations are shown with every first-cycle-year return flagged as an inauguration transition, because the new regular term begins on January 20."
+  },
+  "excludedPre1937Years": [
+    1936
+  ],
+  "first_annual_year": 1937,
+  "inaugurationTransitionWindows": 1,
+  "kind": "PRESIDENTIAL_TERM_CYCLE_DESCRIPTIVE",
+  "last_annual_year": 1937,
+  "observations": 1,
+  "presidentChangedWithinWindow": 0,
+  "schema_version": 1,
+  "series": [
+    {
+      "byPartyAndCycle": [
+        {
+          "administrations": 1,
+          "best": {
+            "president": "Franklin D. Roosevelt",
+            "returnDecimal": 0.01814924501196291,
+            "year": 1937
+          },
+          "inaugurationTransitionWindows": 1,
+          "maximumReturnDecimal": 0.01814924501196291,
+          "meanReturnDecimal": 0.01814924501196291,
+          "medianReturnDecimal": 0.01814924501196291,
+          "minimumReturnDecimal": 0.01814924501196291,
+          "observations": 1,
+          "presidentChangedWithinWindow": 0,
+          "presidentParty": "D",
+          "sampleStandardDeviationDecimal": null,
+          "termCycleYear": 1,
+          "worst": {
+            "president": "Franklin D. Roosevelt",
+            "returnDecimal": 0.01814924501196291,
+            "year": 1937
+          }
+        }
+      ],
+      "id": "crsp_market_proxy",
+      "returnField": "crspMarketProxyReturnDecimal"
+    },
+    {
+      "byPartyAndCycle": [
+        {
+          "administrations": 1,
+          "best": {
+            "president": "Franklin D. Roosevelt",
+            "returnDecimal": 0.11138158116916674,
+            "year": 1937
+          },
+          "inaugurationTransitionWindows": 1,
+          "maximumReturnDecimal": 0.11138158116916674,
+          "meanReturnDecimal": 0.11138158116916674,
+          "medianReturnDecimal": 0.11138158116916674,
+          "minimumReturnDecimal": 0.11138158116916674,
+          "observations": 1,
+          "presidentChangedWithinWindow": 0,
+          "presidentParty": "D",
+          "sampleStandardDeviationDecimal": null,
+          "termCycleYear": 1,
+          "worst": {
+            "president": "Franklin D. Roosevelt",
+            "returnDecimal": 0.11138158116916674,
+            "year": 1937
+          }
+        }
+      ],
+      "id": "shiller_sp_composite_approximation",
+      "returnField": "shillerSpCompositeApproximationReturnDecimal"
+    }
+  ]
+}

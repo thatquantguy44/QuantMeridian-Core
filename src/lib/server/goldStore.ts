@@ -137,6 +137,16 @@ export function goldTable(table: string): string {
   return physicalTable(table, detectBackend());
 }
 
+/** Retained provider evidence for source reconciliation; never an alternate price feed. */
+export function silverTable(table: string): string {
+  return physicalTable(table, detectBackend()).replace(/(^|\.)gold([_.])/, "$1silver$2");
+}
+
+/** Raw provider request receipts used only to qualify retained observations. */
+export function bronzeTable(table: string): string {
+  return physicalTable(table, detectBackend()).replace(/(^|\.)gold([_.])/, "$1bronze$2");
+}
+
 /** Positional placeholder for the configured backend (`$1…` on pg, `?` elsewhere). */
 export function goldParam(index: number): string {
   return detectBackend() === "postgres" ? `$${index}` : "?";

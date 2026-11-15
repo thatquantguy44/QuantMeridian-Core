@@ -1,0 +1,52 @@
+{
+  "first_annual_year": 1936,
+  "kind": "FROZEN_INHERITED_CONDITIONS_JOIN",
+  "last_annual_year": 1937,
+  "observations": 2,
+  "rows": [
+    {
+      "fundamental": {
+        "availableDate": "1935-11-30",
+        "date": "1935-10-31",
+        "policyRatePct": 2.5,
+        "sourceId": "INHERITED_CAPE_FEDFUNDS_001",
+        "valuation": 20.0,
+        "valuationDefinition": "Shiller workbook CAPE field"
+      },
+      "policy_assumed_available_date": "1935-11-01",
+      "policy_observation_date": "1935-10-01",
+      "valuation_assumed_available_date": "1935-11-30",
+      "valuation_observation_date": "1935-10-31",
+      "year": 1936
+    },
+    {
+      "fundamental": {
+        "availableDate": "1936-11-30",
+        "date": "1936-10-31",
+        "policyRatePct": 3.0,
+        "sourceId": "INHERITED_CAPE_FEDFUNDS_001",
+        "valuation": 20.0,
+        "valuationDefinition": "Shiller workbook CAPE field"
+      },
+      "policy_assumed_available_date": "1936-11-01",
+      "policy_observation_date": "1936-10-01",
+      "valuation_assumed_available_date": "1936-11-30",
+      "valuation_observation_date": "1936-10-31",
+      "year": 1937
+    }
+  ],
+  "schema_version": 1,
+  "source_ids": [
+    "SHILLER_001",
+    "FEDFUNDS_001"
+  ],
+  "timing": {
+    "availability_note": "Operational anti-look-ahead convention; not verified real-time vintage history.",
+    "decision_date": "December 31 of the preceding year",
+    "policy_assumed_available": "November 1 of the preceding year",
+    "policy_observation": "October 1 of the preceding year",
+    "valuation_assumed_available": "November month-end of the preceding year",
+    "valuation_observation": "October month-end of the preceding year"
+  },
+  "valuation_definition": "Shiller workbook CAPE field"
+}

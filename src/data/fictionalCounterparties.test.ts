@@ -26,7 +26,7 @@ describe("fictional counterparties", () => {
     for (const row of getCounterpartyCreditOverlays()) expect(row.counterparty).not.toMatch(REAL_FIRMS);
   });
 
-  for (const file of ["alerts.ts", "cash.ts", "econEnhancements.ts"]) {
+  for (const file of ["alerts.ts", "econEnhancements.ts"]) {
     it(`names no real firm in ${file}`, () => {
       const text = readFileSync(path.join(__dirname, file), "utf8").replace(/ICE BofA/g, "");
       expect(text).not.toMatch(REAL_FIRMS);

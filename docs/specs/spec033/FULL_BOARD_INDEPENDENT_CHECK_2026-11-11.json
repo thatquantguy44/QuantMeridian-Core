@@ -1,0 +1,10 @@
+{
+  "snapshot_at": "2026-11-11T05:56:59.774946+00:00",
+  "source_transaction": "repeatable read, read only",
+  "rows_checked": 108510,
+  "configured_rates": 16,
+  "board_unchanged_since_refresh_snapshot": true,
+  "independent_field_mismatches_raw": [],
+  "independent_field_mismatches_as_of_prefiltered": [],
+  "method": "Independent recomputation of latest, prior, change, five-observation trend, date-aligned spreads, population z-score, percentile rank, regime, and staleness. Prefiltered Gold comparison is valid for this snapshot because only one future Silver row exists and it does not hide an earlier revision."
+}

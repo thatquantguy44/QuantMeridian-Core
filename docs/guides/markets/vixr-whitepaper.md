@@ -1,6 +1,6 @@
 # VIX Implied vs Forward Returns (VIXR): white paper and business guide
 
-> **Status:** live on Gold data (VIX from 1990, SPY from 1993). Research context only: the headline statistics are in-sample, an expanding-window out-of-sample test is included, and nothing on the page is a trading signal.
+> **Status:** retained Gold history reconciled to provider evidence (VIX from 1990, SPY from 1993; actual loaded dates shown on screen). Research context only: the headline statistics are in-sample, an expanding-window out-of-sample test is included, and nothing on the page is a trading signal.
 
 ## Executive summary
 
@@ -290,23 +290,60 @@ A value below $-2$ means model $A$ has a significantly smaller squared error. Th
 
 ## Data and provenance
 
-| Series | Source | Coverage | Badge |
-|---|---|---|---|
-| VIX close (`VIXCLS`) | CBOE via FRED, Gold `fred_latest_observation` | 1990 onward | `DB` |
-| SPY close (`SPY:close`) | Gold `equity_total_return_index` | 1993 onward | `DB` |
-| SPY total return (`SPY:total_return_index`) | Gold `equity_total_return_index` | 1993 onward | `DB` |
-| S&P 500 index (`SP500`) | S&P Dow Jones Indices via FRED, Gold `fred_latest_observation` | latest ten years only | `DB` |
+| Series | Provider and Gold field | Meaning |
+|---|---|---|
+| VIX (`VIXCLS`) | Cboe via FRED → `gold.fred_latest_observation.value` | Published volatility index. History before September 2003 is Cboe’s back-calculation from historical option quotes. |
+| SPY price (`SPY:close`) | Tiingo End-of-Day → `gold.equity_total_return_index.close` | Observed, unadjusted ETF closing price in USD; excludes cash dividends. |
+| SPY total return (`SPY:total_return_index`) | Tiingo End-of-Day → pipeline calculation → `gold.equity_total_return_index.total_return_index` | Reinvested-return index derived from `close`, `divCash`, `splitFactor`; 100 at the first retained Tiingo close. |
+| S&P 500 (`SP500`) | S&P Dow Jones Indices via FRED → `gold.fred_latest_observation.value` | Published price index, excluding dividends; FRED provides a rolling ten years. |
 
-The route reads Gold only. If the database is unreachable or a series is empty, the page shows an error. It never substitutes simulated data. The page aligns the series and computes every statistic in the browser, so control changes are instant. The `DATA AS OF` date is the last VIX close; a freshness tag appears when the Gold load is behind.
+The SPY choices use the **same provider and underlying history**, with different return treatment. The total-return calculation is:
+
+`I(t) = I(t−1) × (close(t) + divCash(t)) / close(t−1) × splitFactor(t)`
+
+This is a deterministic calculation from observed inputs. It is neither a simulated path nor a separately quoted price, Tiingo `adjClose`, or an official S&P total-return index. The issuer, State Street, is a fund reference; it is not the provider of these stored prices. Fund expenses are already reflected in observed prices; VIXR makes no separate fee deduction.
+
+The route serves Gold values only after reconciling them against source-labelled `silver.fred_observation` records, requiring raw values, ingestion run IDs, row hashes and timestamps, plus a matching source/run/series record in `bronze.fred_api_response` with the expected provider endpoint. For total return it reconstructs the index and checks the Gold closes, dividends, split factors and index values. Missing dividends or split records are errors, including on days when their genuine values would be zero or one. No defaults, interpolation, fabricated observations, snapshot or alternate-provider fallback are permitted. Serving deployments must retain read access to the required Silver evidence and Bronze response receipts as well as Gold; missing tables or permissions produce an unavailable state.
+
+A database error, absent input, failed reconciliation or invalid response yields no analytics. The client bypasses cached responses, clears previous data on a new request, and rejects error/simulation/snapshot responses even if their arrays contain numbers. The badge says **Verified history · DB**, not live quotes. `DATA AS OF` is the earlier of the two series’ last dates; separate coverage, last-ingestion and source-check timestamps remain visible. Stale retained history is explicitly dated and warned about; checking stored evidence does not mean the upstream provider is currently reachable.
+
+“1993+” describes SPY’s available history, not a promise about the configured load. A read-only check of the local configured database on November 10, 2026 found **8,492 SPY dates, January 29, 1993–October 23, 2026**, with complete Tiingo close, dividend and split records, and corresponding Tiingo response receipts; both SPY calculations reconciled numerically. VIX held 9,306 nonmissing values through October 29, 2026; the FRED S&P 500 alternative held 2,581 through October 21, 2026. These are retained coverage observations, not current market quotes. The receipt audit initially found **739 VIX Silver rows dated January 1, 2024–October 29, 2026** without a routine Bronze receipt. They came from the authorized October 31 bounded FRED repair, which retained its source capture separately in MarketAtlas. The original capture’s SHA-256 matched both the staging manifest and `audit.fred_repair_batch`, and all 739 captured records matched Silver, including values, missingness, intervals, hashes and ingestion timestamps. The missing receipt was restored from that original capture, with restoration metadata explicitly identifying the archive and capture time; this was not a new provider download. No Silver or Gold observations were changed. All three VIXR bases then passed the receipt gate.
+
+The completed raw-capture reconciliation matched **all 9,608 VIX Silver records** (9,306 nonmissing) to retained FRED captures, and **all 25,476 SPY close/dividend/split records** to the 16 retained Tiingo captures, with zero missing or mismatched records. This verifies retained capture consistency, rather than certifying that upstream providers never publish corrections.
+
+For this repair, `scripts/restore-vixr-fred-receipt.mjs` defaults to a dry run, verifies the applied repair ledger, both capture checksums and every affected stored row, and supports an explicit `--apply` to insert only a missing receipt into the local warehouse. It refuses a different database target, changed observations, inconsistent payloads or conflicting receipts. Running it again finds the existing receipt and inserts nothing. The restored capture SHA-256 is `76c160a2c11266f3d52629b96e10f7bac4b3ff0e52a94cda28445e233eb11d96`; its original capture time is October 31, 2026, 17:14:51 UTC.
+
+The VIX source itself is calculated: Cboe introduced the S&P 500 methodology in September 2003 and calculated historical values back to January 1990. The page discloses that early history rather than describing every date as a contemporaneously published reading. The implied bands, normal reference curve and statistical forecasts are model calculations from the supplied history, not additional market observations. Reconciliation establishes consistency with retained provider evidence; it does not independently authenticate every vendor payload or prove that a database has never been manually altered.
+
+Primary source references: [Tiingo EOD fields](https://www.tiingo.com/documentation/end-of-day), [State Street SPY fund reference](https://www.ssga.com/us/en/institutional/etfs/state-street-spdr-sp-500-etf-trust-spy), [FRED VIXCLS](https://fred.stlouisfed.org/series/VIXCLS), [FRED SP500 and its coverage/price-index notes](https://fred.stlouisfed.org/series/SP500), [Cboe historical VIX data](https://www.cboe.com/tradable-products/vix/vix-historical-data), and [Cboe’s 2003 SEC filing on historical VIX calculation, page 4](https://www.sec.gov/rules/sro/cboe/34-48807.pdf).
+
+## Reproducing the analysis
+
+### Check the public implementation
+
+The public [QuantMeridian-Core repository](https://github.com/thatquantguy44/QuantMeridian-Core) contains the VIXR calculation engine, walk-forward forecast code, independent Python reference, and two committed Gold-data excerpts (the 2007–09 crisis and 2017). From that repository root:
+
+```bash
+npm ci
+npm test -- src/lib/vixImpliedForward.golden.test.ts src/lib/vixWalkForward.test.ts
+```
+
+The golden test compares TypeScript results with independent NumPy/SciPy reference values for both excerpts. To regenerate those expected JSON files, install NumPy and SciPy in a Python environment, then run `python3 scripts/fixtures/vixr_reference.py`. That command **rewrites** `src/lib/__fixtures__/vixr/expected-*.json`; inspect the diff before keeping any changes. The included excerpts verify the method on limited periods. They do not reproduce the full-history headline table.
+
+### Recreate the full-history readout
+
+VIXR reads an existing Gold SQLite or PostgreSQL database; the historical database snapshot used for the reference results is **not included** in the repository. The route requires daily `VIXCLS` values in `fred_latest_observation` (`series_id`, `observation_date`, `value`) and SPY price closes in `equity_total_return_index` (`ticker`, `observation_date`, `close`). SPY total-return and FRED `SP500` are optional alternate bases. See the [VIXR route](https://github.com/thatquantguy44/QuantMeridian-Core/blob/main/src/app/api/market-volatility/vix-forward/route.ts) for the exact queries and the [Core setup guide](https://github.com/thatquantguy44/QuantMeridian-Core/blob/main/README.md) for database configuration.
+
+With those tables populated, run `npm ci` and `MACRO_DB_URL=sqlite:./data/fred_local.db npm run dev` (or supply a PostgreSQL URL), then open `/market-volatility/implied-vs-forward`. Select **SPY price**, **non-overlapping** windows and the full date range to compare with the reference table below. Matching the published results also requires the same historical prices and the October 6, 2026 data cutoff; later observations, revisions, missing days, and vendor adjustments can change the numbers. FRED provides [VIXCLS](https://fred.stlouisfed.org/series/VIXCLS); obtain SPY closes from a provider whose access and redistribution terms permit your use. No provider credentials, full SPY history, or populated Gold database are shipped here. The public fixtures and tests are the reproducible check available without that data.
 
 ## Assumptions
 
-- **Price basis:** the default is SPY price (no dividends), the closest long-history match to the price index the VIX options are written on. SPY also carries a 0.09% fee and small tracking error. Use the FRED index to check the proxy over its ten years.
+- **Price basis:** the default is SPY price (no dividends), the closest long-history match to the price index the VIX options are written on. SPY includes fund expenses and small tracking error in its observed prices. Use the FRED index to check the proxy over its ten years.
 - **Zero drift:** the implied band is centred on zero. Over 30 days the equity drift (roughly 0.5–0.8%) is small next to a 4–6% band, but it shifts the shares slightly toward the upside.
 - **Lognormal benchmark:** the ±1σ and ±2σ benchmarks assume normally distributed log returns. Real returns have fat tails, which the kurtosis figure shows.
 - **Close timing:** the VIX settles at 4:15 pm ET; the index closes at 4:00 pm.
 - **Calendar:** windows run 30 calendar days; realized volatility annualizes with 252 trading days.
-- **History:** Gold holds the latest revision of each series; the VIX is not revised in practice.
+- **History:** Gold holds the latest retained revision; published history may be corrected by its provider. The retained series is not a point-in-time vintage archive.
 
 ### Reference results (SPY price, full history, as of 2026-10-06)
 
@@ -394,7 +431,7 @@ Each of three panels has a **CSV** button. Files begin with `#` comment lines (s
 ## Status and governance
 
 - **Spec:** none. This is an analytics module in the Markets group, next to [Market Volatility](/market-volatility).
-- **Data:** Gold only, with no simulated fallback. Production use needs no service and no approval gate; the page is read-only.
+- **Data:** Gold values reconciled against retained Silver provider evidence, with no simulated fallback. Production use needs no service and no approval gate; the page is read-only.
 
 ## References
 

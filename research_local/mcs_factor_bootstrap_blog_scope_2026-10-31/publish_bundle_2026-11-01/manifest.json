@@ -1,0 +1,180 @@
+{
+  "task": "Add two genuine platform visuals, a short LaTeX sidebar and independent final claim reviews; primary experiment10000paths",
+  "prepared_on": "2026-11-01",
+  "status": "complete within mechanics and Monte Carlo sampling-noise scope; no external publication",
+  "article": "article.md",
+  "rendered_preview": "article.html",
+  "sidebar": "latex_sidebar.md",
+  "latex_source": "sidebar.tex",
+  "main_paths": 10000,
+  "comparison_paths": 2000,
+  "seeds_per_setting": 20,
+  "fit_window": [
+    "2016-11-01",
+    "2026-10-29"
+  ],
+  "factor_as_of": "2026-10-29",
+  "residual_vectors": 2497,
+  "anchor": "off",
+  "regime": "unconditional",
+  "main_experiment": {
+    "researchDate": "2026-11-01",
+    "source": "Real local MCS API, Gold DB; no fixture or SIM fallback",
+    "factorAsOf": "2026-10-29",
+    "fitStart": "2016-11-01",
+    "fitEnd": "2026-10-29",
+    "fitObservations": 2497,
+    "validFactorRowsImpliedByFit": 2498,
+    "shockPoolSize": 2497,
+    "lambda": 1.766853482786172,
+    "primaryPaths": 10000,
+    "comparisonPaths": 2000,
+    "seed": 20260914,
+    "seedSensitivity": [
+      20260914,
+      20260915,
+      20260916,
+      20260917,
+      20260918,
+      20260919,
+      20260920,
+      20260921,
+      20260922,
+      20260923,
+      20260924,
+      20260925,
+      20260926,
+      20260927,
+      20260928,
+      20260929,
+      20260930,
+      20260931,
+      20260932,
+      20260933
+    ],
+    "anchor": "off",
+    "regime": "unconditional",
+    "horizons": [
+      21,
+      63,
+      126,
+      252
+    ],
+    "tenors": [
+      0.25,
+      2,
+      5,
+      10,
+      30
+    ],
+    "implementationSha256": "444f77e5d46420a95d825dfbe7820bc9ec73365495db3ca7ee3f2f730f3ba7ea",
+    "fittedInputSha256": "c00ab8b4a690c3ac96086650c36e269b9664fae5d481da04e7d5d31a3b1d2ac5",
+    "reproduction": "Both saved live API outputs reproduced exactly by the frozen platform engine at the default seed.",
+    "primaryTenorYears": 10,
+    "primaryHorizonSteps": 252,
+    "seedVariabilityBps": [
+      {
+        "stat": "p5",
+        "sdBps2000": 3.773737081659947,
+        "sdBps10000": 1.558291204524457
+      },
+      {
+        "stat": "p50",
+        "sdBps2000": 2.691796506708412,
+        "sdBps10000": 0.6339057250895137
+      },
+      {
+        "stat": "p95",
+        "sdBps2000": 4.811819899059242,
+        "sdBps10000": 1.6800145849862922
+      }
+    ],
+    "main12m10y": {
+      "p5": 3.3035069415535547,
+      "p25": 4.089076247206112,
+      "p50": 4.63880293101116,
+      "p75": 5.1791927958040755,
+      "p95": 5.94637931747535,
+      "mean": 4.6321219019386835
+    },
+    "main12m2y": {
+      "p5": 3.19667253303102,
+      "p25": 4.021291596062234,
+      "p50": 4.59891421061765,
+      "p75": 5.179824557631694,
+      "p95": 6.006296017909043,
+      "mean": 4.600537893531105
+    },
+    "baseline12m10y": {
+      "p5": 3.355807689001927,
+      "p25": 4.101952741237443,
+      "p50": 4.626600802002946,
+      "p75": 5.187707349342758,
+      "p95": 5.947302515862233,
+      "mean": 4.639254483843436
+    },
+    "limitation": "Seed variability measures Monte Carlo sampling only, conditional on one fitted historical sample. No out-of-sample accuracy, parameter uncertainty, real-time backtest or tail calibration is established. The two path-count runs share the first 2000 paths at each seed."
+  },
+  "visuals": [
+    "assets/mcs-10000-10y.jpg",
+    "assets/mcs-10000-2y.jpg"
+  ],
+  "reviews": [
+    {
+      "task": "/root/mcs_math_review",
+      "report": "reviews/math_review.md",
+      "status": "no required issues; independent Python reproduction of40runs/4800summaryvalues; final capture reconciliation passed"
+    },
+    {
+      "task": "/root/mcs_fact_visual_review",
+      "report": "reviews/fact_visual_review.md",
+      "status": "no required issues; primarysourcesreopened, finalimagesviewed, sourcecaptionsandfinalcapturehasheschecked"
+    }
+  ],
+  "render_verification": [
+    "KaTeX0.16.11 strict syntax passed on3displayequations and allinlineexpressions",
+    "Browser viewed article typography and renderedformulaarea; no overflowing displaymath at inspecteddesktopwidth",
+    "Both actualimagesloaded at1576x430; originalresolutionlinks retained"
+  ],
+  "capture_correction": "Development reload overwrote an early latestresponse with anchoron. Preserved that response separately; changed proxy tofreeze firstanchoroff; recapturedtwofigures; stoppedproxy; bothreviewers checked finalidentity/hashes/logs. Mainexperiment data/values unchanged.",
+  "limits": [
+    "Separate AI worker reviews, not human review or independent economic data",
+    "Stored historical Goldfactor snapshot; upstreamfactor accuracy and point-in-time vintage not audited",
+    "No out-of-sample forecast or coverage evaluation",
+    "Different figure yscales; printed values and captions provide comparison"
+  ],
+  "artifacts_sha256": {
+    "README.md": "c618ab46053afd3cdb547a23d35b1e9069a1bb21040ae06743d5695fd015bcc6",
+    "THIRD_PARTY_NOTICES.txt": "9dd42ca747db37d776bd8e2e838343986ae5820a44b9631a8e94149bb1aba31d",
+    "article.html": "7bafcad887fff4b9de9e624835e80bb52a615024c39c147fee1281d23f022b4e",
+    "article.md": "39b38a57325637a9524131651c1a171877c4361b1cff3bc1d06fff3c5c19ed87",
+    "assets/mcs-10000-10y.jpg": "d15c346ce76eed1c2a7852e99ab3ac311ef3970ce9b8a96db7e8a7a9cd68fcf4",
+    "assets/mcs-10000-2y.jpg": "e05350bd3e2c0045345016e5da914b5750cce1a184707151660c675eb94bdb03",
+    "evidence/api-10000.json": "dead271c86a137c4741b94a6507527faaaa5c86bacbfd69b5d3a393501791682",
+    "evidence/api-2000.json": "91d35868180630c49fedb96b34de64cb35f04fc39b4f89358756bd51ff9d15e9",
+    "evidence/experiment-summary.json": "bb8948a02142e4af5dc13b383d2bcc23bb88c197ca7cd3b983e09ae3c4cd9b6f",
+    "evidence/final-artifact-checks.json": "ec69c79c11584174f431cd797446ca93861ffbd778de0efaa9f5101fbb280c4f",
+    "evidence/latex-render-check.json": "9f6bc3519dbc7bb7503be55948eb8dc09e1d1cf0363444ab5c895cc2b1db88da",
+    "evidence/platform-capture-dom.txt": "1bdca794706c824ad6919828281d1ef75f20f51f7fa24db1b44b1f70a044bd4a",
+    "evidence/platform-captured-response.json": "dead271c86a137c4741b94a6507527faaaa5c86bacbfd69b5d3a393501791682",
+    "evidence/platform-requests.jsonl": "2b655adfd3e6398924301f1dd0c3e126f8f3d5c939621165a7e4beac4fe5fe84",
+    "evidence/post-capture-anchor-on-response.json": "3b90a02cd6e17d27e7277361e4182c2114d8d332969856e848404c37bab890e3",
+    "evidence/publication-math-preview.jpg": "6f808fc588035efcf8c0cb6f87272159e368f7e2762a26a4bea2fc7912a334eb",
+    "evidence/publication-render-check.json": "44a4e6c491a312a67cd9be957a5bf84529d895a6ff780e8057691c9169d11856",
+    "evidence/seed-runs.json": "51bf5d5af283734066ffe724499b6dc200373118647dee3647b5f4d10fb7f2d9",
+    "evidence/source/src/app/api/simulations/mcs/route.ts": "3f0d26397788eeaf21eafb573024e5a2a2afea8f374d1b84358ef0f1533a1b58",
+    "evidence/source/src/app/simulations/mcs/page.tsx": "2449e5c5df3d1b8ebbe634af9d3e800a077d83da976eecd253ffb1841d879d85",
+    "evidence/source/src/lib/server/mcsEngine.ts": "444f77e5d46420a95d825dfbe7820bc9ec73365495db3ca7ee3f2f730f3ba7ea",
+    "experiment_notes.md": "dcbfdc121ceaa199554f0a19e35974279c0cb2243c0a18cab757883ae8b2b58a",
+    "latex_sidebar.md": "467350f82a1028d7512d8b6bf04bf1c6f23b1fb3c56a509a516095bec22c6ab4",
+    "reviews/fact_visual_review.md": "cb5387857d1baeba40b792ff348162cc5c9c43bd49cd63885e397df57a7af662",
+    "reviews/independent_math_check.json": "886d136065d2cff505e30a0438847d96bd2b8e72c5cb006eb6873999d1c8615f",
+    "reviews/independent_math_check.py": "50e4ea3d7b37547092150f29dbb6fa15fe3f5ab7e96a22ddee1ed22ec70194b8",
+    "reviews/math_review.md": "2ca8fe17292560bb014fc4c966afeb840bf804410299c6f676312be877489a90",
+    "scripts/platform-proxy.mjs": "836a74157fbf3d63036ae624f414af4be43fc6c2ed6d3401ba9ad395ce2630c9",
+    "scripts/render-publication.mjs": "4f10365c6ab2d61c32a673511b4f2708fcf1936a9bff9dd6cc5016a8850d15a1",
+    "scripts/run-experiment.mjs": "188839c94d17330a85f05243ab769d0b6cbfb751e0c1c84fea2868a17eeae735",
+    "sidebar.tex": "17e02ec41838411aa8dcd0307cff3feafd9e8acea0c26b015ee6229b0b353a1f"
+  },
+  "third_party_notice": "THIRD_PARTY_NOTICES.txt"
+}

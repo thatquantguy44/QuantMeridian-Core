@@ -1,0 +1,109 @@
+{
+  "links": [
+    {
+      "file": "experiment_notes.md",
+      "target": "evidence/api-10000.json",
+      "exists": true
+    },
+    {
+      "file": "experiment_notes.md",
+      "target": "evidence/api-2000.json",
+      "exists": true
+    },
+    {
+      "file": "experiment_notes.md",
+      "target": "evidence/source/src/",
+      "exists": true
+    },
+    {
+      "file": "experiment_notes.md",
+      "target": "evidence/experiment-summary.json",
+      "exists": true
+    },
+    {
+      "file": "experiment_notes.md",
+      "target": "evidence/seed-runs.json",
+      "exists": true
+    },
+    {
+      "file": "experiment_notes.md",
+      "target": "assets/mcs-10000-10y.jpg",
+      "exists": true
+    },
+    {
+      "file": "experiment_notes.md",
+      "target": "assets/mcs-10000-2y.jpg",
+      "exists": true
+    },
+    {
+      "file": "experiment_notes.md",
+      "target": "latex_sidebar.md",
+      "exists": true
+    },
+    {
+      "file": "article.md",
+      "target": "assets/mcs-10000-10y.jpg",
+      "exists": true
+    },
+    {
+      "file": "article.md",
+      "target": "assets/mcs-10000-10y.jpg",
+      "exists": true
+    },
+    {
+      "file": "article.md",
+      "target": "assets/mcs-10000-2y.jpg",
+      "exists": true
+    },
+    {
+      "file": "article.md",
+      "target": "assets/mcs-10000-2y.jpg",
+      "exists": true
+    },
+    {
+      "file": "article.md",
+      "target": "experiment_notes.md",
+      "exists": true
+    },
+    {
+      "file": "README.md",
+      "target": "article.md",
+      "exists": true
+    },
+    {
+      "file": "README.md",
+      "target": "article.html",
+      "exists": true
+    },
+    {
+      "file": "README.md",
+      "target": "latex_sidebar.md",
+      "exists": true
+    },
+    {
+      "file": "README.md",
+      "target": "sidebar.tex",
+      "exists": true
+    },
+    {
+      "file": "README.md",
+      "target": "experiment_notes.md",
+      "exists": true
+    },
+    {
+      "file": "README.md",
+      "target": "reviews/math_review.md",
+      "exists": true
+    },
+    {
+      "file": "README.md",
+      "target": "reviews/fact_visual_review.md",
+      "exists": true
+    }
+  ],
+  "primary_equals_immutable_capture_bytes": true,
+  "primary_paths": 10000,
+  "anchor_applied": false,
+  "sidebar_embedded_exactly": true,
+  "captured_response_sha256": "dead271c86a137c4741b94a6507527faaaa5c86bacbfd69b5d3a393501791682"
+}

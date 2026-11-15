@@ -1,0 +1,287 @@
+{
+  "schemaVersion": "kgr-source-research/1",
+  "collectionDate": "2026-11-05",
+  "rawCacheRoot": ".data/spec031/collateral-sources/2026-11-05",
+  "documents": [
+    {
+      "id": "cme-page",
+      "url": "https://www.cmegroup.com/solutions/clearing/financial-and-collateral-management/acceptable-collateral.html",
+      "status": "web_reviewed_not_downloaded",
+      "sourceId": "cme",
+      "sha256": null,
+      "localPath": null,
+      "reviewedOn": "2026-11-05",
+      "retrievedAt": null,
+      "captureNote": "Official page/PDF inspected through web research; curl binary transfer failed with HTTP/2 errors or timeout."
+    },
+    {
+      "id": "cme-base",
+      "url": "https://www.cmegroup.com/clearing/financial-and-collateral-management/files/acceptable-collateral-futures-options-select-forwards.pdf",
+      "status": "web_reviewed_not_downloaded",
+      "sourceId": "cme",
+      "sha256": null,
+      "localPath": null,
+      "reviewedOn": "2026-11-05",
+      "retrievedAt": null,
+      "captureNote": "Official page/PDF inspected through web research; curl binary transfer failed with HTTP/2 errors or timeout."
+    },
+    {
+      "id": "cme-irs",
+      "url": "https://www.cmegroup.com/clearing/financial-and-collateral-management/files/acceptable-collateral-irs.pdf",
+      "status": "web_reviewed_not_downloaded",
+      "sourceId": "cme",
+      "sha256": null,
+      "localPath": null,
+      "reviewedOn": "2026-11-05",
+      "retrievedAt": null,
+      "captureNote": "Official page/PDF inspected through web research; curl binary transfer failed with HTTP/2 errors or timeout."
+    },
+    {
+      "id": "lch-page",
+      "url": "https://www.lseg.com/en/post-trade/clearing/collateral-management/ltd-collateral-management/ltd-acceptable-collateral/ltd-acceptable-securities",
+      "resolvedUrl": "https://www.lseg.com/en/post-trade/clearing/collateral-management/ltd-collateral-management/ltd-acceptable-collateral/ltd-acceptable-securities",
+      "retrievedAt": "2026-11-05T19:20:02.859424+00:00",
+      "contentType": "text/html;charset=utf-8",
+      "byteLength": 119938,
+      "sha256": "2e06d825122cf6160bae6c8ebce5c135eba4c7901f0e6ab45bb2f5501ff65f0c",
+      "localPath": "raw/lch-page.html",
+      "status": "downloaded",
+      "sourceId": "lch"
+    },
+    {
+      "id": "lch-haircuts",
+      "url": "https://www.lseg.com/content/dam/post-trade/en_us/documents/lch/collateral-management/lch-ltd/lch-ltd-acceptable-collateral-haircuts.pdf",
+      "resolvedUrl": "https://www.lseg.com/content/dam/post-trade/en_us/documents/lch/collateral-management/lch-ltd/lch-ltd-acceptable-collateral-haircuts.pdf",
+      "retrievedAt": "2026-11-05T19:20:02.848302+00:00",
+      "contentType": "application/pdf",
+      "byteLength": 278235,
+      "sha256": "3667907bab6f1a8efa5a14d882e740262350b81d4bb6b63e11a161b6245152a0",
+      "localPath": "raw/lch-haircuts.pdf",
+      "status": "downloaded",
+      "sourceId": "lch"
+    },
+    {
+      "id": "ice-page",
+      "url": "https://www.ice.com/clear-europe/treasury-and-banking",
+      "resolvedUrl": "https://www.ice.com/clear-europe/treasury-and-banking",
+      "retrievedAt": "2026-11-05T19:20:02.787455+00:00",
+      "contentType": "text/html; charset=utf-8",
+      "byteLength": 171957,
+      "sha256": "850495a68b0bf1a56c3a9a1796f10b29bb36b0e82da197a44b2978c41f976ea8",
+      "localPath": "raw/ice-page.html",
+      "status": "downloaded",
+      "sourceId": "ice"
+    },
+    {
+      "id": "ice-permitted-cover",
+      "url": "https://www.ice.com/publicdocs/clear_europe/list-of-permitted-covers.pdf",
+      "resolvedUrl": "https://www.ice.com/publicdocs/clear_europe/list-of-permitted-covers.pdf",
+      "retrievedAt": "2026-11-05T19:20:02.895931+00:00",
+      "contentType": "application/pdf",
+      "byteLength": 381106,
+      "sha256": "9cafae22ce90b8fbdebe6e68ef0c018c3600649508d7eef8d71338b857df5949",
+      "localPath": "raw/ice-permitted-cover.pdf",
+      "status": "downloaded",
+      "sourceId": "ice"
+    },
+    {
+      "id": "eurex-page",
+      "url": "https://www.eurex.com/ec-en/services/risk-parameters",
+      "resolvedUrl": "https://www.eurex.com/ec-en/services/risk-parameters",
+      "retrievedAt": "2026-11-05T19:20:03.337218+00:00",
+      "contentType": "text/html;charset=UTF-8",
+      "byteLength": 104592,
+      "sha256": "962137e12a5bcb88010ab4eb56a0f38ac9d2335a6c56b8d1945990c286b9e90f",
+      "localPath": "raw/eurex-page.html",
+      "status": "downloaded",
+      "sourceId": "eurex"
+    },
+    {
+      "id": "eurex-criteria",
+      "url": "https://www.eurex.com/resource/blob/337224/3edd39d7e5c013f6bed55a5f02db86f6/data/AdmissibleCollateralSecurities.pdf",
+      "resolvedUrl": "https://www.eurex.com/resource/blob/337224/3edd39d7e5c013f6bed55a5f02db86f6/data/AdmissibleCollateralSecurities.pdf",
+      "retrievedAt": "2026-11-05T19:20:03.474702+00:00",
+      "contentType": "application/pdf;charset=UTF-8",
+      "byteLength": 209821,
+      "sha256": "8cc4153a3bb15a2b752e6d140737ccee7ccf73d304b753b268648dfa3700f345",
+      "localPath": "raw/eurex-criteria.pdf",
+      "status": "downloaded",
+      "sourceId": "eurex"
+    },
+    {
+      "id": "eurex-global-securities",
+      "url": "https://www.eurex.com/resource/blob/4333300/77cb51ddb785d9d3bb8f142f4dc73919/data/GlobalAdmissibleSecurities.zip",
+      "resolvedUrl": "https://www.eurex.com/resource/blob/4333300/77cb51ddb785d9d3bb8f142f4dc73919/data/GlobalAdmissibleSecurities.zip",
+      "retrievedAt": "2026-11-05T19:20:03.584241+00:00",
+      "contentType": "application/zip;charset=UTF-8",
+      "byteLength": 379933,
+      "sha256": "6a9738ad6afd911487913c51f5329a2385f082390d070aa67fdf5ddac89769af",
+      "localPath": "raw/eurex-global-securities.zip",
+      "status": "downloaded",
+      "sourceId": "eurex"
+    },
+    {
+      "id": "boe-page",
+      "url": "https://www.bankofengland.co.uk/markets/eligible-collateral",
+      "resolvedUrl": "https://www.bankofengland.co.uk/markets/eligible-collateral",
+      "retrievedAt": "2026-11-05T19:20:03.481290+00:00",
+      "contentType": "text/html; charset=utf-8",
+      "byteLength": 90620,
+      "sha256": "e7422c5166e7261fd0e0d01b979c35ad55feb2bf372ccf6c961045cfddc6d05b",
+      "localPath": "raw/boe-page.html",
+      "status": "downloaded",
+      "sourceId": "boe"
+    },
+    {
+      "id": "boe-haircuts",
+      "url": "https://www.bankofengland.co.uk/-/media/boe/files/markets/eligible-collateral/summary-tables-of-haircuts-for-bank-lending-operations.pdf",
+      "resolvedUrl": "https://www.bankofengland.co.uk/-/media/boe/files/markets/eligible-collateral/summary-tables-of-haircuts-for-bank-lending-operations.pdf",
+      "retrievedAt": "2026-11-05T19:20:03.625130+00:00",
+      "contentType": "application/pdf",
+      "byteLength": 331916,
+      "sha256": "c51b3ed53bd03d3aa4ac005c80149f6dc87e9e4c5657b1728e8056c1f59b64d7",
+      "localPath": "raw/boe-haircuts.pdf",
+      "status": "downloaded",
+      "sourceId": "boe"
+    },
+    {
+      "id": "boe-level-a",
+      "url": "https://www.bankofengland.co.uk/-/media/boe/files/markets/eligible-collateral/eligible-securities.csv",
+      "resolvedUrl": "https://www.bankofengland.co.uk/-/media/boe/files/markets/eligible-collateral/eligible-securities.csv",
+      "retrievedAt": "2026-11-05T19:20:04.593925+00:00",
+      "contentType": "text/csv",
+      "byteLength": 43183,
+      "sha256": "360744f2d2fa179ec4e85a727399d6abd4a26e9daf075a2650b80ade7b8d14a7",
+      "localPath": "raw/boe-level-a.csv",
+      "status": "downloaded",
+      "sourceId": "boe"
+    },
+    {
+      "id": "boe-level-b",
+      "url": "https://www.bankofengland.co.uk/-/media/boe/files/markets/eligible-collateral/eligible-level-b-collateral.csv",
+      "resolvedUrl": "https://www.bankofengland.co.uk/-/media/boe/files/markets/eligible-collateral/eligible-level-b-collateral.csv",
+      "retrievedAt": "2026-11-05T19:20:45.824879+00:00",
+      "contentType": "text/csv",
+      "byteLength": 37012,
+      "sha256": "5bc4c125b078b3347d715bee07d477e335de2afa186af450505e67051e1ec1f8",
+      "localPath": "raw/boe-level-b.csv",
+      "status": "downloaded",
+      "sourceId": "boe"
+    },
+    {
+      "id": "boe-level-c",
+      "url": "https://www.bankofengland.co.uk/-/media/boe/files/markets/eligible-collateral/eligible-level-c-collateral.csv",
+      "resolvedUrl": "https://www.bankofengland.co.uk/-/media/boe/files/markets/eligible-collateral/eligible-level-c-collateral.csv",
+      "retrievedAt": "2026-11-05T19:20:46.191587+00:00",
+      "contentType": "text/csv",
+      "byteLength": 1144,
+      "sha256": "f0a41b26e14e7c62750e6a2ca9337f8d398ebc3c0f72b20eb68b76420d19fe96",
+      "localPath": "raw/boe-level-c.csv",
+      "status": "downloaded",
+      "sourceId": "boe"
+    },
+    {
+      "id": "fed-page",
+      "url": "https://www.frbdiscountwindow.org/en/Pages/General-Information/~/link.aspx?_id=BA73CD056C8549BBB63ABB13C091D928&_z=z",
+      "resolvedUrl": "https://www.frbdiscountwindow.org/en/Pages/General-Information/~/link.aspx?_id=BA73CD056C8549BBB63ABB13C091D928&_z=z",
+      "retrievedAt": "2026-11-05T19:20:04.057848+00:00",
+      "contentType": "text/html; charset=utf-8",
+      "byteLength": 269120,
+      "sha256": "ee2f1c330e7bce71dab176f36b06f9b77e278861818ad1a07c972bf0482821b2",
+      "localPath": "raw/fed-page.html",
+      "status": "downloaded",
+      "sourceId": "fed"
+    },
+    {
+      "id": "fed-history",
+      "url": "https://www.frbdiscountwindow.org/generalpages/historical_margins/margin_tables",
+      "resolvedUrl": "https://www.frbdiscountwindow.org/generalpages/historical_margins/margin_tables",
+      "retrievedAt": "2026-11-05T19:20:03.954305+00:00",
+      "contentType": "text/html; charset=utf-8",
+      "byteLength": 48732,
+      "sha256": "a8ae413fb0e2cad16ac7793048fd88dc1e84b989fce84856523e460addb53500",
+      "localPath": "raw/fed-history.html",
+      "status": "downloaded",
+      "sourceId": "fed"
+    },
+    {
+      "id": "fed-securities-2025",
+      "url": "https://www.frbdiscountwindow.org/generalpages/historical_margins/2026/07012025_06302026_securities_table",
+      "resolvedUrl": "https://www.frbdiscountwindow.org/generalpages/historical_margins/2026/07012025_06302026_securities_table",
+      "retrievedAt": "2026-11-05T19:20:46.990606+00:00",
+      "contentType": "text/html; charset=utf-8",
+      "byteLength": 55979,
+      "sha256": "a6fdbc67bd485a8785daa8c1fa1eaa2bdc0570cda075ee8d8c66ce3aef70e4a9",
+      "localPath": "raw/fed-securities-2025.html",
+      "status": "downloaded",
+      "sourceId": "fed"
+    },
+    {
+      "id": "fed-securities-2024",
+      "url": "https://www.frbdiscountwindow.org/generalpages/historical_margins/2025/09032024_06302025_securities_table",
+      "resolvedUrl": "https://www.frbdiscountwindow.org/generalpages/historical_margins/2025/09032024_06302025_securities_table",
+      "retrievedAt": "2026-11-05T19:20:47.285671+00:00",
+      "contentType": "text/html; charset=utf-8",
+      "byteLength": 55921,
+      "sha256": "ebd91152460a2c3cead566ddf8b50ceec92544d2fab77a7e3cceb4b857360794",
+      "localPath": "raw/fed-securities-2024.html",
+      "status": "downloaded",
+      "sourceId": "fed"
+    },
+    {
+      "id": "ice-fx-history",
+      "url": "https://www.ice.com/publicdocs/iosco_reporting/haircut_history/iceu/ICEU_Currency_Haircuts_History.csv",
+      "resolvedUrl": "https://www.ice.com/publicdocs/iosco_reporting/haircut_history/iceu/ICEU_Currency_Haircuts_History.csv",
+      "retrievedAt": "2026-11-05T19:20:47.467535+00:00",
+      "contentType": "text/csv",
+      "byteLength": 16842,
+      "sha256": "649d9ed9236d1b4cfc3e0fffb108a8a759412e575130873ccbb0d6fb904bd3d2",
+      "localPath": "raw/ice-fx-history.csv",
+      "status": "downloaded",
+      "sourceId": "ice"
+    },
+    {
+      "id": "cme-review-20260709",
+      "url": "https://www.cmegroup.com/content/dam/cmegroup/notices/clearing/2026/07/chadv26-233.pdf",
+      "status": "web_reviewed_not_downloaded",
+      "sourceId": "cme",
+      "sha256": null,
+      "localPath": null,
+      "reviewedOn": "2026-11-05",
+      "retrievedAt": null,
+      "captureNote": "Official page/PDF inspected through web research; curl binary transfer failed with HTTP/2 errors or timeout."
+    }
+  ],
+  "normalizedArtifacts": [
+    {
+      "path": "normalized/eurex.jsonl",
+      "records": 11436,
+      "sha256": "879a373b17423a0728c84df26a7030fd71fed4dc9281ef1646b344003d2b22ce",
+      "byteLength": 12894705
+    },
+    {
+      "path": "normalized/boe-securities.jsonl",
+      "records": 4710,
+      "sha256": "658cc1d54bfe0e916db6dab25b801502866f106791d4c9b701b4d6c81d85b93d",
+      "byteLength": 2783842
+    },
+    {
+      "path": "normalized/fed-securities.jsonl",
+      "records": 555,
+      "sha256": "c7c8a37e7a500b278e36fe9f54557d640ad2c1bb40cea873b8bb3ef97c13c0c5",
+      "byteLength": 466964
+    },
+    {
+      "path": "normalized/ice-fx.jsonl",
+      "records": 342,
+      "sha256": "5ff5eef1cdfd0558bfc8d69ba6a177756b9a28ca1dc468d2d8255f4788d6cdc0",
+      "byteLength": 427615
+    },
+    {
+      "path": "normalized/pdf-rule-examples.jsonl",
+      "records": 33,
+      "sha256": "c63388a19b1f380b5f4242dcf00992276f88117fc287ed8c881dd44ede4f5f2e",
+      "byteLength": 27341
+    }
+  ]
+}

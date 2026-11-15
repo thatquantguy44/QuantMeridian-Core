@@ -2,12 +2,12 @@
 
 - **ID:** spec021-production-squeeze-radar
 - **Module:** SQZ (`/securities-lending/squeeze`)
-- **Status:** Phase 1 synthetic scope approved 2026-10-23; live-data production scope deferred and not approved
+- **Status:** Phase 1 synthetic scope and T09-T16 product/service policy approved; live-data production scope deferred and not approved
 - **Author:** Joshua Lutkemuller, CFA
-- **Approver:** Owner (Phase 1 synthetic scope only)
-- **Last updated:** 2026-10-24
+- **Approver:** Owner (Phase 1 synthetic scope and T09-T16 policy only; no LIVE approval)
+- **Last updated:** 2026-10-26
 
-> This document defines WHAT and WHY. Architecture and model choices are in [PLAN.md](PLAN.md); delivery slices are in [TASKS.md](TASKS.md). No threshold, weight, vendor, or alert policy in this draft is approved merely because it is described.
+> This document defines WHAT and WHY. Architecture and model choices are in [PLAN.md](PLAN.md); the approved synthetic T09-T16 defaults are in [PHASE1_POLICY.md](PHASE1_POLICY.md); delivery slices are in [TASKS.md](TASKS.md). Values outside the decision log and that versioned policy are not approved merely because they are described.
 
 ## Summary
 
@@ -15,14 +15,33 @@ Turn the current deterministic Squeeze Radar demonstration into a governed secur
 
 ## Problem and current state
 
-The current page is a useful interface prototype, but `src/data/squeeze.ts` synthesizes every field from a seeded generator and the browser derives its rankings directly from those values. There is no production data contract, historical point-in-time store, server-side scoring service, entitlement model, case workflow, calibration evidence, or reconciliation to the stock-loan book. The live-data readiness assessment accordingly records SQZ as 0% live and blocked by securities-finance and short-interest feeds.
+The current page is a useful interface prototype, but `src/data/squeeze.ts` synthesizes every field from a seeded generator and the browser derives its rankings directly from those values. The new Phase 1 SIM backend foundation is separate from that legacy page: versioned CSV contracts, point-in-time publication, synthetic persona/purpose gates and reconciliation, and restricted Data Health are implemented. Production source contracts, governed live books, production identity management, scoring, case workflow and calibration evidence remain unimplemented. The live-data readiness assessment accordingly records SQZ as 0% live and blocked by securities-finance and short-interest feeds.
 
 The existing feature note in `docs/features/SQUEEZE_RADAR_SPEC.md` also conflates daily short-sale volume with short interest, defines utilization incorrectly, assumes source capabilities that have not been contracted, and treats one composite score as several distinct decisions. It is retained as prototype history, not as the production contract.
+
+### Implementation checkpoint — 2026-10-26
+
+The `feat/sqz-t11-feature-snapshots` branch adds the **T11 feature foundation**, documented in
+[`FEATURES.md`](FEATURES.md), with a strict serialized contract, 14 source blocks/55 measurements,
+record/revision lineage, reproducible point-in-time joins, source/book projections, and explicit
+missingness. This is an unexposed, server-only SIM boundary, not an active signal or a production API.
+
+**T11 is still in progress. Start next with SQZ-T11b:** propagate the permitted T09 current
+reconciliation/degradation and dependency-gate evidence into feature output before T12 can consume
+it. Preserve the approved below-70% modeled-loan coverage degradation, security/book/source scope,
+and persona redaction. Add failure-injection coverage for required versus contextual inputs;
+blocked inputs must remain unavailable. The exact next-slice acceptance criteria and commands are
+in [`HANDOFF.md`](HANDOFF.md) and [`TASKS.md`](TASKS.md).
+
+After T11b closes T11, the next task is T12's separate Market/Internal Borrow Stress baselines.
+T13–T15 follow those baselines; authenticated transport and legacy-page migration remain T16–T17.
+Rate comparison remains unavailable under CSV v1 where comparability metadata is absent. This
+checkpoint does not approve a scoring transform, live source, challenger promotion or workflow owner.
 
 ## Product principles
 
 1. **Three questions, three signals.** Borrow stress, equity squeeze risk, and re-rate opportunity have different inputs, outcomes, users, and failure costs. They are not aliases for one “heat” score.
-2. **A radar, not an oracle.** Outputs are ranked, probabilistic decision support. The product must not state or imply manipulation, “naked shorting,” a certain squeeze, or a guaranteed revenue opportunity.
+2. **A radar, not an oracle.** Phase 1 outputs are transparent ranks and policy bands, not probabilities. The product must not state or imply manipulation, “naked shorting,” a certain squeeze, or a guaranteed revenue opportunity.
 3. **Missing is not neutral.** Required stale, missing, unmapped, or unlicensed inputs suppress the affected signal; they are never zero-filled or silently replaced with SIM data.
 4. **Point-in-time or it did not happen.** Every observation records when it first became knowable to the platform, plus effective, published, observed, and ingested time as applicable. Backtests may use only the exact revision whose `firstKnowableAt` is no later than the decision timestamp.
 5. **Evidence before action.** Every rank and alert opens to inputs, transformations, source age, model version, and material limitations.
@@ -33,11 +52,13 @@ The existing feature note in `docs/features/SQUEEZE_RADAR_SPEC.md` also conflate
 
 | User | Decision supported | Data boundary |
 |---|---|---|
-| Securities-finance trader | Which names need supply review, recall attention, or re-rate review? | Internal positions and approved market benchmarks |
-| Desk manager | Where are revenue leakage, concentration, and service risks building? | Aggregated desk and beneficial-owner views |
-| Risk / compliance | Which alerts were reviewed, on what evidence, and by whom? | Read-only cases and immutable audit history |
-| Research user | Which names exhibit calibrated squeeze-risk conditions? | Market-level data only unless separately entitled |
-| Data operations | Which sources, mappings, and calculations are late or broken? | Operational metadata; confidential economics redacted |
+| Trader test persona | Which names need supply review or re-rate review? | Market outputs plus assigned-book positions and economics |
+| Desk Manager test persona | Where are revenue leakage, concentration, and service risks building? | All synthetic books, detailed economics, and aggregates |
+| Data Ops test persona | Which sources, mappings, and calculations are late or broken? | Operational metadata and record lineage; party names/economics redacted |
+| Model Reviewer test persona | Are definitions, evidence, evaluation, activation, and rollback valid? | Features, signals, model cards, evaluations, and registry; party names/economics redacted |
+
+Phase 1 has one operator who selects among these test personas. Server-side persona and purpose
+checks remain mandatory; the selector is not production identity management.
 
 ## Scope
 
@@ -78,7 +99,7 @@ The existing feature note in `docs/features/SQUEEZE_RADAR_SPEC.md` also conflate
 | **Squeeze Risk** | Are conditions consistent with an elevated risk of a sharp covering-related move? | Lagged reported/estimated short positioning, days to cover, borrow stress, price/volume/volatility, options and catalysts | Forward abnormal return and volume/volatility event at declared 1/5/10-day horizons |
 | **Re-rate Opportunity** | Is an entitled internal loan priced below a comparable executable market level? | Internal loan rate/terms, source-specific external benchmark, demand, available capacity, constraints | Subsequent realizable fee improvement and incremental revenue, net of lost balances |
 
-Each product has its own score or probability, reason codes, coverage state, calibration report, and version. A combined decision board may display the three side by side but must not collapse them into a single authoritative number.
+Each product has its own score/rank, reason codes, coverage state, validation report, and version. Phase 1 does not display a probability. A combined decision board may display the products side by side but must not collapse them into a single authoritative number. A probability is a high-priority future improvement subject to the evidence and approval gates in [PHASE1_POLICY.md](PHASE1_POLICY.md).
 
 ## Required data
 
@@ -144,7 +165,7 @@ For the approved synthetic phase, SQZ-001–015 and SQZ-017–021 apply using SI
 
 1. **Decision Board** — compact triage table with the three signal products, rank change, coverage, source age, and saved filters.
 2. **Borrow Stress & Specials** — scarcity, fee curve, availability, supply/loan flows, classification lifecycle, and transitions.
-3. **Squeeze Risk** — calibrated risk bands, positioning age, days to cover, price/options/event context, and outcome definition.
+3. **Squeeze Risk** — registered rules-based risk bands, positioning age, days to cover, price/options/event context, and outcome definition.
 4. **Re-rate Opportunity** — internal-versus-comparable market economics, quantity eligible, constraints, estimated annualized gross opportunity, and review status.
 5. **Supply & Recall** — lendable/on-loan/available waterfall, owner concentration, recall queue, and projected settlement gaps.
 6. **Name Detail** — synchronized timeline, evidence drawer, feature contributions, related ETFs/issuers, cases, and audit history.
@@ -165,7 +186,7 @@ These are tabs or child routes of SQZ in V1, not eleven top-level navigation mod
 - **AC-005:** A user lacking book entitlement cannot retrieve restricted fields through list, detail, filter, sort, export, logs, or error text.
 - **AC-006:** Alert replay over the same event stream produces the same in-platform state transitions, does not duplicate cases/events, rejects stale concurrent transitions, carries or supersedes open episodes deterministically across rule versions, and preserves the permitted trigger-time evidence after source revisions.
 - **AC-007:** Backtests exclude observations and revisions whose `firstKnowableAt` is after the decision time, including late ingestion and historical backfills, and report results by time period, sector, liquidity bucket, and regime with delisted names retained.
-- **AC-008:** The Squeeze Risk model reports calibration and simple-baseline comparison; failure of a promotion gate keeps the last approved version or an interpretable baseline live.
+- **AC-008:** The Squeeze Risk baseline reports rank/band validation and simple-baseline comparison without displaying a probability. Offline probabilistic challengers report calibration where applicable; no challenger may be promoted in Phase 1.
 - **AC-009:** A re-rate candidate reports comparable-rate normalization, eligible quantity, constraints, and gross estimate; it cannot be marked “realized” without an entitled reviewed outcome.
 - **AC-010:** Data Health detects a stale feed, identifier break, unit inversion, impossible utilization, and internal loan/inventory reconciliation break before publication.
 - **AC-011:** Board and detail APIs satisfy the approved SLO at the agreed universe size, enforce bounded pagination, and degrade with an explicit last-good as-of timestamp.
@@ -201,18 +222,14 @@ These gates apply before any future live-data release. Phase 1 instead uses the 
 - UI, API, alerts, exports, model cards, and Data Health expose SIM provenance and cannot imply real-world efficacy.
 - Existing utilization, PDF, and sentiment consumers retain their current behavior or migrate through tested compatibility contracts.
 
-## Decisions required before implementation
+## Remaining decisions outside T09-T16
 
-1. **Users and authority:** Is V1 for agency-lending traders only, or also prime brokerage, risk, compliance, and research? Which roles may view client/counterparty economics or disposition a case?
-2. **Universe parameters:** Approve the configurable synthetic universe sizes and distributions for price, ADV, float, sector, borrow class, ETF exposure, and history length. Live-universe selection is deferred.
-3. **Sources and licenses — deferred for live phase:** Which vendors and rights apply when live work begins? Phase 1 uses no vendor data.
-4. **Cadence and SLOs:** Approve simulated clock speeds, batch/intraday schedules, freshness budgets, and local performance objectives. Live SLOs remain deferred.
-5. **Internal contracts — deferred for live phase:** Which real systems will eventually own inventory, loans, recalls, demand, fee changes, restrictions, and outcomes? Phase 1 uses synthetic contracts only.
-6. **Signal policy:** Are V1 signal definitions rules-based baselines only, or may a challenger statistical model be promoted after validation? Who owns thresholds?
-7. **Outcome policy:** Approve event labels, horizons, abnormal-return benchmark, re-rate realization definition, exact metric thresholds/sample windows, named approvers, evidence locations, and promotion gates.
-8. **Workflow:** Choose one authoritative in-platform system for alerts and re-rate reviews—SQZ or ALERTS—and define adapters, acknowledgements, escalation times, concurrency, and retention. No second system of record or external notification destination may be implemented.
-9. **Architecture — partially resolved:** Gold-backed historical publication and a bounded internal cache remain proposed. Browser-to-vendor fan-out and all post-ingestion external service/model transmission are prohibited; authorized user downloads/exports remain allowed.
-10. **Compliance language:** Approve product name, disclosures, retention, surveillance boundary, and restrictions on FTD/threshold/social interpretations.
+The user/persona, signal, outcome, validation, retention, local objective, and private-service
+decisions required for T09-T16 are approved in [PHASE1_POLICY.md](PHASE1_POLICY.md). Later work must
+still resolve the alert/case system of record, export limits, generator distribution approval,
+security/operational owner names, final compliance language, and every future-live source,
+licensing, calendar, retention, identity, entitlement, and SLO decision. No later task may infer
+one of those values from the synthetic policy.
 
 ## Decision log
 
@@ -222,10 +239,16 @@ These gates apply before any future live-data release. Phase 1 instead uses the 
 | 2026-10-24 | **SQZ data cannot be automatically emitted outside the platform once a controlled adapter or process accepts its first byte or record.** This applies before parsing, validation, quarantine, diagnostics, or persistence and covers raw, rejected, normalized, derived, evidence, case, and model-prompt content. Same-origin UI/API use and registered internal Market Terminal services are permitted. Third-party model software may run inside the attested boundary only when prompts, features, outputs, telemetry, and diagnostics cannot leave it. Authorized user-initiated downloads and exports are the only approved external transfer and must be entitlement-checked and audited. External notifications, webhooks, external APIs/out-of-boundary model services, payload-bearing external telemetry, platform screenshot generation, and external-share features are prohibited. OS/browser capture cannot be reliably prevented by the application and requires endpoint/DLP policy if production policy must prohibit it. | Owner |
 | 2026-10-24 | **Synthetic freshness grace periods are configurable and schedule-aware.** Daily inventory, loan, market-borrow, equity, options, and ETF snapshots remain current through the next scheduled weekday publication plus 30 minutes. Short-sale volume remains current through its next scheduled weekday publication plus two hours. These values live in versioned SIM policy rather than evaluator constants and do not approve a future LIVE calendar or vendor SLA. | Owner |
 | 2026-10-24 | **Synthetic coverage is measured at an explicit dataset-specific grain.** Securities use security/listing; inventory uses book/security; loans use book/security plus source heartbeat; borrow events use book/source heartbeat; market borrow uses provider/security; short interest uses source/security; short-sale volume uses venue-scope/security; equity daily uses listing/security; options use provider/underlying; ETFs use ETF security; and security events use source heartbeat. Coverage strictly below 75% is systemic collapse; exactly 75% is not. Missing units remain missing and are never zero-filled. Expected cohort construction and atomic-versus-unaffected publication remain open. | Owner |
+| 2026-10-25 | **Coverage publication is security-scoped.** At or above the 75% systemic threshold, unaffected securities may publish with degraded coverage while missing securities remain explicitly unavailable. Below 75%, a required dataset is suppressed as systemic collapse. Complete coverage is required for a clean `ACCEPT`; missing units are never zero-filled, and aggregates that would be misleading on a partial cohort remain unavailable. | Owner |
+| 2026-10-25 | **Phase 1 uses one operator with four server-enforced test personas.** Trader and Desk Manager may access the approved synthetic internal projections at their respective scopes; Data Ops and Model Reviewer receive purpose-limited redacted projections. Saved views and custom profiles are persona-private. | Owner |
+| 2026-10-25 | **Phase 1 active models are transparent registered rules baselines.** Market and Internal Borrow Stress remain separate; custom profiles may change only their high-level current/deterioration split and cannot affect alerts, promotion, or official evaluation. Squeeze Risk publishes rank and band without probability. Statistical challengers may appear only in offline comparison reports and cannot be promoted. | Owner |
+| 2026-10-25 | **The Phase 1 outcome and economics policy is approved.** Squeeze Risk supports 1/5/10-business-day modes, defaults to five days, and uses fixed sector-adjusted return thresholds of 10%/20%/25% plus 1.5-times volume or realized-volatility confirmation. Re-rate candidates require a same-currency 25-bps gap and use the approved ten-day retained-balance realization rules. | Owner |
+| 2026-10-25 | **T09-T16 use the versioned technical policy in `PHASE1_POLICY.md`.** It fixes reconciliation tolerances, purpose vocabulary, walk-forward/purge/embargo windows, append-only registry and rollback, 400-day local SIM retention, bounded API/cursor/saved-view limits, the local/SIM latency objective, and one private TypeScript service on `127.0.0.1:8019`. | Owner |
 
 ## References and evidence
 
 - Current implementation: `src/data/squeeze.ts` and `src/app/securities-lending/squeeze/page.tsx`
+- Approved Phase 1 policy: [PHASE1_POLICY.md](PHASE1_POLICY.md)
 - Internal readiness: `docs/validation/LIVE_DATA_READINESS_ASSESSMENT.md`
 - Connectivity map: `docs/data/PLATFORM_DATA_CONNECTIVITY.md`
 - Product roadmap: `docs/roadmaps/FUTURE_FEATURE_ROADMAP.md`

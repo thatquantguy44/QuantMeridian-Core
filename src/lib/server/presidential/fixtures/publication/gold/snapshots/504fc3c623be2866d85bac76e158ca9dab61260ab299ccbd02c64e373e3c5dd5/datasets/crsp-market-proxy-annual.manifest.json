@@ -1,0 +1,25 @@
+{
+  "construction": "Fictional inputs used to exercise the reconstruction method.",
+  "dataset_kind": "SYNTHETIC_FIXTURE",
+  "dataset_sha256": "00b1eedf375f1ce6641103a3f0f632301f9727a265419ff528810bedb6d2ea7e",
+  "decision_policy": "window_start",
+  "exact_replication": false,
+  "input_kind": "SYNTHETIC_FIXTURE",
+  "inputs": {
+    "config_sha256": "deaf2b355a938b49e42998ab8e95e209088ad9fcbe0748c1e7d00ae1b58b0c06",
+    "controls_promotion_manifest_sha256": "2e80bde43666b26838ba4aa3c5691a245cf194afa3cc9224d85b4fb7af9b5da0",
+    "controls_sha256": "52d82d375c0096357d7fcb36aaacef3d4ff4614a7ddb6ef8dc5c03bff3b2f72a",
+    "market_sha256": "0247e9715f3ca85d04298767d9e6a50ffbc3faa97df538c0ad659e24b46ac41b",
+    "raw_capture_id": "7c64842f81d340088869f47a6a335f42",
+    "raw_capture_sha256": "29e9ce2a151f198c3a061d0222545028957f7b1713f8187e079d5e91d261644f",
+    "review_id": "89ff0a8220284682b9ec834861b11353",
+    "review_receipt_controls_sha256": "52d82d375c0096357d7fcb36aaacef3d4ff4614a7ddb6ef8dc5c03bff3b2f72a",
+    "review_workbook": "review.xlsx",
+    "review_workbook_sha256": "42aa57cab0fa2d57e9955d99640a2539f3e3592b6f502586243dc41fd27eb321"
+  },
+  "market_source_id": "FF_MKT_001",
+  "quality_issues": [],
+  "reason": "Invented test data; this is not historical research.",
+  "reconstruction": "crsp_market_proxy",
+  "schema_version": 1
+}

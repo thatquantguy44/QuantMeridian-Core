@@ -5,16 +5,42 @@
  */
 import type { IncomingMessage, ServerResponse } from "node:http";
 
-export function readBody(req: IncomingMessage): Promise<Buffer> {
+/** Optional limits are applied at socket ingestion for bounded research routes. */
+export function readBody(req: IncomingMessage, limits?: { maxBytes: number; timeoutMs: number; signal?: AbortSignal }): Promise<Buffer> {
   return new Promise((resolve, reject) => {
     const chunks: Buffer[] = [];
-    req.on("data", (c) => chunks.push(c as Buffer));
-    req.on("end", () => resolve(Buffer.concat(chunks)));
-    req.on("error", reject);
+    let length = 0;
+    const cleanup = () => {
+      clearTimeout(timer); req.off("data", data); req.off("end", end); req.off("error", fail);
+      req.off("aborted", aborted); limits?.signal?.removeEventListener("abort", aborted);
+    };
+    const fail = (error: Error) => { cleanup(); reject(error); };
+    const rejected = (status: number, message: string) => { req.pause(); fail(Object.assign(new Error(message), { status })); };
+    const aborted = () => rejected(408, "Request cancelled");
+    const data = (chunk: Buffer) => {
+      length += chunk.length;
+      if (limits && length > limits.maxBytes) return rejected(413, "Request too large");
+      chunks.push(chunk);
+    };
+    const end = () => { cleanup(); resolve(Buffer.concat(chunks)); };
+    const timer = limits ? setTimeout(() => rejected(408, "Request body timeout"), limits.timeoutMs) : undefined;
+    req.on("data", data); req.once("end", end); req.once("error", fail); req.once("aborted", aborted);
+    limits?.signal?.addEventListener("abort", aborted, { once: true });
+    if (limits?.signal?.aborted) aborted();
   });
 }
 
-export function toWebRequest(req: IncomingMessage, url: URL, body?: Buffer): Request {
+/** Use on bounded research requests; disconnecting a browser aborts upstream fetch. */
+export function linkClientAbort(req: IncomingMessage, res: ServerResponse) {
+  const controller = new AbortController();
+  const abort = () => controller.abort();
+  const close = () => { if (!res.writableFinished) abort(); };
+  req.once("aborted", abort); res.once("close", close);
+  if (req.aborted || res.destroyed) abort();
+  return { signal: controller.signal, cleanup: () => { req.off("aborted", abort); res.off("close", close); } };
+}
+
+export function toWebRequest(req: IncomingMessage, url: URL, body?: Buffer, signal?: AbortSignal): Request {
   const headers = new Headers();
   for (const [key, value] of Object.entries(req.headers)) {
     if (Array.isArray(value)) value.forEach((v) => headers.append(key, v));
@@ -22,11 +48,16 @@ export function toWebRequest(req: IncomingMessage, url: URL, body?: Buffer): Req
   }
   const method = (req.method ?? "GET").toUpperCase();
   const hasBody = body && body.length > 0 && method !== "GET" && method !== "HEAD";
-  return new Request(url.toString(), {
+  const request = new Request(url.toString(), {
     method,
     headers,
+    signal,
     ...(hasBody ? { body, duplex: "half" } : {}),
   } as RequestInit);
+  // Internal socket evidence, never taken from Host or forwarding headers.
+  // Symbol.for keeps this identity across Vite's config and SSR module graphs.
+  Object.defineProperty(request, Symbol.for("market-terminal.peer-address"), { value: req.socket.remoteAddress });
+  return request;
 }
 
 export async function sendWebResponse(res: ServerResponse, response: Response): Promise<void> {

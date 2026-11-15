@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "portfolio-regime-models"
+version = "0.1.0"
+description = "Portable portfolio optimization and regime analysis model package (spec026 scaffold)."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["portfolio_regime_models*"]
+namespaces = false

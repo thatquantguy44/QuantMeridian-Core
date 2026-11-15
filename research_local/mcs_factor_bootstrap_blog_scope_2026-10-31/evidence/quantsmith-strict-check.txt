@@ -1,0 +1,14 @@
+$ python3 -I services/agent_worker/src/agent_worker/pin.py --check
+{
+  "mode": "path",
+  "version": "0.1.0",
+  "code_digest": "sha256:e59b8404b307885c7a74f585278de8f380bed62e0fb68018112eb980e7259347",
+  "assets_digest": "sha256:17c367d06af4060d1e6162560a8ded9a207f0074d8eee46f3f67be57dda35874",
+  "pin": "/Users/<you>/Documents/Quant Sandbox/platforms/market_terminal/contracts/agent/quantsmith-pin.json",
+  "mismatches": [
+    "code",
+    "assets"
+  ]
+}
+
+Exit code: 1

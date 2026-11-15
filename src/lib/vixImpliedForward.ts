@@ -33,8 +33,8 @@ export const NORMAL_BENCHMARK = { within1: 68.27, within2: 95.45, beyondMinus2: 
 
 export const BASIS_OPTIONS: { id: VixForwardBasis; label: string; short: string; desc: string }[] = [
   { id: "spy_price", label: "SPY price (1993+)", short: "SPY PX", desc: "SPY close, excluding dividends: the closest long-history match to the S&P 500 price index the VIX is written on" },
-  { id: "spy_total", label: "SPY total return (1993+)", short: "SPY TR", desc: "SPY with dividends reinvested" },
-  { id: "sp500_index", label: "S&P 500 index (FRED, 2016+)", short: "SPX", desc: "The index itself; FRED licenses only the latest ten years" },
+  { id: "spy_total", label: "SPY total return (1993+)", short: "SPY TR", desc: "Tiingo close, cash dividends and split factors; pipeline-calculated reinvested-return index, starting at 100" },
+  { id: "sp500_index", label: "S&P 500 index (FRED, 10Y)", short: "SPX", desc: "The index itself; FRED licenses only the latest ten years" },
 ];
 
 const DAY_MS = 86_400_000;

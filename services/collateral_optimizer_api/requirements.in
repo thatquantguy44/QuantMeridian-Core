@@ -1,3 +1,0 @@
-# Service transport dependencies. The updater also resolves the upstream pyproject.toml.
-fastapi>=0.115
-uvicorn>=0.30

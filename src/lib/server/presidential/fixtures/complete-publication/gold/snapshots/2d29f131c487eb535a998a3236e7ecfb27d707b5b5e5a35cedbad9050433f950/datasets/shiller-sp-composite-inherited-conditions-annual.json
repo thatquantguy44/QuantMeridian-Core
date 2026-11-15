@@ -1,0 +1,262 @@
+{
+  "controls": [
+    {
+      "endDate": "1940-01-03",
+      "houseControl": "D",
+      "id": "control-74-1935-01-03",
+      "presidentId": "franklin-d-roosevelt",
+      "presidentName": "Franklin D. Roosevelt",
+      "presidentParty": "D",
+      "senateControl": "D",
+      "sourceId": "CTRL_074_A",
+      "startDate": "1935-01-03"
+    }
+  ],
+  "currency": "USD",
+  "fundamentals": [
+    {
+      "availableDate": "1935-11-30",
+      "date": "1935-10-31",
+      "policyRatePct": 2.5,
+      "sourceId": "INHERITED_CAPE_FEDFUNDS_001",
+      "valuation": 20.0,
+      "valuationDefinition": "Shiller workbook CAPE field"
+    },
+    {
+      "availableDate": "1936-11-30",
+      "date": "1936-10-31",
+      "policyRatePct": 3.0,
+      "sourceId": "INHERITED_CAPE_FEDFUNDS_001",
+      "valuation": 20.0,
+      "valuationDefinition": "Shiller workbook CAPE field"
+    }
+  ],
+  "id": "annual-shiller-sp-composite-approximation-1936-1937-inherited-conditions",
+  "kind": "USER_SUPPLIED",
+  "levels": [
+    {
+      "date": "1935-01-31",
+      "sourceId": "SHILLER_001",
+      "value": 101.11607142857
+    },
+    {
+      "date": "1935-02-28",
+      "sourceId": "SHILLER_001",
+      "value": 102.23461204172246
+    },
+    {
+      "date": "1935-03-31",
+      "sourceId": "SHILLER_001",
+      "value": 103.35560559481135
+    },
+    {
+      "date": "1935-04-30",
+      "sourceId": "SHILLER_001",
+      "value": 104.47903609040803
+    },
+    {
+      "date": "1935-05-31",
+      "sourceId": "SHILLER_001",
+      "value": 105.60488777242034
+    },
+    {
+      "date": "1935-06-30",
+      "sourceId": "SHILLER_001",
+      "value": 106.73314512042043
+    },
+    {
+      "date": "1935-07-31",
+      "sourceId": "SHILLER_001",
+      "value": 107.86379284415551
+    },
+    {
+      "date": "1935-08-31",
+      "sourceId": "SHILLER_001",
+      "value": 108.99681587823576
+    },
+    {
+      "date": "1935-09-30",
+      "sourceId": "SHILLER_001",
+      "value": 110.13219937697103
+    },
+    {
+      "date": "1935-10-31",
+      "sourceId": "SHILLER_001",
+      "value": 111.2699287093781
+    },
+    {
+      "date": "1935-11-30",
+      "sourceId": "SHILLER_001",
+      "value": 112.40998945434632
+    },
+    {
+      "date": "1935-12-31",
+      "sourceId": "SHILLER_001",
+      "value": 113.5523673959537
+    },
+    {
+      "date": "1936-01-31",
+      "sourceId": "SHILLER_001",
+      "value": 114.69704851889787
+    },
+    {
+      "date": "1936-02-29",
+      "sourceId": "SHILLER_001",
+      "value": 115.84401900408685
+    },
+    {
+      "date": "1936-03-31",
+      "sourceId": "SHILLER_001",
+      "value": 116.99326522436492
+    },
+    {
+      "date": "1936-04-30",
+      "sourceId": "SHILLER_001",
+      "value": 118.14477374035283
+    },
+    {
+      "date": "1936-05-31",
+      "sourceId": "SHILLER_001",
+      "value": 119.29853129641097
+    },
+    {
+      "date": "1936-06-30",
+      "sourceId": "SHILLER_001",
+      "value": 120.45452481672501
+    },
+    {
+      "date": "1936-07-31",
+      "sourceId": "SHILLER_001",
+      "value": 121.61274140150064
+    },
+    {
+      "date": "1936-08-31",
+      "sourceId": "SHILLER_001",
+      "value": 122.77316832327014
+    },
+    {
+      "date": "1936-09-30",
+      "sourceId": "SHILLER_001",
+      "value": 123.93579302330147
+    },
+    {
+      "date": "1936-10-31",
+      "sourceId": "SHILLER_001",
+      "value": 125.10060310810674
+    },
+    {
+      "date": "1936-11-30",
+      "sourceId": "SHILLER_001",
+      "value": 126.2675863460561
+    },
+    {
+      "date": "1936-12-31",
+      "sourceId": "SHILLER_001",
+      "value": 127.43673066407523
+    },
+    {
+      "date": "1937-01-31",
+      "sourceId": "SHILLER_001",
+      "value": 128.6080241444438
+    },
+    {
+      "date": "1937-02-28",
+      "sourceId": "SHILLER_001",
+      "value": 129.781455021674
+    },
+    {
+      "date": "1937-03-31",
+      "sourceId": "SHILLER_001",
+      "value": 130.95701167947865
+    },
+    {
+      "date": "1937-04-30",
+      "sourceId": "SHILLER_001",
+      "value": 132.13468264781986
+    },
+    {
+      "date": "1937-05-31",
+      "sourceId": "SHILLER_001",
+      "value": 133.31445660003234
+    },
+    {
+      "date": "1937-06-30",
+      "sourceId": "SHILLER_001",
+      "value": 134.49632235003259
+    },
+    {
+      "date": "1937-07-31",
+      "sourceId": "SHILLER_001",
+      "value": 135.68026884959295
+    },
+    {
+      "date": "1937-08-31",
+      "sourceId": "SHILLER_001",
+      "value": 136.86628518569097
+    },
+    {
+      "date": "1937-09-30",
+      "sourceId": "SHILLER_001",
+      "value": 138.0543605779285
+    },
+    {
+      "date": "1937-10-31",
+      "sourceId": "SHILLER_001",
+      "value": 139.24448437601373
+    },
+    {
+      "date": "1937-11-30",
+      "sourceId": "SHILLER_001",
+      "value": 140.4366460573157
+    },
+    {
+      "date": "1937-12-31",
+      "sourceId": "SHILLER_001",
+      "value": 141.63083522446917
+    }
+  ],
+  "nominalReal": "NOMINAL",
+  "returnBasis": "TOTAL_RETURN",
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "SHILLER_001",
+      "locator": null,
+      "note": "Invented test inputs; no real source observations.",
+      "title": "Fictional fixture: SHILLER_001"
+    },
+    {
+      "id": "CTRL_074_A",
+      "locator": null,
+      "note": "Invented test inputs; no real source observations.",
+      "title": "Fictional fixture: CTRL_074_A"
+    },
+    {
+      "id": "INHERITED_CAPE_FEDFUNDS_001",
+      "locator": null,
+      "note": "Invented test inputs; no real source observations.",
+      "title": "Fictional fixture: INHERITED_CAPE_FEDFUNDS_001"
+    }
+  ],
+  "title": "Fictional fixture \u2014 Shiller S&P Composite dividend-reinvestment-style annual reconstruction, 1936\u20131937 with inherited conditions",
+  "windows": [
+    {
+      "complete": true,
+      "decisionDate": "1935-12-31",
+      "endDate": "1936-12-31",
+      "id": "annual-1936",
+      "kind": "CALENDAR_YEAR",
+      "label": "1936",
+      "startDate": "1935-12-31"
+    },
+    {
+      "complete": true,
+      "decisionDate": "1936-12-31",
+      "endDate": "1937-12-31",
+      "id": "annual-1937",
+      "kind": "CALENDAR_YEAR",
+      "label": "1937",
+      "startDate": "1936-12-31"
+    }
+  ]
+}

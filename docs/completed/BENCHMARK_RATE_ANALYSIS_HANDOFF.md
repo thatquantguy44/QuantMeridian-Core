@@ -1,5 +1,7 @@
 # Benchmark Rate Analysis — Module Group Handoff
 
+> Historical handoff: for current BMRK/BRA source qualification and limitations, see [spec033](../specs/spec033/SPEC.md).
+
 > This document is a **build plan and prompt** for four new analytics modules that extend the existing Benchmark Rates (`BMRK`) module. Hand this to Claude Code (or any AI assistant) when you are ready to build each module. Each module reuses the same `SeriesMap` data layer and pure-function analytics pattern established by BMRK.
 
 **Module Group:** Benchmark Rate Analysis  

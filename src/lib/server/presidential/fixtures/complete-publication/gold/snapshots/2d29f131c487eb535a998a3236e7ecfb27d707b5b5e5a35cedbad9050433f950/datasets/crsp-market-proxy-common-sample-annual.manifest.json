@@ -1,0 +1,21 @@
+{
+  "construction": "Fictional inputs; Compounded monthly Kenneth French Mkt-RF plus RF returns.",
+  "dataset_kind": "SYNTHETIC_FIXTURE",
+  "dataset_sha256": "3a2f26a7410660473aecc629cba91d4f95f9909b21899f80c17a36ae6ab0ecf6",
+  "decision_policy": "window_start",
+  "exact_replication": false,
+  "input_kind": "SYNTHETIC_FIXTURE",
+  "inputs": {
+    "config_sha256": "30794a2524d6663becf3a4ee3dbf6e3e1532c28824fcbb14e457faa9393eafe6",
+    "controls_promotion_manifest_sha256": "2dad07f2840370af480df96d2b4053b1fa43d9a8df4125972567725b6d49c15c",
+    "controls_sha256": "984960c3e0a8ee5efa1b3b95c8f3a78991fe27077efabd0bd0235b04dae31d74",
+    "market_sha256": "6b109aefcea7d403267beef4d9803fccb034ac92ebdefaa8ec42435ba3dfdcf9",
+    "review_workbook": "review.xlsx",
+    "review_workbook_sha256": "cf52fb079d13356403bacfe7590b3b411af01d97bd88b708f90cdd68eff4d3fd"
+  },
+  "market_source_id": "FF_MKT_001",
+  "quality_issues": [],
+  "reason": "Invented test data; not historical evidence.",
+  "reconstruction": "crsp_market_proxy",
+  "schema_version": 1
+}

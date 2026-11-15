@@ -3,6 +3,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { checkSchemaVersion, parseSchemaVersion, SCHEMA_VERSIONS, type ContractKind } from "./compat";
 import { validateContract } from "./validate";
+import type { QuantSmithPin } from "./contracts/quantsmith-pin.generated";
 
 const ROOT = path.resolve(__dirname, "../../..");
 const read = (rel: string) => JSON.parse(fs.readFileSync(path.join(ROOT, rel), "utf8"));
@@ -66,6 +67,38 @@ describe("compat", () => {
 describe("pin", () => {
   it("the shipped pin validates", () => {
     expect(validateContract("pin", read("contracts/agent/quantsmith-pin.json"))).toEqual({ ok: true });
+  });
+
+  it("accepts a local source path without a Git commit while keeping content digests required", () => {
+    const local = clone(read("contracts/agent/quantsmith-pin.json"));
+    delete local.reviewed.source_commit;
+    const source: QuantSmithPin["reviewed"] = { on: "2026-10-30", source_path: "../QuantSmith local copy" };
+    local.reviewed = source;
+    expect(validateContract("pin", local)).toEqual({ ok: true });
+    delete local.package.code_digest;
+    expect(validateContract("pin", local).ok).toBe(false);
+  });
+
+  it("requires either commit metadata or a non-blank local path", () => {
+    const local = clone(read("contracts/agent/quantsmith-pin.json"));
+    delete local.reviewed.source_commit;
+    delete local.reviewed.source_path;
+    expect(validateContract("pin", local).ok).toBe(false);
+    local.reviewed.source_path = "   ";
+    expect(validateContract("pin", local).ok).toBe(false);
+  });
+
+  it("preserves the source-choice invariant in generated TypeScript", () => {
+    const commit: QuantSmithPin["reviewed"] = { on: "2026-10-30", source_commit: "a".repeat(40) };
+    const both: QuantSmithPin["reviewed"] = { ...commit, source_path: "../QuantSmith" };
+    // @ts-expect-error a reviewed source is required
+    const absent: QuantSmithPin["reviewed"] = { on: "2026-10-30" };
+    // @ts-expect-error source fields are non-null when present
+    const nullable: QuantSmithPin["reviewed"] = { ...commit, source_path: null };
+    // @ts-expect-error unregistered reviewed metadata is forbidden
+    const unknown: QuantSmithPin["reviewed"] = { ...commit, unexpected: "extra" };
+    expect(validateContract("pin", { ...read("contracts/agent/quantsmith-pin.json"), reviewed: both }).ok).toBe(true);
+    expect([absent, nullable, unknown]).toHaveLength(3);
   });
 
   it("rejects a malformed digest and an absolute asset path", () => {

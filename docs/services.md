@@ -26,16 +26,22 @@ browser ──► terminal (Vite dev server, :3000) ──► model service (127
 | Terminal (`npm run dev`) | everything | 3000 | yes | [`README.md`](../README.md) |
 | [`inventory_optimizer_api`](../services/inventory_optimizer_api/README.md) | IBAL `/inventory-optimizer` | 8013 | yes, needs the InventoryBallast engine | `docs/specs/spec013/` |
 | [`money_market_api`](../services/money_market_api/README.md) | MMKT `/money-market` | 8014 | yes | [`spec011/HANDOFF.md`](specs/spec011/HANDOFF.md) |
-| [`sources_uses_api`](../services/sources_uses_api/README.md) | SXU `/sources-uses` | 8015 (reserved) | **not yet**: contracts and tests only | [`spec012/HANDOFF.md`](specs/spec012/HANDOFF.md) |
+| [`sources_uses_api`](../services/sources_uses_api/README.md) | SXU `/sources-uses` | 8015 | verified LP, evidence/comparison and rollover; opt-in local service | [`spec012/HANDOFF.md`](specs/spec012/HANDOFF.md) |
 | `liquidity_api` | `/cash-optimizer/liquidity` | 8016 (reserved) | **not yet**: spec014 is a draft | `docs/specs/spec014/` |
 | [`collateral_optimizer_api`](../services/collateral_optimizer_api/README.md) | COLL `/collateral`, OPT preview | 8017 | yes, needs an authorized InventoryBallast checkout | `docs/specs/spec016/` |
 | [`indemnification_api`](../services/indemnification_api/README.md) | INDEM `/securities-lending/indemnification` | 8018 | yes (phase 1: risk model and pricing; no optimizer) | [`spec020/HANDOFF.md`](specs/spec020/HANDOFF.md) |
+| [`portfolio_regime_api`](../services/portfolio_regime_api/README.md) | PORA (service not registered) | 8019 (proposed) | health-only scaffold; HTTP 503 UNCONFIGURED, no model/run routes | [`spec026/PLAN.md`](specs/spec026/PLAN.md) |
 | [`news_nlp`](../services/news_nlp/README.md) | NEWS sentiment, NER, clustering | 8088 | yes (lexicon fallback without the model stack) | [`services/news_nlp/README.md`](../services/news_nlp/README.md) |
 | [`macro_data_etl`](../services/macro_data_etl/README.md) | ETL batch jobs for global macro data | — (CLI) | yes, run on demand | [`services/macro_data_etl/README.md`](../services/macro_data_etl/README.md) |
 | `agent_worker` | ECOIQ agent panel | — (polls a queue) | yes | `docs/specs/spec009/` |
 | [`optimization_core`](../services/optimization_core/README.md) | shared library | — | no, it is installed into other services | — |
 
 All Python services need **Python 3.12 or newer**. Use one virtual environment per service.
+
+Spec026's independently installable model is co-located at
+[`models/portfolio_regime`](../models/portfolio_regime/README.md). Its API consumes
+the installed wheel and is not added to `dev:all`. Model extraction into a later
+repository preserves the package/import boundary; numerical binding remains open.
 
 **Everything at once:** `npm run dev:all` (or `scripts/dev-all.sh`) starts the terminal, IBAL, MMKT,
 COLL and the agent worker, builds what they need under `.data/` on first run, and stops them all on
@@ -116,23 +122,24 @@ MONEY_MARKET_API_TOKEN=local-token
 - **Rates:** choose a SIM rate set on the page. The real-rate (Gold) option fails closed until
   EcoMedallion's `gold.mmkt_rate_snapshot` is wired (issue #149).
 
-## 4. Sources & Uses: `sources_uses_api` (port 8015, not runnable yet)
+## 4. Sources & Uses: `sources_uses_api` (port 8015)
 
-So far this package holds only the versioned request contracts and the canonical configuration
-and run hashes (spec012 SU-002). It has no solver and no HTTP endpoint, so there is nothing to
-start. The `/sources-uses` page works without it: the configuration workspace and the Synthetic
-PoC tab run entirely in the browser.
-
-To run its checks:
+The workspace can solve a user-supplied single-currency continuous funding book
+through the authenticated Python service. Positive minimum tickets and lot sizes
+remain unsupported until MIP. Synthetic showcase economics remain separate.
 
 ```bash
-python3.12 -m venv .venv-sxu
-.venv-sxu/bin/pip install -e ./services/sources_uses_api pytest ruff
-cd services/sources_uses_api && ../../.venv-sxu/bin/ruff check . && ../../.venv-sxu/bin/pytest -q
+python3 -m venv .data/sxu-venv
+.data/sxu-venv/bin/pip install ./services/optimization_core -e ./services/sources_uses_api
+SXU_PYTHON=.data/sxu-venv/bin/python npm run dev:sxu
 ```
 
-SU-003 to SU-005 add the solver on `optimization_core` and SU-009 adds the API; this section will
-gain start commands then.
+The local launcher supplies matching private ephemeral credentials and opens a
+separate terminal on 5173; it refuses to replace existing listeners. For an
+existing terminal configure `SOURCES_USES_API_URL`, `SOURCES_USES_API_TOKEN`, and
+service binding `SXU_MODEL_BINDING=local-sxu-lp-v1`. Production remains separately
+gated. See the [service guide](../services/sources_uses_api/README.md) for the full
+numerical limits, model semantics, tests, and production access requirements.
 
 ## 5. Collateral optimizer: `collateral_optimizer_api` (port 8017)
 

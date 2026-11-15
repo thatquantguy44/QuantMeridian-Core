@@ -1,0 +1,21 @@
+{
+  "schema_version": "quantsmith-pin/1",
+  "package": { "name": "quantsmith", "version": "0.1.0", "code_digest": "sha256:21eab2392ec8e519077fc4b35b9b1ea72be06d8b56b123223bde291f7658ca12" },
+  "assets": {
+    "digest": "sha256:9f5648b89ed32f54bdfb7143f0a0fdb8f73e4713e855cd932dd2b88c669596f9",
+    "paths": [
+      "knowledge/analytics_packs",
+      "knowledge/visualization_packs",
+      "knowledge/short_term_markets",
+      "agents/analytics",
+      "agents/economists/macro_backdrop_summarizer",
+      "agents/securities_financing",
+      "templates/docs/macro_backdrop_report.md"
+    ]
+  },
+  "reviewed": {
+    "on": "2026-10-10",
+    "source_path": "../../agentic_workflows/qf_workflow_sdk_public",
+    "note": "Local source selected 2026-10-30; no Git commit is required. Fingerprints retain the 2026-10-10 reviewed content. The selected folder currently differs and requires content review before re-pinning."
+  }
+}

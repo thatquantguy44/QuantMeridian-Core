@@ -40,6 +40,39 @@ class Reviewed(BaseModel):
     note: str | None = None
 
 
+class Reviewed1(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    on: Annotated[str, Field(pattern='^[0-9]{4}-[0-9]{2}-[0-9]{2}$')]
+    source_path: Annotated[
+        str,
+        Field(
+            description='Optional local QuantSmith root, absolute or relative to the QuantMeridian repository root. No Git checkout or commit is required. Content fingerprints remain mandatory.',
+            min_length=1,
+            pattern='\\S',
+        ),
+    ]
+    note: str | None = None
+
+
+class Reviewed2(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    on: Annotated[str, Field(pattern='^[0-9]{4}-[0-9]{2}-[0-9]{2}$')]
+    source_commit: Annotated[str, Field(pattern='^[0-9a-f]{40}$')]
+    source_path: Annotated[
+        str,
+        Field(
+            description='Optional local QuantSmith root, absolute or relative to the QuantMeridian repository root. No Git checkout or commit is required. Content fingerprints remain mandatory.',
+            min_length=1,
+            pattern='\\S',
+        ),
+    ]
+    note: str | None = None
+
+
 class QuantSmithPin(BaseModel):
     model_config = ConfigDict(
         extra='forbid',
@@ -47,4 +80,4 @@ class QuantSmithPin(BaseModel):
     schema_version: Literal['quantsmith-pin/1']
     package: Package
     assets: Assets
-    reviewed: Reviewed
+    reviewed: Reviewed | Reviewed1 | Reviewed2

@@ -1,0 +1,23 @@
+% LaTeX equation snippet. Requires amsmath; use definitions from latex_sidebar.md.
+% Equation 1
+\[
+\boldsymbol{\beta}^{(i)}_{t+1}
+=\widehat{\boldsymbol{c}}+\widehat{A}\boldsymbol{\beta}^{(i)}_t
++\widehat{\boldsymbol{\varepsilon}}_{J_{i,t}},
+\qquad J_{i,t}\sim\operatorname{Unif}\{1,\ldots,N\}.
+\]
+
+% Equation 2
+\[
+y^{(i)}_t(\tau)=\beta^{(i)}_{0,t}
++\beta^{(i)}_{1,t}g(x)
++\beta^{(i)}_{2,t}\bigl[g(x)-e^{-x}\bigr],
+\qquad g(x)=\frac{1-e^{-x}}{x},\quad x=\frac{\tau}{\bar\lambda}.
+\]
+
+% Equation 3
+\[
+q^{\mathrm{anchor}}_{p,h}(\tau)=q_{p,h}(\tau)
++w(\tau)\bigl[r_h-q_{0.5,h}(a)\bigr],
+\qquad w(\tau)=\min\!\left(1,\max\!\left(0,e^{-(\tau-a)/k}\right)\right).
+\]
