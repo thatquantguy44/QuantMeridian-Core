@@ -299,6 +299,25 @@ A value below $-2$ means model $A$ has a significantly smaller squared error. Th
 
 The route reads Gold only. If the database is unreachable or a series is empty, the page shows an error. It never substitutes simulated data. The page aligns the series and computes every statistic in the browser, so control changes are instant. The `DATA AS OF` date is the last VIX close; a freshness tag appears when the Gold load is behind.
 
+## Reproducing the analysis
+
+### Check the public implementation
+
+The public [QuantMeridian-Core repository](https://github.com/thatquantguy44/QuantMeridian-Core) contains the VIXR calculation engine, walk-forward forecast code, independent Python reference, and two committed Gold-data excerpts (the 2007–09 crisis and 2017). From that repository root:
+
+```bash
+npm ci
+npm test -- src/lib/vixImpliedForward.golden.test.ts src/lib/vixWalkForward.test.ts
+```
+
+The golden test compares TypeScript results with independent NumPy/SciPy reference values for both excerpts. To regenerate those expected JSON files, install NumPy and SciPy in a Python environment, then run `python3 scripts/fixtures/vixr_reference.py`. That command **rewrites** `src/lib/__fixtures__/vixr/expected-*.json`; inspect the diff before keeping any changes. The included excerpts verify the method on limited periods. They do not reproduce the full-history headline table.
+
+### Recreate the full-history readout
+
+VIXR reads an existing Gold SQLite or PostgreSQL database; the historical database snapshot used for the reference results is **not included** in the repository. The route requires daily `VIXCLS` values in `fred_latest_observation` (`series_id`, `observation_date`, `value`) and SPY price closes in `equity_total_return_index` (`ticker`, `observation_date`, `close`). SPY total-return and FRED `SP500` are optional alternate bases. See the [VIXR route](https://github.com/thatquantguy44/QuantMeridian-Core/blob/main/src/app/api/market-volatility/vix-forward/route.ts) for the exact queries and the [Core setup guide](https://github.com/thatquantguy44/QuantMeridian-Core/blob/main/README.md) for database configuration.
+
+With those tables populated, run `npm ci` and `MACRO_DB_URL=sqlite:./data/fred_local.db npm run dev` (or supply a PostgreSQL URL), then open `/market-volatility/implied-vs-forward`. Select **SPY price**, **non-overlapping** windows and the full date range to compare with the reference table below. Matching the published results also requires the same historical prices and the October 6, 2026 data cutoff; later observations, revisions, missing days, and vendor adjustments can change the numbers. FRED provides [VIXCLS](https://fred.stlouisfed.org/series/VIXCLS); obtain SPY closes from a provider whose access and redistribution terms permit your use. No provider credentials, full SPY history, or populated Gold database are shipped here. The public fixtures and tests are the reproducible check available without that data.
+
 ## Assumptions
 
 - **Price basis:** the default is SPY price (no dividends), the closest long-history match to the price index the VIX options are written on. SPY also carries a 0.09% fee and small tracking error. Use the FRED index to check the proxy over its ten years.
