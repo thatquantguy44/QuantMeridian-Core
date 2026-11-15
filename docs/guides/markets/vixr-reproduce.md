@@ -24,7 +24,7 @@ dates and drops incomplete 30-day windows.
 
 ## Run
 
-Install Python, NumPy, and SciPy. From the QuantMeridian-Core repository root:
+Install Python 3.10 or newer, NumPy, and SciPy. From the QuantMeridian-Core repository root:
 
 ```bash
 python3 scripts/fixtures/vixr_reproduce.py \
