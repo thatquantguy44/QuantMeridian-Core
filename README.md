@@ -6,6 +6,8 @@ snapshots and charting studios, volatility, news and sentiment, prediction marke
 Copilot over the latest macro data. Data comes from a Gold macro database (Postgres or SQLite) fed by
 the FRED pipeline.
 
+For the VIX forward-return study, see the [VIXR white paper](docs/guides/markets/vixr-whitepaper.md) and [CSV reproduction guide](docs/guides/markets/vixr-reproduce.md).
+
 > **This repository is generated.** It is a subset of a private upstream project (QuantMeridian)
 > with the securities-finance modules removed, and a bot syncs it from upstream whenever upstream
 > changes. Please do not open pull requests here: edits to synced files are overwritten on the next
