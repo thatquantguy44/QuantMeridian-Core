@@ -59,7 +59,6 @@ const ALL_NAV: NavItem[] = [
   { code: "MKC", label: "Market Chart Studio", href: "/market-chart", icon: CandlestickChart, desc: "Freeform technical market charting", group: "MARKETS" },
   { code: "MVOL", label: "Market Volatility", href: "/market-volatility", icon: Activity, desc: "VIX claim audits & volatility regimes", group: "MARKETS" },
   { code: "VIXR", label: "VIX Implied vs Forward", href: "/market-volatility/implied-vs-forward", icon: ChartScatter, desc: "VIX-implied 30-day move vs realized S&P 500 returns", group: "MARKETS" },
-  { code: "INDEM", label: "Indemnification Risk", href: "/securities-lending/indemnification", icon: ShieldAlert, desc: "Borrower default & reinvestment indemnification (SIM)", group: "FINANCE" },
   // Optimization Center is the hub of this group: keep it first, then the models in demo order.
   { code: "MMKT", label: "Money Market Optimizer", href: "/money-market", icon: Coins, desc: "Forecast cash deployment across MMFs, bills, repo and CP", group: "OPTIMIZATION" },
   { code: "MMFO", label: "Money Market Fund Optimizer", href: "/money-market-fund-optimizer", icon: Banknote, desc: "Fund allocation optimizer backed by a separately deployed model", group: "OPTIMIZATION" },
@@ -76,11 +75,10 @@ const ALL_NAV: NavItem[] = [
   { code: "REGIME", label: "Macro Regime", href: "/economics/regime", icon: BrainCircuit, desc: "Macro states to desk playbooks", group: "ECONOMICS" },
   { code: "EML", label: "ML Applications", href: "/economics/ml", icon: BrainCircuit, desc: "Recession, nowcast & rate models", group: "ECONOMICS" },
   { code: "FUND", label: "Funding & Liquidity", href: "/economics/funding", icon: Droplets, desc: "Repo, corridor, balances & funding stress", group: "ECONOMICS" },
-  { code: "BMRK", label: "Benchmark Rates", href: "/economics/benchmark", icon: Activity, desc: "Daily rates — trend, status, comparison & regime", group: "ECONOMICS" },
-  { code: "BRA", label: "Rate Analysis Hub", href: "/economics/rate-analysis", icon: Activity, desc: "Unified dashboard across all benchmark rate modules", group: "ECONOMICS" },
+  { code: "BMRK", label: "Benchmark Rates", href: "/economics/benchmark", icon: Activity, desc: "Daily rates — trend, status, comparison & regime", group: "MARKETS" },
+  { code: "BRA", label: "Rate Analysis Hub", href: "/economics/rate-analysis", icon: Activity, desc: "Unified dashboard across all benchmark rate modules", group: "MARKETS" },
   { code: "YCURV", label: "Yield Curve Analytics", href: "/economics/yield-curve", icon: Spline, desc: "Daily curve shape, slope history & regime shifts", group: "ECONOMICS" },
   { code: "RVOL", label: "Rate Volatility", href: "/economics/rate-vol", icon: Activity, desc: "Realized vol surface, vol regimes & vol-of-vol", group: "ECONOMICS" },
-  { code: "FCOST", label: "Funding Cost Monitor", href: "/economics/funding-cost", icon: Banknote, desc: "Blended borrowing costs by tier & desk attribution", group: "ECONOMICS" },
   { code: "MGC", label: "Macro Chart Studio", href: "/macro-chart", icon: AreaChart, desc: "Freeform economic & macro charting", group: "ECONOMICS" },
   { code: "EDA", label: "EDA / Lead-Lag", href: "/economics/eda", icon: Activity, desc: "Cross-correlation, Granger causality & regime breaks", group: "ECONOMICS" },
   { code: "MOTN", label: "Macro Motion Studio", href: "/economics/motion", icon: Clapperboard, desc: "Animate economic series over time", group: "ECONOMICS" },
@@ -93,6 +91,11 @@ const ALL_NAV: NavItem[] = [
   { code: "AI", label: "AI Copilot", href: "/copilot", icon: Bot, desc: "Natural-language intelligence", group: "INTELLIGENCE" },
   { code: "DATAOPS", label: "Data Ops", href: "/dataops", icon: Cpu, desc: "Provider health and lineage", group: "DATAOPERATIONS" },
   { code: "ALRT", label: "Alert Center", href: "/alerts", icon: BellRing, desc: "Streaming risk & ops alerts", group: "DATAOPERATIONS" },
+  // Append new entries so existing Alt+number module shortcuts keep their targets.
+  { code: "FXR", label: "FX Research", href: "/fx/research", icon: Globe2, desc: "FX reference rates, history & research workspace (preview)", group: "MARKETS" },
+  { code: "FXH", label: "FX Exposure & Hedging", href: "/fx/exposure-hedging", icon: ShieldAlert, desc: "Currency cashflows, portfolio exposure & hedges workspace (preview)", group: "FINANCE" },
+  { code: "PRES", label: "Presidential Impact", href: "/presidential-impact", icon: Landmark, desc: "Political-control research, inherited conditions & figure exports", group: "MARKETS" },
+  { code: "PORA", label: "Portfolio & Regime Analysis", href: "/portfolio-regime", icon: ChartScatter, desc: "Portfolio and regime research workspace", group: "OPTIMIZATION" },
 ];
 
 export const NAV: NavItem[] = ALL_NAV.filter((n) => isModuleEnabled(n.code));

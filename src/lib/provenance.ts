@@ -30,6 +30,7 @@ export type ProvenanceSource =
   | "LIVE"
   | "POLY"
   | "QR_HAVEN"
+  | "ECB_REFERENCE"
   | "DB"
   | "FILE"
   | "ETL"
@@ -56,6 +57,7 @@ export const PROVENANCE_META: Record<ProvenanceSource, ProvenanceMeta> = {
   LIVE: { label: "LIVE · PIPELINE", live: true, tone: "live", title: "Live from market data (legacy — MARKET_PIPELINE_URL decommissioned)" },
   POLY: { label: "LIVE · POLY", live: true, tone: "live", title: "Live from Polymarket CLOB + Gamma APIs (public, no auth)" },
   QR_HAVEN: { label: "QR HAVEN", live: false, tone: "etl", title: "Forecast and shadow-run metadata from the QR Haven model service" },
+  ECB_REFERENCE: { label: "ECB · REFERENCE", live: false, tone: "snapshot", title: "Informational ECB reference rates captured through Gold; freshness and permitted use are assessed separately. Not executable quotes." },
   DB: { label: "LIVE · DB", live: true, tone: "live", title: "Gold macro database — fred-bronze-to-gold-pipeline (MACRO_DB_URL)" },
   FILE: { label: "LIVE · FILE", live: true, tone: "live", title: "Local exported-file cache (legacy — MARKET_DATA_DIR decommissioned)" },
   ETL: { label: "ETL · MACRO", live: false, tone: "etl", title: "macro_data_etl gold tables (frozen 2026-06-24). Committed JSON snapshot — not live. Enable SIM or configure a live source (MACRO_DB_URL, FRED_API_KEY) for fresh data." },
@@ -156,7 +158,7 @@ export function classifyDbStaleness(
  * If sources are mixed across live/non-live, returns the worst one present.
  */
 const SOURCE_TIER: Record<string, number> = {
-  FRED: 0, LIVE: 1, POLY: 2, DB: 3, FILE: 4, QR_HAVEN: 5, ETL: 6, SNAPSHOT: 7, ECON: 8, SIM: 9, UNAVAILABLE: 10, ERR: 11,
+  FRED: 0, LIVE: 1, POLY: 2, DB: 3, FILE: 4, QR_HAVEN: 5, ETL: 6, SNAPSHOT: 7, ECB_REFERENCE: 7, ECON: 8, SIM: 9, UNAVAILABLE: 10, ERR: 11,
 };
 
 export function worstSource<T extends string>(sources: T[]): T {

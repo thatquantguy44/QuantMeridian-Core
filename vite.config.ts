@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { devApiPlugin } from "./vite-plugins/dev-api";
+import { composeOnlySecrets } from "./scripts/sxu-review/env-isolation.mjs";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 
@@ -14,8 +15,9 @@ export default defineConfig(({ mode }) => {
   // would fall back to SIM. Load `.env*` and copy any var not already set in the
   // real environment onto `process.env` so `npm run dev` picks up `.env` keys.
   const env = loadEnv(mode, root, "");
+  for (const key of composeOnlySecrets) delete process.env[key];
   for (const [key, value] of Object.entries(env)) {
-    if (process.env[key] === undefined) process.env[key] = value;
+    if (!composeOnlySecrets.includes(key) && process.env[key] === undefined) process.env[key] = value;
   }
 
   return {

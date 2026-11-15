@@ -107,7 +107,7 @@ All as-of joins must require `first_knowable_at <= decision_at`, then select the
 - Loan and benchmark fees are comparable only after rate convention, currency, collateral, term, settlement state, and source cohort are compatible.
 - `quality_state=QUARANTINED` is ineligible for feature publication. `DEGRADED` requires an explicit model policy; it is not silently valid.
 
-The SQZ-T09 decision shape and policy-injected row-quality, freshness, and coverage rules are documented in [QUALITY_GATES.md](QUALITY_GATES.md). The gate deliberately has no built-in budgets or coverage thresholds while owner decisions remain open.
+The SQZ-T09 decision shape and policy-injected row-quality, freshness, and coverage rules are documented in [QUALITY_GATES.md](QUALITY_GATES.md). The evaluator deliberately has no hidden built-in budgets or coverage thresholds: Phase 1 callers supply the approved versioned SIM policies, while future LIVE values remain separate owner decisions.
 
 ## Field reference
 

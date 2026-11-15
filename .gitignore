@@ -48,6 +48,11 @@ next-env.d.ts
 backend/__pycache__/
 backend/.venv/
 services/**/.venv/
+models/**/.venv/
+models/**/build/
+models/**/dist/
+services/portfolio_regime_api/build/
+services/portfolio_regime_api/dist/
 **/__pycache__/
 *.pyc
 .hypothesis/

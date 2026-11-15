@@ -1,0 +1,361 @@
+{
+  "schemaVersion": "kgr-source-research/1",
+  "status": "RESEARCH_ONLY",
+  "providers": [
+    {
+      "id": "cme",
+      "name": "CME Clearing",
+      "sourceClass": "CCP_MARGIN",
+      "landingUrl": "https://www.cmegroup.com/solutions/clearing/financial-and-collateral-management/acceptable-collateral.html",
+      "reviewedOn": "2026-11-05",
+      "admissionStatus": "RESEARCH_ONLY",
+      "rightsStatus": "NOT_CLEARED_FOR_PRODUCT_REUSE",
+      "termsReferenceUrl": "https://www.cmegroup.com/files/terms-of-use.pdf",
+      "termsReviewStatus": "INITIAL_REVIEW_REQUIRES_SCOPE_CLEARANCE",
+      "freshnessPolicyStatus": "PENDING",
+      "coverage": [
+        "Online-verified Treasury examples only; seven rows."
+      ],
+      "documents": [
+        {
+          "documentId": "cme-page",
+          "url": "https://www.cmegroup.com/solutions/clearing/financial-and-collateral-management/acceptable-collateral.html",
+          "captureStatus": "web_reviewed_not_downloaded",
+          "documentDate": null,
+          "documentDateMeaning": null,
+          "sourceAsOf": null,
+          "effectiveFrom": null,
+          "effectiveTo": null
+        },
+        {
+          "documentId": "cme-base",
+          "url": "https://www.cmegroup.com/clearing/financial-and-collateral-management/files/acceptable-collateral-futures-options-select-forwards.pdf",
+          "captureStatus": "web_reviewed_not_downloaded",
+          "documentDate": null,
+          "documentDateMeaning": null,
+          "sourceAsOf": null,
+          "effectiveFrom": null,
+          "effectiveTo": null
+        },
+        {
+          "documentId": "cme-irs",
+          "url": "https://www.cmegroup.com/clearing/financial-and-collateral-management/files/acceptable-collateral-irs.pdf",
+          "captureStatus": "web_reviewed_not_downloaded",
+          "documentDate": null,
+          "documentDateMeaning": null,
+          "sourceAsOf": null,
+          "effectiveFrom": null,
+          "effectiveTo": null
+        },
+        {
+          "documentId": "cme-review-20260709",
+          "url": "https://www.cmegroup.com/content/dam/cmegroup/notices/clearing/2026/07/chadv26-233.pdf",
+          "captureStatus": "web_reviewed_not_downloaded",
+          "documentDate": "2026-07-09",
+          "documentDateMeaning": "publication_or_document_label",
+          "sourceAsOf": null,
+          "effectiveFrom": null,
+          "effectiveTo": null
+        }
+      ],
+      "openGates": [
+        "Original-file capture and hashes remain unavailable.",
+        "Base/IRS scope, account limits and FX overlays require complete extraction.",
+        "Mutable summary PDF effective dates remain unconfirmed.",
+        "Confirm permissions and intended-use scope against the published terms before further automation or product reuse."
+      ],
+      "termsReviewReference": "RIGHTS_REVIEW.md"
+    },
+    {
+      "id": "lch",
+      "name": "LCH Ltd",
+      "sourceClass": "CCP_MARGIN",
+      "landingUrl": "https://www.lseg.com/en/post-trade/clearing/collateral-management/ltd-collateral-management/ltd-acceptable-collateral/ltd-acceptable-securities",
+      "reviewedOn": "2026-11-05",
+      "admissionStatus": "RESEARCH_ONLY",
+      "rightsStatus": "NOT_CLEARED_FOR_PRODUCT_REUSE",
+      "termsReferenceUrl": "https://www.lseg.com/en/policies/website-terms-of-use",
+      "termsReviewStatus": "INITIAL_REVIEW_REQUIRES_SCOPE_CLEARANCE",
+      "freshnessPolicyStatus": "PENDING",
+      "coverage": [
+        "Complete original captured; twelve selected Australia cells retain the 30-year conventional and 25-year inflation-linked maximum eligible terms separately from the printed buckets."
+      ],
+      "documents": [
+        {
+          "documentId": "lch-page",
+          "url": "https://www.lseg.com/en/post-trade/clearing/collateral-management/ltd-collateral-management/ltd-acceptable-collateral/ltd-acceptable-securities",
+          "captureStatus": "downloaded",
+          "documentDate": null,
+          "documentDateMeaning": null,
+          "sourceAsOf": null,
+          "effectiveFrom": null,
+          "effectiveTo": null
+        },
+        {
+          "documentId": "lch-haircuts",
+          "url": "https://www.lseg.com/content/dam/post-trade/en_us/documents/lch/collateral-management/lch-ltd/lch-ltd-acceptable-collateral-haircuts.pdf",
+          "captureStatus": "downloaded",
+          "documentDate": "2026-06-25",
+          "documentDateMeaning": "publication_or_document_label",
+          "sourceAsOf": null,
+          "effectiveFrom": null,
+          "effectiveTo": null
+        }
+      ],
+      "openGates": [
+        "Publication date is not an established effective date.",
+        "Full table, FX, legal-delivery and concentration conditions require reconciliation.",
+        "Confirm permissions and intended-use scope against the published terms before further automation or product reuse."
+      ],
+      "termsReviewReference": "RIGHTS_REVIEW.md"
+    },
+    {
+      "id": "ice",
+      "name": "ICE Clear Europe",
+      "sourceClass": "CCP_MARGIN",
+      "landingUrl": "https://www.ice.com/clear-europe/treasury-and-banking",
+      "reviewedOn": "2026-11-05",
+      "admissionStatus": "RESEARCH_ONLY",
+      "rightsStatus": "NOT_CLEARED_FOR_PRODUCT_REUSE",
+      "termsReferenceUrl": "https://www.ice.com/privacy-security-center/terms-of-use",
+      "termsReviewStatus": "INITIAL_REVIEW_REQUIRES_SCOPE_CLEARANCE",
+      "freshnessPolicyStatus": "PENDING",
+      "coverage": [
+        "342 complete FX history rows retain initial-margin currency-mismatch scope and landing-page lineage; six selected Austrian sovereign cells retain the RATB/RAGB ticker restrictions."
+      ],
+      "documents": [
+        {
+          "documentId": "ice-page",
+          "url": "https://www.ice.com/clear-europe/treasury-and-banking",
+          "captureStatus": "downloaded",
+          "documentDate": null,
+          "documentDateMeaning": null,
+          "sourceAsOf": null,
+          "effectiveFrom": null,
+          "effectiveTo": null
+        },
+        {
+          "documentId": "ice-permitted-cover",
+          "url": "https://www.ice.com/publicdocs/clear_europe/list-of-permitted-covers.pdf",
+          "captureStatus": "downloaded",
+          "documentDate": "2026-07",
+          "documentDateMeaning": "publication_or_document_label",
+          "sourceAsOf": null,
+          "effectiveFrom": null,
+          "effectiveTo": null
+        },
+        {
+          "documentId": "ice-fx-history",
+          "url": "https://www.ice.com/publicdocs/iosco_reporting/haircut_history/iceu/ICEU_Currency_Haircuts_History.csv",
+          "captureStatus": "downloaded",
+          "documentDate": null,
+          "documentDateMeaning": null,
+          "sourceAsOf": null,
+          "effectiveFrom": null,
+          "effectiveTo": null
+        }
+      ],
+      "openGates": [
+        "PDF has publication month only.",
+        "FX history endpoint inclusivity and current-file freshness remain unconfirmed.",
+        "Account/product restrictions and Finance Procedures are not machine-enforced.",
+        "Confirm permissions and intended-use scope against the published terms before further automation or product reuse."
+      ],
+      "termsReviewReference": "RIGHTS_REVIEW.md"
+    },
+    {
+      "id": "eurex",
+      "name": "Eurex Clearing",
+      "sourceClass": "CCP_MARGIN",
+      "landingUrl": "https://www.eurex.com/ec-en/services/risk-parameters",
+      "reviewedOn": "2026-11-05",
+      "admissionStatus": "RESEARCH_ONLY",
+      "rightsStatus": "NOT_CLEARED_FOR_PRODUCT_REUSE",
+      "termsReferenceUrl": "https://www.eurex.com/ec-en/disclaimer",
+      "termsReviewStatus": "INITIAL_REVIEW_REQUIRES_SCOPE_CLEARANCE",
+      "freshnessPolicyStatus": "PENDING",
+      "coverage": [
+        "11,436 complete captured security records; fixed-width Windows-1252 ZIP member."
+      ],
+      "documents": [
+        {
+          "documentId": "eurex-page",
+          "url": "https://www.eurex.com/ec-en/services/risk-parameters",
+          "captureStatus": "downloaded",
+          "documentDate": null,
+          "documentDateMeaning": null,
+          "sourceAsOf": null,
+          "effectiveFrom": null,
+          "effectiveTo": null
+        },
+        {
+          "documentId": "eurex-criteria",
+          "url": "https://www.eurex.com/resource/blob/337224/3edd39d7e5c013f6bed55a5f02db86f6/data/AdmissibleCollateralSecurities.pdf",
+          "captureStatus": "downloaded",
+          "documentDate": null,
+          "documentDateMeaning": null,
+          "sourceAsOf": null,
+          "effectiveFrom": null,
+          "effectiveTo": null
+        },
+        {
+          "documentId": "eurex-global-securities",
+          "url": "https://www.eurex.com/resource/blob/4333300/77cb51ddb785d9d3bb8f142f4dc73919/data/GlobalAdmissibleSecurities.zip",
+          "captureStatus": "downloaded",
+          "documentDate": null,
+          "documentDateMeaning": null,
+          "sourceAsOf": "2026-11-04",
+          "effectiveFrom": null,
+          "effectiveTo": null
+        }
+      ],
+      "openGates": [
+        "Website download date 2026-11-05 differs from row LastUpdate 2026-11-04.",
+        "Row date and collateral expiration are not schedule validity dates.",
+        "Acceptance qualifications, add-ons and freshness need an admitted policy.",
+        "Confirm permissions and intended-use scope against the published terms before further automation or product reuse."
+      ],
+      "termsReviewReference": "RIGHTS_REVIEW.md"
+    },
+    {
+      "id": "boe",
+      "name": "Bank of England",
+      "sourceClass": "CENTRAL_BANK_LENDING",
+      "landingUrl": "https://www.bankofengland.co.uk/markets/eligible-collateral",
+      "reviewedOn": "2026-11-05",
+      "admissionStatus": "RESEARCH_ONLY",
+      "rightsStatus": "NOT_CLEARED_FOR_PRODUCT_REUSE",
+      "termsReferenceUrl": "https://www.bankofengland.co.uk/legal",
+      "termsReviewStatus": "INITIAL_REVIEW_REQUIRES_SCOPE_CLEARANCE",
+      "freshnessPolicyStatus": "PENDING",
+      "coverage": [
+        "Complete A/B/C lists: 1,992 / 2,640 / 78 records; eight selected UK coupon haircut cells."
+      ],
+      "documents": [
+        {
+          "documentId": "boe-page",
+          "url": "https://www.bankofengland.co.uk/markets/eligible-collateral",
+          "captureStatus": "downloaded",
+          "documentDate": null,
+          "documentDateMeaning": null,
+          "sourceAsOf": null,
+          "effectiveFrom": null,
+          "effectiveTo": null
+        },
+        {
+          "documentId": "boe-haircuts",
+          "url": "https://www.bankofengland.co.uk/-/media/boe/files/markets/eligible-collateral/summary-tables-of-haircuts-for-bank-lending-operations.pdf",
+          "captureStatus": "downloaded",
+          "documentDate": "2026-10-30",
+          "documentDateMeaning": "publication_or_document_label",
+          "sourceAsOf": null,
+          "effectiveFrom": null,
+          "effectiveTo": null
+        },
+        {
+          "documentId": "boe-level-a",
+          "url": "https://www.bankofengland.co.uk/-/media/boe/files/markets/eligible-collateral/eligible-securities.csv",
+          "captureStatus": "downloaded",
+          "documentDate": null,
+          "documentDateMeaning": null,
+          "sourceAsOf": "2026-11-05",
+          "effectiveFrom": null,
+          "effectiveTo": null
+        },
+        {
+          "documentId": "boe-level-b",
+          "url": "https://www.bankofengland.co.uk/-/media/boe/files/markets/eligible-collateral/eligible-level-b-collateral.csv",
+          "captureStatus": "downloaded",
+          "documentDate": null,
+          "documentDateMeaning": null,
+          "sourceAsOf": "2026-11-02",
+          "effectiveFrom": null,
+          "effectiveTo": null
+        },
+        {
+          "documentId": "boe-level-c",
+          "url": "https://www.bankofengland.co.uk/-/media/boe/files/markets/eligible-collateral/eligible-level-c-collateral.csv",
+          "captureStatus": "downloaded",
+          "documentDate": null,
+          "documentDateMeaning": null,
+          "sourceAsOf": "2026-11-02",
+          "effectiveFrom": null,
+          "effectiveTo": null
+        }
+      ],
+      "openGates": [
+        "Level A source-as-of 2026-11-05; Level B/C source-as-of 2026-11-02.",
+        "Publication date of haircut table is not assigned as its effective date.",
+        "Listing level is insufficient for a general ISIN-to-haircut or facility-eligibility decision.",
+        "Confirm whether any source-specific reuse permission covers these collateral files; do not assume the separate Database OGL applies.",
+        "Confirm permissions and intended-use scope against the published terms before further automation or product reuse."
+      ],
+      "termsReviewReference": "RIGHTS_REVIEW.md"
+    },
+    {
+      "id": "fed",
+      "name": "Federal Reserve Discount Window",
+      "sourceClass": "CENTRAL_BANK_LENDING",
+      "landingUrl": "https://www.frbdiscountwindow.org/en/Pages/General-Information/~/link.aspx?_id=BA73CD056C8549BBB63ABB13C091D928&_z=z",
+      "reviewedOn": "2026-11-05",
+      "admissionStatus": "RESEARCH_ONLY",
+      "rightsStatus": "NOT_CLEARED_FOR_PRODUCT_REUSE",
+      "termsReferenceUrl": "https://www.frbdiscountwindow.org/utilities/privacy-policy-disclaimer",
+      "termsReviewStatus": "INITIAL_REVIEW_REQUIRES_SCOPE_CLEARANCE",
+      "freshnessPolicyStatus": "PENDING",
+      "coverage": [
+        "Complete securities grids for 2026-07-01 onward as published, 2025-07-01 to 2026-06-30, and 2024-09-03 to 2025-06-30."
+      ],
+      "documents": [
+        {
+          "documentId": "fed-page",
+          "url": "https://www.frbdiscountwindow.org/en/Pages/General-Information/~/link.aspx?_id=BA73CD056C8549BBB63ABB13C091D928&_z=z",
+          "captureStatus": "downloaded",
+          "documentDate": null,
+          "documentDateMeaning": null,
+          "sourceAsOf": null,
+          "effectiveFrom": "2026-07-01",
+          "effectiveTo": null
+        },
+        {
+          "documentId": "fed-history",
+          "url": "https://www.frbdiscountwindow.org/generalpages/historical_margins/margin_tables",
+          "captureStatus": "downloaded",
+          "documentDate": null,
+          "documentDateMeaning": null,
+          "sourceAsOf": null,
+          "effectiveFrom": null,
+          "effectiveTo": null
+        },
+        {
+          "documentId": "fed-securities-2025",
+          "url": "https://www.frbdiscountwindow.org/generalpages/historical_margins/2026/07012025_06302026_securities_table",
+          "captureStatus": "downloaded",
+          "documentDate": null,
+          "documentDateMeaning": null,
+          "sourceAsOf": null,
+          "effectiveFrom": "2025-07-01",
+          "effectiveTo": "2026-06-30"
+        },
+        {
+          "documentId": "fed-securities-2024",
+          "url": "https://www.frbdiscountwindow.org/generalpages/historical_margins/2025/09032024_06302025_securities_table",
+          "captureStatus": "downloaded",
+          "documentDate": null,
+          "documentDateMeaning": null,
+          "sourceAsOf": null,
+          "effectiveFrom": "2024-09-03",
+          "effectiveTo": "2025-06-30"
+        }
+      ],
+      "openGates": [
+        "185 securities cells per version, including two unavailable commercial-paper cells.",
+        "Duration buckets must not be treated as maturity buckets.",
+        "Loan tables are captured but not normalized; methodology/table changes limit comparisons.",
+        "Confirm permissions and intended-use scope against the published terms before further automation or product reuse.",
+        "Base grid cells require the version-specific non-STRIPS zero-coupon note in adjustments.json; adjustment arithmetic remains unresolved and is not applied."
+      ],
+      "termsReviewReference": "RIGHTS_REVIEW.md"
+    }
+  ]
+}

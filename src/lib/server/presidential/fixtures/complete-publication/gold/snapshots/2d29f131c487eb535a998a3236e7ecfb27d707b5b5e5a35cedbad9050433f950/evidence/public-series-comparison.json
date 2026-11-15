@@ -1,0 +1,69 @@
+{
+  "annual_rows": [
+    {
+      "controlSourceId": "CTRL_074_A",
+      "crspMarketProxyReturnDecimal": 0.01814924501196291,
+      "decisionDate": "1935-12-31",
+      "differenceDecimal": 0.1041235317387601,
+      "houseControl": "D",
+      "presidentParty": "D",
+      "senateControl": "D",
+      "shillerSpCompositeApproximationReturnDecimal": 0.12227277675072301,
+      "year": 1936
+    },
+    {
+      "controlSourceId": "CTRL_074_A",
+      "crspMarketProxyReturnDecimal": 0.01814924501196291,
+      "decisionDate": "1936-12-31",
+      "differenceDecimal": 0.09323233615720383,
+      "houseControl": "D",
+      "presidentParty": "D",
+      "senateControl": "D",
+      "shillerSpCompositeApproximationReturnDecimal": 0.11138158116916674,
+      "year": 1937
+    }
+  ],
+  "by_political_configuration": [
+    {
+      "configuration": "D president / D House / D Senate",
+      "crsp_market_proxy_mean": 0.01814924501196291,
+      "mean_difference": 0.09867793394798197,
+      "median_difference": 0.09867793394798197,
+      "observations": 2,
+      "pearson_correlation": null,
+      "shiller_approximation_mean": 0.11682717895994488
+    }
+  ],
+  "decision_policy": "window_start",
+  "exact_replication": false,
+  "kind": "PUBLIC_SERIES_ROBUSTNESS_COMPARISON",
+  "methodology_id": "PID-SERIES-001",
+  "overlap": {
+    "first_annual_year": 1936,
+    "last_annual_year": 1937,
+    "primary_available_through": 1938,
+    "robustness_available_through": 1937
+  },
+  "primary": {
+    "reconstruction": "crsp_market_proxy",
+    "source_id": "FF_MKT_001"
+  },
+  "robustness": {
+    "reconstruction": "shiller_sp_composite_approximation",
+    "source_id": "SHILLER_001"
+  },
+  "robustness_source_completeness": {
+    "excluded_incomplete_dividend_months": [],
+    "last_complete_dividend_december": "1937-12-31",
+    "last_shiller_context_date": "1937-12-31"
+  },
+  "schema_version": 1,
+  "summary": {
+    "crsp_market_proxy_mean": 0.01814924501196291,
+    "mean_difference": 0.09867793394798197,
+    "median_difference": 0.09867793394798197,
+    "observations": 2,
+    "pearson_correlation": null,
+    "shiller_approximation_mean": 0.11682717895994488
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "artifacts": [],
+  "createdAt": "2026-11-13T00:00:00.000000Z",
+  "datasets": [
+    {
+      "bytes": 3821,
+      "canonicalSha256": "00b1eedf375f1ce6641103a3f0f632301f9727a265419ff528810bedb6d2ea7e",
+      "construction": "Fictional inputs used to exercise the reconstruction method.",
+      "datasetId": "annual-crsp-market-proxy-1936-1936",
+      "firstYear": 1936,
+      "lastYear": 1936,
+      "manifestBytes": 1352,
+      "manifestPath": "datasets/crsp-market-proxy-annual.manifest.json",
+      "manifestSha256": "7867d563157ef822bf2bcbfded1980f699b2b59e265c180f56272d78a1361464",
+      "path": "datasets/crsp-market-proxy-annual.json",
+      "sampleId": "1936-1936",
+      "selectionKey": "crsp-market-proxy-annual",
+      "sha256": "65c7c6670eb3bb240e890c8a8885a4146bb55c109b67a3120be8beecac1eca19",
+      "title": "Fictional fixture \u2014 Public CRSP-market-proxy annual reconstruction, 1936\u20131936",
+      "windowCount": 1
+    }
+  ],
+  "decisionPolicy": "window_start",
+  "inputInventory": {
+    "captureFirstSeenAt": "2026-11-13T00:00:00.000000Z",
+    "captureId": "7c64842f81d340088869f47a6a335f42",
+    "configSha256": "deaf2b355a938b49e42998ab8e95e209088ad9fcbe0748c1e7d00ae1b58b0c06",
+    "rawSha256": "29e9ce2a151f198c3a061d0222545028957f7b1713f8187e079d5e91d261644f",
+    "reviewAdmittedAt": "2026-11-13T00:00:00.000000Z",
+    "reviewControlsSha256": "52d82d375c0096357d7fcb36aaacef3d4ff4614a7ddb6ef8dc5c03bff3b2f72a",
+    "reviewId": "89ff0a8220284682b9ec834861b11353",
+    "reviewWorkbookSha256": "42aa57cab0fa2d57e9955d99640a2539f3e3592b6f502586243dc41fd27eb321"
+  },
+  "inputKind": "SYNTHETIC_FIXTURE",
+  "limitations": [
+    "One local baseline only; no independent source authenticity or full replay certification.",
+    "Fictional fixture; no historical observations."
+  ],
+  "producer": {
+    "commit": null,
+    "dirty": null,
+    "methodVersion": "presidential-donor/0.1.0",
+    "repository": "https://github.com/thatquantguy44/market-medallion",
+    "sourceTreeScope": "named presidential_research modules and shared/files.py",
+    "sourceTreeSha256": "0e3ed09139b13b0372c8770a618787fadd1fef097897ec6237a0894630546fcd"
+  },
+  "profileId": "fixture-v1",
+  "quality": {
+    "publishedDatasets": 1,
+    "requiredDatasets": 1,
+    "status": "PASSED"
+  },
+  "schemaVersion": "presidential-research-bundle/1",
+  "semanticInventory": {
+    "artifacts": [],
+    "datasets": [
+      {
+        "bytes": 3821,
+        "canonicalSha256": "00b1eedf375f1ce6641103a3f0f632301f9727a265419ff528810bedb6d2ea7e",
+        "construction": "Fictional inputs used to exercise the reconstruction method.",
+        "datasetId": "annual-crsp-market-proxy-1936-1936",
+        "firstYear": 1936,
+        "lastYear": 1936,
+        "manifestBytes": 1352,
+        "manifestPath": "datasets/crsp-market-proxy-annual.manifest.json",
+        "manifestSha256": "7867d563157ef822bf2bcbfded1980f699b2b59e265c180f56272d78a1361464",
+        "path": "datasets/crsp-market-proxy-annual.json",
+        "sampleId": "1936-1936",
+        "selectionKey": "crsp-market-proxy-annual",
+        "sha256": "65c7c6670eb3bb240e890c8a8885a4146bb55c109b67a3120be8beecac1eca19",
+        "title": "Fictional fixture \u2014 Public CRSP-market-proxy annual reconstruction, 1936\u20131936",
+        "windowCount": 1
+      }
+    ],
+    "decisionPolicy": "window_start",
+    "inputInventory": {
+      "captureFirstSeenAt": "2026-11-13T00:00:00.000000Z",
+      "captureId": "7c64842f81d340088869f47a6a335f42",
+      "configSha256": "deaf2b355a938b49e42998ab8e95e209088ad9fcbe0748c1e7d00ae1b58b0c06",
+      "rawSha256": "29e9ce2a151f198c3a061d0222545028957f7b1713f8187e079d5e91d261644f",
+      "reviewAdmittedAt": "2026-11-13T00:00:00.000000Z",
+      "reviewControlsSha256": "52d82d375c0096357d7fcb36aaacef3d4ff4614a7ddb6ef8dc5c03bff3b2f72a",
+      "reviewId": "89ff0a8220284682b9ec834861b11353",
+      "reviewWorkbookSha256": "42aa57cab0fa2d57e9955d99640a2539f3e3592b6f502586243dc41fd27eb321"
+    },
+    "inputKind": "SYNTHETIC_FIXTURE",
+    "limitations": [
+      "One local baseline only; no independent source authenticity or full replay certification.",
+      "Fictional fixture; no historical observations."
+    ],
+    "producer": {
+      "commit": null,
+      "dirty": null,
+      "methodVersion": "presidential-donor/0.1.0",
+      "repository": "https://github.com/thatquantguy44/market-medallion",
+      "sourceTreeScope": "named presidential_research modules and shared/files.py",
+      "sourceTreeSha256": "0e3ed09139b13b0372c8770a618787fadd1fef097897ec6237a0894630546fcd"
+    },
+    "profileId": "fixture-v1",
+    "quality": {
+      "publishedDatasets": 1,
+      "requiredDatasets": 1,
+      "status": "PASSED"
+    },
+    "sources": [
+      {
+        "id": "FF_MKT_001",
+        "locator": null,
+        "note": "Invented test inputs; no real source observations.",
+        "title": "Fictional fixture: FF_MKT_001"
+      },
+      {
+        "id": "CTRL_074_A",
+        "locator": null,
+        "note": "Invented test inputs; no real source observations.",
+        "title": "Fictional fixture: CTRL_074_A"
+      }
+    ]
+  },
+  "snapshotId": "504fc3c623be2866d85bac76e158ca9dab61260ab299ccbd02c64e373e3c5dd5",
+  "sources": [
+    {
+      "id": "FF_MKT_001",
+      "locator": null,
+      "note": "Invented test inputs; no real source observations.",
+      "title": "Fictional fixture: FF_MKT_001"
+    },
+    {
+      "id": "CTRL_074_A",
+      "locator": null,
+      "note": "Invented test inputs; no real source observations.",
+      "title": "Fictional fixture: CTRL_074_A"
+    }
+  ]
+}

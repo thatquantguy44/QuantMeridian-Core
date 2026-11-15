@@ -2,12 +2,12 @@
   "name": "market-terminal",
   "version": "0.1.0",
   "private": true,
-  "license": "Apache-2.0",
   "type": "module",
-  "description": "Quant Intelligence Platform — a Bloomberg-style operating system for market intelligence, macro analytics, securities finance, treasury analytics, and AI decision support.",
+  "description": "QuantMeridian-Core — macro and market intelligence terminal with rates, research, data operations, and AI support.",
   "scripts": {
+    "trade-flow": "python3 scripts/trade-flow.py",
+    "test:trade-flow": "PYTHONPATH=models/trade_flow/src python3 -m unittest discover -s models/trade_flow/tests -v",
     "dev": "vite",
-    "dev:all": "bash scripts/dev-all.sh",
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build",
     "build:server": "vite build --ssr src/server/index.ts --outDir dist-server",
@@ -16,8 +16,6 @@
     "export:econ-snapshot": "vite build --ssr src/server/exportEconSnapshot.ts --outDir dist-tools && node dist-tools/exportEconSnapshot.js",
     "refresh:fred-master": "vite build --ssr src/server/exportFredMaster.ts --outDir dist-tools && node dist-tools/exportFredMaster.js",
     "refresh:aaii-sentiment": "vite build --ssr src/server/exportAaiiSentiment.ts --outDir dist-tools && node dist-tools/exportAaiiSentiment.js",
-    "generate:squeeze-csv": "node scripts/generate-squeeze-radar-csv.mjs",
-    "generate:squeeze-contracts": "node scripts/generate-squeeze-radar-csv.mjs --write-contracts && json2ts -i contracts/squeeze_radar/v1/csv-records-1.1.schema.json -o src/lib/squeezeRadar/contracts.generated.ts",
     "start": "node dist-server/index.js",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
@@ -32,7 +30,10 @@
     "check:agent-contracts": "node scripts/generate-agent-contracts.mjs --check",
     "test": "vitest run",
     "test:watch": "vitest",
-    "publish:fred-gold": "python3 scripts/publish_fred_gold_to_postgres.py"
+    "publish:fred-gold": "python3 scripts/publish_fred_gold_to_postgres.py",
+    "typecheck:benchmark-refresh": "tsc -p tsconfig.benchmark-refresh.json",
+    "rehearse:benchmark-full": "node scripts/benchmark-full-rehearsal.mjs",
+    "setup:benchmark-control": "node scripts/setup-benchmark-control.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "0.69.0",
@@ -66,5 +67,6 @@
     "typescript": "5.6.3",
     "vite": "5.4.11",
     "vitest": "2.1.8"
-  }
+  },
+  "license": "Apache-2.0"
 }

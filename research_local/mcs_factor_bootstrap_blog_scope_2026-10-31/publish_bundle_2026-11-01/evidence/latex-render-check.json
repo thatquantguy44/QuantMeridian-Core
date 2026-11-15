@@ -1,0 +1,10 @@
+{
+  "renderer": "KaTeX",
+  "version": "0.16.11",
+  "displayEquations": 3,
+  "strict": "error",
+  "throwOnError": true,
+  "result": "all display and inline math rendered successfully",
+  "preview": "article.html",
+  "equations": "sidebar.tex"
+}

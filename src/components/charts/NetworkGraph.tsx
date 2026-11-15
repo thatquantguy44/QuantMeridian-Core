@@ -1,4 +1,6 @@
 
+import type { KeyboardEvent } from "react";
+
 export interface GraphNode {
   id: string;
   label: string;
@@ -16,6 +18,8 @@ interface NetworkGraphProps {
   edges: GraphEdge[];
   height?: number;
   className?: string;
+  selectedNodeId?: string | null;
+  onNodeSelect?: (nodeId: string) => void;
 }
 
 const GROUP_COLOR: Record<GraphNode["group"], string> = {
@@ -25,7 +29,7 @@ const GROUP_COLOR: Record<GraphNode["group"], string> = {
 };
 
 /** Deterministic 3-column network/flow graph (sources → engine → uses). */
-export function NetworkGraph({ nodes, edges, height = 320, className }: NetworkGraphProps) {
+export function NetworkGraph({ nodes, edges, height = 320, className, selectedNodeId, onNodeSelect }: NetworkGraphProps) {
   const W = 600;
   const H = height;
   const cols: Record<GraphNode["group"], GraphNode[]> = { SOURCE: [], ENGINE: [], USE: [] };
@@ -63,17 +67,41 @@ export function NetworkGraph({ nodes, edges, height = 320, className }: NetworkG
       })}
       {nodes.map((n) => {
         const p = pos[n.id];
+        const isEngine = n.group === "ENGINE";
+        const isSelected = selectedNodeId === n.id;
+        const handleKeyDown = (event: KeyboardEvent<SVGGElement>) => {
+          if (onNodeSelect && (event.key === "Enter" || event.key === " ")) {
+            event.preventDefault();
+            onNodeSelect(n.id);
+          }
+        };
         return (
-          <g key={n.id}>
-            <circle cx={p.x} cy={p.y} r={p.r} fill={GROUP_COLOR[n.group]} opacity={n.group === "ENGINE" ? 0.92 : 0.85} stroke="#0A0A0A" strokeWidth={1} />
+          <g
+            key={n.id}
+            role={onNodeSelect ? "button" : undefined}
+            tabIndex={onNodeSelect ? 0 : undefined}
+            aria-label={onNodeSelect ? `Drill through ${n.label}` : undefined}
+            aria-pressed={onNodeSelect ? isSelected : undefined}
+            aria-controls={onNodeSelect ? "kgr-impact-drillthrough" : undefined}
+            onClick={onNodeSelect ? () => onNodeSelect(n.id) : undefined}
+            onKeyDown={onNodeSelect ? handleKeyDown : undefined}
+            style={onNodeSelect ? { cursor: "pointer" } : undefined}
+          >
+            <title>{n.label}</title>
+            <circle cx={p.x} cy={p.y} r={p.r} fill={GROUP_COLOR[n.group]} opacity={n.group === "ENGINE" ? 0.92 : 0.85} stroke={isSelected ? "#F5F5F7" : "#0A0A0A"} strokeWidth={isSelected ? 2.5 : 1} />
             <text
-              x={n.group === "SOURCE" ? p.x - p.r - 4 : n.group === "USE" ? p.x + p.r + 4 : p.x}
-              y={n.group === "ENGINE" ? p.y + 3 : p.y + 3}
-              textAnchor={n.group === "SOURCE" ? "end" : n.group === "USE" ? "start" : "middle"}
-              fontSize={n.group === "ENGINE" ? 9 : 8.5}
-              fill={n.group === "ENGINE" ? "#0A0A0A" : "#C9C9D1"}
+              x={n.group === "SOURCE" ? p.x - p.r - 6 : p.x + p.r + 6}
+              y={p.y + 3}
+              textAnchor={n.group === "SOURCE" ? "end" : "start"}
+              fontSize={isEngine ? 9 : 8.5}
+              fill={isEngine ? "#F5F5F7" : "#C9C9D1"}
+              stroke={isEngine ? "#0A0A0A" : "none"}
+              strokeWidth={isEngine ? 2.5 : 0}
+              paintOrder="stroke"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               fontFamily="var(--font-mono)"
-              fontWeight={n.group === "ENGINE" ? 700 : 400}
+              fontWeight={isEngine ? 700 : 400}
             >
               {n.label}
             </text>

@@ -1,0 +1,331 @@
+{
+  "task": "Scope blog posts about MCS analysis and the factor bootstrap model",
+  "research_date": "2026-10-31",
+  "status": "complete: scoped research and final illustrated10000path article with LaTeX/sidebar, realplatformfigures and two independent agentreviews",
+  "assumed_audience": "general market readers (confirmed by user)",
+  "output_directory": "research_local/mcs_factor_bootstrap_blog_scope_2026-10-31",
+  "repository_head": "7834e2e36b1ce7b4a2fd2c5eeb0cbce133c75e9c",
+  "working_tree_status_at_start": " M .env.example\n M .gitignore\n M docs/SPECS.md\n M docs/handoff.md\n M docs/specs/spec025/ADMISSION.md\n M docs/specs/spec025/DATA_CONTRACT.md\n M docs/specs/spec025/HANDOFF.md\n M docs/specs/spec025/PLAN.md\n M docs/specs/spec025/SPEC.MD\n M docs/specs/spec025/TASKS.md\n M src/app/sentiment/AaiiHistoryTable.tsx\n M src/app/sentiment/page.tsx\n M src/lib/aaii/contracts.ts\n M src/lib/server/mcsEngine.ts\n M src/lib/server/socialProviders.ts\n M test/sentiment-history.spec.ts\n?? src/app/api/sentiment/\n?? src/app/sentiment/AaiiSurvey.tsx\n?? src/app/sentiment/SentSocialView.tsx\n?? src/app/sentiment/useSentFeeds.ts\n?? src/lib/server/aaii/reader.test.ts\n?? src/lib/server/aaii/reader.ts\n?? src/lib/server/mcsEngine.test.ts\n?? src/lib/server/sentSocial.test.ts\n",
+  "source_mode": "current working tree; snapshots record uncommitted MCS edits",
+  "engineering_skills_source": ".agents/",
+  "quantsmith_source": "/Users/<you>/Documents/Quant Sandbox/agentic_workflows/qf_workflow_sdk_public",
+  "quantsmith_pin": {
+    "schema_version": "quantsmith-pin/1",
+    "package": {
+      "name": "quantsmith",
+      "version": "0.1.0",
+      "code_digest": "sha256:21eab2392ec8e519077fc4b35b9b1ea72be06d8b56b123223bde291f7658ca12"
+    },
+    "assets": {
+      "digest": "sha256:9f5648b89ed32f54bdfb7143f0a0fdb8f73e4713e855cd932dd2b88c669596f9",
+      "paths": [
+        "knowledge/analytics_packs",
+        "knowledge/visualization_packs",
+        "knowledge/short_term_markets",
+        "agents/analytics",
+        "agents/economists/macro_backdrop_summarizer",
+        "agents/securities_financing",
+        "templates/docs/macro_backdrop_report.md"
+      ]
+    },
+    "reviewed": {
+      "on": "2026-10-10",
+      "source_path": "../../agentic_workflows/qf_workflow_sdk_public",
+      "note": "Local source selected 2026-10-30; no Git commit is required. Fingerprints retain the 2026-10-10 reviewed content. The selected folder currently differs and requires content review before re-pinning."
+    }
+  },
+  "quantsmith_observed_fingerprint": {
+    "mode": "path",
+    "version": "0.1.0",
+    "code_digest": "sha256:e59b8404b307885c7a74f585278de8f380bed62e0fb68018112eb980e7259347",
+    "assets_digest": "sha256:17c367d06af4060d1e6162560a8ded9a207f0074d8eee46f3f67be57dda35874",
+    "pin": "/Users/<you>/Documents/Quant Sandbox/platforms/market_terminal/contracts/agent/quantsmith-pin.json",
+    "mismatches": [
+      "code",
+      "assets"
+    ]
+  },
+  "provenance_caveat": "QuantSmith is separate from .agents/. Selected checkout differs from approved code/assets pin. Research and Modeling agent contracts are inspected prompt templates, not verified pinned SDK execution. Research reporter is proposed only. No re-pin or SDK import performed. These two agent contract paths are outside assets.paths and thus not covered by the assets digest.",
+  "snapshots": {
+    "/Users/<you>/Documents/Quant Sandbox/agentic_workflows/qf_workflow_sdk_public/agents/research_analyst/README.md": {
+      "snapshot": "agent_inputs/research_analyst/README.md",
+      "sha256": "32cb36c4c4b3ad446ee54b3c9a412ea1f84637918f7e8543198e0e7927ed66c9"
+    },
+    "/Users/<you>/Documents/Quant Sandbox/agentic_workflows/qf_workflow_sdk_public/agents/research_analyst/instructions.md": {
+      "snapshot": "agent_inputs/research_analyst/instructions.md",
+      "sha256": "8ed72d5b7fe0d39f415c8e90261f8798946531d4c758b176bd083fbaa41f971a"
+    },
+    "/Users/<you>/Documents/Quant Sandbox/agentic_workflows/qf_workflow_sdk_public/agents/research_analyst/prompt.md": {
+      "snapshot": "agent_inputs/research_analyst/prompt.md",
+      "sha256": "445602fba16826820dffed96c3c2e49dcd8376103192543a3fa46f34141d097e"
+    },
+    "/Users/<you>/Documents/Quant Sandbox/agentic_workflows/qf_workflow_sdk_public/agents/research_analyst/tasks.md": {
+      "snapshot": "agent_inputs/research_analyst/tasks.md",
+      "sha256": "d1d5467ff24c19c09c852c3d812abbaf00d6175fbfe2ef3335858f1afb7845d5"
+    },
+    "/Users/<you>/Documents/Quant Sandbox/agentic_workflows/qf_workflow_sdk_public/agents/modeling/README.md": {
+      "snapshot": "agent_inputs/modeling/README.md",
+      "sha256": "ee7cb7f316a9e8e9c2f93941d1b3dce92eec8a91edc9301105f005e5c4d4cb4f"
+    },
+    "/Users/<you>/Documents/Quant Sandbox/agentic_workflows/qf_workflow_sdk_public/agents/modeling/instructions.md": {
+      "snapshot": "agent_inputs/modeling/instructions.md",
+      "sha256": "907404cd986003dc420bf80f7a4f1d47ea143e1d02b3e1b722d53f8d170ccac3"
+    },
+    "/Users/<you>/Documents/Quant Sandbox/agentic_workflows/qf_workflow_sdk_public/agents/modeling/prompt.md": {
+      "snapshot": "agent_inputs/modeling/prompt.md",
+      "sha256": "fe02f52a763503d129115b29e4491053019901c212d74d952b3cf2d233221d95"
+    },
+    "/Users/<you>/Documents/Quant Sandbox/agentic_workflows/qf_workflow_sdk_public/agents/modeling/tasks.md": {
+      "snapshot": "agent_inputs/modeling/tasks.md",
+      "sha256": "35ae18f80768f9ff0734eced3a4e41758243176bdefac467c03321433cf60c3c"
+    },
+    "src/lib/server/mcsEngine.ts": {
+      "snapshot": "evidence/src/lib/server/mcsEngine.ts",
+      "sha256": "444f77e5d46420a95d825dfbe7820bc9ec73365495db3ca7ee3f2f730f3ba7ea"
+    },
+    "src/app/api/simulations/mcs/route.ts": {
+      "snapshot": "evidence/src/app/api/simulations/mcs/route.ts",
+      "sha256": "3f0d26397788eeaf21eafb573024e5a2a2afea8f374d1b84358ef0f1533a1b58"
+    },
+    "src/app/simulations/mcs/page.tsx": {
+      "snapshot": "evidence/src/app/simulations/mcs/page.tsx",
+      "sha256": "2449e5c5df3d1b8ebbe634af9d3e800a077d83da976eecd253ffb1841d879d85"
+    },
+    "src/lib/server/mcsEngine.test.ts": {
+      "snapshot": "evidence/src/lib/server/mcsEngine.test.ts",
+      "sha256": "ada533018b30842296979aedab5355435f0d9d41c576ea756997c62bf67bccd8"
+    },
+    "src/lib/server/goldFomc.ts": {
+      "snapshot": "evidence/src/lib/server/goldFomc.ts",
+      "sha256": "718aed5b39dcbe3829edf3c8bb964b0b6c6fd97bdfd6792744ba075a979b5fbb"
+    },
+    "contracts/agent/quantsmith-pin.json": {
+      "snapshot": "evidence/contracts/agent/quantsmith-pin.json",
+      "sha256": "6aecddb562aa9324b9055ddcf4d632cee670d13aee5f900e210d432827cafbb1"
+    },
+    "contracts/agent/agent-skills.pin.json": {
+      "snapshot": "evidence/contracts/agent/agent-skills.pin.json",
+      "sha256": "746516c1f4f9c68ce2d40cf42b75a3ff7056c8973ae8750fb8d6cb14c6f4266a"
+    },
+    "src/data/macroInputs.ts": {
+      "snapshot": "evidence/src/data/macroInputs.ts",
+      "sha256": "47846ba752365db44ca1640e7522f4bdeec87ecd0be004595cb827ca54a880bd"
+    },
+    "src/lib/server/goldStore.ts": {
+      "snapshot": "evidence/src/lib/server/goldStore.ts",
+      "sha256": "c1c5b48a40fb5c13934296774662154840557dbaa757ba6a98e6f7575b552f9f"
+    }
+  },
+  "agent_runs": [
+    {
+      "task_name": "/root/research_analyst",
+      "contract": "agent_inputs/research_analyst/",
+      "assignment": "Create prioritized plain-language blog briefs, scopes, figure plans, experiments and publication gates.",
+      "output": "01_blog_series_scope.md",
+      "execution": "separate Codex worker; inherited model; no QuantSmith runtime",
+      "status": "complete"
+    },
+    {
+      "task_name": "/root/modeling_research",
+      "contract": "agent_inputs/modeling/",
+      "assignment": "Map exact model behavior and design reproducible validation behind general-reader blogs.",
+      "output": "02_model_and_validation_research.md",
+      "execution": "separate Codex worker; inherited model; no QuantSmith runtime",
+      "status": "complete"
+    },
+    {
+      "task_name": "/root/research_packet_review",
+      "contract": "Independent technical/editorial packet review against user task and frozen source evidence",
+      "assignment": "Check implementation claims, publication boundaries, general-reader suitability and evidence completeness; report findings only in own artifact.",
+      "output": "04_review.md",
+      "execution": "separate Codex worker; fresh context; no QuantSmith runtime or empirical verification",
+      "status": "complete",
+      "findings": {
+        "medium": 1,
+        "low": 2
+      },
+      "resolution": "All findings addressed by coordinator; no second full reviewer pass of final edits."
+    },
+    {
+      "task_name": "/root/research_packet_review",
+      "assignment": "Follow-up technical and editorial reading of publish-today manuscript and direction; check paths/evidence, novel sequences, pointwise ranges/coverage, median line and tone",
+      "output": "07_draft_review.md",
+      "execution": "distinct AI worker reading in follow-up turn; not human or empirical model validation",
+      "status": "complete",
+      "findings": {
+        "substantive": 0,
+        "low": 1
+      },
+      "resolution": "Local review-reference typo corrected."
+    }
+  ],
+  "verification_results": [
+    {
+      "command": "npm run check:agent-skills-pin",
+      "exit_code": 0,
+      "result": "passed immutable mirror integrity",
+      "log": "evidence/agent-skills-pin-check.txt"
+    },
+    {
+      "command": "npm run check:quantsmith-pin",
+      "exit_code": 0,
+      "result": "record consistency passed; local code/assets drift advisory",
+      "log": "evidence/quantsmith-pin-check.txt"
+    },
+    {
+      "command": "python3 -I services/agent_worker/src/agent_worker/pin.py --check",
+      "exit_code": 1,
+      "result": "failed strict local content pin: code and assets mismatches; no re-pin performed",
+      "log": "evidence/quantsmith-strict-check.txt"
+    },
+    {
+      "command": "npm test -- src/lib/server/mcsEngine.test.ts",
+      "exit_code": 0,
+      "result": "4 existing unit tests passed; not empirical model validation",
+      "log": "evidence/mcs-existing-tests.txt"
+    },
+    {
+      "check": "artifact integrity and authored local links",
+      "result": "17 frozen hashes matched; 19 local links resolved; corrected metric wording checked",
+      "log": "evidence/artifact-checks.json"
+    },
+    {
+      "check": "publish-today manuscript packet",
+      "result": "24 authored local links resolved; 17 frozen source hashes matched; separate draft review reconciled",
+      "log": "evidence/publish-today-artifact-checks.json"
+    }
+  ],
+  "publication_readiness": {
+    "ready_to_scope_and_draft_explainers": [
+      1,
+      2,
+      4
+    ],
+    "empirical_findings_require_data_and_experiments": [
+      3,
+      5,
+      6
+    ],
+    "recommended_first_post": "Reading the Range of Possible Treasury Yields",
+    "unresolved_scope_blockers": [],
+    "unresolved_publication_dependencies": "Actual figures, source rechecks and empirical gates remain explicit future writing/analysis work."
+  },
+  "local_delivery": "Outputs retained in this dedicated folder, explicitly selected for the research commit; product code, pins and unrelated work excluded.",
+  "artifact_sha256": {
+    "01_blog_series_scope.md": "6b58252ded7118de91e0c3d788f409d1bccd9552be72f2aa67b93bdde57a307a",
+    "02_model_and_validation_research.md": "0c043a25c4b0f041759d0d47ddb9aa0c207c839310c5eab4a4c2f4aeb6766ca2",
+    "03_sources_and_claims.md": "5c3213fada7db1b0af977b27e32e19d988a0db8ab7977986aae5888edb710ed1",
+    "04_review.md": "8b89f7ca6f5f371158bd1eb650400b1be6cb62c8d0ef5247508d4fff59c1a511",
+    "05_publish_today_direction.md": "46c94c9b7763cb787c8230353a3bf16e936cf32aa8e47401c05375a2e22be135",
+    "06_blog_draft.md": "6f886ab63a81e8e1c1c6dad3d6d70de80eb026671e48cde3bc9fd1234e79518d",
+    "07_draft_review.md": "55d4515b44b35d7d546f7e1b6bcc2fe7af98daed131616f07e789a73bfc99c82",
+    "08_ready_to_post.md": "a00240cfe32b016fd2ecbdecc16f199fafb77093033aa5089545d99e04aca570",
+    "README.md": "00367e439ab573e1514886d5102989730c52ac9a7ca366cddc1727a22f234a95",
+    "agent_inputs/modeling/README.md": "ee7cb7f316a9e8e9c2f93941d1b3dce92eec8a91edc9301105f005e5c4d4cb4f",
+    "agent_inputs/modeling/instructions.md": "907404cd986003dc420bf80f7a4f1d47ea143e1d02b3e1b722d53f8d170ccac3",
+    "agent_inputs/modeling/prompt.md": "fe02f52a763503d129115b29e4491053019901c212d74d952b3cf2d233221d95",
+    "agent_inputs/modeling/tasks.md": "35ae18f80768f9ff0734eced3a4e41758243176bdefac467c03321433cf60c3c",
+    "agent_inputs/research_analyst/README.md": "32cb36c4c4b3ad446ee54b3c9a412ea1f84637918f7e8543198e0e7927ed66c9",
+    "agent_inputs/research_analyst/instructions.md": "8ed72d5b7fe0d39f415c8e90261f8798946531d4c758b176bd083fbaa41f971a",
+    "agent_inputs/research_analyst/prompt.md": "445602fba16826820dffed96c3c2e49dcd8376103192543a3fa46f34141d097e",
+    "agent_inputs/research_analyst/tasks.md": "d1d5467ff24c19c09c852c3d812abbaf00d6175fbfe2ef3335858f1afb7845d5",
+    "agent_inputs/task_contract.md": "f212710b70d8f12b61a1b447e26a814a8db49699fd51d9d95b07d8b6cea70a20",
+    "evidence/agent-skills-pin-check.txt": "1cef70d2bfe794dfa88ab6e1d01f90be1ae6d9a7a78d33804ec5d0a61f86cb91",
+    "evidence/artifact-checks.json": "286e67559cb068204493c082f1195aecbf5a215a96863315f5f067b004944232",
+    "evidence/contracts/agent/agent-skills.pin.json": "746516c1f4f9c68ce2d40cf42b75a3ff7056c8973ae8750fb8d6cb14c6f4266a",
+    "evidence/contracts/agent/quantsmith-pin.json": "6aecddb562aa9324b9055ddcf4d632cee670d13aee5f900e210d432827cafbb1",
+    "evidence/final-editorial-checks.json": "b6b0c9e2d6ffc6e89b85c9cf01d44e583d84aaaeba60622543022ba6b6fb8e9d",
+    "evidence/mcs-existing-tests.txt": "6d90b9d5888d08fbb63348e6e5a2c2f0abdc85eef9e9b2ab308f41f141a58811",
+    "evidence/publish-today-artifact-checks.json": "6c89281895da3c5fc6e5baaf38d5ec21e1ea08cdc2ef2d1c77f4554e919f3e61",
+    "evidence/quantsmith-fingerprint.json": "1ffd16a63080b64ba9486b95f7ecf2ba09e308108a775e002adea38823b1e3f1",
+    "evidence/quantsmith-pin-check.txt": "8043aec1360c83cf316579aa8ef4dd248a7a28086cd56cd5a6c7b73ad12fec2e",
+    "evidence/quantsmith-strict-check.txt": "ced473404d4a3bb6ff09f382aaf6ec33aa861ad2b9c2bb1d64c0ce214b98ddd5",
+    "evidence/src/app/api/simulations/mcs/route.ts": "3f0d26397788eeaf21eafb573024e5a2a2afea8f374d1b84358ef0f1533a1b58",
+    "evidence/src/app/simulations/mcs/page.tsx": "2449e5c5df3d1b8ebbe634af9d3e800a077d83da976eecd253ffb1841d879d85",
+    "evidence/src/data/macroInputs.ts": "47846ba752365db44ca1640e7522f4bdeec87ecd0be004595cb827ca54a880bd",
+    "evidence/src/lib/server/goldFomc.ts": "718aed5b39dcbe3829edf3c8bb964b0b6c6fd97bdfd6792744ba075a979b5fbb",
+    "evidence/src/lib/server/goldStore.ts": "c1c5b48a40fb5c13934296774662154840557dbaa757ba6a98e6f7575b552f9f",
+    "evidence/src/lib/server/mcsEngine.test.ts": "ada533018b30842296979aedab5355435f0d9d41c576ea756997c62bf67bccd8",
+    "evidence/src/lib/server/mcsEngine.ts": "444f77e5d46420a95d825dfbe7820bc9ec73365495db3ca7ee3f2f730f3ba7ea",
+    "publish_bundle_2026-11-01/README.md": "c618ab46053afd3cdb547a23d35b1e9069a1bb21040ae06743d5695fd015bcc6",
+    "publish_bundle_2026-11-01/THIRD_PARTY_NOTICES.txt": "9dd42ca747db37d776bd8e2e838343986ae5820a44b9631a8e94149bb1aba31d",
+    "publish_bundle_2026-11-01/article.html": "7bafcad887fff4b9de9e624835e80bb52a615024c39c147fee1281d23f022b4e",
+    "publish_bundle_2026-11-01/article.md": "39b38a57325637a9524131651c1a171877c4361b1cff3bc1d06fff3c5c19ed87",
+    "publish_bundle_2026-11-01/assets/mcs-10000-10y.jpg": "d15c346ce76eed1c2a7852e99ab3ac311ef3970ce9b8a96db7e8a7a9cd68fcf4",
+    "publish_bundle_2026-11-01/assets/mcs-10000-2y.jpg": "e05350bd3e2c0045345016e5da914b5750cce1a184707151660c675eb94bdb03",
+    "publish_bundle_2026-11-01/evidence/api-10000.json": "dead271c86a137c4741b94a6507527faaaa5c86bacbfd69b5d3a393501791682",
+    "publish_bundle_2026-11-01/evidence/api-2000.json": "91d35868180630c49fedb96b34de64cb35f04fc39b4f89358756bd51ff9d15e9",
+    "publish_bundle_2026-11-01/evidence/experiment-summary.json": "bb8948a02142e4af5dc13b383d2bcc23bb88c197ca7cd3b983e09ae3c4cd9b6f",
+    "publish_bundle_2026-11-01/evidence/final-artifact-checks.json": "ec69c79c11584174f431cd797446ca93861ffbd778de0efaa9f5101fbb280c4f",
+    "publish_bundle_2026-11-01/evidence/latex-render-check.json": "9f6bc3519dbc7bb7503be55948eb8dc09e1d1cf0363444ab5c895cc2b1db88da",
+    "publish_bundle_2026-11-01/evidence/platform-capture-dom.txt": "1bdca794706c824ad6919828281d1ef75f20f51f7fa24db1b44b1f70a044bd4a",
+    "publish_bundle_2026-11-01/evidence/platform-captured-response.json": "dead271c86a137c4741b94a6507527faaaa5c86bacbfd69b5d3a393501791682",
+    "publish_bundle_2026-11-01/evidence/platform-requests.jsonl": "2b655adfd3e6398924301f1dd0c3e126f8f3d5c939621165a7e4beac4fe5fe84",
+    "publish_bundle_2026-11-01/evidence/post-capture-anchor-on-response.json": "3b90a02cd6e17d27e7277361e4182c2114d8d332969856e848404c37bab890e3",
+    "publish_bundle_2026-11-01/evidence/publication-math-preview.jpg": "6f808fc588035efcf8c0cb6f87272159e368f7e2762a26a4bea2fc7912a334eb",
+    "publish_bundle_2026-11-01/evidence/publication-render-check.json": "44a4e6c491a312a67cd9be957a5bf84529d895a6ff780e8057691c9169d11856",
+    "publish_bundle_2026-11-01/evidence/seed-runs.json": "51bf5d5af283734066ffe724499b6dc200373118647dee3647b5f4d10fb7f2d9",
+    "publish_bundle_2026-11-01/evidence/source/src/app/api/simulations/mcs/route.ts": "3f0d26397788eeaf21eafb573024e5a2a2afea8f374d1b84358ef0f1533a1b58",
+    "publish_bundle_2026-11-01/evidence/source/src/app/simulations/mcs/page.tsx": "2449e5c5df3d1b8ebbe634af9d3e800a077d83da976eecd253ffb1841d879d85",
+    "publish_bundle_2026-11-01/evidence/source/src/lib/server/mcsEngine.ts": "444f77e5d46420a95d825dfbe7820bc9ec73365495db3ca7ee3f2f730f3ba7ea",
+    "publish_bundle_2026-11-01/experiment_notes.md": "dcbfdc121ceaa199554f0a19e35974279c0cb2243c0a18cab757883ae8b2b58a",
+    "publish_bundle_2026-11-01/latex_sidebar.md": "467350f82a1028d7512d8b6bf04bf1c6f23b1fb3c56a509a516095bec22c6ab4",
+    "publish_bundle_2026-11-01/manifest.json": "4c2eac17e1466cc65b812a8ecf971f2c308c777844c816da1d75eaba13589dba",
+    "publish_bundle_2026-11-01/reviews/fact_visual_review.md": "cb5387857d1baeba40b792ff348162cc5c9c43bd49cd63885e397df57a7af662",
+    "publish_bundle_2026-11-01/reviews/independent_math_check.json": "886d136065d2cff505e30a0438847d96bd2b8e72c5cb006eb6873999d1c8615f",
+    "publish_bundle_2026-11-01/reviews/independent_math_check.py": "50e4ea3d7b37547092150f29dbb6fa15fe3f5ab7e96a22ddee1ed22ec70194b8",
+    "publish_bundle_2026-11-01/reviews/math_review.md": "2ca8fe17292560bb014fc4c966afeb840bf804410299c6f676312be877489a90",
+    "publish_bundle_2026-11-01/scripts/platform-proxy.mjs": "836a74157fbf3d63036ae624f414af4be43fc6c2ed6d3401ba9ad395ce2630c9",
+    "publish_bundle_2026-11-01/scripts/render-publication.mjs": "4f10365c6ab2d61c32a673511b4f2708fcf1936a9bff9dd6cc5016a8850d15a1",
+    "publish_bundle_2026-11-01/scripts/run-experiment.mjs": "188839c94d17330a85f05243ab769d0b6cbfb751e0c1c84fea2868a17eeae735",
+    "publish_bundle_2026-11-01/sidebar.tex": "17e02ec41838411aa8dcd0307cff3feafd9e8acea0c26b015ee6229b0b353a1f"
+  },
+  "followup": {
+    "date": "2026-10-31",
+    "user_request": "Fine-tune briefs into a captivating, partially sarcastic and useful blog post for broad readers that can be posted today.",
+    "skill_used": ".agents/skills/idea-refine/SKILL.md",
+    "direction": "2,000 Scenarios. Same Old History.",
+    "audience": "general market readers with optional value for experienced analysts",
+    "manuscript": "06_blog_draft.md",
+    "article_word_count_excluding_source_note": 906,
+    "editorial_decision_record": "05_publish_today_direction.md",
+    "review": "07_draft_review.md",
+    "review_result": "No substantive factual or tone issue; reference typo corrected.",
+    "publication_status": "Voice and formatting pass complete; copy-ready for user; no external publication performed.",
+    "source_basis": "Existing frozen MCS code and verified research packet; no new empirical claims, live data, autobiographical anecdotes or numerical performance findings.",
+    "final_manuscript": "08_ready_to_post.md"
+  },
+  "final_editorial_pass": {
+    "date": "2026-10-31",
+    "requested_step": "Voice pass and publication formatting",
+    "output": "08_ready_to_post.md",
+    "status": "complete; copy-ready manuscript; not externally published",
+    "word_count_excluding_further_reading": 840,
+    "changes": [
+      "Tightened prose and removed repeated framing",
+      "Retained restrained sarcasm aimed at false confidence",
+      "Clarified maturity versus forecast horizon and defined median",
+      "Formatted title, subtitle, pull quote, short paragraphs, four reader questions and further-reading link",
+      "Removed internal workflow wording from public source note"
+    ],
+    "verification": "Coordinator compared final claims against existing frozen source and reviewed draft; no new empirical claim or separate final reviewer execution. Local links and absence of placeholders checked."
+  },
+  "illustrated_10000_path_experiment": {
+    "prepared_on": "2026-11-01",
+    "status": "complete",
+    "bundle": "publish_bundle_2026-11-01/README.md",
+    "final_article": "publish_bundle_2026-11-01/article.md",
+    "manifest": "publish_bundle_2026-11-01/manifest.json",
+    "main_paths": 10000,
+    "baseline_paths": 2000,
+    "independent_reviewers": 2,
+    "external_publication": false
+  },
+  "version_control": {
+    "branch": "docs/mcs-bootstrap-blog-research",
+    "base": "origin/main",
+    "selection": "This dedicated research folder only; explicit add despite existing ignore rule",
+    "requested_action": "Commit and push, explicitly authorized by user",
+    "unrelated_changes": "Preserved on original branch/index; isolated worktree used"
+  }
+}

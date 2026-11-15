@@ -1,0 +1,483 @@
+{
+  "check": "independent Python implementation and statistics.stdev, no author helpers",
+  "seed": 20260914,
+  "sameFit": true,
+  "mainPaths": 10000,
+  "comparisonPaths": 2000,
+  "independentlyRegeneratedSeedSummaryValues": 4800,
+  "maxAbsSeedSummaryErrorPercent": 3.552713678800501e-14,
+  "poolSize": 2497,
+  "seedRunCount": 40,
+  "seedCountPerPathSetting": 20,
+  "sampleStandardDeviationsBps": [
+    {
+      "stat": "p5",
+      "sdBps2000": 3.773737081659947,
+      "sdBps10000": 1.558291204524457
+    },
+    {
+      "stat": "p50",
+      "sdBps2000": 2.6917965067084126,
+      "sdBps10000": 0.6339057250895137
+    },
+    {
+      "stat": "p95",
+      "sdBps2000": 4.811819899059242,
+      "sdBps10000": 1.6800145849862917
+    }
+  ],
+  "fixedSeedReproduction": {
+    "2000": {
+      "numSummaryValuesChecked": 120,
+      "maxAbsSummaryErrorPercent": 8.881784197001252e-15,
+      "maxAbsCurrentCurveErrorPercent": 0.0,
+      "horizons": [
+        {
+          "horizonDays": 21,
+          "byTenor": {
+            "0.25": {
+              "p5": 4.053037017506728,
+              "p25": 4.221049104377586,
+              "p50": 4.316656883123751,
+              "p75": 4.42384676241681,
+              "p95": 4.599862250566063,
+              "mean": 4.322786437094383
+            },
+            "2": {
+              "p5": 3.71185369385567,
+              "p25": 4.257419859539037,
+              "p50": 4.4493926479035615,
+              "p75": 4.649993295451325,
+              "p95": 5.186304544228548,
+              "mean": 4.448042717905469
+            },
+            "5": {
+              "p5": 3.924086268576728,
+              "p25": 4.425625540842634,
+              "p50": 4.661405078961041,
+              "p75": 4.897130164125167,
+              "p95": 5.389207549655405,
+              "mean": 4.6619556643680715
+            },
+            "10": {
+              "p5": 4.302697627019649,
+              "p25": 4.651480149124731,
+              "p50": 4.854523964314131,
+              "p75": 5.062831480184867,
+              "p95": 5.385645453269894,
+              "mean": 4.853784247727442
+            },
+            "30": {
+              "p5": 4.528393947400722,
+              "p25": 4.829140046450142,
+              "p50": 5.018499834256592,
+              "p75": 5.21459794554388,
+              "p95": 5.510702667543208,
+              "mean": 5.022812041198173
+            }
+          }
+        },
+        {
+          "horizonDays": 63,
+          "byTenor": {
+            "0.25": {
+              "p5": 4.0057708858936945,
+              "p25": 4.321657638781153,
+              "p50": 4.545901014708193,
+              "p75": 4.768276580055348,
+              "p95": 5.093505869352491,
+              "mean": 4.545578450326852
+            },
+            "2": {
+              "p5": 3.534757144054883,
+              "p25": 4.092104239488569,
+              "p50": 4.423144190350401,
+              "p75": 4.77849341882426,
+              "p95": 5.305072234896299,
+              "mean": 4.4279103106935525
+            },
+            "5": {
+              "p5": 3.591281455515684,
+              "p25": 4.17833636335496,
+              "p50": 4.558052805911657,
+              "p75": 4.929307779908043,
+              "p95": 5.503477422697065,
+              "mean": 4.551236987479005
+            },
+            "10": {
+              "p5": 3.8835259389351147,
+              "p25": 4.4109665545737755,
+              "p50": 4.758290199214918,
+              "p75": 5.0870584390180715,
+              "p95": 5.597212694038167,
+              "mean": 4.749465714645628
+            },
+            "30": {
+              "p5": 4.109487716693151,
+              "p25": 4.617637926715835,
+              "p50": 4.950128619036946,
+              "p75": 5.267116846962002,
+              "p95": 5.784355638058816,
+              "mean": 4.946181239337037
+            }
+          }
+        },
+        {
+          "horizonDays": 126,
+          "byTenor": {
+            "0.25": {
+              "p5": 3.9297796596195917,
+              "p25": 4.422880695754142,
+              "p50": 4.75506996413487,
+              "p75": 5.103431481327872,
+              "p95": 5.6119193336674495,
+              "mean": 4.763137185311571
+            },
+            "2": {
+              "p5": 3.3835255503324393,
+              "p25": 4.094578501428936,
+              "p50": 4.534687821793311,
+              "p75": 4.993376009715503,
+              "p95": 5.617461502321695,
+              "mean": 4.5299558121760075
+            },
+            "5": {
+              "p5": 3.3650612449659403,
+              "p25": 4.09526759218496,
+              "p50": 4.574094682256904,
+              "p75": 5.02809153359936,
+              "p95": 5.693076232641279,
+              "mean": 4.559447634617469
+            },
+            "10": {
+              "p5": 3.632685546478633,
+              "p25": 4.276319581807384,
+              "p50": 4.707795282630595,
+              "p75": 5.135121631043918,
+              "p95": 5.738640012372182,
+              "mean": 4.701482566199939
+            },
+            "30": {
+              "p5": 3.8138050566650277,
+              "p25": 4.436045010701663,
+              "p50": 4.860112978364885,
+              "p75": 5.285334534687409,
+              "p95": 5.911483603387757,
+              "mean": 4.855716464346991
+            }
+          }
+        },
+        {
+          "horizonDays": 252,
+          "byTenor": {
+            "0.25": {
+              "p5": 3.7023066829894495,
+              "p25": 4.47385244323621,
+              "p50": 4.9993598692796954,
+              "p75": 5.542236953418221,
+              "p95": 6.345480324167367,
+              "mean": 5.006371920918792
+            },
+            "2": {
+              "p5": 3.192461485451404,
+              "p25": 4.044153267302006,
+              "p50": 4.601640828954806,
+              "p75": 5.196408627148052,
+              "p95": 6.028075479225639,
+              "mean": 4.606960668157259
+            },
+            "5": {
+              "p5": 3.130355402893703,
+              "p25": 3.986258985648428,
+              "p50": 4.520402192223347,
+              "p75": 5.121360623817727,
+              "p95": 5.956871994017601,
+              "mean": 4.536798055693131
+            },
+            "10": {
+              "p5": 3.355807689001927,
+              "p25": 4.101952741237443,
+              "p50": 4.626600802002946,
+              "p75": 5.187707349342758,
+              "p95": 5.9473025158622335,
+              "mean": 4.639254483843439
+            },
+            "30": {
+              "p5": 3.526274662924951,
+              "p25": 4.234572193893209,
+              "p50": 4.7651869810678615,
+              "p75": 5.306756770289011,
+              "p95": 6.02478381769569,
+              "mean": 4.771140480483303
+            }
+          }
+        }
+      ]
+    },
+    "10000": {
+      "numSummaryValuesChecked": 120,
+      "maxAbsSummaryErrorPercent": 3.552713678800501e-14,
+      "maxAbsCurrentCurveErrorPercent": 0.0,
+      "horizons": [
+        {
+          "horizonDays": 21,
+          "byTenor": {
+            "0.25": {
+              "p5": 4.051451473632635,
+              "p25": 4.224017765780075,
+              "p50": 4.322775093069167,
+              "p75": 4.426987494187799,
+              "p95": 4.606363521535176,
+              "mean": 4.326461354610873
+            },
+            "2": {
+              "p5": 3.715849713987167,
+              "p25": 4.247880248050425,
+              "p50": 4.448847157109859,
+              "p75": 4.650615402843609,
+              "p95": 5.164024920202127,
+              "mean": 4.444719325496131
+            },
+            "5": {
+              "p5": 3.9220593371961963,
+              "p25": 4.423759172503711,
+              "p50": 4.657997981049881,
+              "p75": 4.891823481174689,
+              "p95": 5.379825571740717,
+              "mean": 4.6559748168142265
+            },
+            "10": {
+              "p5": 4.296486303346808,
+              "p25": 4.64656222142028,
+              "p50": 4.84774814310636,
+              "p75": 5.056838446768259,
+              "p95": 5.394097399210413,
+              "mean": 4.8479320053587305
+            },
+            "30": {
+              "p5": 4.51318739552041,
+              "p25": 4.8251296279208535,
+              "p50": 5.018489217502621,
+              "p75": 5.208411792292628,
+              "p95": 5.517891262189111,
+              "mean": 5.017705049205239
+            }
+          }
+        },
+        {
+          "horizonDays": 63,
+          "byTenor": {
+            "0.25": {
+              "p5": 4.002142113373423,
+              "p25": 4.326962541732365,
+              "p50": 4.5414478261958475,
+              "p75": 4.751837751565987,
+              "p95": 5.08365130832095,
+              "mean": 4.541112290829733
+            },
+            "2": {
+              "p5": 3.5396391000271037,
+              "p25": 4.102596657924869,
+              "p50": 4.438318664053202,
+              "p75": 4.773390157493616,
+              "p95": 5.338033814266355,
+              "mean": 4.441257906964278
+            },
+            "5": {
+              "p5": 3.6140157887875786,
+              "p25": 4.187945986052587,
+              "p50": 4.5642153390595395,
+              "p75": 4.925132131840229,
+              "p95": 5.515174158485911,
+              "mean": 4.562072634465202
+            },
+            "10": {
+              "p5": 3.915675738465359,
+              "p25": 4.419449154973794,
+              "p50": 4.753806423891998,
+              "p75": 5.0824919720884525,
+              "p95": 5.575154664139824,
+              "mean": 4.7491485034689465
+            },
+            "30": {
+              "p5": 4.121408917303417,
+              "p25": 4.6155544398751065,
+              "p50": 4.9367349699448635,
+              "p75": 5.2545431003860665,
+              "p95": 5.743785021026321,
+              "mean": 4.933797548822366
+            }
+          }
+        },
+        {
+          "horizonDays": 126,
+          "byTenor": {
+            "0.25": {
+              "p5": 3.9076154216673533,
+              "p25": 4.42159812172838,
+              "p50": 4.751026525185036,
+              "p75": 5.087572736033378,
+              "p95": 5.5798392918503925,
+              "mean": 4.751250767412388
+            },
+            "2": {
+              "p5": 3.4116065848091353,
+              "p25": 4.077551785126463,
+              "p50": 4.5086412640447975,
+              "p75": 4.939681281555002,
+              "p95": 5.586783171486805,
+              "mean": 4.50622613339602
+            },
+            "5": {
+              "p5": 3.382546795841342,
+              "p25": 4.073367570759876,
+              "p50": 4.53817366337975,
+              "p75": 4.998327625434229,
+              "p95": 5.678113581322418,
+              "mean": 4.5367077863091465
+            },
+            "10": {
+              "p5": 3.6189727314553792,
+              "p25": 4.253466670524739,
+              "p50": 4.683524788090708,
+              "p75": 5.1139895016194705,
+              "p95": 5.74253075878382,
+              "mean": 4.685363756141231
+            },
+            "30": {
+              "p5": 3.7804511543789268,
+              "p25": 4.427240706830137,
+              "p50": 4.848091063876582,
+              "p75": 5.272799863581037,
+              "p95": 5.910318619765241,
+              "mean": 4.846874206042555
+            }
+          }
+        },
+        {
+          "horizonDays": 252,
+          "byTenor": {
+            "0.25": {
+              "p5": 3.7167460334022913,
+              "p25": 4.462918263755277,
+              "p50": 4.986120024617122,
+              "p75": 5.50894726218405,
+              "p95": 6.284920260392981,
+              "mean": 4.990696854600997
+            },
+            "2": {
+              "p5": 3.19667253303102,
+              "p25": 4.021291596062234,
+              "p50": 4.59891421061765,
+              "p75": 5.179824557631694,
+              "p95": 6.006296017909043,
+              "mean": 4.6005378935311105
+            },
+            "5": {
+              "p5": 3.1144129644709593,
+              "p25": 3.9555878677042067,
+              "p50": 4.53395041691768,
+              "p75": 5.114836972318958,
+              "p95": 5.941047867619292,
+              "mean": 4.532018247558299
+            },
+            "10": {
+              "p5": 3.3035069415535543,
+              "p25": 4.089076247206112,
+              "p50": 4.63880293101116,
+              "p75": 5.1791927958040755,
+              "p95": 5.94637931747535,
+              "mean": 4.632121901938682
+            },
+            "30": {
+              "p5": 3.450096624286055,
+              "p25": 4.232473778902902,
+              "p50": 4.762594724354447,
+              "p75": 5.301402995251673,
+              "p95": 6.043397295471923,
+              "mean": 4.7609721449866
+            }
+          }
+        }
+      ]
+    }
+  },
+  "nestedPaths": "The 2000-path calculation uses exactly the first 2000 rows of the 10000-path residual-index matrix; every saved baseline summary matches.",
+  "captureResultMatchesMain": true,
+  "elapsedSeconds": 19.177806958032306,
+  "sha256": {
+    "article.md": "39b38a57325637a9524131651c1a171877c4361b1cff3bc1d06fff3c5c19ed87",
+    "latex_sidebar.md": "467350f82a1028d7512d8b6bf04bf1c6f23b1fb3c56a509a516095bec22c6ab4",
+    "experiment_notes.md": "dcbfdc121ceaa199554f0a19e35974279c0cb2243c0a18cab757883ae8b2b58a",
+    "scripts/run-experiment.mjs": "188839c94d17330a85f05243ab769d0b6cbfb751e0c1c84fea2868a17eeae735",
+    "scripts/platform-proxy.mjs": "836a74157fbf3d63036ae624f414af4be43fc6c2ed6d3401ba9ad395ce2630c9",
+    "evidence/api-10000.json": "dead271c86a137c4741b94a6507527faaaa5c86bacbfd69b5d3a393501791682",
+    "evidence/api-2000.json": "91d35868180630c49fedb96b34de64cb35f04fc39b4f89358756bd51ff9d15e9",
+    "evidence/experiment-summary.json": "bb8948a02142e4af5dc13b383d2bcc23bb88c197ca7cd3b983e09ae3c4cd9b6f",
+    "evidence/seed-runs.json": "51bf5d5af283734066ffe724499b6dc200373118647dee3647b5f4d10fb7f2d9",
+    "evidence/source/src/lib/server/mcsEngine.ts": "444f77e5d46420a95d825dfbe7820bc9ec73365495db3ca7ee3f2f730f3ba7ea",
+    "evidence/source/src/app/api/simulations/mcs/route.ts": "3f0d26397788eeaf21eafb573024e5a2a2afea8f374d1b84358ef0f1533a1b58",
+    "evidence/source/src/app/simulations/mcs/page.tsx": "2449e5c5df3d1b8ebbe634af9d3e800a077d83da976eecd253ffb1841d879d85",
+    "evidence/platform-captured-response.json": "dead271c86a137c4741b94a6507527faaaa5c86bacbfd69b5d3a393501791682",
+    "evidence/platform-requests.jsonl": "2b655adfd3e6398924301f1dd0c3e126f8f3d5c939621165a7e4beac4fe5fe84",
+    "evidence/platform-capture-dom.txt": "1bdca794706c824ad6919828281d1ef75f20f51f7fa24db1b44b1f70a044bd4a",
+    "assets/mcs-10000-10y.jpg": "d15c346ce76eed1c2a7852e99ab3ac311ef3970ce9b8a96db7e8a7a9cd68fcf4",
+    "assets/mcs-10000-2y.jpg": "e05350bd3e2c0045345016e5da914b5750cce1a184707151660c675eb94bdb03",
+    "reviews/independent_math_check.py": "50e4ea3d7b37547092150f29dbb6fa15fe3f5ab7e96a22ddee1ed22ec70194b8",
+    "evidence/post-capture-anchor-on-response.json": "3b90a02cd6e17d27e7277361e4182c2114d8d332969856e848404c37bab890e3"
+  },
+  "finalEditorialReconciliation": {
+    "date": "2026-11-01",
+    "checked": "Reread final article and notes after maturity wording, full-size links, source label and scripted-diagnostic clarification; formulas, numbers and interpretation unchanged; standalone sidebar is an exact substring of article.",
+    "numericalRerunRequired": false
+  },
+  "finalCaptureAuditCorrection": {
+    "date": "2026-11-01",
+    "description": "Development reload requests later overwrote a latest-response file with anchor-on data. Root preserved that response separately, changed proxy to freeze first anchor-off response, recaptured figures and stopped proxy. Independently reread final proxy/log/DOM/notes and verified final captured response byte-identical to unchanged primary API response.",
+    "capturedResponseByteIdenticalToMain": true,
+    "capturedResponseSha256": "dead271c86a137c4741b94a6507527faaaa5c86bacbfd69b5d3a393501791682",
+    "lastLoggedRequest": {
+      "capturedAt": "2026-11-01T17:47:10.335Z",
+      "incoming": "/api/simulations/mcs?fitYears=10&paths=2000&fomcAnchor=0",
+      "forwarded": "/api/simulations/mcs?fitYears=10&paths=10000&fomcAnchor=0",
+      "status": 200
+    },
+    "preservedLaterResponseAnchorApplied": true,
+    "preservedLaterResponseSameFit": true,
+    "proxyFreezeConditionVerifiedBySource": true,
+    "loopbackPort3011NoListenerAtCheck": true,
+    "changedArtifactHashesSincePreviousReview": {
+      "article.md": {
+        "previousSha256": "7b14dc82708de974725803dda0c73074cfe34c751dc585175439eb9653cc1738",
+        "finalSha256": "39b38a57325637a9524131651c1a171877c4361b1cff3bc1d06fff3c5c19ed87"
+      },
+      "experiment_notes.md": {
+        "previousSha256": "2f6681c38c95407c005c447d3be424191b853e3a711a4d1ecdd31c7a627186a7",
+        "finalSha256": "dcbfdc121ceaa199554f0a19e35974279c0cb2243c0a18cab757883ae8b2b58a"
+      },
+      "scripts/platform-proxy.mjs": {
+        "previousSha256": "8d34b65db61d62e32f53780690fe9e0317e234f2fddd9f6ffc8fc7f7fe50caa7",
+        "finalSha256": "836a74157fbf3d63036ae624f414af4be43fc6c2ed6d3401ba9ad395ce2630c9"
+      },
+      "evidence/platform-requests.jsonl": {
+        "previousSha256": "7afc9ab52c2738e543533ebc5dca13e4e6cbc32623a3d682404fcc3624fdbeb7",
+        "finalSha256": "2b655adfd3e6398924301f1dd0c3e126f8f3d5c939621165a7e4beac4fe5fe84"
+      },
+      "evidence/platform-capture-dom.txt": {
+        "previousSha256": "37742b2bde30c26f161f9e866e6de5b9a66f215b78e98fc502df99b061606dd4",
+        "finalSha256": "1bdca794706c824ad6919828281d1ef75f20f51f7fa24db1b44b1f70a044bd4a"
+      },
+      "assets/mcs-10000-10y.jpg": {
+        "previousSha256": "ba3f4111990346f45f7c63e91fc0056f2ec4abd74000e8fb89175b89f715f85e",
+        "finalSha256": "d15c346ce76eed1c2a7852e99ab3ac311ef3970ce9b8a96db7e8a7a9cd68fcf4"
+      },
+      "assets/mcs-10000-2y.jpg": {
+        "previousSha256": "de0d077f8580c5bd88b91193b8fa0b07f6361a0e354a0027011a9159c07f45fd",
+        "finalSha256": "e05350bd3e2c0045345016e5da914b5750cce1a184707151660c675eb94bdb03"
+      }
+    },
+    "numericalInputsAndEngineUnchanged": true,
+    "numericalSimulationsRerun": false,
+    "limit": "This narrow reconciliation verifies capture identity, code/log/settings consistency and final file hashes; no separate pixel-by-pixel screenshot audit or reproduction of browser capture actions."
+  }
+}

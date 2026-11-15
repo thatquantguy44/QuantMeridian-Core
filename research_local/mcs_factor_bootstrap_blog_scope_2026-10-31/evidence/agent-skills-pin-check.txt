@@ -1,0 +1,8 @@
+$ npm run check:agent-skills-pin
+
+> market-terminal@0.1.0 check:agent-skills-pin
+> node scripts/check-agent-skills-pin.mjs
+
+Agent Skills full-repository pin PASSED — thatquantguy44/agent-skills@f63ec56a3cc9 (188 paths, 24 skills).
+
+Exit code: 0

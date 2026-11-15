@@ -4,6 +4,14 @@ This roadmap is a product and engineering backlog for the QIT Terminal, with the
 
 ## Roadmap principles
 
+The proposed [Spec026 Portfolio Optimization & Regime Analysis suite](../specs/spec026/SPEC.md)
+and [module roadmap](../specs/spec026/ROADMAP.md) define the next research-module
+proposal: daily equity/ETF allocation, statistical regimes and cost-aware
+evaluation, with optional attended QuantSmith assistance. The co-located model and
+separate health-only API packages are scaffolded; numerical/source/operational
+decisions remain drafts. The suite follows the actual React/Vite app
+rather than this older roadmap's Next.js description.
+
 1. **Stabilize the terminal before widening it.** The application already contains a broad module surface across markets, securities finance, optimization, economics, intelligence, and alerts. Near-term work should reduce visual inconsistency, discoverability gaps, and runtime risk.
 2. **Keep the Bloomberg-style density, but add user control.** Dense layouts are part of the product identity; future UI work should add configurable density, saved workspaces, and accessibility affordances without turning the terminal into a generic dashboard.
 3. **Make live-vs-simulated state impossible to miss.** The product deliberately mixes live FRED, ETL, partial-live, and simulated/local-model modules. UI and data plumbing should make source status, freshness, and fallbacks visible at every decision point.

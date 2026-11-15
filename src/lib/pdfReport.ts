@@ -160,7 +160,7 @@ export class PdfReport {
   table(
     headers: string[],
     rows: RowInput[],
-    opts?: { columnStyles?: Record<number, { halign?: "left" | "center" | "right"; cellWidth?: number }> }
+    opts?: { columnStyles?: Record<number, { halign?: "left" | "center" | "right"; cellWidth?: number }>; avoidRowBreak?: boolean }
   ) {
     this.checkPage(60);
 
@@ -169,6 +169,9 @@ export class PdfReport {
       margin: { left: this.margin, right: this.margin },
       head: [headers],
       body: rows,
+      rowPageBreak: opts?.avoidRowBreak ? "avoid" : "auto",
+      // AutoTable adds overflow pages itself, so paint their background before drawing rows.
+      willDrawPage: (data) => { if (data.pageNumber > 1) this.drawBackground(); },
       theme: "plain",
       styles: {
         fillColor: COLORS.bg,

@@ -1,0 +1,975 @@
+{
+  "schema": "benchmark-full-build-validation/1",
+  "source_commit": "7f83f4b3f367d5f9623eb0526d6a7176b333c3bf",
+  "relevant_worktree_changes": "M src/fred_pipeline/io/postgres_store.py",
+  "source_sha256": {
+    "src/fred_pipeline/io/postgres_store.py": "765dac72085456e3d776ac806dd19be250cfe9ed06ba439f8716be9b5c5f249e",
+    "src/fred_pipeline/writer/terminal_views.py": "a5d1c6aa10cc30b9f49b1ef222463fbdf45da100ae21e37a249ea2fd0177c0c5",
+    "src/fred_pipeline/writer/features.py": "cd30a5d4536ae0bd3cf4d66d351c40c9c074a6cd3aae30c55de4092a7df3c6d7",
+    "src/fred_pipeline/gold_config/rates_complex_config.py": "6bb15b016b5e71ed6a4ff97a8dfa9b256f41ca8ea2e493ff3141009803f9fadd",
+    "config/benchmark_rates.yml": "474304123056d01b9becadbd31035fa7d896ff3b1388952c9c77784c87f0d6c5"
+  },
+  "promotable": false,
+  "configured_ids": [
+    "FEDFUNDS",
+    "EFFR",
+    "IORB",
+    "DPRIME",
+    "SOFR",
+    "TGCRRATE",
+    "OBFR",
+    "SOFR30DAYAVG",
+    "DGS3MO",
+    "DGS2",
+    "DGS10",
+    "DGS30",
+    "REAINTRATREARAT10Y",
+    "T10YIE",
+    "T5YIE",
+    "MORTGAGE30US"
+  ],
+  "source_database": "macro_medallion",
+  "snapshot_at": "2026-11-11T05:58:06.881537+00:00",
+  "as_of_date": "2026-11-11",
+  "timezone": "America/New_York",
+  "evidence_counts": {
+    "receipt": 98540,
+    "audited_repair": 10097
+  },
+  "evidence_gaps": [],
+  "future_rows": [
+    {
+      "series_id": "IORB",
+      "date": "2026-11-12",
+      "realtime_start": "2026-11-10",
+      "value": 3.9
+    }
+  ],
+  "silver_rows": 108637,
+  "gold_rows": 108510,
+  "board_rows": 16,
+  "receipt_count": 79,
+  "repair_batch_count": 15,
+  "build_gold_result": {
+    "fred_point_in_time": "ok",
+    "fred_latest_observation": "ok",
+    "fred_macro_feature_daily": "ok",
+    "fred_feature_transforms": "ok",
+    "fred_series_zscore_rolling": "ok",
+    "zscore_heatmap": "ok",
+    "fred_curve_spread": "ok",
+    "fred_cross_series_feature": "ok",
+    "fred_cross_series_feature_pit": "ok",
+    "fred_source_reconciliation": "ok",
+    "fred_company_fundamentals": "ok",
+    "fred_company_ratios": "ok",
+    "fred_revision_stats": "ok",
+    "dim_series": "ok",
+    "dim_date": "ok",
+    "market_calendar": "ok",
+    "macro_indicator_dashboard": "ok",
+    "macro_indicator_sparkline": "ok",
+    "macro_category_summary": "ok",
+    "treasury_curve": "ok",
+    "treasury_curve_metrics": "ok",
+    "yield_curve_ns_factors": "ok",
+    "curve_spread_daily": "ok",
+    "spread_inversion_episode": "ok",
+    "benchmark_rate_board": "ok",
+    "funding_tape_daily": "ok",
+    "funding_stress_daily": "ok",
+    "mmkt_rate_snapshot": "ok",
+    "credit_spread_daily": "ok",
+    "inflation_explorer": "ok",
+    "inflation_contribution": "ok",
+    "curve_spread_rolling": "ok",
+    "credit_spread_rolling": "ok",
+    "treasury_curve_rolling": "ok",
+    "macro_regime_daily": "ok",
+    "series_correlation": "ok",
+    "series_lead_lag": "ok",
+    "series_structural_breaks": "ok",
+    "global_inflation": "ok",
+    "global_policy_rates": "ok",
+    "powerbi_catalog": "ok",
+    "equity_return_daily": "ok",
+    "index_constituents": "ok",
+    "equity_total_return_index": "ok",
+    "equity_price_reconciliation": "ok",
+    "realized_volatility": "ok",
+    "ml_feature_matrix": "ok",
+    "macro_factor_scores": "ok",
+    "macro_factor_loadings": "ok",
+    "macro_anomaly_scores": "ok",
+    "equity_factor_attribution": "ok",
+    "equity_factor_implied_return": "ok",
+    "recession_probability_daily": "ok",
+    "inflation_forecast": "ok"
+  },
+  "gold_mismatches": [],
+  "isolated_gold_rows": 108510,
+  "board_mismatches": [],
+  "board_reproduced": [
+    {
+      "series_id": "FEDFUNDS",
+      "rate_label": "Fed Funds Effective (monthly)",
+      "rate_category": "policy",
+      "benchmark_series": null,
+      "as_of_date": "2026-11-12",
+      "latest_date": "2026-10-01",
+      "latest_value": 3.88,
+      "prior_value": 3.75,
+      "change_bps": 12.99999999999999,
+      "trend": "rising",
+      "spread_to_benchmark_bps": null,
+      "zscore": -0.20246786387070054,
+      "percentile": 0.45098039215686275,
+      "regime": "tightening",
+      "staleness_days": 42
+    },
+    {
+      "series_id": "EFFR",
+      "rate_label": "EFFR",
+      "rate_category": "policy",
+      "benchmark_series": "IORB",
+      "as_of_date": "2026-11-12",
+      "latest_date": "2026-11-09",
+      "latest_value": 3.88,
+      "prior_value": 3.88,
+      "change_bps": 0.0,
+      "trend": "flat",
+      "spread_to_benchmark_bps": -2.0000000000000018,
+      "zscore": 0.9648683282813129,
+      "percentile": 0.7611850060459492,
+      "regime": "stable",
+      "staleness_days": 3
+    },
+    {
+      "series_id": "IORB",
+      "rate_label": "Interest on Reserve Balances",
+      "rate_category": "policy",
+      "benchmark_series": null,
+      "as_of_date": "2026-11-12",
+      "latest_date": "2026-11-12",
+      "latest_value": 3.9,
+      "prior_value": 3.9,
+      "change_bps": 0.0,
+      "trend": "flat",
+      "spread_to_benchmark_bps": null,
+      "zscore": 0.1124818291619108,
+      "percentile": 0.38405797101449274,
+      "regime": "stable",
+      "staleness_days": 0
+    },
+    {
+      "series_id": "DPRIME",
+      "rate_label": "Bank Prime Rate",
+      "rate_category": "policy",
+      "benchmark_series": "EFFR",
+      "as_of_date": "2026-11-12",
+      "latest_date": "2026-11-09",
+      "latest_value": 7.0,
+      "prior_value": 7.0,
+      "change_bps": 0.0,
+      "trend": "flat",
+      "spread_to_benchmark_bps": 312.0,
+      "zscore": 0.04973415459457517,
+      "percentile": 0.5541180356749614,
+      "regime": "stable",
+      "staleness_days": 3
+    },
+    {
+      "series_id": "SOFR",
+      "rate_label": "SOFR",
+      "rate_category": "secured_overnight",
+      "benchmark_series": "EFFR",
+      "as_of_date": "2026-11-12",
+      "latest_date": "2026-11-09",
+      "latest_value": 3.88,
+      "prior_value": 3.89,
+      "change_bps": -1.000000000000023,
+      "trend": "falling",
+      "spread_to_benchmark_bps": 0.0,
+      "zscore": 0.614540638918836,
+      "percentile": 0.6401303538175046,
+      "regime": "easing",
+      "staleness_days": 3
+    },
+    {
+      "series_id": "TGCRRATE",
+      "rate_label": "Tri-Party General Collateral Rate",
+      "rate_category": "secured_overnight",
+      "benchmark_series": "SOFR",
+      "as_of_date": "2026-11-12",
+      "latest_date": "2026-11-09",
+      "latest_value": 3.86,
+      "prior_value": 3.86,
+      "change_bps": 0.0,
+      "trend": "falling",
+      "spread_to_benchmark_bps": -2.0000000000000018,
+      "zscore": 0.6149357993592403,
+      "percentile": 0.6407631456491392,
+      "regime": "easing",
+      "staleness_days": 3
+    },
+    {
+      "series_id": "OBFR",
+      "rate_label": "Overnight Bank Funding Rate",
+      "rate_category": "unsecured_overnight",
+      "benchmark_series": "EFFR",
+      "as_of_date": "2026-11-12",
+      "latest_date": "2026-11-09",
+      "latest_value": 3.88,
+      "prior_value": 3.88,
+      "change_bps": 0.0,
+      "trend": "flat",
+      "spread_to_benchmark_bps": 0.0,
+      "zscore": 0.8286183538254366,
+      "percentile": 0.7118391660461653,
+      "regime": "stable",
+      "staleness_days": 3
+    },
+    {
+      "series_id": "SOFR30DAYAVG",
+      "rate_label": "30-Day Average SOFR",
+      "rate_category": "term_reference",
+      "benchmark_series": "SOFR",
+      "as_of_date": "2026-11-12",
+      "latest_date": "2026-11-10",
+      "latest_value": 3.91498,
+      "prior_value": 3.91461,
+      "change_bps": 0.03699999999997594,
+      "trend": "flat",
+      "spread_to_benchmark_bps": 3.498000000000001,
+      "zscore": 0.6291045134166834,
+      "percentile": 0.6494360902255639,
+      "regime": "stable",
+      "staleness_days": 2
+    },
+    {
+      "series_id": "DGS3MO",
+      "rate_label": "3M Treasury",
+      "rate_category": "treasury",
+      "benchmark_series": "EFFR",
+      "as_of_date": "2026-11-12",
+      "latest_date": "2026-11-09",
+      "latest_value": 4.24,
+      "prior_value": 4.19,
+      "change_bps": 4.999999999999982,
+      "trend": "rising",
+      "spread_to_benchmark_bps": 36.00000000000003,
+      "zscore": 0.1322288740220669,
+      "percentile": 0.5223973087818697,
+      "regime": "tightening",
+      "staleness_days": 3
+    },
+    {
+      "series_id": "DGS2",
+      "rate_label": "2Y Treasury",
+      "rate_category": "treasury",
+      "benchmark_series": "DGS3MO",
+      "as_of_date": "2026-11-12",
+      "latest_date": "2026-11-09",
+      "latest_value": 4.56,
+      "prior_value": 4.51,
+      "change_bps": 4.999999999999982,
+      "trend": "falling",
+      "spread_to_benchmark_bps": 31.99999999999994,
+      "zscore": -0.10741589382402665,
+      "percentile": 0.49174996033634777,
+      "regime": "easing",
+      "staleness_days": 3
+    },
+    {
+      "series_id": "DGS10",
+      "rate_label": "10Y Treasury",
+      "rate_category": "treasury",
+      "benchmark_series": "DGS2",
+      "as_of_date": "2026-11-12",
+      "latest_date": "2026-11-09",
+      "latest_value": 4.88,
+      "prior_value": 4.86,
+      "change_bps": 1.9999999999999574,
+      "trend": "falling",
+      "spread_to_benchmark_bps": 32.00000000000003,
+      "zscore": -0.31561452741295404,
+      "percentile": 0.45054945054945056,
+      "regime": "easing",
+      "staleness_days": 3
+    },
+    {
+      "series_id": "DGS30",
+      "rate_label": "30Y Treasury",
+      "rate_category": "treasury",
+      "benchmark_series": "DGS10",
+      "as_of_date": "2026-11-12",
+      "latest_date": "2026-11-09",
+      "latest_value": 5.26,
+      "prior_value": 5.26,
+      "change_bps": 0.0,
+      "trend": "falling",
+      "spread_to_benchmark_bps": 37.999999999999986,
+      "zscore": -0.3008368080783645,
+      "percentile": 0.4781139362729321,
+      "regime": "easing",
+      "staleness_days": 3
+    },
+    {
+      "series_id": "REAINTRATREARAT10Y",
+      "rate_label": "10Y Real Rate",
+      "rate_category": "real",
+      "benchmark_series": "DGS10",
+      "as_of_date": "2026-11-12",
+      "latest_date": "2026-11-01",
+      "latest_value": 2.26492636,
+      "prior_value": 2.47848505,
+      "change_bps": -21.355869000000016,
+      "trend": "rising",
+      "spread_to_benchmark_bps": -267.50736400000005,
+      "zscore": -0.07703380025344124,
+      "percentile": 0.5427509293680297,
+      "regime": "tightening",
+      "staleness_days": 11
+    },
+    {
+      "series_id": "T10YIE",
+      "rate_label": "10Y Breakeven",
+      "rate_category": "inflation_linked",
+      "benchmark_series": null,
+      "as_of_date": "2026-11-12",
+      "latest_date": "2026-11-10",
+      "latest_value": 2.2,
+      "prior_value": 2.22,
+      "change_bps": -2.0000000000000018,
+      "trend": "falling",
+      "spread_to_benchmark_bps": null,
+      "zscore": 0.22977993461418242,
+      "percentile": 0.4656501340482574,
+      "regime": "easing",
+      "staleness_days": 2
+    },
+    {
+      "series_id": "T5YIE",
+      "rate_label": "5Y Breakeven",
+      "rate_category": "inflation_linked",
+      "benchmark_series": null,
+      "as_of_date": "2026-11-12",
+      "latest_date": "2026-11-10",
+      "latest_value": 2.25,
+      "prior_value": 2.25,
+      "change_bps": 0.0,
+      "trend": "falling",
+      "spread_to_benchmark_bps": null,
+      "zscore": 0.4966975279716517,
+      "percentile": 0.6456099195710456,
+      "regime": "easing",
+      "staleness_days": 2
+    },
+    {
+      "series_id": "MORTGAGE30US",
+      "rate_label": "30Y Mortgage",
+      "rate_category": "lending",
+      "benchmark_series": "DGS10",
+      "as_of_date": "2026-11-12",
+      "latest_date": "2026-11-05",
+      "latest_value": 7.18,
+      "prior_value": 7.24,
+      "change_bps": -6.00000000000005,
+      "trend": "falling",
+      "spread_to_benchmark_bps": 234.0,
+      "zscore": -0.1574494875905165,
+      "percentile": 0.49362288865908305,
+      "regime": "easing",
+      "staleness_days": 7
+    }
+  ],
+  "full_build_board_mismatches": [],
+  "board_as_of_prefiltered": [
+    {
+      "series_id": "FEDFUNDS",
+      "rate_label": "Fed Funds Effective (monthly)",
+      "rate_category": "policy",
+      "benchmark_series": null,
+      "as_of_date": "2026-11-11",
+      "latest_date": "2026-10-01",
+      "latest_value": 3.88,
+      "prior_value": 3.75,
+      "change_bps": 12.99999999999999,
+      "trend": "rising",
+      "spread_to_benchmark_bps": null,
+      "zscore": -0.20246786387070054,
+      "percentile": 0.45098039215686275,
+      "regime": "tightening",
+      "staleness_days": 41
+    },
+    {
+      "series_id": "EFFR",
+      "rate_label": "EFFR",
+      "rate_category": "policy",
+      "benchmark_series": "IORB",
+      "as_of_date": "2026-11-11",
+      "latest_date": "2026-11-09",
+      "latest_value": 3.88,
+      "prior_value": 3.88,
+      "change_bps": 0.0,
+      "trend": "flat",
+      "spread_to_benchmark_bps": -2.0000000000000018,
+      "zscore": 0.9648683282813129,
+      "percentile": 0.7611850060459492,
+      "regime": "stable",
+      "staleness_days": 2
+    },
+    {
+      "series_id": "IORB",
+      "rate_label": "Interest on Reserve Balances",
+      "rate_category": "policy",
+      "benchmark_series": null,
+      "as_of_date": "2026-11-11",
+      "latest_date": "2026-11-11",
+      "latest_value": 3.9,
+      "prior_value": 3.9,
+      "change_bps": 0.0,
+      "trend": "flat",
+      "spread_to_benchmark_bps": null,
+      "zscore": 0.11251130400440286,
+      "percentile": 0.38425686172967377,
+      "regime": "stable",
+      "staleness_days": 0
+    },
+    {
+      "series_id": "DPRIME",
+      "rate_label": "Bank Prime Rate",
+      "rate_category": "policy",
+      "benchmark_series": "EFFR",
+      "as_of_date": "2026-11-11",
+      "latest_date": "2026-11-09",
+      "latest_value": 7.0,
+      "prior_value": 7.0,
+      "change_bps": 0.0,
+      "trend": "flat",
+      "spread_to_benchmark_bps": 312.0,
+      "zscore": 0.04973415459457517,
+      "percentile": 0.5541180356749614,
+      "regime": "stable",
+      "staleness_days": 2
+    },
+    {
+      "series_id": "SOFR",
+      "rate_label": "SOFR",
+      "rate_category": "secured_overnight",
+      "benchmark_series": "EFFR",
+      "as_of_date": "2026-11-11",
+      "latest_date": "2026-11-09",
+      "latest_value": 3.88,
+      "prior_value": 3.89,
+      "change_bps": -1.000000000000023,
+      "trend": "falling",
+      "spread_to_benchmark_bps": 0.0,
+      "zscore": 0.614540638918836,
+      "percentile": 0.6401303538175046,
+      "regime": "easing",
+      "staleness_days": 2
+    },
+    {
+      "series_id": "TGCRRATE",
+      "rate_label": "Tri-Party General Collateral Rate",
+      "rate_category": "secured_overnight",
+      "benchmark_series": "SOFR",
+      "as_of_date": "2026-11-11",
+      "latest_date": "2026-11-09",
+      "latest_value": 3.86,
+      "prior_value": 3.86,
+      "change_bps": 0.0,
+      "trend": "falling",
+      "spread_to_benchmark_bps": -2.0000000000000018,
+      "zscore": 0.6149357993592403,
+      "percentile": 0.6407631456491392,
+      "regime": "easing",
+      "staleness_days": 2
+    },
+    {
+      "series_id": "OBFR",
+      "rate_label": "Overnight Bank Funding Rate",
+      "rate_category": "unsecured_overnight",
+      "benchmark_series": "EFFR",
+      "as_of_date": "2026-11-11",
+      "latest_date": "2026-11-09",
+      "latest_value": 3.88,
+      "prior_value": 3.88,
+      "change_bps": 0.0,
+      "trend": "flat",
+      "spread_to_benchmark_bps": 0.0,
+      "zscore": 0.8286183538254366,
+      "percentile": 0.7118391660461653,
+      "regime": "stable",
+      "staleness_days": 2
+    },
+    {
+      "series_id": "SOFR30DAYAVG",
+      "rate_label": "30-Day Average SOFR",
+      "rate_category": "term_reference",
+      "benchmark_series": "SOFR",
+      "as_of_date": "2026-11-11",
+      "latest_date": "2026-11-10",
+      "latest_value": 3.91498,
+      "prior_value": 3.91461,
+      "change_bps": 0.03699999999997594,
+      "trend": "flat",
+      "spread_to_benchmark_bps": 3.498000000000001,
+      "zscore": 0.6291045134166834,
+      "percentile": 0.6494360902255639,
+      "regime": "stable",
+      "staleness_days": 1
+    },
+    {
+      "series_id": "DGS3MO",
+      "rate_label": "3M Treasury",
+      "rate_category": "treasury",
+      "benchmark_series": "EFFR",
+      "as_of_date": "2026-11-11",
+      "latest_date": "2026-11-09",
+      "latest_value": 4.24,
+      "prior_value": 4.19,
+      "change_bps": 4.999999999999982,
+      "trend": "rising",
+      "spread_to_benchmark_bps": 36.00000000000003,
+      "zscore": 0.1322288740220669,
+      "percentile": 0.5223973087818697,
+      "regime": "tightening",
+      "staleness_days": 2
+    },
+    {
+      "series_id": "DGS2",
+      "rate_label": "2Y Treasury",
+      "rate_category": "treasury",
+      "benchmark_series": "DGS3MO",
+      "as_of_date": "2026-11-11",
+      "latest_date": "2026-11-09",
+      "latest_value": 4.56,
+      "prior_value": 4.51,
+      "change_bps": 4.999999999999982,
+      "trend": "falling",
+      "spread_to_benchmark_bps": 31.99999999999994,
+      "zscore": -0.10741589382402665,
+      "percentile": 0.49174996033634777,
+      "regime": "easing",
+      "staleness_days": 2
+    },
+    {
+      "series_id": "DGS10",
+      "rate_label": "10Y Treasury",
+      "rate_category": "treasury",
+      "benchmark_series": "DGS2",
+      "as_of_date": "2026-11-11",
+      "latest_date": "2026-11-09",
+      "latest_value": 4.88,
+      "prior_value": 4.86,
+      "change_bps": 1.9999999999999574,
+      "trend": "falling",
+      "spread_to_benchmark_bps": 32.00000000000003,
+      "zscore": -0.31561452741295404,
+      "percentile": 0.45054945054945056,
+      "regime": "easing",
+      "staleness_days": 2
+    },
+    {
+      "series_id": "DGS30",
+      "rate_label": "30Y Treasury",
+      "rate_category": "treasury",
+      "benchmark_series": "DGS10",
+      "as_of_date": "2026-11-11",
+      "latest_date": "2026-11-09",
+      "latest_value": 5.26,
+      "prior_value": 5.26,
+      "change_bps": 0.0,
+      "trend": "falling",
+      "spread_to_benchmark_bps": 37.999999999999986,
+      "zscore": -0.3008368080783645,
+      "percentile": 0.4781139362729321,
+      "regime": "easing",
+      "staleness_days": 2
+    },
+    {
+      "series_id": "REAINTRATREARAT10Y",
+      "rate_label": "10Y Real Rate",
+      "rate_category": "real",
+      "benchmark_series": "DGS10",
+      "as_of_date": "2026-11-11",
+      "latest_date": "2026-11-01",
+      "latest_value": 2.26492636,
+      "prior_value": 2.47848505,
+      "change_bps": -21.355869000000016,
+      "trend": "rising",
+      "spread_to_benchmark_bps": -267.50736400000005,
+      "zscore": -0.07703380025344124,
+      "percentile": 0.5427509293680297,
+      "regime": "tightening",
+      "staleness_days": 10
+    },
+    {
+      "series_id": "T10YIE",
+      "rate_label": "10Y Breakeven",
+      "rate_category": "inflation_linked",
+      "benchmark_series": null,
+      "as_of_date": "2026-11-11",
+      "latest_date": "2026-11-10",
+      "latest_value": 2.2,
+      "prior_value": 2.22,
+      "change_bps": -2.0000000000000018,
+      "trend": "falling",
+      "spread_to_benchmark_bps": null,
+      "zscore": 0.22977993461418242,
+      "percentile": 0.4656501340482574,
+      "regime": "easing",
+      "staleness_days": 1
+    },
+    {
+      "series_id": "T5YIE",
+      "rate_label": "5Y Breakeven",
+      "rate_category": "inflation_linked",
+      "benchmark_series": null,
+      "as_of_date": "2026-11-11",
+      "latest_date": "2026-11-10",
+      "latest_value": 2.25,
+      "prior_value": 2.25,
+      "change_bps": 0.0,
+      "trend": "falling",
+      "spread_to_benchmark_bps": null,
+      "zscore": 0.4966975279716517,
+      "percentile": 0.6456099195710456,
+      "regime": "easing",
+      "staleness_days": 1
+    },
+    {
+      "series_id": "MORTGAGE30US",
+      "rate_label": "30Y Mortgage",
+      "rate_category": "lending",
+      "benchmark_series": "DGS10",
+      "as_of_date": "2026-11-11",
+      "latest_date": "2026-11-05",
+      "latest_value": 7.18,
+      "prior_value": 7.24,
+      "change_bps": -6.00000000000005,
+      "trend": "falling",
+      "spread_to_benchmark_bps": 234.0,
+      "zscore": -0.1574494875905165,
+      "percentile": 0.49362288865908305,
+      "regime": "easing",
+      "staleness_days": 6
+    }
+  ],
+  "prefilter_differences": [
+    {
+      "key": [
+        "DGS10",
+        ""
+      ],
+      "field": "as_of_date",
+      "actual": "2026-11-11",
+      "live": "2026-11-12"
+    },
+    {
+      "key": [
+        "DGS10",
+        ""
+      ],
+      "field": "staleness_days",
+      "actual": 2,
+      "live": 3
+    },
+    {
+      "key": [
+        "DGS2",
+        ""
+      ],
+      "field": "as_of_date",
+      "actual": "2026-11-11",
+      "live": "2026-11-12"
+    },
+    {
+      "key": [
+        "DGS2",
+        ""
+      ],
+      "field": "staleness_days",
+      "actual": 2,
+      "live": 3
+    },
+    {
+      "key": [
+        "DGS30",
+        ""
+      ],
+      "field": "as_of_date",
+      "actual": "2026-11-11",
+      "live": "2026-11-12"
+    },
+    {
+      "key": [
+        "DGS30",
+        ""
+      ],
+      "field": "staleness_days",
+      "actual": 2,
+      "live": 3
+    },
+    {
+      "key": [
+        "DGS3MO",
+        ""
+      ],
+      "field": "as_of_date",
+      "actual": "2026-11-11",
+      "live": "2026-11-12"
+    },
+    {
+      "key": [
+        "DGS3MO",
+        ""
+      ],
+      "field": "staleness_days",
+      "actual": 2,
+      "live": 3
+    },
+    {
+      "key": [
+        "DPRIME",
+        ""
+      ],
+      "field": "as_of_date",
+      "actual": "2026-11-11",
+      "live": "2026-11-12"
+    },
+    {
+      "key": [
+        "DPRIME",
+        ""
+      ],
+      "field": "staleness_days",
+      "actual": 2,
+      "live": 3
+    },
+    {
+      "key": [
+        "EFFR",
+        ""
+      ],
+      "field": "as_of_date",
+      "actual": "2026-11-11",
+      "live": "2026-11-12"
+    },
+    {
+      "key": [
+        "EFFR",
+        ""
+      ],
+      "field": "staleness_days",
+      "actual": 2,
+      "live": 3
+    },
+    {
+      "key": [
+        "FEDFUNDS",
+        ""
+      ],
+      "field": "as_of_date",
+      "actual": "2026-11-11",
+      "live": "2026-11-12"
+    },
+    {
+      "key": [
+        "FEDFUNDS",
+        ""
+      ],
+      "field": "staleness_days",
+      "actual": 41,
+      "live": 42
+    },
+    {
+      "key": [
+        "IORB",
+        ""
+      ],
+      "field": "as_of_date",
+      "actual": "2026-11-11",
+      "live": "2026-11-12"
+    },
+    {
+      "key": [
+        "IORB",
+        ""
+      ],
+      "field": "latest_date",
+      "actual": "2026-11-11",
+      "live": "2026-11-12"
+    },
+    {
+      "key": [
+        "IORB",
+        ""
+      ],
+      "field": "zscore",
+      "actual": 0.11251130400440286,
+      "live": 0.1124818291619108
+    },
+    {
+      "key": [
+        "IORB",
+        ""
+      ],
+      "field": "percentile",
+      "actual": 0.38425686172967377,
+      "live": 0.38405797101449274
+    },
+    {
+      "key": [
+        "MORTGAGE30US",
+        ""
+      ],
+      "field": "as_of_date",
+      "actual": "2026-11-11",
+      "live": "2026-11-12"
+    },
+    {
+      "key": [
+        "MORTGAGE30US",
+        ""
+      ],
+      "field": "staleness_days",
+      "actual": 6,
+      "live": 7
+    },
+    {
+      "key": [
+        "OBFR",
+        ""
+      ],
+      "field": "as_of_date",
+      "actual": "2026-11-11",
+      "live": "2026-11-12"
+    },
+    {
+      "key": [
+        "OBFR",
+        ""
+      ],
+      "field": "staleness_days",
+      "actual": 2,
+      "live": 3
+    },
+    {
+      "key": [
+        "REAINTRATREARAT10Y",
+        ""
+      ],
+      "field": "as_of_date",
+      "actual": "2026-11-11",
+      "live": "2026-11-12"
+    },
+    {
+      "key": [
+        "REAINTRATREARAT10Y",
+        ""
+      ],
+      "field": "staleness_days",
+      "actual": 10,
+      "live": 11
+    },
+    {
+      "key": [
+        "SOFR",
+        ""
+      ],
+      "field": "as_of_date",
+      "actual": "2026-11-11",
+      "live": "2026-11-12"
+    },
+    {
+      "key": [
+        "SOFR",
+        ""
+      ],
+      "field": "staleness_days",
+      "actual": 2,
+      "live": 3
+    },
+    {
+      "key": [
+        "SOFR30DAYAVG",
+        ""
+      ],
+      "field": "as_of_date",
+      "actual": "2026-11-11",
+      "live": "2026-11-12"
+    },
+    {
+      "key": [
+        "SOFR30DAYAVG",
+        ""
+      ],
+      "field": "staleness_days",
+      "actual": 1,
+      "live": 2
+    },
+    {
+      "key": [
+        "T10YIE",
+        ""
+      ],
+      "field": "as_of_date",
+      "actual": "2026-11-11",
+      "live": "2026-11-12"
+    },
+    {
+      "key": [
+        "T10YIE",
+        ""
+      ],
+      "field": "staleness_days",
+      "actual": 1,
+      "live": 2
+    },
+    {
+      "key": [
+        "T5YIE",
+        ""
+      ],
+      "field": "as_of_date",
+      "actual": "2026-11-11",
+      "live": "2026-11-12"
+    },
+    {
+      "key": [
+        "T5YIE",
+        ""
+      ],
+      "field": "staleness_days",
+      "actual": 1,
+      "live": 2
+    },
+    {
+      "key": [
+        "TGCRRATE",
+        ""
+      ],
+      "field": "as_of_date",
+      "actual": "2026-11-11",
+      "live": "2026-11-12"
+    },
+    {
+      "key": [
+        "TGCRRATE",
+        ""
+      ],
+      "field": "staleness_days",
+      "actual": 2,
+      "live": 3
+    }
+  ],
+  "scope": "Actual upstream full Gold build and benchmark-board calculation over all retained history of the 16 configured benchmark series; other Gold objects and full-warehouse parity are not validated.",
+  "source_files_unchanged_during_run": "Selected files matched the frozen copied source; this does not assert the upstream working tree remained unchanged.",
+  "additional_source_sha256": {
+    "src/fred_pipeline/io/local_store.py": "897aaf132748abc05af08ea8871f27c390bc951b624b2c14be6572f97530c416"
+  },
+  "additional_worktree_context": "The upstream working tree also contained uncommitted changes in local_store.py and other files; the full build used the frozen working-tree copy, not just HEAD."
+}

@@ -7,7 +7,7 @@
 
 export const RUN_LOG_CAPACITY = 200;
 
-export type RunLogModel = "IBAL" | "MMKT" | "COLL";
+export type RunLogModel = "IBAL" | "MMKT" | "COLL" | "SXU";
 export type RunLogKind = "run" | "stress" | "showcase";
 
 export interface RunLogEntry {

@@ -61,8 +61,8 @@ function resolveStatic(pathname: string): string | null {
 
 const server = http.createServer((req, res) => {
   void (async () => {
+    const rawUrl = req.url ?? "/";
     try {
-      const rawUrl = req.url ?? "/";
       const url = new URL(rawUrl, `http://${req.headers.host ?? "localhost"}`);
 
       // 1. API routes — same registry the dev server uses.

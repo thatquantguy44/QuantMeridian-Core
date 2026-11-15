@@ -259,6 +259,7 @@ export default function DataOpsPage() {
       </KpiStrip>
 
       <div className="grid flex-1 grid-cols-1 gap-2 p-2 xl:grid-cols-12">
+
         <Panel title="Provider Health" code="PROV" className="xl:col-span-12" right={<span className="flex items-center gap-2"><Tag tone={probe.health ? "blue" : "neutral"}>{probe.health && probe.probedAt ? `LIVE PROBE ${probe.probedAt.slice(11, 19)}` : "PROBING…"}</Tag><button className="term-btn" onClick={() => downloadJson("dataops_providers", providers)}>Download</button></span>}>
           <div className="px-3 py-1 text-3xs text-term-text-mute">
             <span className="font-semibold">Status</span> is verified live by <span className="font-mono">/api/dataops/health</span> (FRED makes a real call); <span className="font-semibold">UNVERIFIED</span> = probe hasn't confirmed it. Coverage / Fresh / Series / Failed are illustrative targets, not live metrics.

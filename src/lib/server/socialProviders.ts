@@ -219,10 +219,14 @@ async function attemptSocialProvider(provider: typeof PROVIDERS[number]): Promis
 const emptySocial = (): SocialIntel => ({ tickers: [], sectors: [], themes: [], totalPosts: 0, platforms: [] });
 
 /** Merge configured social providers into a SocialIntel, or ERR when no real rows are available. */
-export async function fetchLiveSocial(): Promise<LiveSocial> {
-  const attempts = await Promise.all(PROVIDERS.map((provider) => attemptSocialProvider(provider)));
-  const rd = attempts.find((attempt) => attempt.provider === "Reddit")?.data as Awaited<ReturnType<typeof reddit>> | null;
-  const st = attempts.find((attempt) => attempt.provider === "StockTwits")?.data as Awaited<ReturnType<typeof stocktwits>> | null;
+export async function fetchLiveSocial(options: { realOnly?: boolean } = {}): Promise<LiveSocial> {
+  // StockTwits trending has no sentiment observations. SENT must not turn that
+  // absence into a neutral score or merge it into measured sentiment.
+  const providers = options.realOnly ? PROVIDERS.filter(p => p.name === "Reddit") : PROVIDERS;
+  const attempts = await Promise.all(providers.map((provider) => attemptSocialProvider(provider)));
+  const usable = options.realOnly ? attempts.filter(a => a.attempt.ok) : attempts;
+  const rd = usable.find((attempt) => attempt.provider === "Reddit")?.data as Awaited<ReturnType<typeof reddit>> | null;
+  const st = usable.find((attempt) => attempt.provider === "StockTwits")?.data as Awaited<ReturnType<typeof stocktwits>> | null;
   const diagnostics = attempts.map((attempt) => attempt.attempt);
 
   if (!rd && !st) return { source: "ERR", intel: emptySocial(), diagnostics };
@@ -242,7 +246,8 @@ export async function fetchLiveSocial(): Promise<LiveSocial> {
     platforms.push({ name: "StockTwits", posts: st.posts, sentiment: 0 });
   }
 
-  const seeded = getSocialIntel();
+  // SENT forbids generated enrichment even when a real provider supplied some rows.
+  const seeded = options.realOnly ? emptySocial() : getSocialIntel();
   const themeRows = rd ? toRows(rd.themes, 8) : seeded.themes;
   const intel: SocialIntel = {
     tickers: tickers.size ? toRows(tickers, 12) : seeded.tickers,

@@ -5,6 +5,8 @@ Standard library only, so it runs before anything is installed:
     python3 -I services/agent_worker/src/agent_worker/pin.py --root ../QuantSmith
     python3 -I services/agent_worker/src/agent_worker/pin.py --installed
     python3 -I services/agent_worker/src/agent_worker/pin.py --root ../QuantSmith --check
+    # With QUANTSMITH_ROOT or reviewed.source_path configured (no Git commit needed):
+    python3 -I services/agent_worker/src/agent_worker/pin.py --check
 
 Two digests identify what the worker would actually run and read:
 
@@ -159,7 +161,39 @@ def read_pin(pin_path: Path) -> dict[str, Any]:
     pin = json.loads(pin_path.read_text(encoding="utf-8"))
     if pin.get("schema_version") != PIN_SCHEMA_VERSION:
         raise ValueError(f"unsupported pin schema_version: {pin.get('schema_version')!r}")
+    reviewed = pin.get("reviewed", {})
+    if not isinstance(reviewed, dict) or not (
+        "source_commit" in reviewed or "source_path" in reviewed
+    ):
+        raise ValueError("pin reviewed metadata requires source_commit or source_path")
+    if "source_commit" in reviewed and (
+        not isinstance(reviewed["source_commit"], str)
+        or re.fullmatch(r"[0-9a-f]{40}", reviewed["source_commit"]) is None
+    ):
+        raise ValueError("pin reviewed.source_commit must be a full Git SHA")
+    if "source_path" in reviewed and (
+        not isinstance(reviewed["source_path"], str) or not reviewed["source_path"].strip()
+    ):
+        raise ValueError("pin reviewed.source_path must be a non-blank local path")
     return pin
+
+
+def configured_root(pin: dict[str, Any], explicit_root: str | None = None) -> str | None:
+    """CLI root, then environment, then a recorded local path. No Git/network lookup.
+
+    Environment/recorded relative paths are anchored to this repository, independent of the
+    working directory. Explicit CLI paths retain working-directory-relative semantics.
+    """
+    if explicit_root is not None:
+        return explicit_root
+    environment = os.environ.get(ROOT_ENV, "").strip()
+    recorded = environment or pin.get("reviewed", {}).get("source_path")
+    if recorded is None:
+        return None
+    path = Path(recorded).expanduser()
+    if not path.is_absolute():
+        path = _default_pin_path().parents[2] / path
+    return str(path.resolve())
 
 
 def fingerprints(copy: dict[str, Any], asset_paths: list[str]) -> dict[str, Any]:
@@ -189,7 +223,7 @@ def _default_pin_path() -> Path:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Fingerprint a local QuantSmith copy.")
-    source = parser.add_mutually_exclusive_group(required=True)
+    source = parser.add_mutually_exclusive_group()
     source.add_argument("--root", help="QuantSmith repository checkout (repository-path mode)")
     source.add_argument("--installed", action="store_true", help="the installed package")
     parser.add_argument("--pin", type=Path, default=None, help="pin file (default: the repo's)")
@@ -201,7 +235,8 @@ def main(argv: list[str] | None = None) -> int:
     pin_path = args.pin or _default_pin_path()
     try:
         pin = read_pin(pin_path)
-        copy = find_copy(args.root, args.installed)
+        root = args.root if args.installed else configured_root(pin, args.root)
+        copy = find_copy(root, args.installed)
         found = fingerprints(copy, pin["assets"]["paths"])
     except (OSError, ValueError, KeyError, json.JSONDecodeError) as error:
         print(f"pin: {error}", file=sys.stderr)

@@ -1,0 +1,17 @@
+$ npm test -- src/lib/server/mcsEngine.test.ts
+
+> market-terminal@0.1.0 test
+> vitest run src/lib/server/mcsEngine.test.ts
+
+
+ RUN  v2.1.8 /Users/<you>/Documents/Quant Sandbox/platforms/market_terminal
+
+ ✓ src/lib/server/mcsEngine.test.ts (4 tests) 5ms
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  13:34:15
+   Duration  456ms (transform 54ms, setup 0ms, collect 31ms, tests 5ms, environment 0ms, prepare 124ms)
+
+
+Exit code: 0

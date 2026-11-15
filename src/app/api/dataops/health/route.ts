@@ -52,7 +52,7 @@ function nlpHealthDetail(nlp: NewsNlpProbe): string {
  * checks for URL-based services). Always 200.
  *
  * After the Gold DB migration, MACRO_DB (GoldStore) is the primary source for
- * all Tier A/C series data. FRED, MARKET_*, MACRO_ETL are legacy/fallback paths.
+ * all Tier A/C series data. The FRED benchmark date check is separate and optional.
  */
 export async function GET(request: Request) {
   const providers: Record<string, ProviderProbe> = {};
@@ -131,13 +131,15 @@ export async function GET(request: Request) {
     }
   }
 
-  // FRED — legacy fallback for Tier A routes when Gold DB is not configured.
-  // The live FRED API client was removed in Phase 5-6. FRED_API_KEY only gates
-  // whether the legacy fallback path is available; no actual probe is made.
-  const fredKey = process.env.FRED_API_KEY;
+  // Configuration only: the on-demand BMRK/BRA date check is not probed here.
+  // Qualified Tier A observations remain warehouse-only.
+  const fredKey = (process.env.FRED_API_KEY ?? "").trim();
+  const fredLimiter = (process.env.BENCHMARK_PROVIDER_LIMIT_DB_URL ?? "").trim();
   providers.FRED = !fredKey
-    ? { status: "ERROR", detail: "FRED_API_KEY not configured — Tier A routes return explicit empty/error states when Gold DB is absent", live: false }
-    : { status: "CACHED", detail: "FRED_API_KEY configured but live API client removed in Phase 5-6 (legacy fallback — Gold DB preferred)", live: false };
+    ? { status: "ERROR", detail: "Optional FRED provider-date check is not configured; qualified rates use the warehouse", live: false }
+    : !fredLimiter
+      ? { status: "ERROR", detail: "FRED key configured, but the shared provider-check limiter is not configured; checks are paused", live: false }
+      : { status: "CACHED", detail: "FRED key and shared limiter configured for optional BMRK/BRA provider-date checks; reachability not probed", live: false };
 
   // macro_data_etl — committed gold snapshot at build time.
   providers.MACRO_ETL = { status: "CACHED", detail: "committed macro_data_etl gold snapshot", live: false };
@@ -241,15 +243,6 @@ export async function GET(request: Request) {
   } else {
     providers.NEWS_NLP = { status: "SIM", detail: "no news/social keys, no NEWS_NLP_URL — heuristic/SIM", live: false, diagnostics: news.nlp };
   }
-
-  // Internal books — Tier C: book stays synthetic; macro inputs wired to Gold DB.
-  providers.LOCAL_BOOK = {
-    status: providers.MACRO_DB?.live ? "LIVE" : "ERROR",
-    detail: providers.MACRO_DB?.live
-      ? "Tier C book: macro/rate inputs from Gold DB; position/P&L synthetic"
-      : "Tier C book: macro inputs not connected (Gold DB absent), falling back to SIM",
-    live: providers.MACRO_DB?.live ?? false,
-  };
 
   // Deterministic fallback — always available.
   providers.SYNTHETIC = { status: "FALLBACK_AVAILABLE", detail: "deterministic fallback available; not a live upstream", live: false };

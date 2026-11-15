@@ -1,0 +1,8 @@
+{"capturedAt":"2026-11-01T17:36:52.861Z","incoming":"/api/simulations/mcs?fitYears=10&paths=2000&fomcAnchor=1","forwarded":"/api/simulations/mcs?fitYears=10&paths=10000&fomcAnchor=1","status":200}
+{"capturedAt":"2026-11-01T17:36:53.016Z","incoming":"/api/simulations/mcs?fitYears=10&paths=2000&fomcAnchor=1","forwarded":"/api/simulations/mcs?fitYears=10&paths=10000&fomcAnchor=1","status":200}
+{"capturedAt":"2026-11-01T17:37:00.160Z","incoming":"/api/simulations/mcs?fitYears=10&paths=2000&fomcAnchor=0","forwarded":"/api/simulations/mcs?fitYears=10&paths=10000&fomcAnchor=0","status":200}
+{"capturedAt":"2026-11-01T17:44:47.982Z","incoming":"/api/simulations/mcs?fitYears=10&paths=2000&fomcAnchor=1","forwarded":"/api/simulations/mcs?fitYears=10&paths=10000&fomcAnchor=1","status":200}
+{"capturedAt":"2026-11-01T17:44:48.154Z","incoming":"/api/simulations/mcs?fitYears=10&paths=2000&fomcAnchor=1","forwarded":"/api/simulations/mcs?fitYears=10&paths=10000&fomcAnchor=1","status":200}
+{"capturedAt":"2026-11-01T17:47:06.029Z","incoming":"/api/simulations/mcs?fitYears=10&paths=2000&fomcAnchor=1","forwarded":"/api/simulations/mcs?fitYears=10&paths=10000&fomcAnchor=1","status":200}
+{"capturedAt":"2026-11-01T17:47:06.394Z","incoming":"/api/simulations/mcs?fitYears=10&paths=2000&fomcAnchor=1","forwarded":"/api/simulations/mcs?fitYears=10&paths=10000&fomcAnchor=1","status":200}
+{"capturedAt":"2026-11-01T17:47:10.335Z","incoming":"/api/simulations/mcs?fitYears=10&paths=2000&fomcAnchor=0","forwarded":"/api/simulations/mcs?fitYears=10&paths=10000&fomcAnchor=0","status":200}

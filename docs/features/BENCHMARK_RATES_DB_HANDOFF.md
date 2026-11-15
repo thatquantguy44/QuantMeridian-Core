@@ -1,5 +1,7 @@
 # Benchmark Rates — Database Provider Handoff
 
+> Historical handoff: for current BMRK/BRA source qualification and limitations, see [spec033](../specs/spec033/SPEC.md).
+
 > This document serves as both a build record and a **prompt** for wiring the Benchmark Rates module to an external database. Hand this to Claude Code (or any AI assistant) when you are ready to connect your database.
 
 **Module:** `BMRK` — Benchmark Rates  

@@ -139,4 +139,4 @@ Reading the result: when the prime cap binds (prime exposure equals the cap), lo
 - Help & FAQ: [MMFO help](/guides/MMFO/help)
 - Spec: `docs/specs/spec015/SPEC.md`
 - Code: `src/app/money-market-fund-optimizer/page.tsx`, `src/lib/mmfo/pocModel.ts`, `src/app/api/mm-fund-optimizer/`
-- Related: [MMKT](/guides/MMKT/whitepaper), [CASH](/guides/CASH/whitepaper), [Optimization Center](/guides/OPT/whitepaper)
+- Related: [MMKT](/guides/MMKT/whitepaper)

@@ -77,6 +77,8 @@ Coverage is the number of expected policy keys present divided by the number exp
 - Phase 1 defines systemic collapse as coverage **strictly below 75%**. Exactly 75% is not a systemic collapse.
 - Systemic collapse yields `SUPPRESS` for a required dataset.
 - The same failure yields `DEGRADE` for an optional dataset.
+- At or above 75% but below complete coverage, security-scoped publication yields `DEGRADE` / `SECURITY_SCOPED_COVERAGE_GAP`: unaffected securities may continue, while missing securities are named and remain unavailable.
+- Complete coverage yields `ACCEPT` / `COVERAGE_WITHIN_MINIMUM`.
 - Missing keys are named in `affected.coverageKeys`; missing observations are never zero-filled.
 - Decision evidence records the grain and threshold used, so ratios from unlike units cannot masquerade as comparable measurements.
 
@@ -98,25 +100,40 @@ The approved Phase 1 synthetic policy is versioned in [`synthetic-coverage-1.0.j
 | `etf_snapshots.csv` | ETF security |
 | `security_events.csv` | source heartbeat |
 
-This threshold identifies a dataset-wide operational failure. It does not bless missing individual units: affected securities remain missing and cannot be zero-filled. Whether publication is atomic or may continue only for unaffected securities remains a separate owner decision. Expected cohort construction is likewise deferred to the point-in-time adapter; the evaluator requires callers to supply it explicitly.
+This threshold identifies a dataset-wide operational failure. Phase 1 uses `SECURITY_SCOPED` publication: affected securities remain missing and unavailable, while unaffected securities may continue with an explicit degraded coverage decision. Dataset-wide aggregates that cannot be computed honestly from the available cohort must remain unavailable; partial data is never zero-filled into a pretend total. The point-in-time adapter implements the approved SIM expected-cohort rule and supplies the resulting current-material cohort to the evaluator.
 
-## Open owner decisions
+## Remaining owner decisions
 
 These values are deliberately absent from runtime defaults:
 
 1. Freshness policy for event-driven feeds, security reference data, and scheduled low-frequency publications such as short interest.
-2. The point-in-time expected cohort construction for each approved dataset grain and product.
-3. Whether product publication is atomic or may continue for unaffected securities above the systemic-collapse threshold.
-4. Holiday, early-close, halt, and source-calendar behavior beyond the approved synthetic weekday calendar.
-5. The approved purpose and role vocabulary for the entitlement-purpose slice, including export permissions and retention.
+2. Future LIVE expected-cohort construction. Phase 1 SIM derives its expected cohort at `decisionAt` from active, effective-dated, entitled manifest securities and the books/providers/sources/venues named by the dataset policy.
+3. Holiday, early-close, halt, and source-calendar behavior beyond the approved synthetic weekday calendar.
+4. Future LIVE role mapping, export permissions and licensed-data retention. Phase 1 uses the four personas, four purposes and 400-day local SIM retention in [PHASE1_POLICY.md](PHASE1_POLICY.md).
 
-Until those decisions exist in a versioned policy, callers must supply explicit test policy. A missing policy is not permission to guess.
+Until remaining LIVE decisions exist in a versioned policy, LIVE callers must supply explicit test policy. A missing policy is not permission to guess or to inherit the SIM values.
 
-## Remaining T09 work
+## Implemented T09 publication boundary
 
-- Adapt point-in-time CSV histories into current material coverage units and enforce the gate before publication.
-- Add entitlement-purpose evaluation with deny-by-default policy injection.
-- Add internal inventory/loan reconciliation decisions and the remaining deterministic fault cases.
-- Define affected-security/product quarantine and last-good recovery behavior using the approved product dependency matrix.
+- Point-in-time histories are reduced to current material coverage units using active identities and
+  policy-named synthetic books, providers, sources, and venues.
+- The four persona/purpose combinations fail closed. Entitlement validity is a required half-open
+  UTC interval evaluated at `decisionAt`, and the resulting book/time projection is bound into the
+  publication stream identity.
+- Market availability/utilization and internal inventory/loan reconciliations enforce the approved
+  exact, 0.001-percentage-point, one-share, and 70% tolerances. Negative, overallocated, above-100%
+  utilization, and zero-lendable/unavailable states cannot pass merely because their arithmetic is
+  internally consistent; reconciliation evidence remains finite and JSON-safe.
+- Reconciliation uses the same active-identity and registered-source cohort as quality evaluation.
+  Retained history and non-policy sources do not poison the current decision.
+- A derived cohort with no applicable keys at `decisionAt` (for example, no active ETF or no
+  positive on-loan inventory) is omitted as not applicable. It is not converted into a coverage
+  failure and does not manufacture a placeholder observation.
+- Coverage-key exclusions preserve source granularity, so one unavailable contextual source cannot
+  erase a valid required source for the same security.
+- Required coverage below 75% or an unscoped required failure retains last-good. At or above 75%,
+  affected grains remain unavailable while unaffected observations may publish as `DEGRADED`.
+- T11 owns product-level dependency projection from these dataset/security/source decisions; it may
+  not reinterpret a missing required block as zero or allow contextual evidence to rescue it.
 
 The quality report contains only bounded operational evidence. It must stay within the SQZ trust boundary under the approved no-automatic-egress policy. Governed user download/export remains the sole authorized outward transfer.

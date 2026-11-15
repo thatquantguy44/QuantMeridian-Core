@@ -1,0 +1,497 @@
+- generic "S&P 500 · SP500 · as of 2026-10-21":
+  - generic: SPX
+  - generic: 7,757
+  - generic: ▲ +0.58%
+  - generic: as of 2026-10-21
+- generic "Nasdaq Composite · NASDAQCOM · as of 2026-10-23":
+  - generic: NDX
+  - generic: 25,955
+  - generic: ▼ -0.21%
+  - generic: as of 2026-10-23
+- generic "Dow Jones Industrial Average · DJIA · as of 2026-10-23":
+  - generic: DJIA
+  - generic: 52,215
+  - generic: ▼ -1.23%
+  - generic: as of 2026-10-23
+- generic "CBOE Volatility Index · VIXCLS · as of 2026-10-29":
+  - generic: VIX
+  - generic: "17.2"
+  - generic: ▲ +0.3pt
+  - generic: as of 2026-10-29
+- generic "10-Year Treasury Yield · DGS10 · as of 2026-10-29":
+  - generic: UST 10Y
+  - generic: 4.98%
+  - generic: ▼ -7bp
+  - generic: as of 2026-10-29
+- generic "10Y Minus 2Y Treasury Spread · T10Y2Y · as of 2026-10-30":
+  - generic: 10Y-2Y
+  - generic: 38bp
+  - generic: ▲ +1bp
+  - generic: as of 2026-10-30
+- generic "Secured Overnight Financing Rate · SOFR · as of 2026-10-29":
+  - generic: SOFR
+  - generic: 3.94%
+  - generic: ▲ +0bp
+  - generic: as of 2026-10-29
+- generic "Core PCE Price Index · PCEPILFE · as of 2026-09-01":
+  - generic: Core PCE
+  - generic: 3.1 % y/y
+  - generic: ▲ +0.1pt
+  - generic: as of 2026-09-01
+- generic "Unemployment Rate · UNRATE · as of 2026-09-01":
+  - generic: Unemployment
+  - generic: 4.2%
+  - generic: ▲ +0.1pt
+  - generic: as of 2026-09-01
+- generic "S&P 500 · SP500 · as of 2026-10-21":
+  - generic: SPX
+  - generic: 7,757
+  - generic: ▲ +0.58%
+  - generic: as of 2026-10-21
+- generic "Nasdaq Composite · NASDAQCOM · as of 2026-10-23":
+  - generic: NDX
+  - generic: 25,955
+  - generic: ▼ -0.21%
+  - generic: as of 2026-10-23
+- generic "Dow Jones Industrial Average · DJIA · as of 2026-10-23":
+  - generic: DJIA
+  - generic: 52,215
+  - generic: ▼ -1.23%
+  - generic: as of 2026-10-23
+- generic "CBOE Volatility Index · VIXCLS · as of 2026-10-29":
+  - generic: VIX
+  - generic: "17.2"
+  - generic: ▲ +0.3pt
+  - generic: as of 2026-10-29
+- generic "10-Year Treasury Yield · DGS10 · as of 2026-10-29":
+  - generic: UST 10Y
+  - generic: 4.98%
+  - generic: ▼ -7bp
+  - generic: as of 2026-10-29
+- generic "10Y Minus 2Y Treasury Spread · T10Y2Y · as of 2026-10-30":
+  - generic: 10Y-2Y
+  - generic: 38bp
+  - generic: ▲ +1bp
+  - generic: as of 2026-10-30
+- generic "Secured Overnight Financing Rate · SOFR · as of 2026-10-29":
+  - generic: SOFR
+  - generic: 3.94%
+  - generic: ▲ +0bp
+  - generic: as of 2026-10-29
+- generic "Core PCE Price Index · PCEPILFE · as of 2026-09-01":
+  - generic: Core PCE
+  - generic: 3.1 % y/y
+  - generic: ▲ +0.1pt
+  - generic: as of 2026-09-01
+- generic "Unemployment Rate · UNRATE · as of 2026-09-01":
+  - generic: Unemployment
+  - generic: 4.2%
+  - generic: ▲ +0.1pt
+  - generic: as of 2026-09-01
+- generic: DB latest 2026-10-30
+- banner:
+  - button "Toggle sidebar":
+  - generic: Q
+  - generic: QIT
+  - generic: Quant Intelligence Platform
+  - generic: MCS
+  - generic: /
+  - generic: Monte Carlo Curve Sim
+  - button "Run command / find security… K":
+    - generic: Run command / find security…
+    - generic: K
+  - button "SNAPSHOT FALLBACK OFF":
+    - generic: SNAPSHOT FALLBACK
+    - text: "OFF"
+  - button "SIM OFF": SIM OFF
+  - generic: DESK SEC-FIN
+  - generic: USER jlutkemuller
+  - text: RBAC
+  - generic: ● PM
+- generic: Gold DB Test
+- generic: /
+- generic "Waiting for health response": "PROBING: Probing /api/dataops/health for MACRO_DB_URL and Gold DB read status"
+- navigation "Module navigation":
+  - generic: Markets
+  - link "Command Center HOME":
+    - /url: /
+    - generic: Command Center
+    - generic: HOME
+  - link "Live Markets MKT":
+    - /url: /markets
+    - generic: Live Markets
+    - generic: MKT
+  - link "Market Snapshot SNAP":
+    - /url: /market-snapshot
+    - generic: Market Snapshot
+    - generic: SNAP
+  - link "Asset Quilt QUILT":
+    - /url: /asset-quilt
+    - generic: Asset Quilt
+    - generic: QUILT
+  - link "Index Returns IRET":
+    - /url: /index-returns
+    - generic: Index Returns
+    - generic: IRET
+  - link "Market Lens Studio LENS":
+    - /url: /market-lens
+    - generic: Market Lens Studio
+    - generic: LENS
+  - link "Market Chart Studio MKC":
+    - /url: /market-chart
+    - generic: Market Chart Studio
+    - generic: MKC
+  - link "Market Volatility MVOL":
+    - /url: /market-volatility
+    - generic: Market Volatility
+    - generic: MVOL
+  - link "VIX Implied vs Forward VIXR":
+    - /url: /market-volatility/implied-vs-forward
+    - generic: VIX Implied vs Forward
+    - generic: VIXR
+  - link "FX Research FXR":
+    - /url: /fx/research
+    - generic: FX Research
+    - generic: FXR
+  - link "Presidential Impact PRES":
+    - /url: /presidential-impact
+    - generic: Presidential Impact
+    - generic: PRES
+  - generic: Financing
+  - link "Securities Lending SLAB":
+    - /url: /securities-lending
+    - generic: Securities Lending
+    - generic: SLAB
+  - link "Squeeze Radar SQZ":
+    - /url: /securities-lending/squeeze
+    - generic: Squeeze Radar
+    - generic: SQZ
+  - link "Indemnification Risk INDEM":
+    - /url: /securities-lending/indemnification
+    - generic: Indemnification Risk
+    - generic: INDEM
+  - link "Prime Finance PB":
+    - /url: /prime-finance
+    - generic: Prime Finance
+    - generic: PB
+  - link "FX Exposure & Hedging FXH":
+    - /url: /fx/exposure-hedging
+    - generic: FX Exposure & Hedging
+    - generic: FXH
+  - generic: Optimization
+  - link "Optimization Center OPT":
+    - /url: /optimization
+    - generic: Optimization Center
+    - generic: OPT
+  - link "Collateral Mgmt COLL":
+    - /url: /collateral
+    - generic: Collateral Mgmt
+    - generic: COLL
+  - link "InventoryBallast IBAL":
+    - /url: /inventory-optimizer
+    - generic: InventoryBallast
+    - generic: IBAL
+  - link "Cash Optimizer CASH":
+    - /url: /cash-optimizer
+    - generic: Cash Optimizer
+    - generic: CASH
+  - link "Money Market Optimizer MMKT":
+    - /url: /money-market
+    - generic: Money Market Optimizer
+    - generic: MMKT
+  - link "Sources & Uses SXU":
+    - /url: /sources-uses
+    - generic: Sources & Uses
+    - generic: SXU
+  - link "Money Market Fund Optimizer MMFO":
+    - /url: /money-market-fund-optimizer
+    - generic: Money Market Fund Optimizer
+    - generic: MMFO
+  - link "Cash Reinvestment REINV":
+    - /url: /reinvestment
+    - generic: Cash Reinvestment
+    - generic: REINV
+  - link "Liquidity Stress LIQ":
+    - /url: /liquidity
+    - generic: Liquidity Stress
+    - generic: LIQ
+  - generic: Simulations
+  - link "Monte Carlo Curve Sim MCS":
+    - /url: /simulations/mcs
+    - generic: Monte Carlo Curve Sim
+    - generic: MCS
+  - generic: ML Tools
+  - link "Model Dictionary MDLS":
+    - /url: /models
+    - generic: Model Dictionary
+    - generic: MDLS
+  - link "Volatility Forecaster VOLF":
+    - /url: /ml/volatility-forecaster
+    - generic: Volatility Forecaster
+    - generic: VOLF
+  - generic: Trading Desk
+  - link "Trading Desk DESK":
+    - /url: /trading-desk
+    - generic: Trading Desk
+    - generic: DESK
+  - generic: Trading Assistant
+  - link "Trading Assistant TASSIST":
+    - /url: /trading-assistant
+    - generic: Trading Assistant
+    - generic: TASSIST
+  - generic: Economics & Macro
+  - link "Macro Dashboard ECON":
+    - /url: /economics
+    - generic: Macro Dashboard
+    - generic: ECON
+  - link "Treasury Curve Lab CURV":
+    - /url: /economics/curve
+    - generic: Treasury Curve Lab
+    - generic: CURV
+  - link "Inflation Explorer INFL":
+    - /url: /economics/inflation
+    - generic: Inflation Explorer
+    - generic: INFL
+  - link "Global Inflation GCPI":
+    - /url: /economics/global-cpi
+    - generic: Global Inflation
+    - generic: GCPI
+  - link "Global Policy Rates GPOL":
+    - /url: /economics/policy-rates
+    - generic: Global Policy Rates
+    - generic: GPOL
+  - link "Credit Spreads CRDT":
+    - /url: /economics/credit
+    - generic: Credit Spreads
+    - generic: CRDT
+  - link "Rate Probabilities FOMC":
+    - /url: /economics/rates
+    - generic: Rate Probabilities
+    - generic: FOMC
+  - link "Economic Calendar CAL":
+    - /url: /economics/calendar
+    - generic: Economic Calendar
+    - generic: CAL
+  - link "Statistical Analysis STAT":
+    - /url: /economics/stats
+    - generic: Statistical Analysis
+    - generic: STAT
+  - link "Macro Regime REGIME":
+    - /url: /economics/regime
+    - generic: Macro Regime
+    - generic: REGIME
+  - link "ML Applications EML":
+    - /url: /economics/ml
+    - generic: ML Applications
+    - generic: EML
+  - link "Sec-Finance Economics SFE":
+    - /url: /economics/sec-finance
+    - generic: Sec-Finance Economics
+    - generic: SFE
+  - link "Funding & Liquidity FUND":
+    - /url: /economics/funding
+    - generic: Funding & Liquidity
+    - generic: FUND
+  - link "Benchmark Rates BMRK":
+    - /url: /economics/benchmark
+    - generic: Benchmark Rates
+    - generic: BMRK
+  - link "Rate Analysis Hub BRA":
+    - /url: /economics/rate-analysis
+    - generic: Rate Analysis Hub
+    - generic: BRA
+  - link "Utilization Analytics UTIL":
+    - /url: /economics/utilization
+    - generic: Utilization Analytics
+    - generic: UTIL
+  - link "Yield Curve Analytics YCURV":
+    - /url: /economics/yield-curve
+    - generic: Yield Curve Analytics
+    - generic: YCURV
+  - link "Rate Volatility RVOL":
+    - /url: /economics/rate-vol
+    - generic: Rate Volatility
+    - generic: RVOL
+  - link "Funding Cost Monitor FCOST":
+    - /url: /economics/funding-cost
+    - generic: Funding Cost Monitor
+    - generic: FCOST
+  - link "Macro Chart Studio MGC":
+    - /url: /macro-chart
+    - generic: Macro Chart Studio
+    - generic: MGC
+  - link "EDA / Lead-Lag EDA":
+    - /url: /economics/eda
+    - generic: EDA / Lead-Lag
+    - generic: EDA
+  - link "Macro Motion Studio MOTN":
+    - /url: /economics/motion
+    - generic: Macro Motion Studio
+    - generic: MOTN
+  - generic: Intelligence
+  - link "Prediction Markets POLY":
+    - /url: /polymarket
+    - generic: Prediction Markets
+    - generic: POLY
+  - link "News & Signal Intel NEWS":
+    - /url: /news
+    - generic: News & Signal Intel
+    - generic: NEWS
+  - link "Investor Sentiment SENT":
+    - /url: /sentiment
+    - generic: Investor Sentiment
+    - generic: SENT
+  - link "AI Copilot AI":
+    - /url: /copilot
+    - generic: AI Copilot
+    - generic: AI
+  - generic: Agentic Intelligence
+  - link "ECOIQ Economic Intelligence ECOIQ":
+    - /url: /economics/ecoiq
+    - generic: ECOIQ Economic Intelligence
+    - generic: ECOIQ
+  - generic: Data Operations & Alerts
+  - link "Data Ops DATAOPS":
+    - /url: /dataops
+    - generic: Data Ops
+    - generic: DATAOPS
+  - link "Alert Center ALRT":
+    - /url: /alerts
+    - generic: Alert Center
+    - generic: ALRT
+  - generic: SESSION
+  - generic: ● LIVE
+  - generic: LATENCY
+  - generic: 2.4ms
+- main:
+  - generic: MCS
+  - heading "Monte Carlo Curve Simulation" [level=1]
+  - generic: VAR(1) factor bootstrap over the Gold Nelson-Siegel curve — forward yield distributions by tenor and horizon
+  - generic "As-of date of the latest underlying data point": DATA AS OF 2026-10-29
+  - generic "Gold macro database — fred-bronze-to-gold-pipeline (MACRO_DB_URL)": LIVE · DB
+  - generic: TICK 00005
+  - text: Fit window
+  - combobox "Fit window":
+    - option "5y"
+    - option "10y" [selected]
+    - option "15y"
+    - option "20y"
+  - text: Tenor
+  - combobox "Tenor":
+    - option "2Y" [selected]
+    - option "5Y"
+    - option "10Y"
+    - option "30Y"
+    - option "3M"
+  - text: Regime
+  - combobox "Regime":
+    - option "Unconditional (all regimes)" [selected]
+    - option "Current (Neutral)"
+    - option "Neutral (2125)"
+    - option "Goldilocks (48)"
+    - option "Reflation (122)"
+    - option "Growth-Scare (185)"
+    - option "Policy-Easing (17 — too few)" [disabled]
+  - generic "Re-centers each horizon's distribution toward gold.fomc_meeting_path — a rate bootstrapped from the Treasury curve, chained meeting-to-meeting, NOT a CME FedWatch / Fed-funds-futures probability. Tapers from the 3M point out to the long end; dispersion is untouched.":
+    - checkbox "FOMC-anchor front end" [active]
+    - text: FOMC-anchor front end
+  - generic: 10,000 paths from 2,497 shocks · fit 2016-11-01 → 2026-10-29 (2,497 obs)
+  - generic "Current 2Y"
+  - generic "4.60%"
+  - generic "12M median"
+  - generic "4.60%"
+  - generic: "-0.00pp"
+  - generic "12M 90% range"
+  - generic "3.20 – 6.01%"
+  - generic "Fit R² (level)"
+  - generic "0.994"
+  - generic "Fit R² (slope)"
+  - generic "0.995"
+  - generic "Avg λ (decay)"
+  - generic "1.77"
+  - generic "Forward curve distribution — 2Y"
+  - generic: FAN
+  - generic: p5–p95 shaded, median line, current yield anchor
+  - generic: P25–P75
+  - generic: P5–P95
+  - generic: Median path
+  - generic: Current
+  - generic "Percentile table"
+  - generic: PCT
+  - generic: 2Y
+  - table:
+    - rowgroup:
+      - row "Horizon P5 P50 P95":
+        - columnheader "Horizon"
+        - columnheader "P5"
+        - columnheader "P50"
+        - columnheader "P95"
+    - rowgroup:
+      - row "1M 3.72 4.45 5.16":
+        - cell "1M"
+        - cell "3.72"
+        - cell "4.45"
+        - cell "5.16"
+      - row "3M 3.54 4.44 5.34":
+        - cell "3M"
+        - cell "3.54"
+        - cell "4.44"
+        - cell "5.34"
+      - row "6M 3.41 4.51 5.59":
+        - cell "6M"
+        - cell "3.41"
+        - cell "4.51"
+        - cell "5.59"
+      - row "12M 3.20 4.60 6.01":
+        - cell "12M"
+        - cell "3.20"
+        - cell "4.60"
+        - cell "6.01"
+  - generic "VAR(1) diagnostics"
+  - generic: VAR
+  - table:
+    - rowgroup:
+      - row "Equation Intercept β0(t-1) β1(t-1) β2(t-1) R²":
+        - columnheader "Equation"
+        - columnheader "Intercept"
+        - columnheader "β0(t-1)"
+        - columnheader "β1(t-1)"
+        - columnheader "β2(t-1)"
+        - columnheader "R²"
+    - rowgroup:
+      - row "β0 (level) 0.0236 0.9965 0.0034 0.0056 0.994":
+        - cell "β0 (level)"
+        - cell "0.0236"
+        - cell "0.9965"
+        - cell "0.0034"
+        - cell "0.0056"
+        - cell "0.994"
+      - row "β1 (slope) -0.0206 0.0053 0.9949 0.0015 0.995":
+        - cell "β1 (slope)"
+        - cell "-0.0206"
+        - cell "0.0053"
+        - cell "0.9949"
+        - cell "0.0015"
+        - cell "0.995"
+      - row "β2 (curvature) -0.1158 0.0073 -0.0145 0.9413 0.886":
+        - cell "β2 (curvature)"
+        - cell "-0.1158"
+        - cell "0.0073"
+        - cell "-0.0145"
+        - cell "0.9413"
+        - cell "0.886"
+  - text: MCS — VAR(1) fit on 2,497 daily observations of the Gold NS factors (10y trailing window); the fitted dynamics are always unconditional. Shocks are bootstrapped jointly across all regimes pooled, not per-factor and not assumed Gaussian. Tail percentiles reflect one historical sample either way — regimes that occurred rarely (or once, e.g. 1970s stagflation) will be under-represented unless explicitly selected above. FOMC anchor is off — this is the raw statistical bootstrap with no curve-implied Fed path blended in.
+  - generic: Model output, not a forecast
+- contentinfo:
+  - generic "Probing data providers…": FEED ···
+  - generic "Probing data providers…": DATA ···
+  - generic: 12:47:21.57
+  - generic: NY 12:47:21
+  - generic: LDN 17:47:21
+  - generic: TKY 02:47:21
+  - generic "Illustrative — no streaming bus is wired in this build": KAFKA ● 8.2k msg/s · SIM
+  - generic "Illustrative — no live websocket streams in this build": WS ● 14 streams · SIM
+  - generic: ⚠ 3 CRIT
+  - generic: 6 HIGH
+  - generic: QIT-TERM v0.1.0
+- alert

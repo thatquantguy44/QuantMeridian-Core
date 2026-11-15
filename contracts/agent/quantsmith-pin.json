@@ -15,7 +15,7 @@
   },
   "reviewed": {
     "on": "2026-10-10",
-    "source_commit": "56abbb5981002fb5300baedb798863e706969de0",
-    "note": "Informational. QuantSmith is supplied locally and never fetched."
+    "source_path": "../../agentic_workflows/qf_workflow_sdk_public",
+    "note": "Local source selected 2026-10-30; no Git commit is required. Fingerprints retain the 2026-10-10 reviewed content. The selected folder currently differs and requires content review before re-pinning."
   }
 }

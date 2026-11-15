@@ -8,6 +8,8 @@ handoffs, and gap analysis.
 | [CPI_2025_10_NULL_OBSERVATION_HANDOFF.md](./CPI_2025_10_NULL_OBSERVATION_HANDOFF.md) | Pipeline-side handoff explaining the October 2025 CPI null observation source gap and validation SQL. |
 | [CPI_EXPANDED_WEIGHT_PIPELINE_HANDOFF.md](./CPI_EXPANDED_WEIGHT_PIPELINE_HANDOFF.md) | Pipeline-side handoff to add missing Gold DB weights for 8 expanded CPI component rows. |
 | [MODULE_DATA_AUDIT.md](./MODULE_DATA_AUDIT.md) | Terminal-side module audit, migration status, remaining Phase 6 work, and test matrix. |
+| [FX_DATA_REFRESH.md](./FX_DATA_REFRESH.md) | FX/rates refresh evidence, source-specific clocks, publication checks and remaining data gaps. |
+| [FX_DATA_REFRESH_CHECKS.sql](./FX_DATA_REFRESH_CHECKS.sql) | Read-only run-scoped extraction, Gold health and Silver/Gold equality checks. |
 | [market_terminal_gold_views.md](./market_terminal_gold_views.md) | Pipeline-side Gold analytical views plan for recreating terminal macro surfaces. |
 | [market_terminal_series_gap.md](./market_terminal_series_gap.md) | Pipeline-side raw series gap audit for terminal identifiers missing from ingestion. |
 

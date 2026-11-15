@@ -1,0 +1,308 @@
+{
+  "controls": [
+    {
+      "endDate": "1940-01-03",
+      "houseControl": "D",
+      "id": "control-74-1935-01-03",
+      "presidentId": "franklin-d-roosevelt",
+      "presidentName": "Franklin D. Roosevelt",
+      "presidentParty": "D",
+      "senateControl": "D",
+      "sourceId": "CTRL_074_A",
+      "startDate": "1935-01-03"
+    }
+  ],
+  "currency": "USD",
+  "fundamentals": [],
+  "id": "annual-crsp-market-proxy-1936-1938",
+  "kind": "USER_SUPPLIED",
+  "levels": [
+    {
+      "date": "1935-01-31",
+      "sourceId": "FF_MKT_001",
+      "value": 100.15
+    },
+    {
+      "date": "1935-02-28",
+      "sourceId": "FF_MKT_001",
+      "value": 100.30022500000001
+    },
+    {
+      "date": "1935-03-31",
+      "sourceId": "FF_MKT_001",
+      "value": 100.45067533750002
+    },
+    {
+      "date": "1935-04-30",
+      "sourceId": "FF_MKT_001",
+      "value": 100.60135135050628
+    },
+    {
+      "date": "1935-05-31",
+      "sourceId": "FF_MKT_001",
+      "value": 100.75225337753204
+    },
+    {
+      "date": "1935-06-30",
+      "sourceId": "FF_MKT_001",
+      "value": 100.90338175759835
+    },
+    {
+      "date": "1935-07-31",
+      "sourceId": "FF_MKT_001",
+      "value": 101.05473683023476
+    },
+    {
+      "date": "1935-08-31",
+      "sourceId": "FF_MKT_001",
+      "value": 101.20631893548011
+    },
+    {
+      "date": "1935-09-30",
+      "sourceId": "FF_MKT_001",
+      "value": 101.35812841388334
+    },
+    {
+      "date": "1935-10-31",
+      "sourceId": "FF_MKT_001",
+      "value": 101.51016560650416
+    },
+    {
+      "date": "1935-11-30",
+      "sourceId": "FF_MKT_001",
+      "value": 101.66243085491392
+    },
+    {
+      "date": "1935-12-31",
+      "sourceId": "FF_MKT_001",
+      "value": 101.8149245011963
+    },
+    {
+      "date": "1936-01-31",
+      "sourceId": "FF_MKT_001",
+      "value": 101.9676468879481
+    },
+    {
+      "date": "1936-02-29",
+      "sourceId": "FF_MKT_001",
+      "value": 102.12059835828003
+    },
+    {
+      "date": "1936-03-31",
+      "sourceId": "FF_MKT_001",
+      "value": 102.27377925581746
+    },
+    {
+      "date": "1936-04-30",
+      "sourceId": "FF_MKT_001",
+      "value": 102.4271899247012
+    },
+    {
+      "date": "1936-05-31",
+      "sourceId": "FF_MKT_001",
+      "value": 102.58083070958826
+    },
+    {
+      "date": "1936-06-30",
+      "sourceId": "FF_MKT_001",
+      "value": 102.73470195565264
+    },
+    {
+      "date": "1936-07-31",
+      "sourceId": "FF_MKT_001",
+      "value": 102.88880400858612
+    },
+    {
+      "date": "1936-08-31",
+      "sourceId": "FF_MKT_001",
+      "value": 103.043137214599
+    },
+    {
+      "date": "1936-09-30",
+      "sourceId": "FF_MKT_001",
+      "value": 103.1977019204209
+    },
+    {
+      "date": "1936-10-31",
+      "sourceId": "FF_MKT_001",
+      "value": 103.35249847330154
+    },
+    {
+      "date": "1936-11-30",
+      "sourceId": "FF_MKT_001",
+      "value": 103.5075272210115
+    },
+    {
+      "date": "1936-12-31",
+      "sourceId": "FF_MKT_001",
+      "value": 103.66278851184302
+    },
+    {
+      "date": "1937-01-31",
+      "sourceId": "FF_MKT_001",
+      "value": 103.81828269461079
+    },
+    {
+      "date": "1937-02-28",
+      "sourceId": "FF_MKT_001",
+      "value": 103.97401011865271
+    },
+    {
+      "date": "1937-03-31",
+      "sourceId": "FF_MKT_001",
+      "value": 104.1299711338307
+    },
+    {
+      "date": "1937-04-30",
+      "sourceId": "FF_MKT_001",
+      "value": 104.28616609053145
+    },
+    {
+      "date": "1937-05-31",
+      "sourceId": "FF_MKT_001",
+      "value": 104.44259533966725
+    },
+    {
+      "date": "1937-06-30",
+      "sourceId": "FF_MKT_001",
+      "value": 104.59925923267676
+    },
+    {
+      "date": "1937-07-31",
+      "sourceId": "FF_MKT_001",
+      "value": 104.75615812152579
+    },
+    {
+      "date": "1937-08-31",
+      "sourceId": "FF_MKT_001",
+      "value": 104.91329235870808
+    },
+    {
+      "date": "1937-09-30",
+      "sourceId": "FF_MKT_001",
+      "value": 105.07066229724614
+    },
+    {
+      "date": "1937-10-31",
+      "sourceId": "FF_MKT_001",
+      "value": 105.22826829069201
+    },
+    {
+      "date": "1937-11-30",
+      "sourceId": "FF_MKT_001",
+      "value": 105.38611069312806
+    },
+    {
+      "date": "1937-12-31",
+      "sourceId": "FF_MKT_001",
+      "value": 105.54418985916776
+    },
+    {
+      "date": "1938-01-31",
+      "sourceId": "FF_MKT_001",
+      "value": 105.70250614395651
+    },
+    {
+      "date": "1938-02-28",
+      "sourceId": "FF_MKT_001",
+      "value": 105.86105990317245
+    },
+    {
+      "date": "1938-03-31",
+      "sourceId": "FF_MKT_001",
+      "value": 106.0198514930272
+    },
+    {
+      "date": "1938-04-30",
+      "sourceId": "FF_MKT_001",
+      "value": 106.17888127026676
+    },
+    {
+      "date": "1938-05-31",
+      "sourceId": "FF_MKT_001",
+      "value": 106.33814959217216
+    },
+    {
+      "date": "1938-06-30",
+      "sourceId": "FF_MKT_001",
+      "value": 106.49765681656042
+    },
+    {
+      "date": "1938-07-31",
+      "sourceId": "FF_MKT_001",
+      "value": 106.65740330178527
+    },
+    {
+      "date": "1938-08-31",
+      "sourceId": "FF_MKT_001",
+      "value": 106.81738940673795
+    },
+    {
+      "date": "1938-09-30",
+      "sourceId": "FF_MKT_001",
+      "value": 106.97761549084805
+    },
+    {
+      "date": "1938-10-31",
+      "sourceId": "FF_MKT_001",
+      "value": 107.13808191408432
+    },
+    {
+      "date": "1938-11-30",
+      "sourceId": "FF_MKT_001",
+      "value": 107.29878903695545
+    },
+    {
+      "date": "1938-12-31",
+      "sourceId": "FF_MKT_001",
+      "value": 107.45973722051089
+    }
+  ],
+  "nominalReal": "NOMINAL",
+  "returnBasis": "TOTAL_RETURN",
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "FF_MKT_001",
+      "locator": null,
+      "note": "Invented test inputs; no real source observations.",
+      "title": "Fictional fixture: FF_MKT_001"
+    },
+    {
+      "id": "CTRL_074_A",
+      "locator": null,
+      "note": "Invented test inputs; no real source observations.",
+      "title": "Fictional fixture: CTRL_074_A"
+    }
+  ],
+  "title": "Fictional fixture \u2014 Public CRSP-market-proxy annual reconstruction, 1936\u20131938",
+  "windows": [
+    {
+      "complete": true,
+      "decisionDate": "1935-12-31",
+      "endDate": "1936-12-31",
+      "id": "annual-1936",
+      "kind": "CALENDAR_YEAR",
+      "label": "1936",
+      "startDate": "1935-12-31"
+    },
+    {
+      "complete": true,
+      "decisionDate": "1936-12-31",
+      "endDate": "1937-12-31",
+      "id": "annual-1937",
+      "kind": "CALENDAR_YEAR",
+      "label": "1937",
+      "startDate": "1936-12-31"
+    },
+    {
+      "complete": true,
+      "decisionDate": "1937-12-31",
+      "endDate": "1938-12-31",
+      "id": "annual-1938",
+      "kind": "CALENDAR_YEAR",
+      "label": "1938",
+      "startDate": "1937-12-31"
+    }
+  ]
+}
