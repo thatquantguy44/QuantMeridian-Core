@@ -328,32 +328,34 @@ npm ci
 npm test -- src/lib/vixImpliedForward.golden.test.ts src/lib/vixWalkForward.test.ts
 ```
 
-The golden test compares TypeScript results with independent NumPy/SciPy reference values for both excerpts. To regenerate those expected JSON files, install NumPy and SciPy in a Python environment, then run `python3 scripts/fixtures/vixr_reference.py`. That command **rewrites** `src/lib/__fixtures__/vixr/expected-*.json`; inspect the diff before keeping any changes. The included excerpts verify the method on limited periods. They do not reproduce the full-history headline table.
+The golden test compares TypeScript results with independent NumPy/SciPy reference values for both excerpts. With Python, NumPy, and SciPy installed, run `python3 -m unittest discover -s scripts/fixtures -p 'test_vixr_reproduce.py'` to check the CSV reproduction command against those committed excerpts. To regenerate their expected JSON files, run `python3 scripts/fixtures/vixr_reference.py`; this **rewrites** `src/lib/__fixtures__/vixr/expected-*.json`, so inspect the diff before keeping any changes. These excerpts check the method on limited periods, not the full-history headline table.
 
-### Recreate the full-history readout
+### Recompute the historical table from your own CSVs
 
-VIXR reads an existing Gold SQLite or PostgreSQL database; the historical database snapshot used for the reference results is **not included** in the repository. The route requires daily `VIXCLS` values in `fred_latest_observation` (`series_id`, `observation_date`, `value`) and SPY price closes in `equity_total_return_index` (`ticker`, `observation_date`, `close`). SPY total-return and FRED `SP500` are optional alternate bases. See the [VIXR route](https://github.com/thatquantguy44/QuantMeridian-Core/blob/main/src/app/api/market-volatility/vix-forward/route.ts) for the exact queries and the [Core setup guide](https://github.com/thatquantguy44/QuantMeridian-Core/blob/main/README.md) for database configuration.
+Provide two UTF-8 CSV files, sorted by date with one row per trading day and no duplicate dates:
 
-With those tables populated, run `npm ci` and `MACRO_DB_URL=sqlite:./data/fred_local.db npm run dev` (or supply a PostgreSQL URL), then open `/market-volatility/implied-vs-forward`. Select **SPY price**, **non-overlapping** windows and the full date range to compare with the reference table below. Matching the published results also requires the same historical prices and the October 6, 2026 data cutoff; later observations, revisions, missing days, and vendor adjustments can change the numbers. FRED provides [VIXCLS](https://fred.stlouisfed.org/series/VIXCLS); obtain SPY closes from a provider whose access and redistribution terms permit your use. No provider credentials, full SPY history, or populated Gold database are shipped here. The public fixtures and tests are the reproducible check available without that data.
-
-## Reproducing the analysis
-
-### Check the public implementation
-
-The public [QuantMeridian-Core repository](https://github.com/thatquantguy44/QuantMeridian-Core) contains the VIXR calculation engine, walk-forward forecast code, independent Python reference, and two committed Gold-data excerpts (the 2007–09 crisis and 2017). From that repository root:
-
-```bash
-npm ci
-npm test -- src/lib/vixImpliedForward.golden.test.ts src/lib/vixWalkForward.test.ts
+```text
+vix.csv: date,vix
+spy.csv: date,close
 ```
 
-The golden test compares TypeScript results with independent NumPy/SciPy reference values for both excerpts. To regenerate those expected JSON files, install NumPy and SciPy in a Python environment, then run `python3 scripts/fixtures/vixr_reference.py`. That command **rewrites** `src/lib/__fixtures__/vixr/expected-*.json`; inspect the diff before keeping any changes. The included excerpts verify the method on limited periods. They do not reproduce the full-history headline table.
+Use ISO dates (`YYYY-MM-DD`), VIX closes in annualized volatility points (for example, `20` means 20%), and **unadjusted SPY price closes** (not dividend-reinvested or adjusted closes). Values must be positive and finite. Rename FRED's `DATE,VIXCLS` columns to `date,vix`; obtain SPY closes from a provider whose access and redistribution terms permit your use. Missing trading dates need not be filled: the calculation aligns dates and drops incomplete 30-day windows.
 
-### Recreate the full-history readout
+With Python, NumPy, and SciPy installed, run from the public repository root:
 
-VIXR reads an existing Gold SQLite or PostgreSQL database; the historical database snapshot used for the reference results is **not included** in the repository. The route requires daily `VIXCLS` values in `fred_latest_observation` (`series_id`, `observation_date`, `value`) and SPY price closes in `equity_total_return_index` (`ticker`, `observation_date`, `close`). SPY total-return and FRED `SP500` are optional alternate bases. See the [VIXR route](https://github.com/thatquantguy44/QuantMeridian-Core/blob/main/src/app/api/market-volatility/vix-forward/route.ts) for the exact queries and the [Core setup guide](https://github.com/thatquantguy44/QuantMeridian-Core/blob/main/README.md) for database configuration.
+```bash
+python3 scripts/fixtures/vixr_reproduce.py \
+  --vix vix.csv --spy spy.csv --cutoff 2026-10-06 \
+  --out vixr_results.json
+```
 
-With those tables populated, run `npm ci` and `MACRO_DB_URL=sqlite:./data/fred_local.db npm run dev` (or supply a PostgreSQL URL), then open `/market-volatility/implied-vs-forward`. Select **SPY price**, **non-overlapping** windows and the full date range to compare with the reference table below. Matching the published results also requires the same historical prices and the October 6, 2026 data cutoff; later observations, revisions, missing days, and vendor adjustments can change the numbers. FRED provides [VIXCLS](https://fred.stlouisfed.org/series/VIXCLS); obtain SPY closes from a provider whose access and redistribution terms permit your use. No provider credentials, full SPY history, or populated Gold database are shipped here. The public fixtures and tests are the reproducible check available without that data.
+The command prints a Markdown table for daily and non-overlapping windows, including calibration, realized-to-implied volatility, regression fit, and expanding-window forecast scores. The JSON output contains fuller statistics, the selected cutoff, input date coverage, and SHA-256 hashes of both input files. The out-of-sample models train only on 30-day windows that had finished before each test date. The default cutoff is October 6, 2026; pass it explicitly when comparing with the published reference table below. The script does not download or redistribute market data.
+
+### Recreate the terminal readout
+
+The VIXR page reads an existing Gold SQLite or PostgreSQL database; the historical database snapshot used for the reference results is **not included** in the repository. The route requires daily `VIXCLS` values in `fred_latest_observation` (`series_id`, `observation_date`, `value`) and SPY price closes in `equity_total_return_index` (`ticker`, `observation_date`, `close`). SPY total-return and FRED `SP500` are optional alternate bases. See the [VIXR route](https://github.com/thatquantguy44/QuantMeridian-Core/blob/main/src/app/api/market-volatility/vix-forward/route.ts) for the exact queries and the [Core setup guide](https://github.com/thatquantguy44/QuantMeridian-Core/blob/main/README.md) for database configuration.
+
+With those tables populated, run `npm ci` and `MACRO_DB_URL=sqlite:./data/fred_local.db npm run dev` (or supply a PostgreSQL URL), then open `/market-volatility/implied-vs-forward`. Select **SPY price**, **non-overlapping** windows and the full date range to compare with the reference table below. Exact agreement requires the same historical prices and October 6, 2026 data cutoff; later observations, missing days, and vendor adjustments can change the numbers. FRED provides [VIXCLS](https://fred.stlouisfed.org/series/VIXCLS). No provider credentials, full SPY history, or populated Gold database are shipped here. The fixture tests check the calculations without that data; the CSV command above can recompute the historical results when readers supply their own history.
 
 ## Assumptions
 
