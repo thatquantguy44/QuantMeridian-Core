@@ -2,7 +2,7 @@
 
 Every QuantMeridian spec lives in `docs/specs/<id>/`, as `SPEC.md` plus, where written,
 `PLAN.md`, `TASKS.md` and `HANDOFF.md`. The **Status** column quotes the spec's own status line
-as of 2026-10-20. A spec's own files are authoritative; update this index when a status changes.
+when its index row was last updated. A spec's own files are authoritative; update this index when a status changes.
 For the current work queue, start at [`handoff.md`](handoff.md), "▶ STOPPING POINT — 2026-10-20".
 
 | Spec | Title | Status (from its `SPEC.md`) | Current state / pickup |
